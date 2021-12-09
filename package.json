@@ -1,0 +1,29 @@
+{
+  "name": "atelier",
+  "version": "1.0.0",
+  "description": "Chantereles - FEC - Atelier",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmocoder1/fec_atelier.git"
+  },
+  "author": "Joseph Lee, Nathan Lucy, Julian Ortiz, Andrew Tran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cosmocoder1/fec_atelier/issues"
+  },
+  "homepage": "https://github.com/cosmocoder1/fec_atelier#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "express": "^4.17.1",
+    "jquery": "^3.6.0",
+    "nodemon": "^2.0.15",
+    "webpack": "^5.65.0"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.16.0"
+  }
+}
