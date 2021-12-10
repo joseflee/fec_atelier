@@ -7,3 +7,4 @@ app.listen(port, () => {
   console.log('serving on 3000');
 })
 
+app.use(express.static('public'));
