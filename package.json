@@ -5,6 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "test-overview": "mocha ./test/overview",
+    "test-questionsAndAnswers": "mocha ./test/questionsAndAnswers",
+    "test-ratingsAndReviews": "mocha ./test/ratingsAndReviews",
+    "test-relatedItems": "mocha ./test/relatedItems",
     "start": "nodemon ./server/index.js",
     "build": "webpack --watch"
   },
