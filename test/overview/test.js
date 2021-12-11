@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-//import { mount } from 'enyzme';
 import React from 'react';
 import Overview from '../../components/Overview.jsx';
 import Enzyme from 'enzyme';
@@ -24,10 +23,6 @@ afterEach(() => {
 describe("app component test", () => {
 
   // it("Renders successfully", () => {
-  //   act(() => {
-  //     ReactDOM.render(overview, container);
-  //   });
-  //   expect(document.getElementsByClassName('overview')).to.exist;
   // })
 
 })
