@@ -13,7 +13,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 var container;
 
-describe("app component test", () => {
+describe("Overview", () => {
 
   it("Overview renders successfully", () => {
     const wrapper = shallow(<Overview/>);
