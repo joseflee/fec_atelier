@@ -1,4 +1,5 @@
 import React from 'react';
+import Style from './Style.jsx';
 
 class StyleSelector extends React.Component {
 
@@ -9,10 +10,12 @@ class StyleSelector extends React.Component {
     }
   }
 
+  // when props are being received, render method will be refactored to map-render avaliable styles
+
   render() {
     return (
 
-      <div className={'styleSelector'} >Style Selector</div>
+      <Style props={this.props} />
 
     )
   }

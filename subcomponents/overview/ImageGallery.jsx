@@ -12,7 +12,7 @@ class ImageGallery extends React.Component {
   render() {
     return (
 
-      <div className={'imageGallery'} >Image Gallery</div>
+      <div className={'imageGallery'}>Image Gallery</div>
 
     )
   }
