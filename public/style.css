@@ -1,0 +1,81 @@
+/*
+/////////////////////
+OVERVIEW
+/////////////////////
+*/
+
+
+#overview {
+  border: 1px solid rgba(0, 0, 0, .4);
+  height: 500px;
+}
+
+.productInfo {
+  position: relative;
+  left: 800px;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, .4);
+  height: 150px;
+  width: 400px;
+}
+
+
+.styleSelector {
+  position: relative;
+  top: -330px;
+  left: 800px;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, .4);
+  height: 150px;
+  width: 400px;
+}
+
+.imageGallery {
+  position: relative;
+  right: 400px;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, .4);
+  height: 500px;
+  width: 500px;
+}
+
+
+.addToCart {
+  position: relative;
+  left: 400px;
+  top: -160px;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, .4);
+  height: 150px;
+  width: 400px;
+}
+
+
+
+
+/*
+/////////////////////
+RELATED ITEMS
+/////////////////////
+*/
+
+
+
+
+
+/*
+/////////////////////
+QUESTIONS AND ANSWERS
+/////////////////////
+*/
+
+
+
+
+
+
+/*
+/////////////////////
+RATINGS AND REVIEWS
+/////////////////////
+*/

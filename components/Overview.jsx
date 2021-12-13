@@ -12,7 +12,12 @@ class Overview extends React.Component {
 
   render() {
     return (
-      <div className={'overview'}>Overview</div>
+      <div id={'overview'}>
+        <ProductInfo props={this.state}/>
+        <ImageGallery props={this.state}/>
+        <StyleSelector props={this.state}/>
+        <AddToCart props={this.state}/>
+      </div>
     )
   }
 
