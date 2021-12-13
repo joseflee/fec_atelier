@@ -11,6 +11,7 @@ class StyleSelector extends React.Component {
   }
 
   // when props are being received, render method will be refactored to map-render avaliable styles
+  // selected style must render first ***
 
   render() {
     return (
