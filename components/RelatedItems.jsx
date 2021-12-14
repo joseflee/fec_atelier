@@ -12,15 +12,7 @@ class RelatedItems extends React.Component {
 
   render() {
     return (
-      <>
-        <div>Related Items</div>
-        <div>
-          <RelatedProductList />
-          <OutfitCard />
-          <OutfitList />
-          <ProductCard />
-        </div>
-      </>
+      <div>Related Items</div>
     )
   }
 }
