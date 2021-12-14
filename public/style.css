@@ -50,6 +50,9 @@ OVERVIEW
   width: 400px;
 }
 
+#zoomView {
+  display: none;
+}
 
 
 

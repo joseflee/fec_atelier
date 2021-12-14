@@ -14,18 +14,23 @@ class AddToCart extends React.Component {
       sizesAvailable: null,
       sizeSelected: null,
     }
+
     this.validateForm = this.validateForm.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.starItem = this.starItem.bind(this);
+
   }
 
   validateForm() {
+
     // checks this.state.inventory against form field selections
-    // and responds with correct form field values.
+    // and responds by setting correct form field values in state
+    // (i.e. size received from form, quantityAvailable is based on size selected)
+
   }
 
   submitForm() {
-
+    // form submission handling
   }
 
   starItem() {

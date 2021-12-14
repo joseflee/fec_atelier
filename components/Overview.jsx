@@ -5,12 +5,23 @@ import ProductInfo from '../subcomponents/overview/ProductInfo.jsx';
 import StyleSelector from '../subcomponents/overview/StyleSelector.jsx';
 
 class Overview extends React.Component {
+
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+
+    }
+  }
+
+  handleChange() {
+
+    // passes state changes (featured item) up to central App state for coordination
+    // with other widgets when needed
+
   }
 
   render() {
+
     return (
       <div id={'overview'}>
         <ProductInfo props={this.state}/>
@@ -19,6 +30,7 @@ class Overview extends React.Component {
         <AddToCart props={this.state}/>
       </div>
     )
+
   }
 
 }
