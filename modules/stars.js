@@ -2,12 +2,8 @@
 
 var ratingToStar = (rating) => {
 
-  console.log('round rating = 2.5')
-
   var roundedRating = Number(roundRating(rating));
   var percentage;
-
-  console.log(typeof roundedRating);
 
   if (roundedRating === .25) {
     percentage = 5;
