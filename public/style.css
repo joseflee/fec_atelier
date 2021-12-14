@@ -71,8 +71,10 @@ RELATED ITEMS
 QUESTIONS AND ANSWERS
 /////////////////////
 */
-.questionSearch{
-  width: 200px;
+
+#search {
+  height: 50px;
+  width: 400px;
 }
 
 
