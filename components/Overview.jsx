@@ -10,6 +10,10 @@ class Overview extends React.Component {
     this.state = {}
   }
 
+  componentDidMount() {
+     console.log('component did mount');
+  }
+
   render() {
     return (
       <div className={'overview'}>Overview</div>
