@@ -13,6 +13,10 @@ class Overview extends React.Component {
     }
   }
 
+  componentDidMount() {
+    console.log('component did mount');
+  }
+
   handleChange() {
 
     // passes state changes (featured item) up to central App state for coordination
