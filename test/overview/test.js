@@ -6,7 +6,10 @@ import { expect } from 'chai';
 import Overview from '../../components/Overview.jsx';
 import sinon from 'sinon';
 
+
+
 Enzyme.configure({ adapter: new Adapter() });
+
 
 var container;
 

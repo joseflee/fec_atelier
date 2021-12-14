@@ -24,6 +24,10 @@ class Overview extends React.Component {
 
   }
 
+  componentDidMount() {
+     console.log('component did mount');
+  }
+
   render() {
 
     return (
