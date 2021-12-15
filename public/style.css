@@ -122,9 +122,9 @@ Image Gallery - Overview
 
 .thumbnailGallery {
   width: 30px;
-  height: 100px;
+  height: 80px;
   overflow: auto;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .thumbnailGallery::-webkit-scrollbar {
@@ -147,6 +147,18 @@ Image Gallery - Overview
 
 .mainImage:hover {
   cursor: zoom-in;
+}
+
+.down_angle {
+  width: 15px;
+  height: auto;
+  visibility: visible;
+}
+
+.up_angle {
+  width: 15px;
+  height: auto;
+  visibility: hidden;
 }
 
 /*
