@@ -55,7 +55,6 @@ class ImageGallery extends React.Component {
 
   }
 
-
   render() {
 
     return (
