@@ -9,7 +9,7 @@ export class RelatedProductList extends React.Component {
     return (
       <>
         <h3>list of related products</h3>
-        <ProductCard clickCard={this.props.clickCard}/>
+        <ProductCard clickCard={this.props.clickCard} clickStar={this.props.clickStar} />
       </>
     )
   }

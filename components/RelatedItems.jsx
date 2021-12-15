@@ -17,18 +17,19 @@ class RelatedItems extends React.Component {
 
   //when a card on the related items list is clicked, it will navigate to that page
   handleRelatedCardClick(e) {
-    console.log('hello')
+    console.log('clicked on the card')
   }
   //when the star on the related item card is clicked, a comparison modal will be opened up
-  handleRelatedStarClick() {
-
+  handleRelatedStarClick(e) {
+    e.stopPropagation();
+    console.log('clicked on the star')
   }
 
   render() {
     return (
       <>
       <div>Related Items</div>
-      <RelatedProductList clickCard={this.handleRelatedCardClick}/>
+      <RelatedProductList clickCard={this.handleRelatedCardClick} clickStar={this.handleRelatedStarClick}/>
       <OutfitList />
       </>
     )
