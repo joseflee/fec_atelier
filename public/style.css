@@ -55,6 +55,114 @@ OVERVIEW
 }
 
 
+/*
+Star Ratings - Overview
+*/
+
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+  color: black;
+}
+
+.stars-outer::before {
+  content: "\f006 \f006 \f006 \f006 \f006";
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-inner::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: #f8ce0b;
+}
+
+/*
+Style Item - Overview
+*/
+
+.styleItem {
+
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, .3);
+  border-radius: 35px;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  margin: 10px 0 0 10px;
+  line-height: 50px;
+
+}
+
+.styleSelector {
+  overflow: scroll;
+}
+
+.styleSelector::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollBox {
+  display: flex;
+  width: 300px;
+  flex-wrap: wrap;
+}
+
+/*
+Image Gallery - Overview
+*/
+
+
+.thumbnailGallery {
+  width: 30px;
+  height: 100px;
+  overflow: auto;
+  margin-top: 10px;
+}
+
+.thumbnailGallery::-webkit-scrollbar {
+  display: none;
+}
+
+.thumbnailItem {
+  width: 15px;
+  height: 15px;
+  margin-top: 5px;
+  border: 1px solid rgba(0, 0, 0, .3);
+  font-size: 10px;
+}
+
+.thumbnailScroll {
+  display: flex;
+  width: 31px;
+  flex-wrap: wrap;
+}
+
+.mainImage:hover {
+  cursor: zoom-in;
+}
+
+/*
+Expanded View, Image Gallery - Overview
+*/
+
+.invisibleIndex {
+  display: none;
+}
+
+#zoomView {
+  display: none;
+}
+
+
+
 
 /*
 /////////////////////
