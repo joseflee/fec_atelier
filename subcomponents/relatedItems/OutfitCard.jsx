@@ -7,7 +7,15 @@ export class OutfitCard extends React.Component {
 
   render() {
     return (
-      <p>outfit card</p>
+      <>
+        <div>
+          <button>test</button>
+          <div>Picture</div>
+          <div>Category</div>
+          <div>Price</div>
+          <div>Rating</div>
+        </div>
+      </>
     )
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {ProductCard} from './ProductCard.jsx';
 export class RelatedProductList extends React.Component {
   constructor(props) {
     super(props);
@@ -7,7 +7,10 @@ export class RelatedProductList extends React.Component {
 
   render() {
     return (
-      <p>list of related products</p>
+      <>
+        <h3>list of related products</h3>
+        <ProductCard clickCard={this.props.clickCard}/>
+      </>
     )
   }
 }
