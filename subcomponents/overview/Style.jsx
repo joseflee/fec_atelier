@@ -4,12 +4,23 @@ var Style = (props) => {
 
   //props (single style name, img and checkmark / selected data are received and style circle is rendered )
 
-  var temporaryStyleProps = ['style 1', 'style 2', 'style 3', 'style 4', 'style 5', 'style 6'];
+  var createTemporaryStyleProps = () => {
+
+    var result = [];
+    for (var i = 0; i < 15; i++) {
+      result.push('style');
+    }
+    return result;
+  }
+
+  var temporaryStyleProps = createTemporaryStyleProps();
 
   return (
-    <div className={'styleSelector'}>{temporaryStyleProps.map((item, i) => (
-      <div key={i} className={'styleItem'}>{item}</div>
-    ))}</div>
+    <div className={'styleSelector'}>
+      <div className={'scrollBox'}>{temporaryStyleProps.map((item, i) => (
+        <div key={i} className={'styleItem'}>{item}</div>
+      ))}</div>
+    </div>
   )
 
 }

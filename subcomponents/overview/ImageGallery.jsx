@@ -61,7 +61,7 @@ class ImageGallery extends React.Component {
     return (
 
       <div className={'imageGallery'}>
-        <div onClick={this.toggleZoom}>Main Image</div>
+        <div onClick={this.toggleZoom} className={'mainImage'}>Main Image</div>
         <ImageInsert props={this.props} />
         <ImageZoom props={this.state} />
       </div>
