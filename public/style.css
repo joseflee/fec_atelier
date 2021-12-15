@@ -84,7 +84,23 @@ Star Ratings - Overview
   color: #f8ce0b;
 }
 
+/*
+Style Item - Overview
+*/
 
+.styleItem {
+
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, .3);
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  margin: 10px 0 0 10px;
+  line-height: 50px;
+
+
+}
 
 
 
