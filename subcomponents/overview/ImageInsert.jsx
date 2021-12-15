@@ -11,25 +11,23 @@ class ImageInsert extends React.Component {
       temporaryImageProps: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7'],
     }
 
-    this.updateScroll = this.updateScroll.bind(this);
+    this.updateArrows = this.updateArrows.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
 
   }
 
 
 
-  updateScroll(e) {
+  updateArrows(e) {
 
-    // for mockup purposes offset top: 213 is at topmost position of gallery
-    // bottom position is 139
+    // for mockup purposes offset top: 216 is at topmost position of gallery
+    // bottom position is 142
+    // values will change when restyling
 
     var gallery = $('.thumbnailScroll');
     var offset = gallery.offset();
     var upAngle = $('.up_angle');
     var downAngle = $('.down_angle');
-
-    console.log('offset.top = ', offset.top)
-
 
     if (offset.top === 216) {
       console.log('block entered')
@@ -47,7 +45,21 @@ class ImageInsert extends React.Component {
   }
 
   handleScroll(direction) {
-    console.log('handle scroll in this direction ', direction)
+
+    var gallery = $('.thumbnailScroll');
+    var offset = gallery.offset();
+    var shift;
+
+    if (direction === 'down' && offset.top > 142) {
+      shift = offset.top - 20;
+      gallery.offset({ top: shift, left: 20 });
+    } else if (direction === 'up' && offset.top < 216) {
+      shift = offset.top + 20;
+      gallery.offset({ top: shift, left: 20 });
+    }
+
+    this.updateArrows();
+
   }
 
 
@@ -55,13 +67,13 @@ class ImageInsert extends React.Component {
   render() {
     return (
       <div>
-      <img src={'./assets/up_angle.jpg'} className={"up_angle"} onClick={this.handleScroll}></img>
-      <div className={'thumbnailGallery'} onScroll={this.updateScroll}>
+      <img src={'./assets/up_angle.jpg'} className={"up_angle"} onClick={() => {this.handleScroll('up')}}></img>
+      <div className={'thumbnailGallery'} onScroll={this.updateArrows}>
         <div className={'thumbnailScroll'}>{this.state.temporaryImageProps.map((item, i) => (
           <div key={i} className={'thumbnailItem'}></div>
         ))}</div>
       </div>
-      <img src={'./assets/down_angle.jpg'} className={"down_angle"} onClick={this.handleScroll}></img>
+      <img src={'./assets/down_angle.jpg'} className={"down_angle"} onClick={() => {this.handleScroll('down')}}></img>
       </div>
     )
   }

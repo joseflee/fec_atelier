@@ -125,6 +125,7 @@ Image Gallery - Overview
   height: 80px;
   overflow: auto;
   margin-top: 0px;
+  margin-left: 10px;
 }
 
 .thumbnailGallery::-webkit-scrollbar {
@@ -153,12 +154,14 @@ Image Gallery - Overview
   width: 15px;
   height: auto;
   visibility: visible;
+  margin-left: 10px;
 }
 
 .up_angle {
   width: 15px;
   height: auto;
   visibility: hidden;
+  margin-left: 10px;;
 }
 
 /*
