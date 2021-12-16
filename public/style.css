@@ -210,9 +210,23 @@ Expanded View, Image Gallery - Overview
 
 #zoomView {
   display: none;
+  position: relative;
+  left: 150px;
+  bottom: 75px;
 }
 
+#zoomView:hover {
+  cursor: zoom-in;
+}
 
+.scrollDot {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.scrollDot:hover {
+  cursor: pointer;
+}
 
 
 /*

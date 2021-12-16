@@ -7,21 +7,24 @@ class ImageZoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gallery: ['main image'],
-      currentImageIndex: 0
+      gallery: ['image zoom 1', 'image zoom 2', 'image zoom 3', 'image zoom 4', 'image zoom 5'],
+      currentImageIndex: 0,
+      zoom: false
     }
+
     this.handleImageChange = this.handleImageChange.bind(this);
   }
 
   handleImageChange(e) {
 
     // receives clicked dot index and sets currentImageIndex
-    var value = e.target.innerHTML;
-    var newIndex = Number(value.split('').splice(1).join(''));
+    var value = Number(e.target.innerHTML[30]);
+
+    //console.log('handle image change innerHTML = ', newIndex);
 
     this.setState({
       ...this.state,
-      currentImageIndex: newIndex,
+      currentImageIndex: value,
     })
 
   }
@@ -45,5 +48,6 @@ class ImageZoom extends React.Component {
   }
 
 }
+
 
 export default ImageZoom;
