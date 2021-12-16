@@ -23,6 +23,7 @@ class ImageGallery extends React.Component {
     this.handleScroll = this.handleScroll.bind(this);
     this.updateArrows = this.updateArrows.bind(this);
     this.syncThumbnail = this.syncThumbnail.bind(this);
+    this.closeZoom = this.closeZoom.bind(this);
 
   }
 
@@ -120,6 +121,13 @@ class ImageGallery extends React.Component {
 
   }
 
+  closeZoom() {
+
+    var zoomView = $('#zoomView');
+    zoomView.css('display', 'none');
+
+  }
+
   render() {
 
     return (
@@ -129,7 +137,7 @@ class ImageGallery extends React.Component {
         <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }} />
         <MainImage image={this.state.gallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
         <ImageInsert gallery={this.state.gallery} featureImage={this.state.featureImage} />
-        <ImageZoom props={this.state.gallery[this.state.featureImage]} />
+        <ImageZoom props={this.state.gallery[this.state.featureImage]} closeZoom={this.closeZoom} />
       </div>
 
     )

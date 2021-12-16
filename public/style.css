@@ -215,7 +215,8 @@ Expanded View, Image Gallery - Overview
   bottom: 75px;
 }
 
-#zoomView:hover {
+#zoomedImage {
+  transform: scale(1);
   cursor: zoom-in;
 }
 
@@ -225,6 +226,18 @@ Expanded View, Image Gallery - Overview
 }
 
 .scrollDot:hover {
+  cursor: pointer;
+}
+
+#xOutZoom {
+  display: inline-block;
+  position: relative;
+  left: 100px;
+  font-family: arial;
+  color:rgba(0, 0, 0, .3);
+}
+
+#xOutZoom:hover {
   cursor: pointer;
 }
 

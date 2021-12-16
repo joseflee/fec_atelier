@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class ImageZoom extends React.Component {
 
@@ -13,6 +14,9 @@ class ImageZoom extends React.Component {
     }
 
     this.handleImageChange = this.handleImageChange.bind(this);
+    this.zoomClick = this.zoomClick.bind(this);
+    this.closeZoom = this.closeZoom.bind(this);
+
   }
 
   handleImageChange(e) {
@@ -29,6 +33,32 @@ class ImageZoom extends React.Component {
 
   }
 
+  zoomClick() {
+
+    var zoomedImg = $('#zoomedImage');
+
+    if (this.state.zoom === false) {
+      zoomedImg.css('transform', 'scale(2.5)');
+      zoomedImg.css('cursor', 'zoom-out');
+      this.setState({
+        ...this.state,
+        zoom: true
+      })
+    } else if (this.state.zoom === true) {
+      zoomedImg.css('transform', 'scale(1)');
+      zoomedImg.css('cursor', 'zoom-in');
+      this.setState({
+        ...this.state,
+        zoom: false
+      })
+    }
+
+  }
+
+  closeZoom() {
+    this.props.closeZoom();
+  }
+
   // map-render index dots w/click handlers
 
   render() {
@@ -36,7 +66,8 @@ class ImageZoom extends React.Component {
     return (
 
       <div id={'zoomView'}>
-        <div>{this.state.gallery[this.state.currentImageIndex]}</div>
+        <div id={'xOutZoom'} onClick={this.closeZoom}>x</div>
+        <div id={'zoomedImage'} onClick={this.zoomClick}>{this.state.gallery[this.state.currentImageIndex]}</div>
         <div>{this.state.gallery.map((item, i) => (
           <div key={i} className={'scrollDot'} onClick={this.handleImageChange}>.<span className={'invisibleIndex'}>{i}</span></div>
         ))
