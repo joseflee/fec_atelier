@@ -38,9 +38,11 @@ class AddToCart extends React.Component {
   }
 
   render() {
+
     return (
 
       <div className={'addToCart'}>
+
         <Size props={this.state.sizesAvailable} cb={this.validateForm}/>
         <Quantity props={this.state.quantityAvailable} cb={this.validateForm}/>
         <button onClick={this.submitForm}>Add to Cart</button>

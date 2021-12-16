@@ -2,9 +2,13 @@ import React from 'react';
 
 var Size = (props) => {
 
+  var temporarySizesProp = ['x-small', 'small', 'medium', 'large', 'x-large'];
+
   return (
 
-    <div>Sizes dropdown</div>
+    <select name={'sizes'} id={'sizesDropdown'}>{temporarySizesProp.map((item, i) => (
+      <option key={i} value={`${item}`}>{item}</option>
+    ))}</select>
 
   )
 
