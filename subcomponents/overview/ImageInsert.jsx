@@ -66,7 +66,6 @@ class ImageInsert extends React.Component {
   }
 
 
-
   render() {
     return (
       <div>
