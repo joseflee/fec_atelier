@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class QuestionSearch extends React.Component {
   constructor(props) {
@@ -7,11 +7,9 @@ class QuestionSearch extends React.Component {
   }
   render() {
     return (
-      <div className={'questionSearch'}>
         <div>
           <input type="search" placeholder="Have A Question? Search For Answers..." id="search" ></input>
         </div>
-      </div>
     )
   }
 };
