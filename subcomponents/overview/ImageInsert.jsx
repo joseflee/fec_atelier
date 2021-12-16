@@ -21,18 +21,12 @@ class ImageInsert extends React.Component {
 
   componentDidMount() {
 
-  var i = this.state.featureImage;
-  var scrollBox = $('.thumbnailScroll');
-  scrollBox.children('div').eq(i).css('border', '2px solid black');
+
 
   }
 
   updateThumbnailBorder() {
 
-  var i = this.state.featureImage;
-  var scrollBox = $('.thumbnailScroll');
-  scrollBox.children().css('border: 1px solid rgba(0, 0, 0, .3)');
-  scrollBox.children().eq(i).css('border', '2px solid black');
 
   }
 

@@ -22,11 +22,15 @@ class ImageGallery extends React.Component {
     this.switchZoomDisplay = this.switchZoomDisplay.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.updateArrows = this.updateArrows.bind(this);
+    this.syncThumbnail = this.syncThumbnail.bind(this);
 
   }
 
   componentDidMount() {
 
+    var i = this.state.featureImage;
+    var scrollBox = $('.thumbnailScroll');
+    scrollBox.children('div').eq(i).css('border', '1px solid black');
 
   }
 
@@ -82,7 +86,20 @@ class ImageGallery extends React.Component {
 
   }
 
+  syncThumbnail() {
+
+    console.log('sync thumbnail invoked')
+
+    var i = this.state.featureImage;
+    var scrollBox = $('.thumbnailScroll');
+    scrollBox.children().css('border', '1px solid rgba(0, 0, 0, .3)');
+    scrollBox.children().eq(i).css('border', '1px solid black');
+
+  }
+
   handleScroll(direction) {
+
+    console.log('handle scroll toggle')
 
     var newIndex;
 
@@ -96,8 +113,9 @@ class ImageGallery extends React.Component {
       ...this.state,
       featureImage: newIndex
     }, () => {
-      this.updateArrows()
-    })
+      this.updateArrows();
+      this.syncThumbnail();
+    });
 
 
   }
@@ -107,10 +125,10 @@ class ImageGallery extends React.Component {
     return (
 
       <div className={'imageGallery'}>
-        <img className={'left_angle'} src={'./assets/left_angle.png'} onClick={() => { this.handleScroll('left') }}/>
-        <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }}/>
-        <MainImage image={this.state.gallery[this.state.featureImage]} toggleZoom={this.toggleZoom}/>
-        <ImageInsert gallery={this.state.gallery} featureImage={this.state.featureImage}/>
+        <img className={'left_angle'} src={'./assets/left_angle.png'} onClick={() => { this.handleScroll('left') }} />
+        <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }} />
+        <MainImage image={this.state.gallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
+        <ImageInsert gallery={this.state.gallery} featureImage={this.state.featureImage} />
         <ImageZoom props={this.state} />
       </div>
 
