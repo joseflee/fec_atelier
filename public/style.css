@@ -101,6 +101,19 @@ Style Item - Overview
 
 }
 
+.selectedStyle {
+
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 1);
+  border-radius: 35px;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  margin: 10px 0 0 10px;
+  line-height: 50px;
+
+}
+
 .styleSelector {
   overflow: scroll;
 }
@@ -113,6 +126,24 @@ Style Item - Overview
   display: flex;
   width: 300px;
   flex-wrap: wrap;
+}
+
+.title {
+  display: inline-block;
+  position: absolute;
+  left: 20px;
+
+}
+
+.checkmark {
+  display: inline-block;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
+.styleContainer {
+  position: relative;
 }
 
 /*

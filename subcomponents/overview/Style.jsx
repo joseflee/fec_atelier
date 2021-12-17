@@ -1,25 +1,39 @@
 import React from 'react';
+import $ from 'jquery';
 
 var Style = (props) => {
 
   //props (single style name, img and checkmark / selected data are received and style circle is rendered )
 
-  var createTemporaryStyleProps = () => {
+  var index = props.featuredIndex;
 
-    var result = [];
-    for (var i = 0; i < 15; i++) {
-      result.push('style');
-    }
-    return result;
+  var handleClick = (i) => {
+
+    var scrollBox = $('.scrollBox');
+    // scrollBox.children().css('border', '1px solid rgba(0, 0, 0, .3)');
+    // scrollBox.children().eq(i).css('border', '1px solid rgba(0, 0, 0, 1)');
+
+    props.changeStyle(i);
+
   }
-
-  var temporaryStyleProps = createTemporaryStyleProps();
 
   return (
     <div className={'styleSelector'}>
-      <div className={'scrollBox'}>{temporaryStyleProps.map((item, i) => (
-        <div key={i} className={'styleItem'}>{item}</div>
-      ))}</div>
+      <div className={'scrollBox'}>{props.styles.map((item, i) => {
+        if (index === i) {
+          return (
+            <div key={i} className={'styleContainer'}>
+            <div className={'title'}>{props.styleNames[i]}</div>
+            <div className={'checkmark'}><span>&#10003;</span></div>
+            <div className={`selectedStyle`} onClick={() => {handleClick(i)}}>{item}</div>
+            </div>
+          )
+        } else {
+          return (
+            <div key={i} className={'styleItem'} onClick={() => {handleClick(i)}}>{item}</div>
+          )
+        }
+      })}</div>
     </div>
   )
 
