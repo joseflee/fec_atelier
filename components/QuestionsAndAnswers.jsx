@@ -1,14 +1,24 @@
 import React from 'react';
+import QuestionSearch from '../subcomponents/QuestionsAndAnswers/QuestionSearch.jsx';
+import QuestionList from '../subcomponents/QuestionsAndAnswers/QuestionList.jsx';
+import sampleData from '../database/questionsAndAnswers';
+import AddQuestion from '../subcomponents/questionsAndAnswers/AddQuestion.jsx';
+import MoreQuestions from '../subcomponents/questionsAndAnswers/MoreQuestions.jsx';
 
 class QuestionsAndAnswers extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
   }
 
   render() {
     return (
-      <div>Questions And Answers</div>
+      <div>
+        <h4>Questions And Answers</h4>
+        <QuestionSearch />
+        <QuestionList data={sampleData}/>
+        <MoreQuestions />
+        <AddQuestion />
+      </div>
     )
   }
 }
