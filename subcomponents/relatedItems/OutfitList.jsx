@@ -1,4 +1,6 @@
 import React from 'react';
+import {OutfitCard} from './OutfitCard.jsx';
+import {AddToOutfitCard} from './AddToOutfitCard.jsx';
 
 export class OutfitList extends React.Component {
   constructor(props) {
@@ -7,7 +9,10 @@ export class OutfitList extends React.Component {
 
   render() {
     return (
-      <p>list of outfits</p>
+      <div>
+        <h3>Your Outfit</h3>
+        <AddToOutfitCard add={this.props.add}/>
+      </div>
     )
   }
 }
