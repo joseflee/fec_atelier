@@ -9,14 +9,26 @@ class ImageInsert extends React.Component {
     super(props);
     this.state = {
       temporaryImageProps: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7'],
-      gallery: props.gallery,
+      gallery: this.props.gallery,
+      featureImage: this.props.featureImage
     }
 
     this.updateArrows = this.updateArrows.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.updateThumbnailBorder = this.updateThumbnailBorder.bind(this);
 
   }
 
+  componentDidMount() {
+
+
+
+  }
+
+  updateThumbnailBorder() {
+
+
+  }
 
 
   updateArrows(e) {
@@ -66,13 +78,12 @@ class ImageInsert extends React.Component {
   }
 
 
-
   render() {
     return (
       <div>
       <img src={'./assets/up_angle.png'} className={"up_angle"} onClick={() => {this.handleScroll('up')}}></img>
       <div className={'thumbnailGallery'} onScroll={this.updateArrows}>
-        <div className={'thumbnailScroll'}>{this.state.temporaryImageProps.map((item, i) => (
+        <div className={'thumbnailScroll'}>{this.state.gallery.map((item, i) => (
           <div key={i} className={'thumbnailItem'}></div>
         ))}</div>
       </div>

@@ -6,7 +6,7 @@ class AddQuestion extends React.Component {
   }
   render() {
     return(
-      <button>add question</button>
+      <button>Add Question</button>
     )
   }
 }
