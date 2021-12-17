@@ -3,7 +3,7 @@ import Enzyme from 'enzyme';
 import { mount, shallow, render } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { expect } from 'chai';
-import Overview from '../../components/Overview.jsx';
+import RelatedItems from '../../components/RelatedItems.jsx';
 import sinon from 'sinon';
 
 
@@ -13,10 +13,10 @@ Enzyme.configure({ adapter: new Adapter() });
 
 var container;
 
-describe("Overview", () => {
+describe("RelatedItems", () => {
 
-  it("Overview renders successfully", () => {
-    const wrapper = shallow(<Overview/>);
+  it("Related Items renders successfully", () => {
+    const wrapper = shallow(<RelatedItems/>);
     expect(wrapper.find('div')).to.have.length(1);
   });
 

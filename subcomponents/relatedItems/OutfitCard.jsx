@@ -8,8 +8,8 @@ export class OutfitCard extends React.Component {
   render() {
     return (
       <>
-        <div>
-          <button>test</button>
+        <div className="card">
+          <button onClick={this.props.remove}>delete</button>
           <div>Picture</div>
           <div>Category</div>
           <div>Price</div>

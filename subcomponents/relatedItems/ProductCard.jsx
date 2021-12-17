@@ -8,8 +8,8 @@ export class ProductCard extends React.Component {
   render() {
     return (
       <>
-        <div onClick={this.props.clickCard}>
-          <button onClick={this.props.clickStar}>test</button>
+        <div onClick={this.props.clickCard} className="card">
+          <button onClick={this.props.clickStar}>compare</button>
           <div>Picture</div>
           <div>Category</div>
           <div>Price</div>
