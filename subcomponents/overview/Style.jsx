@@ -9,10 +9,6 @@ var Style = (props) => {
 
   var handleClick = (i) => {
 
-    var scrollBox = $('.scrollBox');
-    // scrollBox.children().css('border', '1px solid rgba(0, 0, 0, .3)');
-    // scrollBox.children().eq(i).css('border', '1px solid rgba(0, 0, 0, 1)');
-
     props.changeStyle(i);
 
   }
