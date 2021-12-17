@@ -10,7 +10,7 @@ export class OutfitList extends React.Component {
   render() {
     return (
       <div>
-        <h3>list of outfits</h3>
+        <h3>Your Outfit</h3>
         <AddToOutfitCard add={this.props.add}/>
       </div>
     )
