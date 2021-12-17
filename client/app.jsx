@@ -9,6 +9,7 @@ import $ from 'jquery';
 import mockProduct from '../mock_api/mock_product.js';
 import mockStyles from '../mock_api/mock_styles.js';
 
+
 class App extends React.Component {
 
   constructor(props) {
