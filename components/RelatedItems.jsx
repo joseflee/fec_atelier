@@ -39,7 +39,7 @@ class RelatedItems extends React.Component {
     console.log('delete from outfit list');
   }
 
-  //function to add items to the related Items List
+  //function to add items to the related Items List; might need to do this in the database helpers
   addToRelatedItems() {
   }
 
