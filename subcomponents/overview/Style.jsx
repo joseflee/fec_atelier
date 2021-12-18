@@ -21,12 +21,12 @@ var Style = (props) => {
             <div key={i} className={'styleContainer'}>
             <div className={'title'}>{props.styleNames[i]}</div>
             <div className={'checkmark'}><span>&#10003;</span></div>
-            <div className={`selectedStyle`} onClick={() => {handleClick(i)}}>{item}</div>
+            <img className={`selectedStyle`} onClick={() => {handleClick(i)}} src={item}/>
             </div>
           )
         } else {
           return (
-            <div key={i} className={'styleItem'} onClick={() => {handleClick(i)}}>{item}</div>
+            <img key={i} className={'styleItem'} onClick={() => {handleClick(i)}} src={item}/>
           )
         }
       })}</div>

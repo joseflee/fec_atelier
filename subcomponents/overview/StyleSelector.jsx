@@ -13,10 +13,35 @@ class StyleSelector extends React.Component {
     }
 
     this.changeStyle = this.changeStyle.bind(this);
+    this.unpackStyles = this.unpackStyles.bind(this);
 
   }
 
   componentDidMount() {
+
+    this.unpackStyles();
+
+  }
+
+  unpackStyles() {
+
+    // converts style objects into arrays formatted for rendering each style component
+    var styles = this.props.styles.results;
+    var imageUrls = [];
+    var styleNames = [];
+
+    for (var i = 0; i < styles.length; i++) {
+      styleNames.push(styles[i].name);
+      imageUrls.push(styles[i].photos[0].url);
+    }
+
+    this.setState({
+
+      ...this.state,
+      styles: imageUrls,
+      styleNames: styleNames
+
+    })
 
   }
 
