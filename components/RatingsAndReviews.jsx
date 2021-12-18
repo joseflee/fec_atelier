@@ -6,6 +6,10 @@ class RatingsAndReviews extends React.Component {
     this.state = {}
   }
 
+  componentDidMount() {
+    console.log('component did mount');
+  }
+
   render() {
     return (
       <div>Ratings And Reviews</div>
