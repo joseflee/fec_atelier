@@ -1,5 +1,5 @@
 import React from 'react';
-import ratingToStar from '../modules/stars.js';
+import ratingToStar from '../../modules/stars.js';
 
 class NewReview extends React.Component {
   constructor(props) {
@@ -15,11 +15,16 @@ class NewReview extends React.Component {
         <button>Add A Review +</button>
         <form className="reviewForm">
           <label>Overall Rating*
-            <ratingToStar />
+            {/* <ratingToStar /> */}
           </label>
-          <label>Do you recommend this product?*
-            <input type="radio"></input>
-          </label>
+
+          <div>Do you recommend this product?*
+            <input type="radio" name="recommend" id="recommendYes" value="yes"></input>
+            <label htmlFor="recommendYes">Yes</label>
+
+            <input type="radio" name="recommend" id="recommendNo" value="no"></input>
+            <label htmlFor="recommendNo">No</label>
+          </div>
         </form>
       </div>
       // when button is clicked, should open a form with field inputs for:
