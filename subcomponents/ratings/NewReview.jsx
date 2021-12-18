@@ -18,13 +18,40 @@ class NewReview extends React.Component {
             {/* <ratingToStar /> */}
           </label>
 
-          <div>Do you recommend this product?*
+          <div className="recommend">Do you recommend this product?*
             <input type="radio" name="recommend" id="recommendYes" value="yes"></input>
             <label htmlFor="recommendYes">Yes</label>
 
             <input type="radio" name="recommend" id="recommendNo" value="no"></input>
             <label htmlFor="recommendNo">No</label>
           </div>
+
+          <div className="characteristicRating">Characteristic Ratings*
+
+          </div>
+
+          <div className="reviewSummary">Review Summary
+            <textarea name="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!"
+            spellCheck="true"></textarea>
+          </div>
+
+          <div className="reviewBody">Review Body*
+
+          </div>
+
+          <div className="uploadPhotos">Upload Photos
+
+          </div>
+
+          <div className="nickname">Nickname*
+
+          </div>
+
+          <div className="email">Email*
+
+          </div>
+
+          <button type="submit">Submit</button>
         </form>
       </div>
       // when button is clicked, should open a form with field inputs for:
