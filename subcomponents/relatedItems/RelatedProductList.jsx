@@ -19,7 +19,6 @@ var mockRelatedItems = [
   {picture: 'image', category: 'belt', price: '$1', rating: 3.3},
 ]
 
-var fiveAtOnce = mockRelatedItems.slice
 
 //where to keep the related items state
 //related items will be got from the api and will be in related Items component
@@ -95,13 +94,13 @@ export class RelatedProductList extends React.Component {
         <h3>list of related products</h3>
         <div className="carousel">
           <div className="centerVertical">
-            <div className="leftArrow" onClick={this.handleLeftArrow}></div>
+           {this.state.positionAtList > 0 ? <div className="leftArrow" onClick={this.handleLeftArrow}></div> : null}
           </div>
           {this.state.currentView.map((item, index) => {
             return <ProductCard key={index} clickCard={this.props.clickCard} clickStar={this.props.clickStar} itemInfo={item} />
           })}
           <div className="centerVertical">
-            <div className="rightArrow" onClick={this.handleRightArrow}></div>
+            {this.state.positionAtList < mockRelatedItems.length - 5 ? <div className="rightArrow" onClick={this.handleRightArrow}></div> : null}
           </div>
         </div>
       </>
