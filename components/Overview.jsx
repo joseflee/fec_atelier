@@ -9,6 +9,7 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      product: props.product,
       styles: props.styles,
       selectedStyle: 0,
     }
@@ -38,7 +39,7 @@ class Overview extends React.Component {
 
     return (
       <div id={'overview'}>
-        <ProductInfo props={this.state}/>
+        <ProductInfo product={this.state.product}/>
         <ImageGallery selectedStyle={this.state.styles.results[this.state.selectedStyle]}/>
         <StyleSelector styles={this.state.styles} changeStyle={this.changeStyle}/>
         <AddToCart props={this.state}/>
