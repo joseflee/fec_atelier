@@ -5,12 +5,11 @@ import $ from 'jquery';
 class ImageInsert extends React.Component {
 
   constructor(props) {
-
     super(props);
     this.state = {
       temporaryImageProps: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7'],
-      gallery: this.props.gallery,
-      featureImage: this.props.featureImage
+      gallery: props.gallery,
+      featureImage: props.featureImage
     }
 
     this.updateArrows = this.updateArrows.bind(this);
@@ -21,7 +20,7 @@ class ImageInsert extends React.Component {
 
   componentDidMount() {
 
-
+    console.log('state gallery in image insert => ', this.props)
 
   }
 
@@ -84,7 +83,7 @@ class ImageInsert extends React.Component {
       <img src={'./assets/up_angle.png'} className={"up_angle"} onClick={() => {this.handleScroll('up')}}></img>
       <div className={'thumbnailGallery'} onScroll={this.updateArrows}>
         <div className={'thumbnailScroll'}>{this.state.gallery.map((item, i) => (
-          <div key={i} className={'thumbnailItem'}></div>
+          <img key={i} className={'thumbnailItem'} src={item}/>
         ))}</div>
       </div>
       <img src={'./assets/down_angle.png'} className={"down_angle"} onClick={() => {this.handleScroll('down')}}></img>

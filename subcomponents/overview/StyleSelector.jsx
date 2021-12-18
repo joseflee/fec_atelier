@@ -18,8 +18,9 @@ class StyleSelector extends React.Component {
   }
 
   componentDidMount() {
-    console.log('styles props => ', this.props.styles)
+
     this.unpackStyles();
+
   }
 
   unpackStyles() {

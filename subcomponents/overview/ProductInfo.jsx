@@ -3,7 +3,6 @@ import Stars from './Stars.jsx';
 
 var ProductInfo = (props) => {
 
-  console.log('product info props => ', props)
   var name = props.product.name;
   var category = props.product.category;
   var price = props.product.default_price;

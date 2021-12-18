@@ -12,6 +12,9 @@ class ImageGallery extends React.Component {
     super(props);
     this.state = {
 
+      selectedStyle: props.selectedStyle,
+      newGallery: [],
+      thumbGallery: [],
       gallery: ["image 1", 'image 2', 'image 3', 'image 4', 'image 5', 'image 6', 'image 7'],
       featureImage: 0,
       zoom: false
@@ -24,14 +27,38 @@ class ImageGallery extends React.Component {
     this.updateArrows = this.updateArrows.bind(this);
     this.syncThumbnail = this.syncThumbnail.bind(this);
     this.closeZoom = this.closeZoom.bind(this);
+    this.unpackImages = this.unpackImages.bind(this);
 
   }
 
   componentDidMount() {
 
-    var i = this.state.featureImage;
-    var scrollBox = $('.thumbnailScroll');
-    scrollBox.children('div').eq(i).css('border', '1px solid black');
+    this.unpackImages();
+
+  }
+
+  unpackImages() {
+
+    var styleImages = this.state.selectedStyle.photos;
+    var thumbURLs = [];
+    var mainURLs = [];
+
+    for (var i = 0; i < styleImages.length; i++) {
+      thumbURLs.push(styleImages[i].thumbnail_url);
+      mainURLs.push(styleImages[i].url);
+    }
+
+    this.setState({
+      ...this.state,
+      newGallery: mainURLs,
+      thumbGallery: thumbURLs
+    }, () => {
+      // console.log('state thumbnails => ', this.state.thumbGallery)
+      // console.log('state gallery => ', this.state.newGallery)
+      var i = this.state.featureImage;
+      var scrollBox = $('.thumbnailScroll');
+      scrollBox.children('div').eq(i).css('border', '1px solid black');
+    })
 
   }
 
@@ -135,8 +162,8 @@ class ImageGallery extends React.Component {
       <div className={'imageGallery'}>
         <img className={'left_angle'} src={'./assets/left_angle.png'} onClick={() => { this.handleScroll('left') }} />
         <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }} />
-        <MainImage image={this.state.gallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
-        <ImageInsert gallery={this.state.gallery} featureImage={this.state.featureImage} />
+        <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
+        <ImageInsert gallery={this.state.thumbGallery} featureImage={this.state.featureImage} />
         <ImageZoom props={this.state.gallery[this.state.featureImage]} closeZoom={this.closeZoom} />
       </div>
 
