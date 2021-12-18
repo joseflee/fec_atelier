@@ -8,7 +8,6 @@ import MainImage from './MainImage.jsx';
 class ImageGallery extends React.Component {
 
   constructor(props) {
-
     super(props);
     this.state = {
 
@@ -116,8 +115,6 @@ class ImageGallery extends React.Component {
 
   syncThumbnail() {
 
-    console.log('sync thumbnail invoked')
-
     var i = this.state.featureImage;
     var scrollBox = $('.thumbnailScroll');
     scrollBox.children().css('border', '1px solid rgba(0, 0, 0, .3)');
@@ -126,8 +123,6 @@ class ImageGallery extends React.Component {
   }
 
   handleScroll(direction) {
-
-    console.log('handle scroll toggle')
 
     var newIndex;
 
@@ -164,7 +159,7 @@ class ImageGallery extends React.Component {
         <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }} />
         <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
         <ImageInsert gallery={this.state.thumbGallery} featureImage={this.state.featureImage} />
-        <ImageZoom props={this.state.gallery[this.state.featureImage]} closeZoom={this.closeZoom} />
+        <ImageZoom props={this.state.newGallery[this.state.featureImage]} closeZoom={this.closeZoom} />
       </div>
 
     )
