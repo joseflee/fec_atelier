@@ -41,12 +41,10 @@ export class RelatedProductList extends React.Component {
   }
 
   handleLeftArrow() {
-    console.log('left arrow clicked');
     this.shiftViewLeft();
   }
 
   handleRightArrow() {
-    console.log('right arrow clicked');
     this.shiftViewRight();
   }
 
@@ -81,7 +79,6 @@ export class RelatedProductList extends React.Component {
 
 
   componentDidMount() {
-    //var startingPosition = this.state.positionAtList;
     var fiveAtATime = mockRelatedItems.slice(0, 5);
     this.setState({
       currentView: fiveAtATime
@@ -107,4 +104,3 @@ export class RelatedProductList extends React.Component {
     )
   }
 }
-//<ProductCard clickCard={this.props.clickCard} clickStar={this.props.clickStar} />
