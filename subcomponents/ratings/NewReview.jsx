@@ -36,7 +36,8 @@ class NewReview extends React.Component {
           </div>
 
           <div className="reviewBody">Review Body*
-
+            <textarea name="reviewBody" maxLength="1000" placeholder="Why did you like the product or not?"
+            spellCheck="true" required="true"></textarea>
           </div>
 
           <div className="uploadPhotos">Upload Photos
@@ -44,7 +45,9 @@ class NewReview extends React.Component {
           </div>
 
           <div className="nickname">Nickname*
-
+          <input type="text" name="nickname" placeholder="Example: jackson11!"
+          spellcheck="true" maxlength="60" required="true"></input>
+          <div>For privacy reasons, do not use your full name or email address</div>
           </div>
 
           <div className="email">Email*
