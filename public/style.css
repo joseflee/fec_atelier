@@ -7,7 +7,7 @@ OVERVIEW
 
 #overview {
   border: 1px solid rgba(0, 0, 0, .4);
-  height: 650px;
+  height: 750px;
 }
 
 .productInfo {
@@ -35,7 +35,7 @@ OVERVIEW
   right: 400px;
   display: inline-block; */
   border: 1px solid rgba(0, 0, 0, .4);
-  height: 150px;
+  height: 200px;
   width: 400px;
 }
 
@@ -101,6 +101,19 @@ Style Item - Overview
 
 }
 
+.selectedStyle {
+
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 1);
+  border-radius: 35px;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  margin: 10px 0 0 10px;
+  line-height: 50px;
+
+}
+
 .styleSelector {
   overflow: scroll;
 }
@@ -115,6 +128,24 @@ Style Item - Overview
   flex-wrap: wrap;
 }
 
+.title {
+  display: inline-block;
+  position: absolute;
+  left: 20px;
+
+}
+
+.checkmark {
+  display: inline-block;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
+.styleContainer {
+  position: relative;
+}
+
 /*
 Image Gallery - Overview
 */
@@ -122,9 +153,10 @@ Image Gallery - Overview
 
 .thumbnailGallery {
   width: 30px;
-  height: 100px;
+  height: 80px;
   overflow: auto;
-  margin-top: 10px;
+  margin-top: 0px;
+  margin-left: 10px;
 }
 
 .thumbnailGallery::-webkit-scrollbar {
@@ -139,14 +171,64 @@ Image Gallery - Overview
   font-size: 10px;
 }
 
+.thumbnailItem:hover {
+  cursor: pointer;
+}
+
 .thumbnailScroll {
   display: flex;
   width: 31px;
   flex-wrap: wrap;
 }
 
+.mainImage {
+  text-align: center;
+}
+
 .mainImage:hover {
   cursor: zoom-in;
+}
+
+.down_angle {
+  width: 15px;
+  height: auto;
+  visibility: visible;
+  margin-left: 10px;
+  margin-top: -25px;
+}
+
+.up_angle {
+  width: 15px;
+  height: auto;
+  visibility: hidden;
+  margin-left: 10px;
+  margin-top: -25px;
+}
+
+.left_angle {
+  width: 15px;
+  height: auto;
+  position: relative;
+  left: 100px;
+  top: 25px;
+  visibility: hidden;
+}
+
+.left_angle:hover {
+  cursor: pointer;
+}
+
+.right_angle:hover {
+  cursor: pointer;
+}
+
+.right_angle {
+  width: 15px;
+  height: auto;
+  position: relative;
+  left: 270px;
+  top: 25px;
+  visibility: visible;
 }
 
 /*
@@ -159,9 +241,36 @@ Expanded View, Image Gallery - Overview
 
 #zoomView {
   display: none;
+  position: relative;
+  left: 150px;
+  bottom: 75px;
 }
 
+#zoomedImage {
+  transform: scale(1);
+  cursor: zoom-in;
+}
 
+.scrollDot {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.scrollDot:hover {
+  cursor: pointer;
+}
+
+#xOutZoom {
+  display: inline-block;
+  position: relative;
+  left: 100px;
+  font-family: arial;
+  color:rgba(0, 0, 0, .3);
+}
+
+#xOutZoom:hover {
+  cursor: pointer;
+}
 
 
 /*
@@ -170,15 +279,57 @@ RELATED ITEMS
 /////////////////////
 */
 
+.card {
+  width: 100px;
+  height: 150px;
+  background: rgb(146, 142, 142);
+  border: 1px solid black;
+  text-align: center;
+}
+
+.carousel {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
 
 
+.rightArrow {
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 15px solid black;
+}
 
+.leftArrow {
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-right: 15px solid black;
+}
+
+.centerVertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 /*
 /////////////////////
 QUESTIONS AND ANSWERS
 /////////////////////
 */
+
+#search {
+  height: 50px;
+  width: 400px;
+}
+
+.questionItem {
+  border: 1px solid rgba(0, 0, 0, .4);
+}
 
 
 

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "test-overview": "mocha ./test/overview --require @babel/register",
-    "test-questionsAndAnswers": "mocha ./test/questionsAndAnswers --require @babel/register",
+    "test-QandA": "mocha ./test/questionsAndAnswers --require @babel/register",
     "test-ratingsAndReviews": "mocha ./test/ratingsAndReviews --require @babel/register",
     "test-relatedItems": "mocha ./test/relatedItems --require @babel/register",
     "start": "nodemon ./server/index.js",
