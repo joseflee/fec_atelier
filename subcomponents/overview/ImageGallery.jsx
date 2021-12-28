@@ -13,7 +13,8 @@ class ImageGallery extends React.Component {
       selectedStyle: props.selectedStyle,
       newGallery: [],
       featureImage: 0,
-      zoom: false
+      zoom: false,
+      selectedIndex: props.selectedIndex
     }
 
     this.toggleZoom = this.toggleZoom.bind(this);

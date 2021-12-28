@@ -30,8 +30,14 @@ class Overview extends React.Component {
 
   }
 
-  changeStyle(name) {
+  changeStyle(newIndex) {
     // updates state - selected style images for dist to image gallery
+    this.setState({
+      ...this.state,
+      selectedStyle: newIndex
+    }, () => {
+      console.log('new overview state selected style => ', this.state.selectedStyle)
+    })
 
   }
 
@@ -40,7 +46,7 @@ class Overview extends React.Component {
     return (
       <div id={'overview'}>
         <ProductInfo product={this.state.product}/>
-        <ImageGallery selectedStyle={this.state.styles.results[this.state.selectedStyle]}/>
+        <ImageGallery selectedStyle={this.state.styles.results[this.state.selectedStyle]} />
         <StyleSelector styles={this.state.styles} changeStyle={this.changeStyle}/>
         <AddToCart props={this.state}/>
       </div>
