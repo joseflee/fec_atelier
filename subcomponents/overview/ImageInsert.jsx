@@ -9,18 +9,44 @@ class ImageInsert extends React.Component {
     this.state = {
       temporaryImageProps: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7'],
       gallery: props.gallery,
-      featureImage: props.featureImage
+      featureImage: props.featureImage,
+      thumbGallery: [],
+      selectedStyle: props.selectedStyle
     }
 
     this.updateArrows = this.updateArrows.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.updateThumbnailBorder = this.updateThumbnailBorder.bind(this);
+    this.unpackImages = this.unpackImages.bind(this);
 
   }
 
   componentDidMount() {
 
-    console.log('state gallery in image insert => ', this.props)
+    //console.log('state selectedStyle in image insert => ', this.props.selectedStyle)
+    this.unpackImages();
+
+
+  }
+
+  unpackImages() {
+
+    var styleImages = this.state.selectedStyle.photos;
+    var thumbURLs = [];
+
+    for (var i = 0; i < styleImages.length; i++) {
+      thumbURLs.push(styleImages[i].thumbnail_url);
+    }
+
+    this.setState({
+      ...this.state,
+      thumbGallery: thumbURLs
+    }, () => {
+      console.log('state thumbnails => ', this.state.thumbGallery)
+      var i = this.state.featureImage;
+      var scrollBox = $('.thumbnailScroll');
+      scrollBox.children('div').eq(i).css('border', '1px solid black');
+    })
 
   }
 
@@ -61,9 +87,6 @@ class ImageInsert extends React.Component {
     var offset = gallery.offset();
     var shift;
 
-    // For spacing calibration after restyling
-    //console.log(offset);
-
     if (direction === 'down' && Math.floor(offset.top) > 175) {
       shift = offset.top - 20;
       gallery.offset({ top: shift, left: 20 });
@@ -82,7 +105,7 @@ class ImageInsert extends React.Component {
       <div>
       <img src={'./assets/up_angle.png'} className={"up_angle"} onClick={() => {this.handleScroll('up')}}></img>
       <div className={'thumbnailGallery'} onScroll={this.updateArrows}>
-        <div className={'thumbnailScroll'}>{this.state.gallery.map((item, i) => (
+        <div className={'thumbnailScroll'}>{this.state.thumbGallery.map((item, i) => (
           <img key={i} className={'thumbnailItem'} src={item}/>
         ))}</div>
       </div>

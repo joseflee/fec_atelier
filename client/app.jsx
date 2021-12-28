@@ -21,17 +21,22 @@ class App extends React.Component {
       styles: mockStyles,
       products: null,
     }
+
     this.retrieveProduct = this.retrieveProduct.bind(this);
+    this.retrieveStyles = this.retrieveStyles.bind(this);
+
   }
 
   componentDidMount() {
     // invoke retrieveProduct
     this.retrieveProduct();
+    this.retrieveStyles(3);
   }
 
   retrieveProduct() {
 
     var self = this;
+
     $.ajax({
       method: 'GET',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/',
@@ -43,9 +48,31 @@ class App extends React.Component {
         ...self.state,
         products: res
       }, () => {
-        console.log(self.state.products);
+        console.log('state products => ', self.state.products);
       })
     })
+
+  }
+
+  retrieveStyles(productNumber) {
+
+    var self = this;
+
+    $.ajax({
+      method: 'GET',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productNumber}/styles`,
+      headers: {
+        "Authorization": APIkey
+      }
+    }).done((res) => {
+      self.setState({
+        ...self.state,
+        styles: res
+      }, () => {
+        console.log('state styles => ', self.state.styles);
+      })
+    })
+
 
   }
 
