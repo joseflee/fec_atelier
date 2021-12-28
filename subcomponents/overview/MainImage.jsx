@@ -8,7 +8,7 @@ var MainImage = (props) => {
 
   return (
 
-    <div className={'mainImage'} onClick={clickHandler}>{props.image}</div>
+    <img className={'mainImage'} onClick={clickHandler} src={props.image}></img>
 
   )
 

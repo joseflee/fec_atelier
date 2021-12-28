@@ -67,11 +67,12 @@ class ImageInsert extends React.Component {
     var upAngle = $('.up_angle');
     var downAngle = $('.down_angle');
 
+    console.log('offset top => ', offset.top)
 
-    if (Math.floor(offset.top) >= 249) {
+    if (Math.floor(offset.top) >= 266) {
       upAngle.css('visibility', 'hidden');
       downAngle.css('visibility', 'visible');
-    } else if (Math.floor(offset.top) <= 175) {
+    } else if (Math.floor(offset.top) <= 166) {
       upAngle.css('visibility', 'visible');
       downAngle.css('visibility', 'hidden');
     } else {
@@ -87,12 +88,12 @@ class ImageInsert extends React.Component {
     var offset = gallery.offset();
     var shift;
 
-    if (direction === 'down' && Math.floor(offset.top) > 175) {
+    if (direction === 'down' && Math.floor(offset.top) > 166) {
       shift = offset.top - 20;
-      gallery.offset({ top: shift, left: 20 });
-    } else if (direction === 'up' && Math.floor(offset.top) < 249) {
+      gallery.offset({ top: shift, left: 115 });
+    } else if (direction === 'up' && Math.floor(offset.top) < 266) {
       shift = offset.top + 20;
-      gallery.offset({ top: shift, left: 20 });
+      gallery.offset({ top: shift, left: 115 });
     }
 
     this.updateArrows();
@@ -102,7 +103,7 @@ class ImageInsert extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={'imageInsert'}>
       <img src={'./assets/up_angle.png'} className={"up_angle"} onClick={() => {this.handleScroll('up')}}></img>
       <div className={'thumbnailGallery'} onScroll={this.updateArrows}>
         <div className={'thumbnailScroll'}>{this.state.thumbGallery.map((item, i) => (

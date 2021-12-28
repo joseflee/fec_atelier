@@ -157,8 +157,10 @@ class ImageGallery extends React.Component {
       <div className={'imageGallery'}>
         <img className={'left_angle'} src={'./assets/left_angle.png'} onClick={() => { this.handleScroll('left') }} />
         <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }} />
-        <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
         <ImageInsert gallery={this.state.thumbGallery} featureImage={this.state.featureImage} selectedStyle={this.state.selectedStyle}/>
+        <div className={'mainFrame'}>
+        <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
+        </div>
         <ImageZoom props={this.state.newGallery[this.state.featureImage]} closeZoom={this.closeZoom} />
       </div>
 
