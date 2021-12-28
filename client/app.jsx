@@ -48,7 +48,7 @@ class App extends React.Component {
         ...self.state,
         products: res
       }, () => {
-        console.log('state products => ', self.state.products);
+        //console.log('state products => ', self.state.products);
       })
     })
 
@@ -69,7 +69,7 @@ class App extends React.Component {
         ...self.state,
         styles: res
       }, () => {
-        console.log('state styles => ', self.state.styles);
+        //console.log('state styles => ', self.state.styles);
       })
     })
 
@@ -80,7 +80,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <div>ATELIER</div>
+        <div className={'pageTitle'}>ATELIER</div>
         <Overview product={this.state.product} styles={this.state.styles}/>
         <RelatedItems />
         <QuestionsAndAnswers />

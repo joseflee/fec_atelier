@@ -13,7 +13,6 @@ class ImageGallery extends React.Component {
 
       selectedStyle: props.selectedStyle,
       newGallery: [],
-      thumbGallery: [],
       gallery: ["image 1", 'image 2', 'image 3', 'image 4', 'image 5', 'image 6', 'image 7'],
       featureImage: 0,
       zoom: false
@@ -27,6 +26,7 @@ class ImageGallery extends React.Component {
     this.syncThumbnail = this.syncThumbnail.bind(this);
     this.closeZoom = this.closeZoom.bind(this);
     this.unpackImages = this.unpackImages.bind(this);
+    this.changeFeaturedImage = this.changeFeaturedImage.bind(this);
 
   }
 
@@ -39,18 +39,15 @@ class ImageGallery extends React.Component {
   unpackImages() {
 
     var styleImages = this.state.selectedStyle.photos;
-    var thumbURLs = [];
     var mainURLs = [];
 
     for (var i = 0; i < styleImages.length; i++) {
-      thumbURLs.push(styleImages[i].thumbnail_url);
       mainURLs.push(styleImages[i].url);
     }
 
     this.setState({
       ...this.state,
       newGallery: mainURLs,
-      thumbGallery: thumbURLs
     }, () => {
       // console.log('state thumbnails => ', this.state.thumbGallery)
       // console.log('state gallery => ', this.state.newGallery)
@@ -103,10 +100,10 @@ class ImageGallery extends React.Component {
     if (index === 0) {
       left.css('visibility', 'hidden');
       right.css('visibility', 'visible')
-    } else if (index > 0 && index < this.state.gallery.length - 1) {
+    } else if (index > 0 && index < this.state.newGallery.length - 1) {
       left.css('visibility', 'visible');
       right.css('visibility', 'visible');
-    } else if (index === this.state.gallery.length - 1) {
+    } else if (index === this.state.newGallery.length - 1) {
       left.css('visibility', 'visible');
       right.css('visibility', 'hidden');
     }
@@ -150,6 +147,15 @@ class ImageGallery extends React.Component {
 
   }
 
+  changeFeaturedImage(newIndex) {
+    this.setState({
+      ...this.state,
+      featureImage: newIndex
+    }, () => {
+      this.updateArrows();
+    })
+  }
+
   render() {
 
     return (
@@ -157,7 +163,7 @@ class ImageGallery extends React.Component {
       <div className={'imageGallery'}>
         <img className={'left_angle'} src={'./assets/left_angle.png'} onClick={() => { this.handleScroll('left') }} />
         <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }} />
-        <ImageInsert gallery={this.state.thumbGallery} featureImage={this.state.featureImage} selectedStyle={this.state.selectedStyle}/>
+        <ImageInsert featureImage={this.state.featureImage} selectedStyle={this.state.selectedStyle} cb={this.changeFeaturedImage}/>
         <div className={'mainFrame'}>
         <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
         </div>

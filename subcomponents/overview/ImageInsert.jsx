@@ -18,6 +18,7 @@ class ImageInsert extends React.Component {
     this.handleScroll = this.handleScroll.bind(this);
     this.updateThumbnailBorder = this.updateThumbnailBorder.bind(this);
     this.unpackImages = this.unpackImages.bind(this);
+    this.changeFeaturedImage = this.changeFeaturedImage.bind(this);
 
   }
 
@@ -42,7 +43,7 @@ class ImageInsert extends React.Component {
       ...this.state,
       thumbGallery: thumbURLs
     }, () => {
-      console.log('state thumbnails => ', this.state.thumbGallery)
+      //console.log('state thumbnails => ', this.state.thumbGallery)
       var i = this.state.featureImage;
       var scrollBox = $('.thumbnailScroll');
       scrollBox.children('div').eq(i).css('border', '1px solid black');
@@ -100,6 +101,17 @@ class ImageInsert extends React.Component {
 
   }
 
+  changeFeaturedImage(e) {
+    console.log('this is the target => ', e.target.src)
+    var newIndex;
+    for (var i = 0; i < this.state.thumbGallery.length; i++) {
+      if (this.state.thumbGallery[i] === e.target.src) {
+        newIndex = i;
+      }
+    }
+    this.props.cb(newIndex);
+  }
+
 
   render() {
     return (
@@ -107,7 +119,7 @@ class ImageInsert extends React.Component {
       <img src={'./assets/up_angle.png'} className={"up_angle"} onClick={() => {this.handleScroll('up')}}></img>
       <div className={'thumbnailGallery'} onScroll={this.updateArrows}>
         <div className={'thumbnailScroll'}>{this.state.thumbGallery.map((item, i) => (
-          <img key={i} className={'thumbnailItem'} src={item}/>
+          <img key={i} className={'thumbnailItem'} src={item} onClick={this.changeFeaturedImage}/>
         ))}</div>
       </div>
       <img src={'./assets/down_angle.png'} className={"down_angle"} onClick={() => {this.handleScroll('down')}}></img>

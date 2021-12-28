@@ -2,6 +2,11 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+.pageTitle {
+  font-weight: 600;
+  font-size: 35px;
+}
+
 /*
 /////////////////////
 OVERVIEW
@@ -261,7 +266,7 @@ Image Gallery - Overview
   width: 15px;
   height: auto;
   position: relative;
-  left: 240px;
+  left: 235px;
   bottom: 90px;
   visibility: visible;
 }
