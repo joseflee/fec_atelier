@@ -10,14 +10,45 @@ class ImageZoom extends React.Component {
     this.state = {
       gallery: ['image zoom 1', 'image zoom 2', 'image zoom 3', 'image zoom 4', 'image zoom 5'],
       currentImageIndex: 0,
+      selectedStyle: props.selectedStyle,
+      featureImage: props.featureImage,
+      newGallery: [],
       zoom: false
     }
 
     this.handleImageChange = this.handleImageChange.bind(this);
     this.zoomClick = this.zoomClick.bind(this);
     this.closeZoom = this.closeZoom.bind(this);
+    this.unpackImages = this.unpackImages.bind(this);
 
   }
+
+  componentDidMount() {
+    this.unpackImages();
+  }
+
+
+  unpackImages() {
+
+    var styleImages = this.state.selectedStyle.photos;
+    var galleryURLs = [];
+
+    for (var i = 0; i < styleImages.length; i++) {
+      galleryURLs.push(styleImages[i].thumbnail_url);
+    }
+
+    this.setState({
+      ...this.state,
+      newGallery: galleryURLs
+    }, () => {
+      //console.log('state thumbnails => ', this.state.thumbGallery)
+      var i = this.state.featureImage;
+      var scrollBox = $('.thumbnailScroll');
+      scrollBox.children('div').eq(i).css('border', '1px solid black');
+    })
+
+  }
+
 
   handleImageChange(e) {
 
@@ -28,7 +59,7 @@ class ImageZoom extends React.Component {
 
     this.setState({
       ...this.state,
-      currentImageIndex: value,
+      featureImage: value,
     })
 
   }
@@ -67,13 +98,12 @@ class ImageZoom extends React.Component {
 
       <div id={'zoomView'}>
         <div id={'xOutZoom'} onClick={this.closeZoom}>x</div>
-        <div id={'zoomedImage'} onClick={this.zoomClick}>{this.state.gallery[this.state.currentImageIndex]}</div>
-        <div>{this.state.gallery.map((item, i) => (
+        <img id={'zoomedImage'} onClick={this.zoomClick} src={this.state.newGallery[this.state.featureImage]}/>
+        <div>{this.state.newGallery.map((item, i) => (
           <div key={i} className={'scrollDot'} onClick={this.handleImageChange}>.<span className={'invisibleIndex'}>{i}</span></div>
         ))
         }</div>
       </div>
-
     )
 
   }

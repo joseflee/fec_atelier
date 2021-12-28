@@ -10,13 +10,10 @@ class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
       selectedStyle: props.selectedStyle,
       newGallery: [],
-      gallery: ["image 1", 'image 2', 'image 3', 'image 4', 'image 5', 'image 6', 'image 7'],
       featureImage: 0,
       zoom: false
-
     }
 
     this.toggleZoom = this.toggleZoom.bind(this);
@@ -49,8 +46,6 @@ class ImageGallery extends React.Component {
       ...this.state,
       newGallery: mainURLs,
     }, () => {
-      // console.log('state thumbnails => ', this.state.thumbGallery)
-      // console.log('state gallery => ', this.state.newGallery)
       var i = this.state.featureImage;
       var scrollBox = $('.thumbnailScroll');
       scrollBox.children('div').eq(i).css('border', '1px solid black');
@@ -167,7 +162,7 @@ class ImageGallery extends React.Component {
         <div className={'mainFrame'}>
         <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
         </div>
-        <ImageZoom props={this.state.newGallery[this.state.featureImage]} closeZoom={this.closeZoom} />
+        <ImageZoom selectedStyle={this.state.selectedStyle} featureImage={this.state.featureImage} closeZoom={this.closeZoom} />
       </div>
 
     )
