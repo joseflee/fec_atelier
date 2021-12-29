@@ -28,7 +28,8 @@ class Overview extends React.Component {
       ...this.state,
       selectedStyle: newIndex
     }, () => {
-      //console.log('new overview state selected style => ', this.state.selectedStyle);
+      //this.forceUpdate();
+      console.log('new overview state selected style => ', this.state.selectedStyle);
     })
 
   }

@@ -37,6 +37,17 @@ class ImageGallery extends React.Component {
 
   componentDidUpdate() {
 
+    if (this.state.selectedStyle !== this.props.styleIndex) {
+      this.setState({
+        ...this.state,
+        selectedStyle: this.props.styleIndex
+      })
+    }
+
+    //console.log('image gallery selectedIndex = ', this.state.selectedIndex)
+    console.log('these are the props passed to imageGallery = ', this.props.styleIndex)
+    console.log('this is selectedStyle in ImageGallery = ', this.state.selectedStyle)
+
   }
 
 
