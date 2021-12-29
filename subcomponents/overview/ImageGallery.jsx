@@ -40,35 +40,46 @@ class ImageGallery extends React.Component {
     if (this.state.selectedStyle !== this.props.styleIndex) {
       this.setState({
         ...this.state,
-        selectedStyle: this.props.styleIndex
+        selectedStyle: this.props.styleIndex,
+        featureImage: 0
+      }, () => {
+        this.unpackImages();
       })
     }
-
-    //console.log('image gallery selectedIndex = ', this.state.selectedIndex)
-    console.log('these are the props passed to imageGallery = ', this.props.styleIndex)
-    console.log('this is selectedStyle in ImageGallery = ', this.state.selectedStyle)
 
   }
 
 
   unpackImages() {
 
-    //var styleImages = this.state.selectedStyle.photos;
-    var styleImages = this.state.styles[this.state.selectedIndex].photos;
+    var styleImages = this.state.selectedStyle.photos;
+    //var styleImages = this.state.styles[this.state.selectedIndex].photos;
     var mainURLs = [];
+    var galleryIsNew = false;
 
     for (var i = 0; i < styleImages.length; i++) {
       mainURLs.push(styleImages[i].url);
     }
 
-    this.setState({
-      ...this.state,
-      newGallery: mainURLs,
-    }, () => {
-      var i = this.state.featureImage;
-      var scrollBox = $('.thumbnailScroll');
-      scrollBox.children('div').eq(i).css('border', '1px solid black');
-    })
+    // checks if existing gallery has been updated with new style
+    for (var i = 0; i < styleImages.length; i++) {
+      if (styleImages[i] !== this.state.newGallery[i]) {
+        galleryIsNew = true;
+      }
+    }
+
+    // if style is new or the gallery is empty, update gallery
+    if (galleryIsNew === true || this.state.newGallery.length === 0) {
+      this.setState({
+        ...this.state,
+        newGallery: mainURLs,
+      }, () => {
+        var i = this.state.featureImage;
+        var scrollBox = $('.thumbnailScroll');
+        scrollBox.children('div').eq(i).css('border', '1px solid black');
+        this.updateArrows();
+      })
+    }
 
   }
 
@@ -105,20 +116,24 @@ class ImageGallery extends React.Component {
 
   }
 
+  // hides/displays L/R scroll arrows based on gallery index
   updateArrows() {
 
     var left = $('.left_angle');
     var right = $('.right_angle');
     var index = this.state.featureImage;
 
-    if (index === 0) {
+    if (index === 0 && this.state.newGallery.length > 1) {
       left.css('visibility', 'hidden');
       right.css('visibility', 'visible')
     } else if (index > 0 && index < this.state.newGallery.length - 1) {
       left.css('visibility', 'visible');
       right.css('visibility', 'visible');
-    } else if (index === this.state.newGallery.length - 1) {
+    } else if (index === this.state.newGallery.length - 1 && index > 0) {
       left.css('visibility', 'visible');
+      right.css('visibility', 'hidden');
+    } else if (this.state.newGallery.length === 1) {
+      left.css('visibility', 'hidden');
       right.css('visibility', 'hidden');
     }
 
@@ -161,12 +176,16 @@ class ImageGallery extends React.Component {
   }
 
   changeFeaturedImage(newIndex) {
-    this.setState({
-      ...this.state,
-      featureImage: newIndex
-    }, () => {
-      this.updateArrows();
-    })
+
+    if (this.state.featureImage !== newIndex) {
+      this.setState({
+        ...this.state,
+        featureImage: newIndex
+      }, () => {
+        this.updateArrows();
+      })
+    }
+
   }
 
   render() {
@@ -176,9 +195,9 @@ class ImageGallery extends React.Component {
       <div className={'imageGallery'}>
         <img className={'left_angle'} src={'./assets/left_angle.png'} onClick={() => { this.handleScroll('left') }} />
         <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }} />
-        <ImageInsert featureImage={this.state.featureImage} selectedStyle={this.state.styles[this.state.selectedIndex]} cb={this.changeFeaturedImage}/>
+        <ImageInsert featureImage={this.state.featureImage} selectedStyle={this.state.selectedStyle} cb={this.changeFeaturedImage} />
         <div className={'mainFrame'}>
-        <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
+          <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
         </div>
         <ImageZoom selectedStyle={this.state.selectedStyle} featureImage={this.state.featureImage} closeZoom={this.closeZoom} />
       </div>

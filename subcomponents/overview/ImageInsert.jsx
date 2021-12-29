@@ -23,9 +23,20 @@ class ImageInsert extends React.Component {
 
   componentDidMount() {
 
-    //console.log('state selectedStyle in image insert => ', this.props.selectedStyle)
     this.unpackImages();
 
+  }
+
+  componentDidUpdate() {
+
+    if (this.props.selectedStyle !== this.state.selectedStyle) {
+      this.setState({
+        ...this.state,
+        selectedStyle: this.props.selectedStyle
+      }, () => {
+        this.unpackImages();
+      })
+    }
 
   }
 
@@ -33,33 +44,39 @@ class ImageInsert extends React.Component {
 
     var styleImages = this.state.selectedStyle.photos;
     var thumbURLs = [];
+    var galleryIsNew = false;
 
     for (var i = 0; i < styleImages.length; i++) {
       thumbURLs.push(styleImages[i].thumbnail_url);
     }
 
-    this.setState({
-      ...this.state,
-      thumbGallery: thumbURLs
-    }, () => {
-      //console.log('state thumbnails => ', this.state.thumbGallery)
-      var i = this.state.featureImage;
-      var scrollBox = $('.thumbnailScroll');
-      scrollBox.children('div').eq(i).css('border', '1px solid black');
-    })
+    for (var i = 0; i < thumbURLs.length; i++) {
+      if (thumbURLs[i] !== this.state.thumbGallery[i]) {
+        galleryIsNew = true;
+      }
+    }
+
+    if (galleryIsNew === true || this.state.thumbGallery.length === 0) {
+      this.setState({
+        ...this.state,
+        thumbGallery: thumbURLs
+      }, () => {
+        var i = this.state.featureImage;
+        var scrollBox = $('.thumbnailScroll');
+        scrollBox.children('div').eq(i).css('border', '1px solid black');
+      })
+    }
 
   }
 
   updateThumbnailBorder() {
 
-
   }
-
 
   updateArrows(e) {
 
-    // for mockup purposes offset top: 216 is at topmost position of gallery
-    // bottom position is 142
+    // for mockup purposes offset top: 266 is at topmost position of gallery
+    // bottom position is 166
     // values will change when restyling
 
     var gallery = $('.thumbnailScroll');
@@ -67,7 +84,7 @@ class ImageInsert extends React.Component {
     var upAngle = $('.up_angle');
     var downAngle = $('.down_angle');
 
-    console.log('offset top => ', offset.top)
+    //console.log('offset top => ', offset.top)
 
     if (Math.floor(offset.top) >= 266) {
       upAngle.css('visibility', 'hidden');

@@ -3,12 +3,9 @@ import $ from 'jquery';
 
 class ImageZoom extends React.Component {
 
-  // props will need to include full gallery
-
   constructor(props) {
     super(props);
     this.state = {
-      gallery: ['image zoom 1', 'image zoom 2', 'image zoom 3', 'image zoom 4', 'image zoom 5'],
       currentImageIndex: 0,
       selectedStyle: props.selectedStyle,
       featureImage: props.featureImage,
@@ -27,25 +24,47 @@ class ImageZoom extends React.Component {
     this.unpackImages();
   }
 
+  componentDidUpdate() {
+    if (this.props.selectedStyle !== this.state.selectedStyle) {
+      this.setState({
+        ...this.state,
+        selectedStyle: this.props.selectedStyle
+      }, () => {
+        this.unpackImages();
+      })
+    }
+  }
+
 
   unpackImages() {
 
     var styleImages = this.state.selectedStyle.photos;
     var galleryURLs = [];
+    var galleryIsNew = false;
 
     for (var i = 0; i < styleImages.length; i++) {
       galleryURLs.push(styleImages[i].thumbnail_url);
     }
 
-    this.setState({
-      ...this.state,
-      newGallery: galleryURLs
-    }, () => {
-      //console.log('state thumbnails => ', this.state.thumbGallery)
-      var i = this.state.featureImage;
-      var scrollBox = $('.thumbnailScroll');
-      scrollBox.children('div').eq(i).css('border', '1px solid black');
-    })
+    for (var i = 0; i < styleImages.length; i++) {
+      if (this.state.newGallery[i] !== styleImages[i].url) {
+        galleryIsNew = true;
+      }
+    }
+
+    if (galleryIsNew === true || this.state.newGallery.length === 0 ) {
+
+      this.setState({
+        ...this.state,
+        newGallery: galleryURLs
+      }, () => {
+        //console.log('state thumbnails => ', this.state.thumbGallery)
+        var i = this.state.featureImage;
+        var scrollBox = $('.thumbnailScroll');
+        scrollBox.children('div').eq(i).css('border', '1px solid black');
+      })
+
+    }
 
   }
 
@@ -54,8 +73,6 @@ class ImageZoom extends React.Component {
 
     // receives clicked dot index and sets currentImageIndex
     var value = Number(e.target.innerHTML[30]);
-
-    //console.log('handle image change innerHTML = ', newIndex);
 
     this.setState({
       ...this.state,
