@@ -7,7 +7,6 @@ class ImageInsert extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      temporaryImageProps: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7'],
       gallery: props.gallery,
       featureImage: props.featureImage,
       thumbGallery: [],
@@ -102,7 +101,6 @@ class ImageInsert extends React.Component {
   }
 
   changeFeaturedImage(e) {
-    console.log('this is the target => ', e.target.src)
     var newIndex;
     for (var i = 0; i < this.state.thumbGallery.length; i++) {
       if (this.state.thumbGallery[i] === e.target.src) {

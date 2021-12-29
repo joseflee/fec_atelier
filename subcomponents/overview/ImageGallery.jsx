@@ -10,11 +10,12 @@ class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedStyle: props.selectedStyle,
+      selectedStyle: props.styleIndex,
+      styles: props.styles.results,
       newGallery: [],
       featureImage: 0,
       zoom: false,
-      selectedIndex: props.selectedIndex
+      selectedIndex: props.index
     }
 
     this.toggleZoom = this.toggleZoom.bind(this);
@@ -34,9 +35,15 @@ class ImageGallery extends React.Component {
 
   }
 
+  componentDidUpdate() {
+
+  }
+
+
   unpackImages() {
 
-    var styleImages = this.state.selectedStyle.photos;
+    //var styleImages = this.state.selectedStyle.photos;
+    var styleImages = this.state.styles[this.state.selectedIndex].photos;
     var mainURLs = [];
 
     for (var i = 0; i < styleImages.length; i++) {
@@ -57,7 +64,7 @@ class ImageGallery extends React.Component {
   // ImageZoom component has CSS display set to "none" until toggled
 
   toggleZoom() {
-    // handles click on image to produce zoomed image
+
     var newZoom;
 
     if (this.state.zoom === true) {
@@ -133,7 +140,6 @@ class ImageGallery extends React.Component {
       this.syncThumbnail();
     });
 
-
   }
 
   closeZoom() {
@@ -159,7 +165,7 @@ class ImageGallery extends React.Component {
       <div className={'imageGallery'}>
         <img className={'left_angle'} src={'./assets/left_angle.png'} onClick={() => { this.handleScroll('left') }} />
         <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }} />
-        <ImageInsert featureImage={this.state.featureImage} selectedStyle={this.state.selectedStyle} cb={this.changeFeaturedImage}/>
+        <ImageInsert featureImage={this.state.featureImage} selectedStyle={this.state.styles[this.state.selectedIndex]} cb={this.changeFeaturedImage}/>
         <div className={'mainFrame'}>
         <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
         </div>
