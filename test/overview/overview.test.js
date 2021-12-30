@@ -11,6 +11,7 @@ import AddToCart from '../../subcomponents/overview/AddToCart.jsx';
 import ImageGallery from '../../subcomponents/overview/ImageGallery.jsx';
 import ProductInfo from '../../subcomponents/overview/ProductInfo.jsx';
 import StyleSelector from '../../subcomponents/overview/StyleSelector.jsx';
+import Style from '../../subcomponents/overview/Style.jsx';
 
 import mockProduct from '../../mock_api/mock_product.js';
 import mockStyles from '../../mock_api/mock_styles.js';
@@ -43,6 +44,18 @@ test("Product Info renders successfully", () => {
       expect(wrapper.find(ProductInfo)).to.have.length(1);
 });
 
+describe('full DOM test', () => {
+
+  it('renders child components', () => {
+    const wrapper = mount(<Overview product={mockProduct} styles={mockStyles}/>);
+    expect(wrapper.find(AddToCart).length).to.equal(1);
+    expect(wrapper.find(ProductInfo).length).to.equal(1);
+    expect(wrapper.find(StyleSelector).length).to.equal(1);
+    expect(wrapper.find(ImageGallery).length).to.equal(1);
+    expect(wrapper.find(Style).length).to.equal(1);
+  })
+
+})
 
 
 

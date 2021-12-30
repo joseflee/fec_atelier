@@ -21,6 +21,9 @@
   "bugs": {
     "url": "https://github.com/cosmocoder1/fec_atelier/issues"
   },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
   "homepage": "https://github.com/cosmocoder1/fec_atelier#readme",
   "dependencies": {
     "@babel/preset-env": "^7.16.4",
@@ -44,6 +47,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.16.0",
+    "@testing-library/react": "^12.1.2",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
     "enzyme": "^3.11.0",
     "jest": "^27.4.5",

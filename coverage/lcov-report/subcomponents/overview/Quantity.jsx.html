@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">92.85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/14</span>
+                <span class='fraction'>13/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.38% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/13</span>
+                <span class='fraction'>12/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -111,18 +111,18 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,17 +133,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,21 +151,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 &nbsp;
-var Quantity = <span class="fstat-no" title="function not covered" >(p</span>rops) =&gt; {
+var Quantity = (props) =&gt; {
 &nbsp;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (props.quantity === null) {</span>
-<span class="cstat-no" title="statement not covered" >    return (</span>
+  if (props.quantity === null) {
+    return (
       &lt;div&gt;awaiting props&lt;/div&gt;
     )
   }
 &nbsp;
-  var quantity = <span class="cstat-no" title="statement not covered" >quantityToArray(props.quantity);</span>
+  var quantity = quantityToArray(props.quantity);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
 &nbsp;
-    &lt;select name={'quantities'} id={'quantitiesDropdown'}&gt;{quantity.map(<span class="fstat-no" title="function not covered" >(i</span>tem, i) =&gt; (
-<span class="cstat-no" title="statement not covered" >      &lt;option key={i} value={`${item}`}&gt;{item}&lt;/option&gt;</span>
+    &lt;select name={'quantities'} id={'quantitiesDropdown'}&gt;{quantity.map((item, i) =&gt; (
+      &lt;option key={i} value={`${item}`}&gt;{item}&lt;/option&gt;
     ))}&lt;/select&gt;
 &nbsp;
   )
@@ -174,19 +174,19 @@ var Quantity = <span class="fstat-no" title="function not covered" >(p</span>rop
 &nbsp;
 // helper - converts quantity to array for map-render
 &nbsp;
-var quantityToArray = <span class="fstat-no" title="function not covered" >(q</span>uantity) =&gt; {
+var quantityToArray = (quantity) =&gt; {
 &nbsp;
-  var result = <span class="cstat-no" title="statement not covered" >[];</span>
+  var result = [];
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  for (var i = <span class="cstat-no" title="statement not covered" >1;</span> i &lt;= quantity; i++) {</span>
-<span class="cstat-no" title="statement not covered" >    result.push(i);</span>
+  for (var i = 1; i &lt;= quantity; i++) {
+    result.push(i);
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (result.length &gt; 15) {</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (result.length &gt; 15) {
 <span class="cstat-no" title="statement not covered" >    result = result.splice(0, 15);</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return result;</span>
+  return result;
 &nbsp;
 }
 &nbsp;
@@ -199,7 +199,7 @@ export default Quantity;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Dec 30 2021 13:05:53 GMT-0600 (Central Standard Time)
+                at Thu Dec 30 2021 14:08:39 GMT-0600 (Central Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
