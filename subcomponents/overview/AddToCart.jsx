@@ -26,7 +26,6 @@ class AddToCart extends React.Component {
   }
 
   componentDidMount() {
-    console.log('AddToCart did mount');
     this.unpackProps();
   }
 
