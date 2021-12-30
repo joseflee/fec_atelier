@@ -5,7 +5,6 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import App from '../../client/app.jsx';
 import Overview from '../../components/Overview.jsx';
 import AddToCart from '../../subcomponents/overview/AddToCart.jsx';
 import ImageGallery from '../../subcomponents/overview/ImageGallery.jsx';
@@ -37,41 +36,46 @@ describe("Overview", () => {
     }
   });
 
+  after(() => {
+    console.log.restore();
+  })
+
 })
 
 describe("Add To Cart", () => {
 
   it("Add To Cart renders successfully", () => {
-    const wrapper = mount(<App />);
-    console.log('this is the wrapper', wrapper)
-    //expect(wrapper.find('div')).to.have.length(1);
+    const wrapper = shallow(<Overview product={mockProduct} styles={mockStyles}/>);
+    expect(wrapper.find(AddToCart)).to.have.length(1);
+  });
+
+});
+
+describe("Image Gallery", () => {
+
+  it("Image Gallery renders successfully", () => {
+    const wrapper = shallow(<Overview product={mockProduct} styles={mockStyles}/>);
+    expect(wrapper.find(ImageGallery)).to.have.length(1);
   });
 
 })
 
-// describe("Image Gallery", () => {
+describe("Style Selector", () => {
 
-//   it("ImageGallery renders successfully", () => {
-//     const wrapper = shallow(<ImageGallery />);
-//     expect(wrapper.find('div')).to.have.length(1);
-//   });
+  it("Style Selector renders successfully", () => {
+    const wrapper = shallow(<Overview product={mockProduct} styles={mockStyles}/>);
+    expect(wrapper.find(StyleSelector)).to.have.length(1);
+  });
 
-// })
+})
 
-// describe("Product Info", () => {
+describe("Product Info", () => {
 
-//   it("ProductInfo renders successfully", () => {
-//     const wrapper = shallow(<ProductInfo />);
-//     expect(wrapper.find('div')).to.have.length(1);
-//   });
+  it("Product Info renders successfully", () => {
+    const wrapper = shallow(<Overview product={mockProduct} styles={mockStyles}/>);
+    expect(wrapper.find(ProductInfo)).to.have.length(1);
+  });
 
-// })
+})
 
-// describe("Style Selector", () => {
 
-//   it("StyleSelector renders successfully", () => {
-//     const wrapper = shallow(<StyleSelector />);
-//     expect(wrapper.find('div')).to.have.length(1);
-//   });
-
-// })
