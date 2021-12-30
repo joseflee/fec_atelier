@@ -25,9 +25,11 @@
   "dependencies": {
     "@babel/preset-env": "^7.16.4",
     "@babel/register": "^7.16.0",
+    "axios": "^0.24.0",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.3",
+    "bluebird": "^3.7.2",
     "chai": "^4.3.4",
     "express": "^4.17.1",
     "jquery": "^3.6.0",

@@ -54,6 +54,7 @@ class App extends React.Component {
 
   }
 
+
   retrieveStyles(productNumber) {
 
     var self = this;
