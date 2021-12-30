@@ -1,3 +1,12 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.pageTitle {
+  font-weight: 600;
+  font-size: 35px;
+}
+
 /*
 /////////////////////
 OVERVIEW
@@ -17,8 +26,8 @@ OVERVIEW
   border: 1px solid rgba(0, 0, 0, .4);
   height: 150px;
   width: 400px;
+  overflow: hidden;
 }
-
 
 .styleSelector {
   /* position: relative;
@@ -93,10 +102,10 @@ Style Item - Overview
   display: inline-block;
   border: 1px solid rgba(0, 0, 0, .3);
   border-radius: 35px;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   text-align: center;
-  margin: 10px 0 0 10px;
+  margin: 20px 0 0 20px;
   line-height: 50px;
 
 }
@@ -106,10 +115,10 @@ Style Item - Overview
   display: inline-block;
   border: 1px solid rgba(0, 0, 0, 1);
   border-radius: 35px;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   text-align: center;
-  margin: 10px 0 0 10px;
+  margin: 20px 0 0 20px;
   line-height: 50px;
 
 }
@@ -131,15 +140,15 @@ Style Item - Overview
 .title {
   display: inline-block;
   position: absolute;
-  left: 20px;
-
+  left: 0px;
+  font-size: 10px;
 }
 
 .checkmark {
   display: inline-block;
   position: absolute;
-  top: 50px;
-  left: 50px;
+  top: 71px;
+  left: 85px;
 }
 
 .styleContainer {
@@ -150,8 +159,15 @@ Style Item - Overview
 Image Gallery - Overview
 */
 
+.imageGallery {
+  text-align: center;
+}
+
 
 .thumbnailGallery {
+  z-index: 2;
+  position: relative;
+  bottom: 80px;
   width: 30px;
   height: 80px;
   overflow: auto;
@@ -164,8 +180,8 @@ Image Gallery - Overview
 }
 
 .thumbnailItem {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   margin-top: 5px;
   border: 1px solid rgba(0, 0, 0, .3);
   font-size: 10px;
@@ -182,14 +198,34 @@ Image Gallery - Overview
 }
 
 .mainImage {
+  display: inline-block;
   text-align: center;
+  height: 300px;
 }
 
 .mainImage:hover {
   cursor: zoom-in;
 }
 
+.mainFrame {
+  position: relative;
+  right: 35px;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.imageInsert {
+  display: inline-block;
+  position: relative;
+
+}
+
 .down_angle {
+  z-index: 2;
+  position: relative;
+  bottom: 80px;
   width: 15px;
   height: auto;
   visibility: visible;
@@ -198,6 +234,9 @@ Image Gallery - Overview
 }
 
 .up_angle {
+  z-index: 2;
+  position: relative;
+  bottom: 80px;
   width: 15px;
   height: auto;
   visibility: hidden;
@@ -206,11 +245,12 @@ Image Gallery - Overview
 }
 
 .left_angle {
+  z-index: 2;
   width: 15px;
   height: auto;
   position: relative;
-  left: 100px;
-  top: 25px;
+  left: 10px;
+  bottom: 90px;
   visibility: hidden;
 }
 
@@ -226,8 +266,8 @@ Image Gallery - Overview
   width: 15px;
   height: auto;
   position: relative;
-  left: 270px;
-  top: 25px;
+  left: 235px;
+  bottom: 90px;
   visibility: visible;
 }
 
@@ -240,6 +280,7 @@ Expanded View, Image Gallery - Overview
 }
 
 #zoomView {
+  z-index: 2;
   display: none;
   position: relative;
   left: 150px;
@@ -261,11 +302,13 @@ Expanded View, Image Gallery - Overview
 }
 
 #xOutZoom {
+  z-index: 2;
   display: inline-block;
   position: relative;
-  left: 100px;
+  left: 200px;
+  bottom: 300px;
   font-family: arial;
-  color:rgba(0, 0, 0, .3);
+  color:rgba(0, 0, 0, .5);
 }
 
 #xOutZoom:hover {
