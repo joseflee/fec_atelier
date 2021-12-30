@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "test-overview": "mocha ./test/overview --require @babel/register",
+    "test-overview": "mocha ./test/overview --require @babel/register jsdom-global/register",
     "test-QandA": "mocha ./test/questionsAndAnswers --require @babel/register",
     "test-ratingsAndReviews": "mocha ./test/ratingsAndReviews --require @babel/register",
     "test-relatedItems": "mocha ./test/relatedItems --require @babel/register",
