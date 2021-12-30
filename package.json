@@ -4,8 +4,8 @@
   "description": "Chantereles - FEC - Atelier",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "test-overview": "mocha ./test/overview --require @babel/register",
+    "test": "jest",
+    "jest-overview": "jest --verbose ./test/overview --collectCoverage",
     "test-QandA": "mocha ./test/questionsAndAnswers --require @babel/register",
     "test-ratingsAndReviews": "mocha ./test/ratingsAndReviews --require @babel/register",
     "test-relatedItems": "mocha ./test/relatedItems --require @babel/register",
