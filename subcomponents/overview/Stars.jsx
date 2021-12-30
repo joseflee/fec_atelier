@@ -6,7 +6,7 @@ var Stars = (props) => {
   // Uncomment when receiving rating props
   //var rating = ratingToStar(props.rating);
 
-  var rating = ratingToStar(2);
+  var rating = ratingToStar(4);
 
   return (
 

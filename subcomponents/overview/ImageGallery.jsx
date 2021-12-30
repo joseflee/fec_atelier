@@ -10,14 +10,12 @@ class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
-      selectedStyle: props.selectedStyle,
+      selectedStyle: props.styleIndex,
+      styles: props.styles.results,
       newGallery: [],
-      thumbGallery: [],
-      gallery: ["image 1", 'image 2', 'image 3', 'image 4', 'image 5', 'image 6', 'image 7'],
       featureImage: 0,
-      zoom: false
-
+      zoom: false,
+      selectedIndex: props.index
     }
 
     this.toggleZoom = this.toggleZoom.bind(this);
@@ -27,6 +25,7 @@ class ImageGallery extends React.Component {
     this.syncThumbnail = this.syncThumbnail.bind(this);
     this.closeZoom = this.closeZoom.bind(this);
     this.unpackImages = this.unpackImages.bind(this);
+    this.changeFeaturedImage = this.changeFeaturedImage.bind(this);
 
   }
 
@@ -36,35 +35,58 @@ class ImageGallery extends React.Component {
 
   }
 
+  componentDidUpdate() {
+
+    if (this.state.selectedStyle !== this.props.styleIndex) {
+      this.setState({
+        ...this.state,
+        selectedStyle: this.props.styleIndex,
+        featureImage: 0
+      }, () => {
+        this.unpackImages();
+      })
+    }
+
+  }
+
+
   unpackImages() {
 
     var styleImages = this.state.selectedStyle.photos;
-    var thumbURLs = [];
+    //var styleImages = this.state.styles[this.state.selectedIndex].photos;
     var mainURLs = [];
+    var galleryIsNew = false;
 
     for (var i = 0; i < styleImages.length; i++) {
-      thumbURLs.push(styleImages[i].thumbnail_url);
       mainURLs.push(styleImages[i].url);
     }
 
-    this.setState({
-      ...this.state,
-      newGallery: mainURLs,
-      thumbGallery: thumbURLs
-    }, () => {
-      // console.log('state thumbnails => ', this.state.thumbGallery)
-      // console.log('state gallery => ', this.state.newGallery)
-      var i = this.state.featureImage;
-      var scrollBox = $('.thumbnailScroll');
-      scrollBox.children('div').eq(i).css('border', '1px solid black');
-    })
+    // checks if existing gallery has been updated with new style
+    for (var i = 0; i < styleImages.length; i++) {
+      if (styleImages[i] !== this.state.newGallery[i]) {
+        galleryIsNew = true;
+      }
+    }
+
+    // if style is new or the gallery is empty, update gallery
+    if (galleryIsNew === true || this.state.newGallery.length === 0) {
+      this.setState({
+        ...this.state,
+        newGallery: mainURLs,
+      }, () => {
+        var i = this.state.featureImage;
+        var scrollBox = $('.thumbnailScroll');
+        scrollBox.children('div').eq(i).css('border', '1px solid black');
+        this.updateArrows();
+      })
+    }
 
   }
 
   // ImageZoom component has CSS display set to "none" until toggled
 
   toggleZoom() {
-    // handles click on image to produce zoomed image
+
     var newZoom;
 
     if (this.state.zoom === true) {
@@ -94,20 +116,24 @@ class ImageGallery extends React.Component {
 
   }
 
+  // hides/displays L/R scroll arrows based on gallery index
   updateArrows() {
 
     var left = $('.left_angle');
     var right = $('.right_angle');
     var index = this.state.featureImage;
 
-    if (index === 0) {
+    if (index === 0 && this.state.newGallery.length > 1) {
       left.css('visibility', 'hidden');
       right.css('visibility', 'visible')
-    } else if (index > 0 && index < this.state.gallery.length - 1) {
+    } else if (index > 0 && index < this.state.newGallery.length - 1) {
       left.css('visibility', 'visible');
       right.css('visibility', 'visible');
-    } else if (index === this.state.gallery.length - 1) {
+    } else if (index === this.state.newGallery.length - 1 && index > 0) {
       left.css('visibility', 'visible');
+      right.css('visibility', 'hidden');
+    } else if (this.state.newGallery.length === 1) {
+      left.css('visibility', 'hidden');
       right.css('visibility', 'hidden');
     }
 
@@ -140,13 +166,25 @@ class ImageGallery extends React.Component {
       this.syncThumbnail();
     });
 
-
   }
 
   closeZoom() {
 
     var zoomView = $('#zoomView');
     zoomView.css('display', 'none');
+
+  }
+
+  changeFeaturedImage(newIndex) {
+
+    if (this.state.featureImage !== newIndex) {
+      this.setState({
+        ...this.state,
+        featureImage: newIndex
+      }, () => {
+        this.updateArrows();
+      })
+    }
 
   }
 
@@ -157,9 +195,11 @@ class ImageGallery extends React.Component {
       <div className={'imageGallery'}>
         <img className={'left_angle'} src={'./assets/left_angle.png'} onClick={() => { this.handleScroll('left') }} />
         <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }} />
-        <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
-        <ImageInsert gallery={this.state.thumbGallery} featureImage={this.state.featureImage} />
-        <ImageZoom props={this.state.newGallery[this.state.featureImage]} closeZoom={this.closeZoom} />
+        <ImageInsert featureImage={this.state.featureImage} selectedStyle={this.state.selectedStyle} cb={this.changeFeaturedImage} />
+        <div className={'mainFrame'}>
+          <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
+        </div>
+        <ImageZoom selectedStyle={this.state.selectedStyle} featureImage={this.state.featureImage} closeZoom={this.closeZoom} />
       </div>
 
     )
@@ -167,6 +207,8 @@ class ImageGallery extends React.Component {
   }
 
 };
+
+
 
 export default ImageGallery;
 
