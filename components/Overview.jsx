@@ -9,12 +9,18 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      product: props.product,
+      styles: props.styles,
+      selectedStyle: 0,
     }
+
+    this.changeStyle = this.changeStyle.bind(this);
+
   }
 
   componentDidMount() {
     console.log('component did mount');
+    //console.log('styles =', this.state.styles)
   }
 
   handleChange() {
@@ -24,17 +30,18 @@ class Overview extends React.Component {
 
   }
 
-  componentDidMount() {
-     console.log('component did mount');
+  changeStyle(name) {
+    // updates state - selected style images for dist to image gallery
+
   }
 
   render() {
 
     return (
       <div id={'overview'}>
-        <ProductInfo props={this.state}/>
-        <ImageGallery props={this.state}/>
-        <StyleSelector props={this.state}/>
+        <ProductInfo product={this.state.product}/>
+        <ImageGallery selectedStyle={this.state.styles.results[this.state.selectedStyle]}/>
+        <StyleSelector styles={this.state.styles} changeStyle={this.changeStyle}/>
         <AddToCart props={this.state}/>
       </div>
     )
