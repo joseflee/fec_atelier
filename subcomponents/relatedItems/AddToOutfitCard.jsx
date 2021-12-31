@@ -8,7 +8,7 @@ export const AddToOutfitCard = (props) => {
     <>
       <div onClick={props.add} className="card">
         <h1>+</h1>
-        <div onClick={props.add}>Add to Outfit</div>
+        <div>Add to Outfit</div>
       </div>
     </>
   )
