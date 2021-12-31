@@ -5,6 +5,7 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { expect } from 'chai';
 import RelatedItems from '../../components/RelatedItems.jsx';
 import sinon from 'sinon';
+import {ProductCard} from '../../subcomponents/relatedItems/ProductCard.jsx';
 
 
 
@@ -19,6 +20,20 @@ describe("RelatedItems", () => {
     const wrapper = shallow(<RelatedItems/>);
     expect(wrapper.find('div')).to.have.length(1);
   });
+
+  it("Should have a button", () => {
+    const props = {
+      clickCard: () => {},
+      clickStar: () => {},
+      itemInfo: {
+        picture: {}, category: {}, price: {}, rating: {}
+      }
+
+    }
+    const wrapp = shallow(<ProductCard {...props}/>);
+    expect(wrapp.find('button')).to.have.length(1);
+  });
+
 
   // it("Overview runs component did mount", () => {
   //   const log = sinon.spy(console, 'log');
