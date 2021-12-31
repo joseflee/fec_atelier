@@ -76,7 +76,7 @@ class App extends React.Component {
         ...self.state,
         styles: res
       }, () => {
-        //console.log('state styles => ', self.state.styles);
+        console.log('state styles => ', self.state.styles);
       })
     })
 
