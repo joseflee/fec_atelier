@@ -4,8 +4,13 @@ import Overview from '../components/Overview.jsx';
 import QuestionsAndAnswers from '../components/QuestionsAndAnswers.jsx';
 import RatingsAndReviews from '../components/RatingsAndReviews.jsx';
 import RelatedItems from '../components/RelatedItems.jsx';
+import Search from '../components/Search.jsx';
+
 import $ from 'jquery';
 import { APIkey } from '../config.js';
+
+// importing search bar icon from react library
+import { FaSistrix } from 'react-icons/fa';
 
 import mockProduct from '../mock_api/mock_product.js';
 import mockStyles from '../mock_api/mock_styles.js';
@@ -24,13 +29,13 @@ class App extends React.Component {
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
     this.retrieveStyles = this.retrieveStyles.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
 
   }
 
   componentDidMount() {
     // invoke retrieveProduct
     this.retrieveProduct();
-    this.retrieveStyles(this.state.productId);
   }
 
   componentDidUpdate() {
@@ -41,7 +46,7 @@ class App extends React.Component {
 
     var self = this;
 
-    console.log(APIkey);
+    //console.log(APIkey);
 
     $.ajax({
       method: 'GET',
@@ -54,6 +59,7 @@ class App extends React.Component {
         ...self.state,
         product: res
       }, () => {
+        this.retrieveStyles(this.state.productId);
         //console.log('state product => ', self.state.product);
       })
     })
@@ -80,6 +86,14 @@ class App extends React.Component {
       })
     })
 
+  }
+
+  handleSearch() {
+
+    // this method will retrieve search term from topbar on page and use a
+    // server route + modularized helpers to construct search query and perform
+    // API pull.
+    // Then state will be updated with new product / styles
 
   }
 
@@ -87,8 +101,15 @@ class App extends React.Component {
 
     return (
       <div>
-        <div className={'pageTitle'}>ATELIER</div>
-        <Overview product={this.state.product} styles={this.state.styles}/>
+        <div className={'topBar'}>
+          <div className={'pageTitle'}>ATELIER</div>
+          <div className={'searchUnit'}>
+            <Search handleSearch={this.handleSearch} />
+            <FaSistrix className={'searchIcon'} />
+            <div className={'searchFieldUnderline'} />
+          </div>
+        </div>
+        <Overview product={this.state.product} styles={this.state.styles} />
         <RelatedItems />
         <QuestionsAndAnswers />
         <RatingsAndReviews />

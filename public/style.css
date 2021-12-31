@@ -2,9 +2,57 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+/*
+////////////////////
+topbar
+////////////////////
+*/
+
+.topBar {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  height: 70px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .7);
+}
+
 .pageTitle {
+  display: inline-block;
   font-weight: 600;
   font-size: 35px;
+  color: rgba(250, 250, 250, .9);
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.search {
+  margin: 6px 10px 0 0;
+  display: inline-block;
+}
+
+.searchUnit {
+  float: right;
+}
+
+.searchInput {
+  background-color: rgba(0, 0, 0, .0);
+  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, .0);
+}
+
+.searchIcon {
+  display: inline-block;
+  height: 22px;
+  width: auto;
+  margin: 22px 15px 0 0;
+  color:rgba(250, 250, 250, .9);
+}
+
+.searchFieldUnderline {
+  height: 2px;
+  width: 150px;
+  background-color: rgba(250, 250, 250, .9);
 }
 
 /*
