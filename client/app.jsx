@@ -54,7 +54,7 @@ class App extends React.Component {
         ...self.state,
         product: res
       }, () => {
-        console.log('state product => ', self.state.product);
+        //console.log('state product => ', self.state.product);
       })
     })
 
@@ -76,7 +76,7 @@ class App extends React.Component {
         ...self.state,
         styles: res
       }, () => {
-        console.log('state styles => ', self.state.styles);
+        //console.log('state styles => ', self.state.styles);
       })
     })
 

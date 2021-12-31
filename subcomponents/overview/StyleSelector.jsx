@@ -25,10 +25,14 @@ class StyleSelector extends React.Component {
   }
 
   componentDidUpdate() {
-    //this.unpackStyles();
+    this.unpackStyles();
   }
 
   unpackStyles() {
+
+    // console.log('styles prop received by style selector ', this.props.styles);
+    // console.log('current styles in state ', this.state.styles);
+
 
     // converts style objects into arrays formatted for rendering each style component
     var styles = this.props.styles.results;
@@ -46,7 +50,7 @@ class StyleSelector extends React.Component {
     //console.log('styles props', this.props.styles.results)
 
     for (var i = 0; i < styles.length; i++) {
-      if (styles[index].photos[i].url !== this.state.styles[i]) {
+      if (styles[i].photos[0].url !== this.state.styles[i]) {
         isNewGallery = true;
       }
     }
@@ -59,6 +63,8 @@ class StyleSelector extends React.Component {
         stylesObj: this.props.styles,
         styles: imageUrls,
         styleNames: styleNames
+      }, () => {
+        //console.log('set state ran... this is now styles in state -> ', this.state.styles)
       })
     }
 

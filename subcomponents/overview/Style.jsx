@@ -3,8 +3,6 @@ import $ from 'jquery';
 
 var Style = (props) => {
 
-  //props (single style name, img and checkmark / selected data are received and style circle is rendered )
-
   var index = props.featuredIndex;
 
   var handleClick = (i) => {
