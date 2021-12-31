@@ -9,7 +9,8 @@ var Size = (props) => {
   }
 
   var handleChange = (e) => {
-
+    var size = e.target.value
+    props.updateQuantity(size)
   }
 
   return (

@@ -22,6 +22,16 @@ class Overview extends React.Component {
     console.log('component did mount');
   }
 
+  componentDidUpdate() {
+    if (this.props.product !== this.state.product) {
+      this.setState({
+        ...this.state,
+        product: this.props.product,
+        styles: this.props.styles
+      })
+    }
+  }
+
 
   changeStyle(newIndex) {
     this.setState({

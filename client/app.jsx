@@ -5,7 +5,7 @@ import QuestionsAndAnswers from '../components/QuestionsAndAnswers.jsx';
 import RatingsAndReviews from '../components/RatingsAndReviews.jsx';
 import RelatedItems from '../components/RelatedItems.jsx';
 import $ from 'jquery';
-import APIkey from '../config.js';
+import { APIkey } from '../config.js';
 
 import mockProduct from '../mock_api/mock_product.js';
 import mockStyles from '../mock_api/mock_styles.js';
@@ -16,7 +16,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 1,
+      productId: 59553,
       product: mockProduct,
       styles: mockStyles,
       products: null,
@@ -30,25 +30,31 @@ class App extends React.Component {
   componentDidMount() {
     // invoke retrieveProduct
     this.retrieveProduct();
-    this.retrieveStyles(3);
+    this.retrieveStyles(this.state.productId);
+  }
+
+  componentDidUpdate() {
+
   }
 
   retrieveProduct() {
 
     var self = this;
 
+    console.log(APIkey);
+
     $.ajax({
       method: 'GET',
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${this.state.productId}`,
       headers: {
         "Authorization": APIkey
       }
     }).done((res) => {
       self.setState({
         ...self.state,
-        products: res
+        product: res
       }, () => {
-        //console.log('state products => ', self.state.products);
+        //console.log('state product => ', self.state.product);
       })
     })
 
@@ -70,7 +76,7 @@ class App extends React.Component {
         ...self.state,
         styles: res
       }, () => {
-        //console.log('state styles => ', self.state.styles);
+        console.log('state styles => ', self.state.styles);
       })
     })
 
