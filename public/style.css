@@ -1,5 +1,6 @@
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: rgba(0, 0, 0, .05);
 }
 
 /*
@@ -12,7 +13,7 @@ topbar
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  height: 70px;
+  height: 77px;
   width: 100%;
   background-color: rgba(0, 0, 0, .7);
 }
@@ -32,7 +33,7 @@ topbar
 }
 
 .searchUnit {
-  float: right;
+  /* float: right; */
 }
 
 .searchInput {
@@ -57,6 +58,24 @@ topbar
 
 /*
 /////////////////////
+SITE ANNOUNCEMENT
+/////////////////////
+*/
+
+.siteAnnouncementBar {
+  height: 44px;
+  width: 100%;
+  font-size: 12px;
+  color:rgba(0, 0, 0, .6)
+}
+
+.announcement {
+  display: inline-block;
+  margin: 10px 0 0 100px;
+}
+
+/*
+/////////////////////
 OVERVIEW
 /////////////////////
 */
@@ -67,44 +86,46 @@ OVERVIEW
   height: 750px;
 }
 
+.leftPanel {
+  float: left;
+  width: 66.6%;
+  height: 80%;
+
+}
+
+.rightPanel {
+  display: inline-block;
+  height: 100%;
+  width: 33.3%;
+}
+
 .productInfo {
-  /* position: relative;
-  left: 800px;
-  display: inline-block; */
-  border: 1px solid rgba(0, 0, 0, .4);
+  display: inline-block;
+  /* border: 1px solid rgba(0, 0, 0, .4); */
   height: 150px;
-  width: 400px;
+  width: 100%;
   overflow: hidden;
 }
 
 .styleSelector {
-  /* position: relative;
-  top: -330px;
-  left: 800px;
-  display: inline-block; */
-  border: 1px solid rgba(0, 0, 0, .4);
+  /* border: 1px solid rgba(0, 0, 0, .4); */
+  display: inline-block;
   height: 150px;
-  width: 400px;
+  width: 100%;
 }
 
 .imageGallery {
-  /* position: relative;
-  right: 400px;
-  display: inline-block; */
-  border: 1px solid rgba(0, 0, 0, .4);
-  height: 200px;
-  width: 400px;
+  display: inline-block;
+  width: 100%;
+  height: 80%;
 }
 
 
 .addToCart {
-  /* position: relative;
-  left: 400px;
-  top: -160px;
-  display: inline-block; */
-  border: 1px solid rgba(0, 0, 0, .4);
+  display: inline-block;
+  /* border: 1px solid rgba(0, 0, 0, .4); */
   height: 150px;
-  width: 400px;
+  width: 100%;
 }
 
 #zoomView {

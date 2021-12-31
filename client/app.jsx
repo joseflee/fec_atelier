@@ -109,6 +109,9 @@ class App extends React.Component {
             <div className={'searchFieldUnderline'} />
           </div>
         </div>
+        <div className={'siteAnnouncementBar'}>
+        <div className={'announcement'}><i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - NEW PRODUCT HIGHLIGHT</div>
+        </div>
         <Overview product={this.state.product} styles={this.state.styles} />
         <RelatedItems />
         <QuestionsAndAnswers />

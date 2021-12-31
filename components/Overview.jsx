@@ -44,10 +44,14 @@ class Overview extends React.Component {
 
     return (
       <div id={'overview'}>
-        <ProductInfo product={this.state.product}/>
-        <ImageGallery styleIndex={this.state.styles.results[this.state.selectedStyle]} styles={this.state.styles} index={this.state.selectedStyle}/>
-        <StyleSelector styles={this.state.styles} changeStyle={this.changeStyle}/>
-        <AddToCart state={this.state}/>
+        <div className={'leftPanel'}>
+          <ImageGallery styleIndex={this.state.styles.results[this.state.selectedStyle]} styles={this.state.styles} index={this.state.selectedStyle} />
+        </div>
+        <div className={'rightPanel'}>
+          <ProductInfo product={this.state.product} />
+          <StyleSelector styles={this.state.styles} changeStyle={this.changeStyle} />
+          <AddToCart state={this.state} />
+        </div>
       </div>
     )
 
