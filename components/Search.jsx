@@ -1,4 +1,6 @@
 import React from 'react';
+import { FaSistrix } from 'react-icons/fa';
+
 
 
 class Search extends React.Component {
@@ -16,12 +18,19 @@ class Search extends React.Component {
 
   }
 
-  updateSearchTerm() {
+  updateSearchTerm(e) {
+
+    var value = e.target.value;
+    this.setState({
+      ...this.state,
+      searchTerm: value
+    })
 
   }
 
   submitSearch() {
-
+    var searchValue = this.state.searchTerm;
+    this.props.handleSearch(searchValue);
   }
 
   render() {
@@ -29,6 +38,7 @@ class Search extends React.Component {
 
       <form className={'search'} name={'search'}>
         <input type={'text'} name={'search'} onChange={this.updateSearchTerm} className={'searchInput'}></input>
+        <FaSistrix className={'searchIcon'} onClick={this.submitSearch}/>
       </form>
 
     )

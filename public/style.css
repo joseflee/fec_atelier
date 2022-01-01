@@ -32,8 +32,8 @@ topbar
   display: inline-block;
 }
 
-.searchUnit {
-  /* float: right; */
+input, textarea {
+  color:rgba(250, 250, 250, .9);
 }
 
 .searchInput {
@@ -102,7 +102,7 @@ OVERVIEW
 .productInfo {
   display: inline-block;
   /* border: 1px solid rgba(0, 0, 0, .4); */
-  height: 20%;
+  height: 27%;
   width: 100%;
   overflow: hidden;
 }
@@ -444,10 +444,14 @@ ADD TO CART
   justify-content: space-between;
 }
 
+select {
+  text-align-last: center;
+}
+
 .quantities {
   display: inline-block;
   height: 50px;
-  flex-basis: 75px;
+  flex-basis: 30%;
   flex-grow: 0;
   flex-shrink: 0;
   border: 1px solid rgba(0, 0, 0, .4);
@@ -457,7 +461,7 @@ ADD TO CART
 .sizes {
   height: 50px;
   display: inline-block;
-  flex-basis: 150px;
+  flex-basis: 60%;
   flex-grow: 0;
   flex-shrink: 0;
   border: 1px solid rgba(0, 0, 0, .4);
@@ -467,7 +471,7 @@ ADD TO CART
 .addToCartButton {
   display: inline-block;
   height: 50px;
-  flex-basis: 175px;
+  flex-basis: 75%;
   flex-grow: 0;
   flex-shrink: 0;
   background-color: rgba(250, 250, 250, 1);

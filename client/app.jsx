@@ -22,8 +22,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 59553,
-      product: mockProduct,
-      styles: mockStyles,
+      product: null,
+      styles: null,
       products: null,
     }
 
@@ -82,13 +82,13 @@ class App extends React.Component {
         ...self.state,
         styles: res
       }, () => {
-        console.log('state styles => ', self.state.styles);
+        //console.log('state styles => ', self.state.styles);
       })
     })
 
   }
 
-  handleSearch() {
+  handleSearch(searchTerm) {
 
     // this method will retrieve search term from topbar on page and use a
     // server route + modularized helpers to construct search query and perform
@@ -105,14 +105,13 @@ class App extends React.Component {
           <div className={'pageTitle'}>ATELIER</div>
           <div className={'searchUnit'}>
             <Search handleSearch={this.handleSearch} />
-            <FaSistrix className={'searchIcon'} />
             <div className={'searchFieldUnderline'} />
           </div>
         </div>
         <div className={'siteAnnouncementBar'}>
-        <div className={'announcement'}><i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - NEW PRODUCT HIGHLIGHT</div>
+          <div className={'announcement'}><i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - NEW PRODUCT HIGHLIGHT</div>
         </div>
-        <Overview product={this.state.product} styles={this.state.styles} />
+        <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} /> : null }</div>
         <RelatedItems />
         <QuestionsAndAnswers />
         <RatingsAndReviews />

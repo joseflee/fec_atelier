@@ -21,6 +21,7 @@ class Overview extends React.Component {
 
   componentDidMount() {
     console.log('component did mount');
+    console.log('props = ', this.props)
   }
 
   componentDidUpdate() {
