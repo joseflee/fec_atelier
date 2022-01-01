@@ -6,9 +6,9 @@
   "scripts": {
     "test": "jest",
     "jest-overview": "jest --verbose ./test/overview --collectCoverage",
+    "jest-relatedItems": "jest --verbose ./test/relatedItems --collectCoverage",
     "test-QandA": "mocha ./test/questionsAndAnswers --require @babel/register",
     "test-ratingsAndReviews": "mocha ./test/ratingsAndReviews --require @babel/register",
-    "test-relatedItems": "mocha ./test/relatedItems --require @babel/register",
     "start": "nodemon ./server/index.js",
     "build": "webpack --watch"
   },

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/Overview.jsx</title>
+    <title>Code coverage report for components/RelatedItems.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> Overview.jsx</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> RelatedItems.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">61.53% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/8</span>
+                <span class='fraction'>8/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/5</span>
+                <span class='fraction'>2/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">61.53% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/8</span>
+                <span class='fraction'>8/13</span>
             </div>
         
             
@@ -128,20 +128,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,7 +153,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,10 +166,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -178,70 +178,70 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import AddToCart from '../subcomponents/overview/AddToCart.jsx';
-import ImageGallery from '../subcomponents/overview/ImageGallery.jsx';
-import ProductInfo from '../subcomponents/overview/ProductInfo.jsx';
-import StyleSelector from '../subcomponents/overview/StyleSelector.jsx';
+import {RelatedProductList} from '../subcomponents/relatedItems/RelatedProductList.jsx';
+import {ProductCard} from '../subcomponents/relatedItems/ProductCard.jsx';
+import {OutfitList} from '../subcomponents/relatedItems/OutfitList.jsx';
+import {OutfitCard} from '../subcomponents/relatedItems/OutfitCard.jsx';
 &nbsp;
-class Overview extends React.Component {
-&nbsp;
+class RelatedItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: props.product,
-      styles: props.styles,
-      selectedStyle: 0
+      relatedItemsList: [],
+      outfitsList: [],
     }
 &nbsp;
-    this.changeStyle = this.changeStyle.bind(this);
-&nbsp;
+    this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
+    this.handleRelatedStarClick = this.handleRelatedStarClick.bind(this);
+    this.addToOutfits = this.addToOutfits.bind(this);
+    this.removeFromOutfits = this.removeFromOutfits.bind(this);
+    this.addToRelatedItems = this.addToRelatedItems.bind(this);
   }
 &nbsp;
-  componentDidMount() {
-    console.log('component did mount');
+  //when a card on the related items list is clicked, it will navigate to that page
+<span class="fstat-no" title="function not covered" >  ha</span>ndleRelatedCardClick(e) {
+<span class="cstat-no" title="statement not covered" >    console.log('clicked on the card')</span>
+  }
+  //when the star on the related item card is clicked, a comparison modal will be opened up
+<span class="fstat-no" title="function not covered" >  ha</span>ndleRelatedStarClick(e) {
+<span class="cstat-no" title="statement not covered" >    e.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" >    console.log('clicked on the star')</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  co</span>mponentDidUpdate() {
-<span class="cstat-no" title="statement not covered" >    if (this.props.product !== this.state.product) {</span>
-<span class="cstat-no" title="statement not covered" >      this.setState({</span>
-        ...this.state,
-        product: this.props.product,
-        styles: this.props.styles
-      })
-    }
+  //function to add items to outfitlist
+<span class="fstat-no" title="function not covered" >  ad</span>dToOutfits(e) {
+<span class="cstat-no" title="statement not covered" >    console.log('added to outfit list')</span>
   }
 &nbsp;
-&nbsp;
-<span class="fstat-no" title="function not covered" >  ch</span>angeStyle(newIndex) {
-<span class="cstat-no" title="statement not covered" >    this.setState({</span>
-      ...this.state,
-      selectedStyle: newIndex
-    })
+  //function to remove items from outfitList
+<span class="fstat-no" title="function not covered" >  re</span>moveFromOutfits(e) {
+<span class="cstat-no" title="statement not covered" >    console.log('delete from outfit list');</span>
   }
+&nbsp;
+  //function to add items to the related Items List; might need to do this in the database helpers
+<span class="fstat-no" title="function not covered" >  ad</span>dToRelatedItems() {
+  }
+&nbsp;
 &nbsp;
   render() {
-&nbsp;
     return (
-      &lt;div id={'overview'}&gt;
-        &lt;ProductInfo product={this.state.product}/&gt;
-        &lt;ImageGallery styleIndex={this.state.styles.results[this.state.selectedStyle]} styles={this.state.styles} index={this.state.selectedStyle}/&gt;
-        &lt;StyleSelector styles={this.state.styles} changeStyle={this.changeStyle}/&gt;
-        &lt;AddToCart state={this.state}/&gt;
-      &lt;/div&gt;
+      &lt;&gt;
+        &lt;div&gt;Related Items&lt;/div&gt;
+        &lt;RelatedProductList clickCard={this.handleRelatedCardClick} clickStar={this.handleRelatedStarClick} /&gt;
+        &lt;OutfitList add={this.addToOutfits} remove={this.removeFromOutfits} /&gt;
+      &lt;/&gt;
     )
-&nbsp;
   }
-&nbsp;
 }
 &nbsp;
-export default Overview;</pre></td></tr></table></pre>
+export default RelatedItems;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sat Jan 01 2022 13:25:42 GMT-0600 (Central Standard Time)
+                at Fri Dec 31 2021 14:08:12 GMT-0800 (Pacific Standard Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
