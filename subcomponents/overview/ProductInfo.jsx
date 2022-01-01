@@ -11,11 +11,12 @@ var ProductInfo = (props) => {
   return (
 
     <div className={'productInfo'}>
-      <Stars props={props}/>
+      <div className={'starbox'}>
+        <Stars props={props} />
+      </div>
       <div id={'category-overview'}>{category}</div>
-      <div id={'expandedProductName-overview'}>{name}</div>
-      <div id={'price-overview'}>$ {price}</div>
-      <div id={'productOverview-overview'}>{overview}</div>
+      <div id={'expandedProductName-overview'} className={'productName'}>{name}</div>
+      <div id={'price-overview'} className={'price'}>$ {price}</div>
     </div>
 
   )

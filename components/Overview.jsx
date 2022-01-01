@@ -3,6 +3,7 @@ import AddToCart from '../subcomponents/overview/AddToCart.jsx';
 import ImageGallery from '../subcomponents/overview/ImageGallery.jsx';
 import ProductInfo from '../subcomponents/overview/ProductInfo.jsx';
 import StyleSelector from '../subcomponents/overview/StyleSelector.jsx';
+import ProductDescription from '../subcomponents/overview/ProductDescription.jsx';
 
 class Overview extends React.Component {
 
@@ -46,6 +47,7 @@ class Overview extends React.Component {
       <div id={'overview'}>
         <div className={'leftPanel'}>
           <ImageGallery styleIndex={this.state.styles.results[this.state.selectedStyle]} styles={this.state.styles} index={this.state.selectedStyle} />
+          <ProductDescription description={this.state.product.description}/>
         </div>
         <div className={'rightPanel'}>
           <ProductInfo product={this.state.product} />

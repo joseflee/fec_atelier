@@ -11,9 +11,13 @@ var Quantity = (props) => {
 
   var quantity = quantityToArray(props.quantity);
 
+  if (quantity[quantity.length - 1] !== '-') {
+    quantity.push('-');
+  }
+
   return (
 
-    <select name={'quantities'} id={'quantitiesDropdown'}>{quantity.map((item, i) => (
+    <select className={'quantities'} defaultValue={'-'} name={'quantities'} id={'quantitiesDropdown'}>{quantity.map((item, i) => (
       <option key={i} value={`${item}`}>{item}</option>
     ))}</select>
 
