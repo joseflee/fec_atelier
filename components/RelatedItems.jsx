@@ -5,12 +5,14 @@ import {OutfitList} from '../subcomponents/relatedItems/OutfitList.jsx';
 import {OutfitCard} from '../subcomponents/relatedItems/OutfitCard.jsx';
 import {ComparisonModal} from '../subcomponents/relatedItems/ComparisonModal.jsx';
 
+
 class RelatedItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       relatedItemsList: [],
       outfitsList: [],
+      currentItem: {},
       modal: false,
     }
 
@@ -27,6 +29,8 @@ class RelatedItems extends React.Component {
     console.log('clicked on the card')
   }
   //when the star on the related item card is clicked, a comparison modal will be opened up
+  //will need to pass the currentItem as well as the clicked on item to the modalComponent so it can
+  //render the table using that information
   handleRelatedStarClick(e) {
     e.stopPropagation();
     console.log('clicked on the star')
@@ -56,11 +60,17 @@ class RelatedItems extends React.Component {
   addToRelatedItems() {
   }
 
+  componentDidMount() {
+    this.setState({
+      relatedItemsList: this.props.items
+    });
+  }
+
   render() {
     return (
       <>
         <div>Related Items</div>
-        <RelatedProductList clickCard={this.handleRelatedCardClick} clickStar={this.handleRelatedStarClick} related={this.state.relatedItemsList} />
+        {this.state.relatedItemsList.length > 0 ? <RelatedProductList clickCard={this.handleRelatedCardClick} clickStar={this.handleRelatedStarClick} related={this.state.relatedItemsList} /> : null}
         <OutfitList add={this.addToOutfits} remove={this.removeFromOutfits} />
         {this.state.modal ? <ComparisonModal close={this.closeModal} /> : null}
       </>

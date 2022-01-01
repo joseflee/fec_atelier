@@ -323,8 +323,8 @@ RELATED ITEMS
 */
 
 .card {
-  width: 100px;
-  height: 150px;
+  width: 200px;
+  height: 250px;
   background: rgb(146, 142, 142);
   border: 1px solid black;
   text-align: center;

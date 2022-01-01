@@ -20,17 +20,22 @@ class App extends React.Component {
       product: mockProduct,
       styles: mockStyles,
       products: null,
+      relatedItems: [],
+      relatedIds: [],
     }
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
     this.retrieveStyles = this.retrieveStyles.bind(this);
-
+    this.retrieveRelatedProducts = this.retrieveRelatedProducts.bind(this);
+    this.retrieveProductJoe = this.retrieveProductJoe.bind(this);
+    this.renderRelatedItems = this.renderRelatedItems.bind(this);
   }
 
   componentDidMount() {
     // invoke retrieveProduct
     this.retrieveProduct();
     this.retrieveStyles(this.state.productId);
+    this.retrieveRelatedProducts(this.state.productId);
   }
 
   componentDidUpdate() {
@@ -38,9 +43,7 @@ class App extends React.Component {
   }
 
   retrieveProduct() {
-
     var self = this;
-
     console.log(APIkey);
 
     $.ajax({
@@ -62,7 +65,6 @@ class App extends React.Component {
 
 
   retrieveStyles(productNumber) {
-
     var self = this;
 
     $.ajax({
@@ -83,13 +85,64 @@ class App extends React.Component {
 
   }
 
+  retrieveRelatedProducts(productId) {
+    $.ajax({
+      method: 'GET',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${this.state.productId}/related`,
+      headers: {
+        "Authorization": APIkey
+      },
+      success: (data) => {
+        this.setState({
+          relatedIds: data
+        });
+        data.forEach(item => {
+          this.retrieveProductJoe(item)
+        })
+      },
+      error: (err) => {
+        console.log('error getting related products', err);
+      }
+    })
+  }
+
+
+  retrieveProductJoe(productId) {
+    $.ajax({
+      method: 'GET',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}`,
+      headers: {
+        "Authorization": APIkey
+      },
+      success: (data) => {
+        console.log('data', data);
+        var relatedData = this.state.relatedItems;
+        relatedData.push(data);
+        this.setState({
+          relatedItems: relatedData
+        })
+      },
+      error: (err) => {
+        console.log('error', err);
+      }
+    })
+  }
+
+  renderRelatedItems() {
+    if (this.state.relatedIds.length > 0) {
+      if (this.state.relatedIds.length === this.state.relatedItems.length) {
+        return <RelatedItems items={this.state.relatedItems} />
+      }
+    }
+  }
+
   render() {
 
     return (
       <div>
         <div className={'pageTitle'}>ATELIER</div>
         <Overview product={this.state.product} styles={this.state.styles}/>
-        <RelatedItems />
+        {this.renderRelatedItems()}
         <QuestionsAndAnswers />
         <RatingsAndReviews />
       </div>
@@ -101,3 +154,4 @@ class App extends React.Component {
 }
 
 export default App;
+// {this.state.relatedItems ? <RelatedItems items={this.state.relatedItems} /> : null}

@@ -17,7 +17,8 @@ export class ProductCard extends React.Component {
           <button onClick={this.props.clickStar}>compare</button>
           <div>{this.props.itemInfo.picture}</div>
           <div>{this.props.itemInfo.category}</div>
-          <div>{this.props.itemInfo.price}</div>
+          <div>{this.props.itemInfo.name}</div>
+          <div>{this.props.itemInfo.default_price}</div>
           <div className={starClass}>{ratingToStar(this.props.itemInfo.rating)}</div>
         </div>
       </>

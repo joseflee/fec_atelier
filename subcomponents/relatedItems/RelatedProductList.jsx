@@ -2,30 +2,6 @@ import React from 'react';
 import {ProductCard} from './ProductCard.jsx';
 
 
-
-
-var mockRelatedItems = [
-  {picture: 'image', category: 'shirt', price: '$50', rating: 4},
-  {picture: 'image', category: 'pants', price: '$197', rating: 3.8},
-  {picture: 'image', category: 'jacket', price: '$79', rating: 2.2},
-  {picture: 'image', category: 'hat', price: '$99', rating: 1.5},
-  {picture: 'image', category: 'scarf', price: '$47', rating: 5},
-  {picture: 'image', category: 'socks', price: '$8', rating: 3.33},
-  {picture: 'image', category: 'briefs', price: '$2', rating: 4.88},
-  {picture: 'image', category: 'hoodie', price: '$197', rating: 4.35},
-  {picture: 'image', category: 'sweater', price: '$1000', rating: 3.9},
-  {picture: 'image', category: 'coat', price: '$999', rating: 1.1},
-  {picture: 'image', category: 'shoes', price: '$444', rating: 4},
-  {picture: 'image', category: 'belt', price: '$1', rating: 3.3},
-]
-
-
-//where to keep the related items state
-//related items will be got from the api and will be in related Items component
-//from there pass it as props to related list
-//in related list there will be a current view container. this will be located in the list component and not the parent component.
-
-
 export class RelatedProductList extends React.Component {
   constructor(props) {
     super(props);
@@ -33,6 +9,7 @@ export class RelatedProductList extends React.Component {
     this.state = {
       positionAtList: 0,
       currentView: [],
+      relatedItems: [],
     }
     this.handleLeftArrow = this.handleLeftArrow.bind(this);
     this.handleRightArrow = this.handleRightArrow.bind(this);
@@ -55,7 +32,7 @@ export class RelatedProductList extends React.Component {
     } else {
       newPosition = 0;
     }
-    var newView = mockRelatedItems.slice(newPosition, newPosition + 5);
+    var newView = this.state.relatedItems.slice(newPosition, newPosition + 3);
     this.setState({
       positionAtList: newPosition,
       currentView: newView
@@ -64,13 +41,12 @@ export class RelatedProductList extends React.Component {
 
   shiftViewRight() {
     var newPosition;
-    //need to change this when real data
-    if (this.state.positionAtList < mockRelatedItems.length - 5) {
+    if (this.state.positionAtList < this.state.relatedItems.length - 3) {
       newPosition = this.state.positionAtList + 1;
     } else {
-      newPosition = mockRelatedItems.length - 5;
+      newPosition = this.state.relatedItems.length - 3;
     }
-    var newView = mockRelatedItems.slice(newPosition, newPosition + 5);
+    var newView = this.state.relatedItems.slice(newPosition, newPosition + 3);
     this.setState({
       positionAtList: newPosition,
       currentView: newView
@@ -79,10 +55,11 @@ export class RelatedProductList extends React.Component {
 
 
   componentDidMount() {
-    var fiveAtATime = mockRelatedItems.slice(0, 5);
-    this.setState({
-      currentView: fiveAtATime
-    })
+      var fiveAtATime = this.props.related.slice(0, 3);
+      this.setState({
+        currentView: fiveAtATime,
+        relatedItems: this.props.related,
+      })
   }
 
   render() {
@@ -97,7 +74,7 @@ export class RelatedProductList extends React.Component {
             return <ProductCard key={index} clickCard={this.props.clickCard} clickStar={this.props.clickStar} itemInfo={item} />
           })}
           <div className="centerVertical">
-            {this.state.positionAtList < mockRelatedItems.length - 5 ? <div className="rightArrow" onClick={this.handleRightArrow}></div> : null}
+            {this.state.positionAtList < this.state.relatedItems.length - 3 ? <div className="rightArrow" onClick={this.handleRightArrow}></div> : null}
           </div>
         </div>
       </>
