@@ -3,6 +3,7 @@ import {RelatedProductList} from '../subcomponents/relatedItems/RelatedProductLi
 import {ProductCard} from '../subcomponents/relatedItems/ProductCard.jsx';
 import {OutfitList} from '../subcomponents/relatedItems/OutfitList.jsx';
 import {OutfitCard} from '../subcomponents/relatedItems/OutfitCard.jsx';
+import {ComparisonModal} from '../subcomponents/relatedItems/ComparisonModal.jsx';
 
 class RelatedItems extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class RelatedItems extends React.Component {
     this.state = {
       relatedItemsList: [],
       outfitsList: [],
+      modal: false,
     }
 
     this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
@@ -17,6 +19,7 @@ class RelatedItems extends React.Component {
     this.addToOutfits = this.addToOutfits.bind(this);
     this.removeFromOutfits = this.removeFromOutfits.bind(this);
     this.addToRelatedItems = this.addToRelatedItems.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   //when a card on the related items list is clicked, it will navigate to that page
@@ -27,6 +30,16 @@ class RelatedItems extends React.Component {
   handleRelatedStarClick(e) {
     e.stopPropagation();
     console.log('clicked on the star')
+    this.setState({
+      modal: true
+    })
+  }
+
+  closeModal() {
+    console.log('hello')
+    this.setState({
+      modal: false
+    })
   }
 
   //function to add items to outfitlist
@@ -43,13 +56,13 @@ class RelatedItems extends React.Component {
   addToRelatedItems() {
   }
 
-
   render() {
     return (
       <>
         <div>Related Items</div>
-        <RelatedProductList clickCard={this.handleRelatedCardClick} clickStar={this.handleRelatedStarClick} />
+        <RelatedProductList clickCard={this.handleRelatedCardClick} clickStar={this.handleRelatedStarClick} related={this.state.relatedItemsList} />
         <OutfitList add={this.addToOutfits} remove={this.removeFromOutfits} />
+        {this.state.modal ? <ComparisonModal close={this.closeModal} /> : null}
       </>
     )
   }
