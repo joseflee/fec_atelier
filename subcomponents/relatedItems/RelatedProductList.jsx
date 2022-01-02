@@ -57,15 +57,11 @@ export class RelatedProductList extends React.Component {
 
   combineProductData(array1, array2) {
     //given two arrays of objects, combine matching objects
-    console.log(array1)
-    console.log(array2);
     var combinedArray = [];
     array1.forEach(obj1 => {
       array2.forEach(obj2 => {
-        console.log(obj1.id, obj2.product_id);
         if ('' + obj1.id === obj2.product_id) {
           var combined = Object.assign(obj1, obj2);
-          console.log('bom', combined);
           combinedArray.push(combined);
         }
       })
@@ -81,12 +77,6 @@ export class RelatedProductList extends React.Component {
       currentView: threeAtATime,
       relatedItems: combined,
     })
-    // var threeAtATime = this.props.related.slice(0, 3);
-    // this.setState({
-    //   currentView: threeAtATime,
-    //   relatedItems: this.props.related,
-    //   //relatedStyles: this.props.styles
-    // })
   }
 
   render() {
