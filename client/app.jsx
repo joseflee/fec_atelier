@@ -21,14 +21,16 @@ class App extends React.Component {
       styles: mockStyles,
       products: null,
       relatedItems: [],
+      relatedStyles: [],
       relatedIds: [],
     }
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
     this.retrieveStyles = this.retrieveStyles.bind(this);
     this.retrieveRelatedProducts = this.retrieveRelatedProducts.bind(this);
-    this.retrieveProductJoe = this.retrieveProductJoe.bind(this);
+    this.retrieveProductForRelated = this.retrieveProductForRelated.bind(this);
     this.renderRelatedItems = this.renderRelatedItems.bind(this);
+    this.retrieveStyleForRelated = this.retrieveStyleForRelated.bind(this);
   }
 
   componentDidMount() {
@@ -76,7 +78,7 @@ class App extends React.Component {
     }).done((res) => {
       self.setState({
         ...self.state,
-        styles: res
+        styles: res,
       }, () => {
         console.log('state styles => ', self.state.styles);
       })
@@ -96,8 +98,9 @@ class App extends React.Component {
         this.setState({
           relatedIds: data
         });
-        data.forEach(item => {
-          this.retrieveProductJoe(item)
+        data.forEach(id => {
+          this.retrieveProductForRelated(id);
+          this.retrieveStyleForRelated(id);
         })
       },
       error: (err) => {
@@ -107,7 +110,9 @@ class App extends React.Component {
   }
 
 
-  retrieveProductJoe(productId) {
+
+
+  retrieveProductForRelated(productId) {
     $.ajax({
       method: 'GET',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}`,
@@ -115,12 +120,10 @@ class App extends React.Component {
         "Authorization": APIkey
       },
       success: (data) => {
-        console.log('data', data);
-        var relatedData = this.state.relatedItems;
-        relatedData.push(data);
+        var relatedData = this.state.relatedItems.concat(data);
         this.setState({
           relatedItems: relatedData
-        })
+        });
       },
       error: (err) => {
         console.log('error', err);
@@ -128,10 +131,29 @@ class App extends React.Component {
     })
   }
 
+  retrieveStyleForRelated(productNumber) {
+    $.ajax({
+      method: 'GET',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productNumber}/styles`,
+      headers: {
+        "Authorization": APIkey
+      },
+      success: (data) => {
+        var relatedStyle = this.state.relatedStyles.concat(data);
+        this.setState({
+          relatedStyles: relatedStyle
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
   renderRelatedItems() {
     if (this.state.relatedIds.length > 0) {
-      if (this.state.relatedIds.length === this.state.relatedItems.length) {
-        return <RelatedItems items={this.state.relatedItems} />
+      if (this.state.relatedIds.length === this.state.relatedItems.length && this.state.relatedIds.length === this.state.relatedStyles.length) {
+        return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} />
       }
     }
   }
@@ -154,4 +176,3 @@ class App extends React.Component {
 }
 
 export default App;
-// {this.state.relatedItems ? <RelatedItems items={this.state.relatedItems} /> : null}

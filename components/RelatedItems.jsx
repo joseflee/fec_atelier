@@ -11,6 +11,7 @@ class RelatedItems extends React.Component {
     super(props);
     this.state = {
       relatedItemsList: [],
+      relatedStyles: [],
       outfitsList: [],
       currentItem: {},
       modal: false,
@@ -62,7 +63,8 @@ class RelatedItems extends React.Component {
 
   componentDidMount() {
     this.setState({
-      relatedItemsList: this.props.items
+      relatedItemsList: this.props.items,
+      relatedStyles: this.props.styles
     });
   }
 
@@ -70,7 +72,7 @@ class RelatedItems extends React.Component {
     return (
       <>
         <div>Related Items</div>
-        {this.state.relatedItemsList.length > 0 ? <RelatedProductList clickCard={this.handleRelatedCardClick} clickStar={this.handleRelatedStarClick} related={this.state.relatedItemsList} /> : null}
+        {this.state.relatedItemsList.length > 0 ? <RelatedProductList clickCard={this.handleRelatedCardClick} clickStar={this.handleRelatedStarClick} related={this.state.relatedItemsList} styles={this.state.relatedStyles} /> : null}
         <OutfitList add={this.addToOutfits} remove={this.removeFromOutfits} />
         {this.state.modal ? <ComparisonModal close={this.closeModal} /> : null}
       </>
