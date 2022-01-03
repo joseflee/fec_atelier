@@ -3,13 +3,18 @@ import {RelatedProductList} from '../subcomponents/relatedItems/RelatedProductLi
 import {ProductCard} from '../subcomponents/relatedItems/ProductCard.jsx';
 import {OutfitList} from '../subcomponents/relatedItems/OutfitList.jsx';
 import {OutfitCard} from '../subcomponents/relatedItems/OutfitCard.jsx';
+import {ComparisonModal} from '../subcomponents/relatedItems/ComparisonModal.jsx';
+
 
 class RelatedItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       relatedItemsList: [],
+      relatedStyles: [],
       outfitsList: [],
+      currentItem: {},
+      modal: false,
     }
 
     this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
@@ -17,6 +22,7 @@ class RelatedItems extends React.Component {
     this.addToOutfits = this.addToOutfits.bind(this);
     this.removeFromOutfits = this.removeFromOutfits.bind(this);
     this.addToRelatedItems = this.addToRelatedItems.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   //when a card on the related items list is clicked, it will navigate to that page
@@ -24,9 +30,21 @@ class RelatedItems extends React.Component {
     console.log('clicked on the card')
   }
   //when the star on the related item card is clicked, a comparison modal will be opened up
+  //will need to pass the currentItem as well as the clicked on item to the modalComponent so it can
+  //render the table using that information
   handleRelatedStarClick(e) {
     e.stopPropagation();
     console.log('clicked on the star')
+    this.setState({
+      modal: true
+    })
+  }
+
+  closeModal() {
+    console.log('hello')
+    this.setState({
+      modal: false
+    })
   }
 
   //function to add items to outfitlist
@@ -43,13 +61,20 @@ class RelatedItems extends React.Component {
   addToRelatedItems() {
   }
 
+  componentDidMount() {
+    this.setState({
+      relatedItemsList: this.props.items,
+      relatedStyles: this.props.styles
+    });
+  }
 
   render() {
     return (
       <>
         <div>Related Items</div>
-        <RelatedProductList clickCard={this.handleRelatedCardClick} clickStar={this.handleRelatedStarClick} />
+        {this.state.relatedItemsList.length > 0 ? <RelatedProductList clickCard={this.handleRelatedCardClick} clickStar={this.handleRelatedStarClick} related={this.state.relatedItemsList} styles={this.state.relatedStyles} /> : null}
         <OutfitList add={this.addToOutfits} remove={this.removeFromOutfits} />
+        {this.state.modal ? <ComparisonModal close={this.closeModal} features={this.props.features} /> : null}
       </>
     )
   }

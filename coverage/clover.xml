@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <coverage generated="1641065142932" clover="3.2.0">
   <project timestamp="1641065142932" name="All files">
     <metrics statements="322" coveredstatements="206" conditionals="128" coveredconditionals="48" methods="85" coveredmethods="50" elements="535" coveredelements="304" complexity="0" loc="322" ncloc="322" packages="4" files="15" classes="15"/>
@@ -65,6 +66,73 @@
         <line num="37" count="0" type="stmt"/>
         <line num="38" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="39" count="1" type="stmt"/>
+=======
+<coverage generated="1641159278908" clover="3.2.0">
+  <project timestamp="1641159278911" name="All files">
+    <metrics statements="125" coveredstatements="23" conditionals="62" coveredconditionals="2" methods="35" coveredmethods="9" elements="222" coveredelements="34" complexity="0" loc="125" ncloc="125" packages="3" files="8" classes="8"/>
+    <package name="components">
+      <metrics statements="18" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="9" coveredmethods="3"/>
+      <file name="RelatedItems.jsx" path="/Users/joe/Documents/RPP32/senior-phase/fec_atelier/components/RelatedItems.jsx">
+        <metrics statements="18" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="9" coveredmethods="3"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="65" count="4" type="stmt"/>
+        <line num="72" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules">
+      <metrics statements="45" coveredstatements="2" conditionals="40" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="stars.js" path="/Users/joe/Documents/RPP32/senior-phase/fec_atelier/modules/stars.js">
+        <metrics statements="45" coveredstatements="2" conditionals="40" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="39" count="0" type="stmt"/>
+>>>>>>> 37fb8c9a68c3322ed6e0d7878df06f4b8db71f96
         <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="41" count="0" type="stmt"/>
         <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -73,6 +141,7 @@
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="47" count="0" type="stmt"/>
+<<<<<<< HEAD
         <line num="50" count="1" type="stmt"/>
         <line num="56" count="1" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
@@ -83,6 +152,29 @@
       <file name="AddToCart.jsx" path="/Users/nathanlucy/Desktop/Hack Reactor/Course/FEC/fec_atelier/subcomponents/overview/AddToCart.jsx">
         <metrics statements="40" coveredstatements="40" conditionals="6" coveredconditionals="4" methods="11" coveredmethods="8"/>
         <line num="8" count="1" type="stmt"/>
+=======
+        <line num="50" count="0" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="subcomponents.relatedItems">
+      <metrics statements="62" coveredstatements="11" conditionals="18" coveredconditionals="0" methods="24" coveredmethods="6"/>
+      <file name="AddToOutfitCard.jsx" path="/Users/joe/Documents/RPP32/senior-phase/fec_atelier/subcomponents/relatedItems/AddToOutfitCard.jsx">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+      </file>
+      <file name="ComparisonModal.jsx" path="/Users/joe/Documents/RPP32/senior-phase/fec_atelier/subcomponents/relatedItems/ComparisonModal.jsx">
+        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+      </file>
+      <file name="OutfitCard.jsx" path="/Users/joe/Documents/RPP32/senior-phase/fec_atelier/subcomponents/relatedItems/OutfitCard.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="5" count="1" type="stmt"/>
+>>>>>>> 37fb8c9a68c3322ed6e0d7878df06f4b8db71f96
         <line num="9" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
@@ -123,6 +215,7 @@
         <line num="129" count="3" type="stmt"/>
         <line num="131" count="3" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="ImageGallery.jsx" path="/Users/nathanlucy/Desktop/Hack Reactor/Course/FEC/fec_atelier/subcomponents/overview/ImageGallery.jsx">
         <metrics statements="71" coveredstatements="33" conditionals="32" coveredconditionals="7" methods="19" coveredmethods="7"/>
         <line num="11" count="1" type="stmt"/>
@@ -208,8 +301,53 @@
         <line num="20" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
         <line num="32" count="1" type="cond" truecount="1" falsecount="1"/>
+=======
+      <file name="OutfitList.jsx" path="/Users/joe/Documents/RPP32/senior-phase/fec_atelier/subcomponents/relatedItems/OutfitList.jsx">
+        <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="ProductCard.jsx" path="/Users/joe/Documents/RPP32/senior-phase/fec_atelier/subcomponents/relatedItems/ProductCard.jsx">
+        <metrics statements="21" coveredstatements="8" conditionals="8" coveredconditionals="0" methods="6" coveredmethods="4"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+      </file>
+      <file name="RelatedProductList.jsx" path="/Users/joe/Documents/RPP32/senior-phase/fec_atelier/subcomponents/relatedItems/RelatedProductList.jsx">
+        <metrics statements="32" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="11" coveredmethods="0"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+>>>>>>> 37fb8c9a68c3322ed6e0d7878df06f4b8db71f96
         <line num="33" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
+<<<<<<< HEAD
         <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
@@ -379,6 +517,27 @@
         <line num="75" count="0" type="stmt"/>
         <line num="79" count="0" type="stmt"/>
         <line num="86" count="2" type="stmt"/>
+=======
+        <line num="38" count="0" type="stmt"/>
+        <line num="46" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+>>>>>>> 37fb8c9a68c3322ed6e0d7878df06f4b8db71f96
       </file>
     </package>
   </project>
