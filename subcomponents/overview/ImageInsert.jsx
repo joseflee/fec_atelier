@@ -107,11 +107,12 @@ class ImageInsert extends React.Component {
 
     if (direction === 'down' && Math.floor(offset.top) > 166) {
       shift = offset.top - 20;
-      gallery.offset({ top: shift, left: 115 });
+      gallery.offset({ top: shift, left: 138 });
     } else if (direction === 'up' && Math.floor(offset.top) < 266) {
       shift = offset.top + 20;
-      gallery.offset({ top: shift, left: 115 });
+      gallery.offset({ top: shift, left: 138 });
     }
+
 
     this.updateArrows();
 

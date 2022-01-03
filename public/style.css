@@ -1,3 +1,5 @@
+
+
 body {
   font-family: 'Poppins', sans-serif;
   background-color: rgba(0, 0, 0, .05);
@@ -279,7 +281,7 @@ Image Gallery - Overview
 .thumbnailGallery {
   z-index: 2;
   position: relative;
-  top: 100px;
+  top: 120px;
   right: 200px;
   width: 30px;
   height: 80px;
@@ -350,7 +352,7 @@ Image Gallery - Overview
 .up_angle {
   z-index: 3;
   position: relative;
-  top: 125px;
+  top: 121px;
   right: 200px;
   width: 15px;
   height: auto;
