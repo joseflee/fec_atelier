@@ -28,7 +28,7 @@ describe("RelatedItems", () => {
       clickCard: () => {},
       clickStar: () => {},
       itemInfo: {
-        picture: {}, category: {}, price: {}, rating: {}
+        category: {}, price: {}, rating: {}
       }
     }
     const wrapper = shallow(<ProductCard {...props}/>);
