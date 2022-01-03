@@ -192,7 +192,6 @@ class App extends React.Component {
           <div className={'announcement'}><i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - NEW PRODUCT HIGHLIGHT</div>
         </div>
         <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} /> : null }</div>
-        <RelatedItems />
         {this.renderRelatedItems()}
         <QuestionsAndAnswers />
         <RatingsAndReviews />
