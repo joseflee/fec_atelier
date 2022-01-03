@@ -79,9 +79,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /*!*******************!*\
   !*** ./config.js ***!
   \*******************/
-/***/ (() => {
+/***/ ((module) => {
 
-eval("\n\n//# sourceURL=webpack://atelier/./config.js?");
+eval("var APIkey = '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';\nmodule.exports = {\n  APIkey: APIkey\n};\n\n//# sourceURL=webpack://atelier/./config.js?");
 
 /***/ }),
 
