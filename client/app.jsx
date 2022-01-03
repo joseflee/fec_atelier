@@ -20,6 +20,7 @@ class App extends React.Component {
       product: mockProduct,
       styles: mockStyles,
       products: null,
+      currentItemFeatures: [],
       relatedItems: [],
       relatedStyles: [],
       relatedIds: [],
@@ -29,8 +30,8 @@ class App extends React.Component {
     this.retrieveStyles = this.retrieveStyles.bind(this);
     this.retrieveRelatedProducts = this.retrieveRelatedProducts.bind(this);
     this.retrieveProductForRelated = this.retrieveProductForRelated.bind(this);
-    this.renderRelatedItems = this.renderRelatedItems.bind(this);
     this.retrieveStyleForRelated = this.retrieveStyleForRelated.bind(this);
+    this.renderRelatedItems = this.renderRelatedItems.bind(this);
   }
 
   componentDidMount() {
@@ -57,7 +58,8 @@ class App extends React.Component {
     }).done((res) => {
       self.setState({
         ...self.state,
-        product: res
+        product: res,
+        currentItemFeatures: res.features,
       }, () => {
         //console.log('state product => ', self.state.product);
       })
@@ -153,7 +155,7 @@ class App extends React.Component {
   renderRelatedItems() {
     if (this.state.relatedIds.length > 0) {
       if (this.state.relatedIds.length === this.state.relatedItems.length && this.state.relatedIds.length === this.state.relatedStyles.length) {
-        return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} />
+        return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} features={this.state.currentItemFeatures} />
       }
     }
   }

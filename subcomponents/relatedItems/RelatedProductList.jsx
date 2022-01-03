@@ -56,7 +56,6 @@ export class RelatedProductList extends React.Component {
   }
 
   combineProductData(array1, array2) {
-    //given two arrays of objects, combine matching objects
     var combinedArray = [];
     array1.forEach(obj1 => {
       array2.forEach(obj2 => {

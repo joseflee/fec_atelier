@@ -38,7 +38,6 @@ export class ProductCard extends React.Component {
   renderImg() {
     var defaultItem = this.findDefault();
     if (defaultItem.photos[0].url) {
-      console.log('image', defaultItem.photos[0].url);
       return <div><img src={defaultItem.photos[0].url} className="cardImage" /></div>
     } else {
       return <div>no photo</div>
@@ -52,7 +51,6 @@ export class ProductCard extends React.Component {
         <div onClick={this.props.clickCard} className="card">
           {this.renderImg()}
           <button onClick={this.props.clickStar}>compare</button>
-          <div>{this.props.itemInfo.picture}</div>
           <div>{this.props.itemInfo.category}</div>
           <div>{this.props.itemInfo.name}</div>
           {this.renderPrice()}
@@ -62,4 +60,3 @@ export class ProductCard extends React.Component {
     )
   }
 }
-//<div>{this.props.itemInfo.default_price}</div>
