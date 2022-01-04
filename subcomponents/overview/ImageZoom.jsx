@@ -17,6 +17,7 @@ class ImageZoom extends React.Component {
     this.zoomClick = this.zoomClick.bind(this);
     this.closeZoom = this.closeZoom.bind(this);
     this.unpackImages = this.unpackImages.bind(this);
+    this.trackZoom = this.trackZoom.bind(this);
 
   }
 
@@ -107,6 +108,40 @@ class ImageZoom extends React.Component {
     this.props.closeZoom();
   }
 
+  trackZoom(e) {
+
+    if (this.state.zoom === true) {
+
+      // var zoomed = $('#zoomFrame');
+      var zoomedImage = $('#zoomedImage');
+      // var featureImage = this.state.newGallery[this.state.currentImageIndex];
+
+      // existingImage.css('visibility', 'hidden');
+      // zoomed.css('background-image', `url(${featureImage})`);
+      // zoomed.css('background-repeat', 'no-repeat');
+      // zoomed.css('background-size', '900px');
+
+      //zoomedImage
+
+
+
+      var posX = e.nativeEvent.offsetX;
+      var posY = e.nativeEvent.offsetY;
+
+      console.log('x -> ', posX)
+      console.log('y -> ', posY)
+
+      // when x is decreasing and y is increasing - this is correct
+      // also, when x is increasing and y is decreasing - correct
+      // but when both x and y decrease or increase together, tracking
+      // is incorrect
+
+      zoomedImage.css('top', `${posX + 2.5 - 250}px`);
+      zoomedImage.css('left', `${posY - 5.5 - 250}px`);
+
+    }
+  }
+
   // map-render index dots w/click handlers
 
   render() {
@@ -115,8 +150,10 @@ class ImageZoom extends React.Component {
 
       <div id={'zoomView'}>
         <div id={'xOutZoom'} onClick={this.closeZoom}>x</div>
-        <img id={'zoomedImage'} onClick={this.zoomClick} src={this.state.newGallery[this.state.featureImage]}/>
-        <div>{this.state.newGallery.map((item, i) => (
+        <div id={'zoomFrame'}>
+        <img id={'zoomedImage'} onMouseMove={this.trackZoom} onClick={this.zoomClick} src={this.state.newGallery[this.state.featureImage]}/>
+        </div>
+        <div id={'dotBar'}>{this.state.newGallery.map((item, i) => (
           <div key={i} className={'scrollDot'} onClick={this.handleImageChange}>.<span className={'invisibleIndex'}>{i}</span></div>
         ))
         }</div>

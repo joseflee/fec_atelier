@@ -414,21 +414,45 @@ Expanded View, Image Gallery - Overview
 }
 
 #zoomView {
+  background-color: rgba(250, 250, 250, .9);
   z-index: 2;
   display: none;
   position: relative;
-  left: 150px;
-  bottom: 75px;
+  height: 600px;
+  width: 800px;
+  left: 0px;
+  bottom: 675px;
+}
+
+#zoomFrame {
+  display: inline-block;
+  margin: 50px auto;
+  width: 55%;
+  overflow: hidden;
 }
 
 #zoomedImage {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: auto auto;
+  height: 90%;
   transform: scale(1);
   cursor: zoom-in;
 }
 
 .scrollDot {
   display: inline-block;
-  margin-left: 10px;
+  margin-top: -15px;
+  margin-left: 15px;
+  font-size: 30px;
+}
+
+#dotBar {
+  position: absolute;
+  bottom: 25px;
+  left: 330px;
+
 }
 
 .scrollDot:hover {
@@ -436,13 +460,14 @@ Expanded View, Image Gallery - Overview
 }
 
 #xOutZoom {
-  z-index: 2;
+  z-index: 3;
   display: inline-block;
   position: relative;
-  left: 200px;
-  bottom: 300px;
+  left: 600px;
+  bottom: 480px;
   font-family: arial;
   color:rgba(0, 0, 0, .5);
+  font-size: 20px;
 }
 
 #xOutZoom:hover {
