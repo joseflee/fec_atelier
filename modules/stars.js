@@ -57,4 +57,5 @@ var roundRating = (rating) => {
   return (Math.round(rating * 4) / 4).toFixed(2);
 }
 
+
 export default ratingToStar;
