@@ -83,10 +83,14 @@ class StyleSelector extends React.Component {
   // selected style must render first ***
 
   render() {
+
+
+
     return (
-
-      <Style styles={this.state.styles} styleNames={this.state.styleNames} featuredIndex={this.state.featuredIndex} changeStyle={this.changeStyle}/>
-
+      <div>
+        <div className={'styleIndicator'}><b>STYLE > </b>{this.state.styleNames[this.state.featuredIndex]}</div>
+        <Style styles={this.state.styles} styleNames={this.state.styleNames} featuredIndex={this.state.featuredIndex} changeStyle={this.changeStyle}/>
+      </div>
     )
   }
 

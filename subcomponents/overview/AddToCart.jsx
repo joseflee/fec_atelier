@@ -131,11 +131,14 @@ class AddToCart extends React.Component {
     return (
 
       <div className={'addToCart'}>
-
-        <Size availableSizes={this.state.availableSizes} updateQuantity={this.updateQuantity}/>
-        <Quantity quantity={this.state.quantityAvailable} cb={this.validateForm}/>
-        <button onClick={this.submitForm}>Add to Cart</button>
-        <button onClick={this.starItem}>★</button>
+        <div className={'addToCartRow1'}>
+          <Size availableSizes={this.state.availableSizes} updateQuantity={this.updateQuantity} />
+          <Quantity quantity={this.state.quantityAvailable} cb={this.validateForm} />
+        </div>
+        <div className={'addToCartRow2'}>
+          <button onClick={this.submitForm} className={'addToCartButton'}>ADD TO BAG</button>
+          <button onClick={this.starItem} className={'starButton'}>★</button>
+        </div>
       </div>
 
     )

@@ -4,8 +4,13 @@ import Overview from '../components/Overview.jsx';
 import QuestionsAndAnswers from '../components/QuestionsAndAnswers.jsx';
 import RatingsAndReviews from '../components/RatingsAndReviews.jsx';
 import RelatedItems from '../components/RelatedItems.jsx';
+import Search from '../components/Search.jsx';
+
 import $ from 'jquery';
 import { APIkey } from '../config.js';
+
+// importing search bar icon from react library
+import { FaSistrix } from 'react-icons/fa';
 
 import mockProduct from '../mock_api/mock_product.js';
 import mockStyles from '../mock_api/mock_styles.js';
@@ -17,8 +22,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 59553,
-      product: mockProduct,
-      styles: mockStyles,
+      product: null,
+      styles: null,
       products: null,
       currentItemFeatures: [],
       relatedItems: [],
@@ -28,6 +33,8 @@ class App extends React.Component {
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
     this.retrieveStyles = this.retrieveStyles.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+
     this.retrieveRelatedProducts = this.retrieveRelatedProducts.bind(this);
     this.retrieveProductForRelated = this.retrieveProductForRelated.bind(this);
     this.retrieveStyleForRelated = this.retrieveStyleForRelated.bind(this);
@@ -47,7 +54,8 @@ class App extends React.Component {
 
   retrieveProduct() {
     var self = this;
-    console.log(APIkey);
+
+    //console.log(APIkey);
 
     $.ajax({
       method: 'GET',
@@ -61,6 +69,7 @@ class App extends React.Component {
         product: res,
         currentItemFeatures: res.features,
       }, () => {
+        this.retrieveStyles(this.state.productId);
         //console.log('state product => ', self.state.product);
       })
     })
@@ -82,10 +91,18 @@ class App extends React.Component {
         ...self.state,
         styles: res,
       }, () => {
-        console.log('state styles => ', self.state.styles);
+        //console.log('state styles => ', self.state.styles);
       })
     })
 
+  }
+
+  handleSearch(searchTerm) {
+
+    // this method will retrieve search term from topbar on page and use a
+    // server route + modularized helpers to construct search query and perform
+    // API pull.
+    // Then state will be updated with new product / styles
 
   }
 
@@ -164,8 +181,17 @@ class App extends React.Component {
 
     return (
       <div>
-        <div className={'pageTitle'}>ATELIER</div>
-        <Overview product={this.state.product} styles={this.state.styles}/>
+        <div className={'topBar'}>
+          <div className={'pageTitle'}>ATELIER</div>
+          <div className={'searchUnit'}>
+            <Search handleSearch={this.handleSearch} />
+            <div className={'searchFieldUnderline'} />
+          </div>
+        </div>
+        <div className={'siteAnnouncementBar'}>
+          <div className={'announcement'}><i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - NEW PRODUCT HIGHLIGHT</div>
+        </div>
+        <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} /> : null }</div>
         {this.renderRelatedItems()}
         <QuestionsAndAnswers />
         <RatingsAndReviews />

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1641236182525" clover="3.2.0">
-  <project timestamp="1641236182525" name="All files">
-    <metrics statements="322" coveredstatements="206" conditionals="128" coveredconditionals="48" methods="85" coveredmethods="50" elements="535" coveredelements="304" complexity="0" loc="322" ncloc="322" packages="4" files="15" classes="15"/>
+<coverage generated="1641238208254" clover="3.2.0">
+  <project timestamp="1641238208254" name="All files">
+    <metrics statements="328" coveredstatements="212" conditionals="132" coveredconditionals="51" methods="86" coveredmethods="51" elements="546" coveredelements="314" complexity="0" loc="328" ncloc="328" packages="4" files="16" classes="16"/>
     <package name="components">
       <metrics statements="8" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="3"/>
       <file name="Overview.jsx" path="/Users/nathanlucy/Desktop/Hack Reactor/Course/FEC/fec_atelier/components/Overview.jsx">
         <metrics statements="8" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="3"/>
-        <line num="10" count="6" type="stmt"/>
         <line num="11" count="6" type="stmt"/>
-        <line num="17" count="6" type="stmt"/>
-        <line num="22" count="6" type="stmt"/>
-        <line num="26" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="45" count="6" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="23" count="6" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="46" count="6" type="stmt"/>
       </file>
     </package>
     <package name="mock_api">
@@ -79,7 +79,7 @@
       </file>
     </package>
     <package name="subcomponents.overview">
-      <metrics statements="267" coveredstatements="177" conditionals="86" coveredconditionals="32" methods="78" coveredmethods="45"/>
+      <metrics statements="273" coveredstatements="183" conditionals="90" coveredconditionals="35" methods="79" coveredmethods="46"/>
       <file name="AddToCart.jsx" path="/Users/nathanlucy/Desktop/Hack Reactor/Course/FEC/fec_atelier/subcomponents/overview/AddToCart.jsx">
         <metrics statements="40" coveredstatements="40" conditionals="6" coveredconditionals="4" methods="11" coveredmethods="8"/>
         <line num="8" count="1" type="stmt"/>
@@ -300,6 +300,11 @@
         <line num="6" count="0" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
       </file>
+      <file name="ProductDescription.jsx" path="/Users/nathanlucy/Desktop/Hack Reactor/Course/FEC/fec_atelier/subcomponents/overview/ProductDescription.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
       <file name="ProductInfo.jsx" path="/Users/nathanlucy/Desktop/Hack Reactor/Course/FEC/fec_atelier/subcomponents/overview/ProductInfo.jsx">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="4" count="1" type="stmt"/>
@@ -310,31 +315,35 @@
         <line num="11" count="1" type="stmt"/>
       </file>
       <file name="Quantity.jsx" path="/Users/nathanlucy/Desktop/Hack Reactor/Course/FEC/fec_atelier/subcomponents/overview/Quantity.jsx">
-        <metrics statements="13" coveredstatements="12" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <metrics statements="15" coveredstatements="14" conditionals="6" coveredconditionals="4" methods="3" coveredmethods="3"/>
         <line num="3" count="1" type="stmt"/>
         <line num="6" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="7" count="1" type="stmt"/>
         <line num="12" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="17" count="8" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="28" count="2" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
-        <line num="31" count="8" type="stmt"/>
-        <line num="34" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
+        <line num="14" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="21" count="10" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="38" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
       </file>
       <file name="Size.jsx" path="/Users/nathanlucy/Desktop/Hack Reactor/Course/FEC/fec_atelier/subcomponents/overview/Size.jsx">
-        <metrics statements="8" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="2"/>
+        <metrics statements="10" coveredstatements="8" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="2"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="19" count="6" type="stmt"/>
+        <line num="11" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
       </file>
       <file name="Stars.jsx" path="/Users/nathanlucy/Desktop/Hack Reactor/Course/FEC/fec_atelier/subcomponents/overview/Stars.jsx">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -351,9 +360,9 @@
         <line num="14" count="2" type="stmt"/>
         <line num="17" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="18" count="1" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
       </file>
       <file name="StyleSelector.jsx" path="/Users/nathanlucy/Desktop/Hack Reactor/Course/FEC/fec_atelier/subcomponents/overview/StyleSelector.jsx">
         <metrics statements="22" coveredstatements="20" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="6"/>
@@ -378,7 +387,7 @@
         <line num="61" count="1" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
         <line num="79" count="0" type="stmt"/>
-        <line num="86" count="2" type="stmt"/>
+        <line num="89" count="2" type="stmt"/>
       </file>
     </package>
   </project>
