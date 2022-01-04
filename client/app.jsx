@@ -122,7 +122,7 @@ class App extends React.Component {
           ...self.state,
           averageRating: parseAverageRating(this.state.ratings)
         }, () => {
-          console.log('average rating ', this.state.averageRating)
+          // console.log('average rating ', this.state.averageRating)
         })
       })
     })

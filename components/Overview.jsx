@@ -20,7 +20,7 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    console.log('component did mount');
+    //console.log('component did mount');
   }
 
   componentDidUpdate() {
