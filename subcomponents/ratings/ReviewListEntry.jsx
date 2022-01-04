@@ -2,7 +2,8 @@ import React form 'react';
 
 var ReviewListEntry = (props) => {
   return (
-    <div></div>
+    <div>
+    </div>
     // <star rating/>
     // <date of review/>
     // <review summary/>

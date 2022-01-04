@@ -40,8 +40,10 @@ class NewReview extends React.Component {
             spellCheck="true" required="true"></textarea>
           </div>
 
-          <div className="uploadPhotos">Upload Photos
-
+          <div className="uploadPhotos">
+            <label for="photos">Upload Photos</label>
+            <input type="file" name="photos" multiple></input>
+            <div className="photoThumbnails"></div>
           </div>
 
           <div className="nickname">Nickname*
@@ -51,7 +53,9 @@ class NewReview extends React.Component {
           </div>
 
           <div className="email">Email*
-
+          <input type="text" name="email" placeholder="Example: jackson11@email.com"
+          maxlength="60" required="true"></input>
+          <div>For authentication reasons, you will not be emailed</div>
           </div>
 
           <button type="submit">Submit</button>
