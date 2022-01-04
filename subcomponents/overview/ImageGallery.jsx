@@ -144,7 +144,7 @@ class ImageGallery extends React.Component {
     var i = this.state.featureImage;
     var scrollBox = $('.thumbnailScroll');
     scrollBox.children().css('border', '1px solid rgba(0, 0, 0, .3)');
-    scrollBox.children().eq(i).css('border', '1px solid black');
+    scrollBox.children().eq(i).css('border', '2px solid black');
 
   }
 
@@ -183,6 +183,7 @@ class ImageGallery extends React.Component {
         featureImage: newIndex
       }, () => {
         this.updateArrows();
+        this.syncThumbnail();
       })
     }
 
