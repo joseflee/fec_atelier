@@ -7,7 +7,7 @@ class AddToCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inventoryBySKU: null,
+      SKUbySize: null,
       inventoryBySize: null,
       quantitySelected: null,
       quantityAvailable: null,
@@ -40,7 +40,7 @@ class AddToCart extends React.Component {
     var styles = props.styles.results;
     var selectedStyle = styles[selectedIndex];
 
-    var inventoryBySKU = {};
+    var SKUbySize = {};
     var inventoryBySize = {};
     var availableSizes = [];
 
@@ -48,7 +48,8 @@ class AddToCart extends React.Component {
 
     // sort inventory by sku
     for (var key in selectedStyle.skus) {
-      inventoryBySKU[key] = [selectedStyle.skus[key]['quantity'], selectedStyle.skus[key]['size']]
+      var size = selectedStyle.skus[key].size;
+      SKUbySize[size] = key;
     }
 
     // sort inventory by size / quantity
@@ -63,6 +64,7 @@ class AddToCart extends React.Component {
     }
 
     var selectedSize = availableSizes[0];
+    var quantityAvailable = inventoryBySize[selectedSize];
 
     // check if incoming props contain new style
 
@@ -70,10 +72,11 @@ class AddToCart extends React.Component {
       this.setState({
         ...this.state,
         selectedIndex: selectedIndex,
-        inventoryBySKU: inventoryBySKU,
+        SKUbySize: SKUbySize,
         inventoryBySize: inventoryBySize,
         availableSizes: availableSizes,
-        sizeSelected: selectedSize
+        sizeSelected: selectedSize,
+        quantityAvailable: quantityAvailable
       }, () => {
         this.updateQuantity();
       })
@@ -82,14 +85,19 @@ class AddToCart extends React.Component {
   }
 
   // checks size selected and updates quantity available
-  updateQuantity() {
+  updateQuantity(size) {
 
     var sizeSelected = this.state.sizeSelected;
-    var quantityAvailable = this.state.quantityAvailable;
-    var inventory = this.state.inventoryBySize;
-    var available = this.state.inventoryBySize[sizeSelected];
 
-    if (inventory[sizeSelected] !== quantityAvailable) {
+    if (this.state.sizeSelected !== size) {
+      sizeSelected = size;
+    }
+
+    var currentQuantityAvailable = this.state.quantityAvailable;
+    var inventory = this.state.inventoryBySize;
+    var available = inventory[sizeSelected];
+
+    if (available !== currentQuantityAvailable) {
       this.setState({
         ...this.state,
         quantityAvailable: available
@@ -118,15 +126,19 @@ class AddToCart extends React.Component {
 
   render() {
 
+    var star = '&#9733';
+
     return (
 
       <div className={'addToCart'}>
-
-        <Size availableSizes={this.state.availableSizes} cb={this.validateForm}/>
-        <Quantity quantity={this.state.quantityAvailable} cb={this.validateForm}/>
-        <button onClick={this.submitForm}>Add to Cart</button>
-        <button onClick={this.starItem}>star item</button>
-
+        <div className={'addToCartRow1'}>
+          <Size availableSizes={this.state.availableSizes} updateQuantity={this.updateQuantity} />
+          <Quantity quantity={this.state.quantityAvailable} cb={this.validateForm} />
+        </div>
+        <div className={'addToCartRow2'}>
+          <button onClick={this.submitForm} className={'addToCartButton'}>ADD TO BAG</button>
+          <button onClick={this.starItem} className={'starButton'}>★</button>
+        </div>
       </div>
 
     )
