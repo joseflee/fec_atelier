@@ -16,7 +16,7 @@ var Stars = (props) => {
         <div className={'stars-inner'} style={{ width: rating }}></div>
         </div>
       </a>
-      <a href={'#ratingsAndReviewsSectionIdHere'}>read all reviews</a>
+      <a href={'#ratingsAndReviewsSectionIdHere'} className={'readAllReviews'}>read all reviews</a>
     </div>
 
   )
