@@ -230,14 +230,11 @@ class App extends React.Component {
         {this.renderRelatedItems()}
         <QuestionsAndAnswers />
         <div className="ratingsAndReviews">
-        {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings}/> : null }
+        {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings} averageRating={this.state.averageRating}/> : null }
         </div>
       </div>
     )
-
   }
-
-
 }
 
 export default App;

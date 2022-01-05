@@ -728,3 +728,29 @@ Review List
   position: relative;
   left: 5px;
 }
+
+/*
+/////////////////////
+New Review
+/////////////////////
+*/
+
+#reviewModal {
+  background-color: lightgray;
+  border: 1px solid black;
+  display: none;
+  height: 80%;
+  width: 80%;
+  overflow: auto;
+}
+
+#reviewForm {
+  display: none;
+  margin: 15% auto;
+  padding: 20px;
+  width: 80%;
+}
+
+#reviewSummaryText {
+  color: black;
+}
