@@ -112,32 +112,22 @@ class ImageZoom extends React.Component {
 
     if (this.state.zoom === true) {
 
-      // var zoomed = $('#zoomFrame');
+      var zoomed = $('#zoomFrame');
       var zoomedImage = $('#zoomedImage');
-      // var featureImage = this.state.newGallery[this.state.currentImageIndex];
+      var featureImage = this.state.newGallery[this.state.featureImage];
 
-      // existingImage.css('visibility', 'hidden');
-      // zoomed.css('background-image', `url(${featureImage})`);
-      // zoomed.css('background-repeat', 'no-repeat');
-      // zoomed.css('background-size', '900px');
-
-      //zoomedImage
-
-
+      zoomedImage.css('visibility', 'hidden');
+      zoomed.css('background-image', `url(${featureImage})`);
+      zoomed.css('background-repeat', 'no-repeat');
+      zoomed.css('background-size', '900px');
 
       var posX = e.nativeEvent.offsetX;
       var posY = e.nativeEvent.offsetY;
 
-      console.log('x -> ', posX)
-      console.log('y -> ', posY)
+      // console.log('x -> ', posX)
+      // console.log('y -> ', posY)
 
-      // when x is decreasing and y is increasing - this is correct
-      // also, when x is increasing and y is decreasing - correct
-      // but when both x and y decrease or increase together, tracking
-      // is incorrect
-
-      zoomedImage.css('top', `${posX + 2.5 - 250}px`);
-      zoomedImage.css('left', `${posY - 5.5 - 250}px`);
+      zoomed.css('background-position', `${-posX * 1.04}px ${-posY * 1.8}px`);
 
     }
   }
@@ -150,7 +140,7 @@ class ImageZoom extends React.Component {
 
       <div id={'zoomView'}>
         <div id={'xOutZoom'} onClick={this.closeZoom}>x</div>
-        <div id={'zoomFrame'}>
+        <div id={'zoomFrame'} onMouseMove={this.trackZoom}>
         <img id={'zoomedImage'} onMouseMove={this.trackZoom} onClick={this.zoomClick} src={this.state.newGallery[this.state.featureImage]}/>
         </div>
         <div id={'dotBar'}>{this.state.newGallery.map((item, i) => (
