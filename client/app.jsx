@@ -101,9 +101,6 @@ class App extends React.Component {
     })
 
   }
-  retrieveReviews() {
-
-  }
 
   retrieveRatings() {
 
@@ -129,7 +126,6 @@ class App extends React.Component {
         })
       })
     })
-
 
   }
 
