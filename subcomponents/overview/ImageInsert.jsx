@@ -63,7 +63,7 @@ class ImageInsert extends React.Component {
       }, () => {
         var i = this.state.featureImage;
         var scrollBox = $('.thumbnailScroll');
-        scrollBox.children('div').eq(i).css('border', '1px solid black');
+        scrollBox.children('img').eq(i).css('border', '2px solid black');
       })
     }
 
@@ -84,12 +84,12 @@ class ImageInsert extends React.Component {
     var upAngle = $('.up_angle');
     var downAngle = $('.down_angle');
 
-    //console.log('offset top => ', offset.top)
+    console.log('offset top => ', offset.top)
 
-    if (Math.floor(offset.top) >= 266) {
+    if (Math.floor(offset.top) >= 180) {
       upAngle.css('visibility', 'hidden');
       downAngle.css('visibility', 'visible');
-    } else if (Math.floor(offset.top) <= 166) {
+    } else if (Math.floor(offset.top) <= 120) {
       upAngle.css('visibility', 'visible');
       downAngle.css('visibility', 'hidden');
     } else {
@@ -105,12 +105,12 @@ class ImageInsert extends React.Component {
     var offset = gallery.offset();
     var shift;
 
-    if (direction === 'down' && Math.floor(offset.top) > 166) {
+    if (direction === 'down' && Math.floor(offset.top) > 120) {
       shift = offset.top - 20;
-      gallery.offset({ top: shift, left: 138 });
+      gallery.offset({ top: shift, left: 40 });
     } else if (direction === 'up' && Math.floor(offset.top) < 266) {
       shift = offset.top + 20;
-      gallery.offset({ top: shift, left: 138 });
+      gallery.offset({ top: shift, left: 40 });
     }
 
 
@@ -125,7 +125,7 @@ class ImageInsert extends React.Component {
         newIndex = i;
       }
     }
-    this.props.cb(newIndex);
+    this.props.cb(newIndex)
   }
 
 

@@ -26,6 +26,7 @@ class ImageGallery extends React.Component {
     this.closeZoom = this.closeZoom.bind(this);
     this.unpackImages = this.unpackImages.bind(this);
     this.changeFeaturedImage = this.changeFeaturedImage.bind(this);
+    this.resetTracking = this.resetTracking.bind(this);
 
   }
 
@@ -144,7 +145,7 @@ class ImageGallery extends React.Component {
     var i = this.state.featureImage;
     var scrollBox = $('.thumbnailScroll');
     scrollBox.children().css('border', '1px solid rgba(0, 0, 0, .3)');
-    scrollBox.children().eq(i).css('border', '1px solid black');
+    scrollBox.children().eq(i).css('border', '2px solid black');
 
   }
 
@@ -172,6 +173,21 @@ class ImageGallery extends React.Component {
 
     var zoomView = $('#zoomView');
     zoomView.css('display', 'none');
+    this.resetTracking();
+
+  }
+
+  resetTracking() {
+
+    var zoomed = $('#zoomFrame');
+    var zoomedImage = $('#zoomedImage');
+    var featureImage = this.state.newGallery[this.state.featureImage];
+
+    zoomedImage.css('visibility', 'visible');
+
+    zoomed.css('background-image', `none`);
+    zoomed.css('background-repeat', 'no-repeat');
+    zoomed.css('background-size', '0px');
 
   }
 
@@ -183,6 +199,7 @@ class ImageGallery extends React.Component {
         featureImage: newIndex
       }, () => {
         this.updateArrows();
+        this.syncThumbnail();
       })
     }
 
@@ -195,8 +212,8 @@ class ImageGallery extends React.Component {
       <div className={'imageGallery'}>
         <img className={'left_angle'} src={'./assets/left_angle.png'} onClick={() => { this.handleScroll('left') }} />
         <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }} />
-        <ImageInsert featureImage={this.state.featureImage} selectedStyle={this.state.selectedStyle} cb={this.changeFeaturedImage} />
         <div className={'mainFrame'}>
+          <ImageInsert featureImage={this.state.featureImage} selectedStyle={this.state.selectedStyle} cb={this.changeFeaturedImage} />
           <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
         </div>
         <ImageZoom selectedStyle={this.state.selectedStyle} featureImage={this.state.featureImage} closeZoom={this.closeZoom} />
