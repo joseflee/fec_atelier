@@ -29,7 +29,7 @@ class ReviewListEntry extends React.Component {
             <Stars rating={this.props.review.rating} />
           </div>
           <div className="reviewerName">{this.props.review.reviewer_name}</div>
-          <div className="reviewDate">{moment(this.props.date).format('MMMM Do YYYY')}</div>
+          <div className="reviewDate">{moment(this.props.review.date).format('MMMM Do YYYY')}</div>
         </div>
 
         <div className="reviewSummary">{this.props.review.summary}</div>
