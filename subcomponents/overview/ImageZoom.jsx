@@ -17,6 +17,7 @@ class ImageZoom extends React.Component {
     this.zoomClick = this.zoomClick.bind(this);
     this.closeZoom = this.closeZoom.bind(this);
     this.unpackImages = this.unpackImages.bind(this);
+    this.trackZoom = this.trackZoom.bind(this);
 
   }
 
@@ -52,7 +53,7 @@ class ImageZoom extends React.Component {
       }
     }
 
-    if (galleryIsNew === true || this.state.newGallery.length === 0 ) {
+    if (galleryIsNew === true || this.state.newGallery.length === 0) {
 
       this.setState({
         ...this.state,
@@ -84,6 +85,7 @@ class ImageZoom extends React.Component {
   zoomClick() {
 
     var zoomedImg = $('#zoomedImage');
+    var zoomed = $('#zoomFrame');
 
     if (this.state.zoom === false) {
       zoomedImg.css('transform', 'scale(2.5)');
@@ -93,6 +95,8 @@ class ImageZoom extends React.Component {
         zoom: true
       })
     } else if (this.state.zoom === true) {
+      zoomed.css('background-image', 'none');
+      zoomedImg.css('visibility', 'visible');
       zoomedImg.css('transform', 'scale(1)');
       zoomedImg.css('cursor', 'zoom-in');
       this.setState({
@@ -107,6 +111,30 @@ class ImageZoom extends React.Component {
     this.props.closeZoom();
   }
 
+  trackZoom(e) {
+
+    if (this.state.zoom === true) {
+
+      var zoomed = $('#zoomFrame');
+      var zoomedImage = $('#zoomedImage');
+      var featureImage = this.state.newGallery[this.state.featureImage];
+
+      zoomedImage.css('visibility', 'hidden');
+      zoomed.css('background-image', `url(${featureImage})`);
+      zoomed.css('background-repeat', 'no-repeat');
+      zoomed.css('background-size', '900px');
+
+      var posX = e.nativeEvent.offsetX;
+      var posY = e.nativeEvent.offsetY;
+
+      // console.log('x -> ', posX)
+      // console.log('y -> ', posY)
+
+      zoomed.css('background-position', `${-posX * 1.04}px ${-posY * 1.8}px`);
+
+    }
+  }
+
   // map-render index dots w/click handlers
 
   render() {
@@ -115,8 +143,10 @@ class ImageZoom extends React.Component {
 
       <div id={'zoomView'}>
         <div id={'xOutZoom'} onClick={this.closeZoom}>x</div>
-        <img id={'zoomedImage'} onClick={this.zoomClick} src={this.state.newGallery[this.state.featureImage]}/>
-        <div>{this.state.newGallery.map((item, i) => (
+        <div id={'zoomFrame'} onMouseMove={this.trackZoom} onClick={this.zoomClick}>
+          <img id={'zoomedImage'} onClick={this.zoomClick} src={this.state.newGallery[this.state.featureImage]} />
+        </div>
+        <div id={'dotBar'}>{this.state.newGallery.map((item, i) => (
           <div key={i} className={'scrollDot'} onClick={this.handleImageChange}>.<span className={'invisibleIndex'}>{i}</span></div>
         ))
         }</div>

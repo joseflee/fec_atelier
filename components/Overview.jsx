@@ -20,7 +20,7 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    console.log('component did mount');
+    //console.log('component did mount');
   }
 
   componentDidUpdate() {
@@ -50,7 +50,7 @@ class Overview extends React.Component {
           <ProductDescription description={this.state.product.description}/>
         </div>
         <div className={'rightPanel'}>
-          <ProductInfo product={this.state.product} />
+          <ProductInfo product={this.state.product} rating={this.props.rating} />
           <StyleSelector styles={this.state.styles} changeStyle={this.changeStyle} />
           <AddToCart state={this.state} />
         </div>
