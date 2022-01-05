@@ -11,11 +11,9 @@ class ReviewsList extends React.Component {
 
   render() {
     return (
-      <div>Reviews
-        <div>
+        <div id="reviewList">
           {this.props.reviews.results.map(review => <ReviewListEntry review={review}/>)}
-          </div>
-      </div>
+        </div>
       // list should map ReviewListEntries two entries at a time
       // <more reviews/> button should load two more entries
     )

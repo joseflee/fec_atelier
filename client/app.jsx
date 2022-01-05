@@ -22,7 +22,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 59553,
+      productId: 59554,
       product: null,
       styles: null,
       ratings: null,
@@ -229,7 +229,7 @@ class App extends React.Component {
         <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating}/> : null }</div>
         {this.renderRelatedItems()}
         <QuestionsAndAnswers />
-        <div>
+        <div className="ratingsAndReviews">
         {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings}/> : null }
         </div>
       </div>

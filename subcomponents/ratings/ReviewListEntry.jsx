@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import Stars from './Stars.jsx';
 
 class ReviewListEntry extends React.Component {
   constructor(props) {
@@ -8,8 +9,6 @@ class ReviewListEntry extends React.Component {
       helpfulness: props.review.helpfulness
     }
     this.handleHelpful = this.handleHelpful.bind(this);
-    // var review = props.review;
-    // var date = moment(review.date).format('MMMM Do YYYY');
   }
 
   handleHelpful() {
@@ -25,15 +24,27 @@ class ReviewListEntry extends React.Component {
   render() {
     return (
       <div className="reviewListEntry">
-        <div className="reviewRating">{this.props.rating}</div>
-        <div className="reviewerName">{this.props.reviewer_name}</div>
-        <div className="reviewDate">{moment(this.props.date).format('MMMM Do YYYY')}</div>
-        <div className="reviewSummary">{this.props.summary}</div>
-        {this.props.recommend ? <div className="recommendedCheck">I recommend this product</div> : null}
-        {this.props.response ? <div className="sellerResponse">Response: {this.props.response}</div> : null}
-        <div className="reviewHelpfulness">Helpful?
-          <div id="helpfulYes" onClick={this.handleHelpful}>Yes</div>
-          ({this.state.helpfulness})
+        <div className="reviewEntryTop">
+          <div className="reviewRating">
+            <Stars rating={this.props.review.rating} />
+          </div>
+          <div className="reviewerName">{this.props.review.reviewer_name}</div>
+          <div className="reviewDate">{moment(this.props.date).format('MMMM Do YYYY')}</div>
+        </div>
+
+        <div className="reviewSummary">{this.props.review.summary}</div>
+        <div className="reviewBody">{this.props.review.body}</div>
+        {this.props.review.recommend ? <div className="recommendedCheck">I recommend this product</div> : null}
+        <div className="sellerResponse">
+          {this.props.review.response ? <div className="responseHeader">Response:</div> : null}
+          {this.props.review.response ? <div className="responseText">{this.props.review.response}</div> : null}
+        </div>
+        <div className="reviewEntryBottom">
+          <div className="reviewHelpfulness">
+            <div className="helpfulText">Helpful?</div>
+            <div className="helpfulYes" onClick={this.handleHelpful}>Yes</div>
+            <div className="helpfulCount">({this.state.helpfulness})</div>
+          </div>
         </div>
       </div>
     )

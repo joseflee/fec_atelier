@@ -12,7 +12,7 @@ class RatingsAndReviews extends React.Component {
 
   render() {
     return (
-      <div>Ratings And Reviews
+      <div id="reviewsSection">Ratings & Reviews
         <ReviewsList reviews={this.state.reviews}/>
         <NewReview />
       </div>
