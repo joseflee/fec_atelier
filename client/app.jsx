@@ -46,11 +46,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // invoke retrieveProduct
+
     this.retrieveProduct();
     this.retrieveStyles(this.state.productId);
     this.retrieveRelatedProducts(this.state.productId);
     this.retrieveRatings();
+
   }
 
   componentDidUpdate() {
@@ -127,15 +128,18 @@ class App extends React.Component {
       })
     })
 
-
   }
 
+  // now available for use - must use string parameter with product name
+  // not case sensitive but spelling must be correct
   handleSearch(searchTerm) {
 
-    // this method will retrieve search term from topbar on page and use a
-    // server route + modularized helpers to construct search query and perform
-    // API pull.
-    // Then state will be updated with new product / styles
+    $.ajax({
+      method: 'GET',
+      url: `search/${searchTerm}`,
+    }).done((res) => {
+      console.log(res);
+    })
 
   }
 
@@ -160,8 +164,6 @@ class App extends React.Component {
       }
     })
   }
-
-
 
 
   retrieveProductForRelated(productId) {
