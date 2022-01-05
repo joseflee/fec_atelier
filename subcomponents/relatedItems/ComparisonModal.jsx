@@ -65,9 +65,9 @@ export class ComparisonModal extends React.Component {
         this.state.combinedFeatures.map((feature, index) => {
           return(
             <tr key={index}>
-              <th>{feature.left ? feature.left : null}</th>
-              <th>{feature.feature}</th>
-              <th>{feature.right ? feature.right : null}</th>
+              <th className="comparisonRow">{feature.left ? feature.left : null}</th>
+              <th className="comparisonRow">{feature.feature}</th>
+              <th className="comparisonRow">{feature.right ? feature.right : null}</th>
             </tr>
           )
         })
@@ -82,9 +82,9 @@ export class ComparisonModal extends React.Component {
         <table>
           <thead>
             <tr>
-              <th>{this.props.self.name}</th>
-              <th>characteristic</th>
-              <th>{this.props.relatedFeatures.name}</th>
+              <th className="comparisonTopRow">{this.props.self.name}</th>
+              <th className="comparisonTopRow"></th>
+              <th className="comparisonTopRow">{this.props.relatedFeatures.name}</th>
             </tr>
           </thead>
           <tbody>
