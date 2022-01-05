@@ -51,6 +51,7 @@ class App extends React.Component {
     this.retrieveStyles(this.state.productId);
     this.retrieveRelatedProducts(this.state.productId);
     this.retrieveRatings();
+    console.log(this.state.ratings);
   }
 
   componentDidUpdate() {
@@ -101,9 +102,6 @@ class App extends React.Component {
     })
 
   }
-  retrieveReviews() {
-
-  }
 
   retrieveRatings() {
 
@@ -120,7 +118,8 @@ class App extends React.Component {
         ...self.state,
         ratings: res,
       }, () => {
-        //console.log('state styles => ', self.state.styles);
+        // console.log('state styles => ', self.state.styles);
+        // console.log('state ratings: ', self.state.ratings);
         self.setState({
           ...self.state,
           averageRating: parseAverageRating(this.state.ratings)
@@ -230,7 +229,9 @@ class App extends React.Component {
         <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating}/> : null }</div>
         {this.renderRelatedItems()}
         <QuestionsAndAnswers />
-        <RatingsAndReviews />
+        <div>
+        {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings}/> : null }
+        </div>
       </div>
     )
 

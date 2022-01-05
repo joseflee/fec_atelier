@@ -5,17 +5,15 @@ import ReviewsList from '../subcomponents/ratings/ReviewsList.jsx';
 class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
-  }
-
-  componentDidMount() {
-    console.log('component did mount');
+    this.state = {
+      reviews: props.reviews
+    }
   }
 
   render() {
     return (
       <div>Ratings And Reviews
-        <ReviewsList />
+        <ReviewsList reviews={this.state.reviews}/>
         <NewReview />
       </div>
 
