@@ -96,6 +96,9 @@ class App extends React.Component {
     })
 
   }
+  retrieveReviews() {
+
+  }
 
   handleSearch(searchTerm) {
 
