@@ -7,8 +7,9 @@ class StyleSelector extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      styles: ['', '', '', '', '', '', '', '', ''],
-      styleNames: ['name 1', 'name 2', 'name 3', 'name 4', 'name 5', 'name 6', 'name 7', 'name 8', 'name 9'],
+      styleObj: props.styles,
+      styles: [],
+      styleNames: [],
       featuredIndex: 0
     }
 
@@ -23,43 +24,73 @@ class StyleSelector extends React.Component {
 
   }
 
+  componentDidUpdate() {
+    this.unpackStyles();
+  }
+
   unpackStyles() {
+
+    // console.log('styles prop received by style selector ', this.props.styles);
+    // console.log('current styles in state ', this.state.styles);
+
 
     // converts style objects into arrays formatted for rendering each style component
     var styles = this.props.styles.results;
     var imageUrls = [];
     var styleNames = [];
+    var isNewGallery = false;
+    var index = this.state.featuredIndex;
+
 
     for (var i = 0; i < styles.length; i++) {
       styleNames.push(styles[i].name);
       imageUrls.push(styles[i].photos[0].url);
     }
 
-    this.setState({
+    //console.log('styles props', this.props.styles.results)
 
-      ...this.state,
-      styles: imageUrls,
-      styleNames: styleNames
+    for (var i = 0; i < styles.length; i++) {
+      if (styles[i].photos[0].url !== this.state.styles[i]) {
+        isNewGallery = true;
+      }
+    }
 
-    })
+
+    if (isNewGallery === true || this.state.styles.length === 0) {
+
+      this.setState({
+        ...this.state,
+        stylesObj: this.props.styles,
+        styles: imageUrls,
+        styleNames: styleNames
+      }, () => {
+        //console.log('set state ran... this is now styles in state -> ', this.state.styles)
+      })
+    }
+
 
   }
 
   changeStyle(index) {
-    this.props.changeStyle(this.state.styles[index]);
     this.setState({
       ...this.state,
       featuredIndex: index
+    }, () => {
+      this.props.changeStyle(this.state.featuredIndex);
     })
   }
 
   // selected style must render first ***
 
   render() {
+
+
+
     return (
-
-      <Style styles={this.state.styles} styleNames={this.state.styleNames} featuredIndex={this.state.featuredIndex} changeStyle={this.changeStyle}/>
-
+      <div>
+        <div className={'styleIndicator'}><b>STYLE > </b>{this.state.styleNames[this.state.featuredIndex]}</div>
+        <Style styles={this.state.styles} styleNames={this.state.styleNames} featuredIndex={this.state.featuredIndex} changeStyle={this.changeStyle}/>
+      </div>
     )
   }
 

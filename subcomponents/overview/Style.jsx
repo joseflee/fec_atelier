@@ -3,8 +3,6 @@ import $ from 'jquery';
 
 var Style = (props) => {
 
-  //props (single style name, img and checkmark / selected data are received and style circle is rendered )
-
   var index = props.featuredIndex;
 
   var handleClick = (i) => {
@@ -19,8 +17,9 @@ var Style = (props) => {
         if (index === i) {
           return (
             <div key={i} className={'styleContainer'}>
-            <div className={'title'}>{props.styleNames[i]}</div>
+            <div className={'checkBox'}>
             <div className={'checkmark'}><span>&#10003;</span></div>
+            </div>
             <img className={`selectedStyle`} onClick={() => {handleClick(i)}} src={item}/>
             </div>
           )

@@ -3,6 +3,7 @@ import AddToCart from '../subcomponents/overview/AddToCart.jsx';
 import ImageGallery from '../subcomponents/overview/ImageGallery.jsx';
 import ProductInfo from '../subcomponents/overview/ProductInfo.jsx';
 import StyleSelector from '../subcomponents/overview/StyleSelector.jsx';
+import ProductDescription from '../subcomponents/overview/ProductDescription.jsx';
 
 class Overview extends React.Component {
 
@@ -11,7 +12,7 @@ class Overview extends React.Component {
     this.state = {
       product: props.product,
       styles: props.styles,
-      selectedStyle: 0,
+      selectedStyle: 0
     }
 
     this.changeStyle = this.changeStyle.bind(this);
@@ -20,29 +21,39 @@ class Overview extends React.Component {
 
   componentDidMount() {
     console.log('component did mount');
-    //console.log('styles =', this.state.styles)
   }
 
-  handleChange() {
-
-    // passes state changes (featured item) up to central App state for coordination
-    // with other widgets when needed
-
+  componentDidUpdate() {
+    if (this.props.product !== this.state.product) {
+      this.setState({
+        ...this.state,
+        product: this.props.product,
+        styles: this.props.styles
+      })
+    }
   }
 
-  changeStyle(name) {
-    // updates state - selected style images for dist to image gallery
 
+  changeStyle(newIndex) {
+    this.setState({
+      ...this.state,
+      selectedStyle: newIndex
+    })
   }
 
   render() {
 
     return (
       <div id={'overview'}>
-        <ProductInfo product={this.state.product}/>
-        <ImageGallery selectedStyle={this.state.styles.results[this.state.selectedStyle]}/>
-        <StyleSelector styles={this.state.styles} changeStyle={this.changeStyle}/>
-        <AddToCart props={this.state}/>
+        <div className={'leftPanel'}>
+          <ImageGallery styleIndex={this.state.styles.results[this.state.selectedStyle]} styles={this.state.styles} index={this.state.selectedStyle} />
+          <ProductDescription description={this.state.product.description}/>
+        </div>
+        <div className={'rightPanel'}>
+          <ProductInfo product={this.state.product} />
+          <StyleSelector styles={this.state.styles} changeStyle={this.changeStyle} />
+          <AddToCart state={this.state} />
+        </div>
       </div>
     )
 

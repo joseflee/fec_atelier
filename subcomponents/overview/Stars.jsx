@@ -6,7 +6,7 @@ var Stars = (props) => {
   // Uncomment when receiving rating props
   //var rating = ratingToStar(props.rating);
 
-  var rating = ratingToStar(2);
+  var rating = ratingToStar(4);
 
   return (
 
@@ -16,7 +16,7 @@ var Stars = (props) => {
         <div className={'stars-inner'} style={{ width: rating }}></div>
         </div>
       </a>
-      <a href={'#ratingsAndReviewsSectionIdHere'}>read all reviews</a>
+      <a href={'#ratingsAndReviewsSectionIdHere'} className={'readAllReviews'}>read all reviews</a>
     </div>
 
   )
