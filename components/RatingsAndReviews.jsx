@@ -12,9 +12,9 @@ class RatingsAndReviews extends React.Component {
 
   render() {
     return (
-      <div id="reviewsSection">Ratings & Reviews
+      <div id="reviewsSection">
+        <h3>Ratings & Reviews</h3>
         <ReviewsList reviews={this.state.reviews}/>
-        <NewReview />
       </div>
 
     )

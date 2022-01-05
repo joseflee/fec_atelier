@@ -30,12 +30,12 @@ class NewReview extends React.Component {
 
           </div>
 
-          <div className="reviewSummary">Review Summary
+          <div className="newReviewSummary">Review Summary
             <textarea name="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!"
             spellCheck="true"></textarea>
           </div>
 
-          <div className="reviewBody">Review Body*
+          <div className="newReviewBody">Review Body*
             <textarea name="reviewBody" maxLength="1000" placeholder="Why did you like the product or not?"
             spellCheck="true" required={true}></textarea>
           </div>

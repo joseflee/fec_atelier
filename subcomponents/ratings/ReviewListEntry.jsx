@@ -35,10 +35,10 @@ class ReviewListEntry extends React.Component {
         <div className="reviewSummary">{this.props.review.summary}</div>
         <div className="reviewBody">{this.props.review.body}</div>
         {this.props.review.recommend ? <div className="recommendedCheck">I recommend this product</div> : null}
-        <div className="sellerResponse">
-          {this.props.review.response ? <div className="responseHeader">Response:</div> : null}
-          {this.props.review.response ? <div className="responseText">{this.props.review.response}</div> : null}
-        </div>
+        {this.props.review.response ? <div className="sellerResponse">
+          <div className="responseHeader">Response:</div>
+          <div className="responseText">{this.props.review.response}</div>
+        </div> : null}
         <div className="reviewEntryBottom">
           <div className="reviewHelpfulness">
             <div className="helpfulText">Helpful?</div>
