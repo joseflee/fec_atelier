@@ -15,7 +15,7 @@ class NewReview extends React.Component {
         <button>Add A Review +</button>
         <form className="reviewForm">
           <label>Overall Rating*
-            {/* <ratingToStar /> */}
+
           </label>
 
           <div className="recommend">Do you recommend this product?*

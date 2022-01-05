@@ -48,6 +48,9 @@ class App extends React.Component {
     })
 
   }
+  retrieveReviews() {
+
+  }
 
   render() {
 
