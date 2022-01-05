@@ -53,7 +53,7 @@ class ImageZoom extends React.Component {
       }
     }
 
-    if (galleryIsNew === true || this.state.newGallery.length === 0 ) {
+    if (galleryIsNew === true || this.state.newGallery.length === 0) {
 
       this.setState({
         ...this.state,
@@ -85,6 +85,7 @@ class ImageZoom extends React.Component {
   zoomClick() {
 
     var zoomedImg = $('#zoomedImage');
+    var zoomed = $('#zoomFrame');
 
     if (this.state.zoom === false) {
       zoomedImg.css('transform', 'scale(2.5)');
@@ -94,6 +95,8 @@ class ImageZoom extends React.Component {
         zoom: true
       })
     } else if (this.state.zoom === true) {
+      zoomed.css('background-image', 'none');
+      zoomedImg.css('visibility', 'visible');
       zoomedImg.css('transform', 'scale(1)');
       zoomedImg.css('cursor', 'zoom-in');
       this.setState({
@@ -140,8 +143,8 @@ class ImageZoom extends React.Component {
 
       <div id={'zoomView'}>
         <div id={'xOutZoom'} onClick={this.closeZoom}>x</div>
-        <div id={'zoomFrame'} onMouseMove={this.trackZoom}>
-        <img id={'zoomedImage'} onMouseMove={this.trackZoom} onClick={this.zoomClick} src={this.state.newGallery[this.state.featureImage]}/>
+        <div id={'zoomFrame'} onMouseMove={this.trackZoom} onClick={this.zoomClick}>
+          <img id={'zoomedImage'} onClick={this.zoomClick} src={this.state.newGallery[this.state.featureImage]} />
         </div>
         <div id={'dotBar'}>{this.state.newGallery.map((item, i) => (
           <div key={i} className={'scrollDot'} onClick={this.handleImageChange}>.<span className={'invisibleIndex'}>{i}</span></div>

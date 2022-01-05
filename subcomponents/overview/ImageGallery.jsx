@@ -26,6 +26,7 @@ class ImageGallery extends React.Component {
     this.closeZoom = this.closeZoom.bind(this);
     this.unpackImages = this.unpackImages.bind(this);
     this.changeFeaturedImage = this.changeFeaturedImage.bind(this);
+    this.resetTracking = this.resetTracking.bind(this);
 
   }
 
@@ -172,6 +173,21 @@ class ImageGallery extends React.Component {
 
     var zoomView = $('#zoomView');
     zoomView.css('display', 'none');
+    this.resetTracking();
+
+  }
+
+  resetTracking() {
+
+    var zoomed = $('#zoomFrame');
+    var zoomedImage = $('#zoomedImage');
+    var featureImage = this.state.newGallery[this.state.featureImage];
+
+    zoomedImage.css('visibility', 'visible');
+
+    zoomed.css('background-image', `none`);
+    zoomed.css('background-repeat', 'no-repeat');
+    zoomed.css('background-size', '0px');
 
   }
 

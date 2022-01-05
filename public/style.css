@@ -431,8 +431,13 @@ Expanded View, Image Gallery - Overview
   overflow: hidden;
 }
 
+#zoomFrame:hover {
+  cursor: zoom-out;
+}
+
 #zoomedImage {
   position: relative;
+  visibility: visible;
   top: 0;
   left: 0;
   margin: auto auto;
