@@ -7,9 +7,9 @@ var MainImage = (props) => {
   }
 
   return (
-
-    <img className={'mainImage'} onClick={clickHandler} src={props.image}></img>
-
+    <div className={'mainImageFrame'}>
+      <img className={'mainImage'} onClick={clickHandler} src={props.image}></img>
+    </div>
   )
 
 }

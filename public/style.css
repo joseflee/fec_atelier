@@ -155,7 +155,7 @@ PRODUCT INFO
 }
 
 .descriptionBox {
-  margin-top: 80px;
+  margin-top: 20px;
 }
 
 .description {
@@ -275,19 +275,21 @@ Image Gallery - Overview
 
 .imageGallery {
   text-align: center;
+  height: 100%;
 }
 
 
 .thumbnailGallery {
-  z-index: 2;
+
   position: relative;
-  top: 120px;
-  right: 200px;
-  width: 30px;
-  height: 80px;
+  top: -10px;
+  right: 260px;
+  width: 90px;
+  height: 380px;
   overflow: auto;
   margin-top: 0px;
-  margin-left: 10px;
+  margin-left: 0px;
+
 }
 
 .thumbnailGallery::-webkit-scrollbar {
@@ -295,9 +297,10 @@ Image Gallery - Overview
 }
 
 .thumbnailItem {
-  width: 25px;
-  height: 25px;
-  margin-top: 5px;
+
+  width: 60px;
+  height: 60px;
+  margin-top: 12px;
   border: 1px solid rgba(0, 0, 0, .3);
   font-size: 10px;
 }
@@ -307,15 +310,24 @@ Image Gallery - Overview
 }
 
 .thumbnailScroll {
+
   display: flex;
-  width: 31px;
+  width: 90px;
   flex-wrap: wrap;
 }
 
 .mainImage {
+  z-index: 0;
+  margin-left: 100px;
   display: inline-block;
   text-align: center;
-  height: 300px;
+  height: 100%;
+}
+
+.mainImageFrame {
+  z-index: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 .mainImage:hover {
@@ -332,16 +344,18 @@ Image Gallery - Overview
 }
 
 .imageInsert {
+
   display: inline-block;
-  position: relative;
+  position: absolute;
+  width: 90px;
 
 }
 
 .down_angle {
   z-index: 2;
   position: relative;
-  top: 125px;
-  right: 200px;
+  top: -10px;
+  right: 280px;
   width: 15px;
   height: auto;
   visibility: visible;
@@ -352,8 +366,8 @@ Image Gallery - Overview
 .up_angle {
   z-index: 3;
   position: relative;
-  top: 121px;
-  right: 200px;
+  top: -10px;
+  right: 280px;
   width: 15px;
   height: auto;
   visibility: hidden;
@@ -366,8 +380,8 @@ Image Gallery - Overview
   width: 15px;
   height: auto;
   position: relative;
-  right: 130px;
-  top: 170px;
+  right: 200px;
+  top: 305px;
   bottom: 90px;
   visibility: hidden;
 }
@@ -385,8 +399,8 @@ Image Gallery - Overview
   width: 15px;
   height: auto;
   position: relative;
-  left: 100px;
-  top: 170px;
+  left: 235px;
+  top: 305px;
   bottom: 90px;
   visibility: visible;
 }
@@ -400,21 +414,50 @@ Expanded View, Image Gallery - Overview
 }
 
 #zoomView {
+  background-color: rgba(250, 250, 250, .9);
   z-index: 2;
   display: none;
   position: relative;
-  left: 150px;
-  bottom: 75px;
+  height: 600px;
+  width: 800px;
+  left: 0px;
+  bottom: 675px;
+}
+
+#zoomFrame {
+  display: inline-block;
+  margin: 50px auto;
+  width: 55%;
+  overflow: hidden;
+}
+
+#zoomFrame:hover {
+  cursor: zoom-out;
 }
 
 #zoomedImage {
+  position: relative;
+  visibility: visible;
+  top: 0;
+  left: 0;
+  margin: auto auto;
+  height: 90%;
   transform: scale(1);
   cursor: zoom-in;
 }
 
 .scrollDot {
   display: inline-block;
-  margin-left: 10px;
+  margin-top: -15px;
+  margin-left: 15px;
+  font-size: 30px;
+}
+
+#dotBar {
+  position: absolute;
+  bottom: 25px;
+  left: 330px;
+
 }
 
 .scrollDot:hover {
@@ -422,13 +465,14 @@ Expanded View, Image Gallery - Overview
 }
 
 #xOutZoom {
-  z-index: 2;
+  z-index: 3;
   display: inline-block;
   position: relative;
-  left: 200px;
-  bottom: 300px;
+  left: 600px;
+  bottom: 480px;
   font-family: arial;
   color:rgba(0, 0, 0, .5);
+  font-size: 20px;
 }
 
 #xOutZoom:hover {

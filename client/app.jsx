@@ -6,12 +6,13 @@ import RatingsAndReviews from '../components/RatingsAndReviews.jsx';
 import RelatedItems from '../components/RelatedItems.jsx';
 import Search from '../components/Search.jsx';
 
+
 import $ from 'jquery';
 import { APIkey } from '../config.js';
 
 // importing search bar icon from react library
 import { FaSistrix } from 'react-icons/fa';
-
+import parseAverageRating from '../modules/parseRatings.js';
 import mockProduct from '../mock_api/mock_product.js';
 import mockStyles from '../mock_api/mock_styles.js';
 
@@ -24,6 +25,8 @@ class App extends React.Component {
       productId: 59553,
       product: null,
       styles: null,
+      ratings: null,
+      averageRating: null,
       products: null,
       currentItemFeatures: [],
       relatedItems: [],
@@ -39,6 +42,7 @@ class App extends React.Component {
     this.retrieveProductForRelated = this.retrieveProductForRelated.bind(this);
     this.retrieveStyleForRelated = this.retrieveStyleForRelated.bind(this);
     this.renderRelatedItems = this.renderRelatedItems.bind(this);
+    this.retrieveRatings = this.retrieveRatings.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +50,7 @@ class App extends React.Component {
     this.retrieveProduct();
     this.retrieveStyles(this.state.productId);
     this.retrieveRelatedProducts(this.state.productId);
+    this.retrieveRatings();
   }
 
   componentDidUpdate() {
@@ -97,6 +102,34 @@ class App extends React.Component {
 
   }
   retrieveReviews() {
+
+  }
+
+  retrieveRatings() {
+
+    var self = this;
+
+    $.ajax({
+      method: 'GET',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/?product_id=${this.state.productId}`,
+      headers: {
+        "Authorization": APIkey
+      }
+    }).done((res) => {
+      self.setState({
+        ...self.state,
+        ratings: res,
+      }, () => {
+        //console.log('state styles => ', self.state.styles);
+        self.setState({
+          ...self.state,
+          averageRating: parseAverageRating(this.state.ratings)
+        }, () => {
+          // console.log('average rating ', this.state.averageRating)
+        })
+      })
+    })
+
 
   }
 
@@ -194,7 +227,7 @@ class App extends React.Component {
         <div className={'siteAnnouncementBar'}>
           <div className={'announcement'}><i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - NEW PRODUCT HIGHLIGHT</div>
         </div>
-        <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} /> : null }</div>
+        <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating}/> : null }</div>
         {this.renderRelatedItems()}
         <QuestionsAndAnswers />
         <RatingsAndReviews />

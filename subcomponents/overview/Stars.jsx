@@ -4,9 +4,9 @@ import ratingToStar from '../../modules/stars.js';
 var Stars = (props) => {
 
   // Uncomment when receiving rating props
-  //var rating = ratingToStar(props.rating);
+  var rating = ratingToStar(props.rating);
 
-  var rating = ratingToStar(4);
+  //var rating = ratingToStar(4);
 
   return (
 
