@@ -37,24 +37,24 @@ class NewReview extends React.Component {
 
           <div className="reviewBody">Review Body*
             <textarea name="reviewBody" maxLength="1000" placeholder="Why did you like the product or not?"
-            spellCheck="true" required="true"></textarea>
+            spellCheck="true" required={true}></textarea>
           </div>
 
           <div className="uploadPhotos">
-            <label for="photos">Upload Photos</label>
+            <label htmlFor="photos">Upload Photos</label>
             <input type="file" name="photos" multiple></input>
             <div className="photoThumbnails"></div>
           </div>
 
           <div className="nickname">Nickname*
           <input type="text" name="nickname" placeholder="Example: jackson11!"
-          spellcheck="true" maxlength="60" required="true"></input>
+          spellCheck="true" maxLength="60" required={true}></input>
           <div>For privacy reasons, do not use your full name or email address</div>
           </div>
 
           <div className="email">Email*
           <input type="text" name="email" placeholder="Example: jackson11@email.com"
-          maxlength="60" required="true"></input>
+          maxLength="60" required={true}></input>
           <div>For authentication reasons, you will not be emailed</div>
           </div>
 
