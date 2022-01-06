@@ -14,6 +14,7 @@ class RatingBreakdown extends React.Component {
           <div id="ratingNumber">{this.props.averageRating}</div>
           <Stars rating={this.props.averageRating}/>
           <div id="percentRecommended">{this.props.percent}% of reviews recommend this product</div>
+          <div id="reviewCount">{this.props.reviewCount} reviews</div>
         </div>
       </div>
       // rating summary: average rating depicted by stars & number

@@ -7,7 +7,8 @@ class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: props.reviews
+      reviews: props.reviews,
+      reviewCount: props.reviews.results.length
     }
   }
 
@@ -15,7 +16,7 @@ class RatingsAndReviews extends React.Component {
     return (
       <div id="reviewsSection">
         <h3>Ratings & Reviews</h3>
-        <RatingBreakdown  averageRating={this.props.averageRating} percent={this.props.percent}/>
+        <RatingBreakdown  averageRating={this.props.averageRating} percent={this.props.percent} reviewCount={this.state.reviewCount}/>
         <ReviewsList reviews={this.state.reviews} />
       </div>
 
