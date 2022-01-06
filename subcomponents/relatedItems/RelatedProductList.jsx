@@ -70,7 +70,7 @@ export class RelatedProductList extends React.Component {
 
   componentDidMount() {
     var combined = this.combineProductData(this.props.related, this.props.styles);
-    console.log('did combine work?', combined);
+    // console.log('did combine work?', combined);
     var threeAtATime = combined.slice(0, 3);
     this.setState({
       currentView: threeAtATime,
