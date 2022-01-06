@@ -15,7 +15,7 @@ class RatingsAndReviews extends React.Component {
     return (
       <div id="reviewsSection">
         <h3>Ratings & Reviews</h3>
-        <RatingBreakdown  averageRating={this.props.averageRating} />
+        <RatingBreakdown  averageRating={this.props.averageRating} percent={this.props.percent}/>
         <ReviewsList reviews={this.state.reviews} />
       </div>
 

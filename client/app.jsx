@@ -15,6 +15,7 @@ import { FaSistrix } from 'react-icons/fa';
 import parseAverageRating from '../modules/parseRatings.js';
 import mockProduct from '../mock_api/mock_product.js';
 import mockStyles from '../mock_api/mock_styles.js';
+import getPercentRecommended from '../modules/percentRecommended.js';
 
 
 class App extends React.Component {
@@ -28,6 +29,7 @@ class App extends React.Component {
       ratings: null,
       averageRating: null,
       products: null,
+      percentRecommended: null,
       currentItemFeatures: [],
       relatedItems: [],
       relatedStyles: [],
@@ -125,6 +127,12 @@ class App extends React.Component {
           averageRating: parseAverageRating(this.state.ratings)
         }, () => {
           // console.log('average rating ', this.state.averageRating)
+          self.setState({
+            ...self.state,
+            percentRecommended: getPercentRecommended(this.state.ratings)
+          }, () => {
+            // console.log('percent recommended: ', this.state.percentRecommended);
+          })
         })
       })
     })
@@ -230,7 +238,7 @@ class App extends React.Component {
         {this.renderRelatedItems()}
         <QuestionsAndAnswers />
         <div className="ratingsAndReviews">
-        {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings} averageRating={this.state.averageRating}/> : null }
+        {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings} averageRating={this.state.averageRating} percent={this.state.percentRecommended}/> : null }
         </div>
       </div>
     )
