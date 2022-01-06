@@ -1,4 +1,5 @@
 const express = require('express');
+const expressStaticGzip = require('express-static-gzip')
 
 const app = express();
 const { retrieveProduct, conductSearch } = require('./apiMethods.js');
@@ -9,7 +10,10 @@ app.listen(port, () => {
   console.log('serving on 3000');
 })
 
-app.use(express.static('public'));
+//app.use(express.static('public'));
+
+// G-zipped static service
+app.use('/', expressStaticGzip('public'));
 
 
 
