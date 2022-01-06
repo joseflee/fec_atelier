@@ -1,7 +1,7 @@
 const express = require('express');
 
 const app = express();
-const { retrieveProducts, conductSearch } = require('./apiMethods.js');
+const { retrieveProduct, conductSearch } = require('./apiMethods.js');
 
 var port = 3000;
 
@@ -11,17 +11,26 @@ app.listen(port, () => {
 
 app.use(express.static('public'));
 
+
+
+// GET single product by ID
 app.get('/products/:id', (req, res) => {
+
+  console.log('server product pull initiated')
 
   var id = req.params.id;
 
   retrieveProduct(id).then((data) => {
-    console.log(data)
-    res.send(data);
-  })
+    res.send(data.data);
+  }).catch((err) => {
+    console.log(err);
+  });
 
 })
 
+
+
+// GET product by search term
 app.get('/search/:searchTerm', (req, res) => {
 
   var query = req.params.searchTerm;

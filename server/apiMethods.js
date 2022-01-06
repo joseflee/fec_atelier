@@ -2,7 +2,7 @@ var Promise = require('bluebird');
 var { APIkey } = require('../config.js');
 const axios = require('axios');
 
-var retrieveProducts = (id) => {
+var retrieveProduct = (id) => {
 
   var self = this;
 
@@ -47,6 +47,6 @@ var parseResults = (array, term) => {
 }
 
 module.exports ={
-  retrieveProducts: retrieveProducts,
+  retrieveProduct: retrieveProduct,
   conductSearch: conductSearch
 }
