@@ -632,3 +632,126 @@ QUESTIONS AND ANSWERS
 RATINGS AND REVIEWS
 /////////////////////
 */
+
+
+/*
+/////////////////////
+Review List
+/////////////////////
+*/
+
+
+#reviewList {
+  float: right;
+  width: 60%;
+  margin-left: 9%;
+  margin-right: 9%;
+  margin-top: 4.5%;
+  margin-bottom: 4.5%;
+  padding: 10px;
+}
+
+.reviewListEntry {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-bottom: 1px solid grey;
+}
+
+.reviewEntryTop {
+  display: inline-flex;
+  flex-direction: row;
+  /* justify-content: right; */
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* height: 5px; */
+}
+
+.reviewRating {
+  display: inline-flex;
+}
+
+.reviewerName {
+  display: inline-flex;
+}
+
+.reviewDate {
+  display: inline-flex;
+}
+
+.reviewEntryBottom {
+  display: inline-flexbox;
+  align-items: baseline;
+}
+
+/* Middle */
+
+.reviewSummary {
+  font-size: large;
+  font-weight: 600;
+  color: rgb(48,48,48);
+}
+
+.reviewBody {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.sellerResponse {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: lightgray;
+  padding: 9px;
+}
+
+/* Helpfulness */
+
+.reviewHelpfulness {
+  display: inline-flex;
+}
+
+.helpfulText {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.helpfulYes {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  left: 5px;
+}
+
+.helpfulCount {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  left: 5px;
+}
+
+/*
+/////////////////////
+New Review
+/////////////////////
+*/
+
+#reviewModal {
+  background-color: lightgray;
+  border: 1px solid black;
+  display: none;
+  height: 80%;
+  width: 80%;
+  overflow: auto;
+}
+
+#reviewForm {
+  display: none;
+  margin: 15% auto;
+  padding: 20px;
+  width: 80%;
+}
+
+#reviewSummaryText {
+  color: black;
+}
