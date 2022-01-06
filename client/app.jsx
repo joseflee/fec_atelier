@@ -15,6 +15,7 @@ import { FaSistrix } from 'react-icons/fa';
 import parseAverageRating from '../modules/parseRatings.js';
 import mockProduct from '../mock_api/mock_product.js';
 import mockStyles from '../mock_api/mock_styles.js';
+import getPercentRecommended from '../modules/percentRecommended.js';
 
 
 class App extends React.Component {
@@ -22,12 +23,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 59553,
+      productId: 59554,
       product: null,
       styles: null,
       ratings: null,
       averageRating: null,
       products: null,
+      percentRecommended: null,
       currentItemFeatures: [],
       relatedItems: [],
       relatedStyles: [],
@@ -51,6 +53,7 @@ class App extends React.Component {
     this.retrieveStyles(this.state.productId);
     this.retrieveRelatedProducts(this.state.productId);
     this.retrieveRatings();
+    console.log(this.state.ratings);
   }
 
   componentDidUpdate() {
@@ -101,9 +104,6 @@ class App extends React.Component {
     })
 
   }
-  retrieveReviews() {
-
-  }
 
   retrieveRatings() {
 
@@ -120,12 +120,19 @@ class App extends React.Component {
         ...self.state,
         ratings: res,
       }, () => {
-        //console.log('state styles => ', self.state.styles);
+        // console.log('state styles => ', self.state.styles);
+        // console.log('state ratings: ', self.state.ratings);
         self.setState({
           ...self.state,
           averageRating: parseAverageRating(this.state.ratings)
         }, () => {
           // console.log('average rating ', this.state.averageRating)
+          self.setState({
+            ...self.state,
+            percentRecommended: getPercentRecommended(this.state.ratings)
+          }, () => {
+            // console.log('percent recommended: ', this.state.percentRecommended);
+          })
         })
       })
     })
@@ -230,13 +237,12 @@ class App extends React.Component {
         <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating}/> : null }</div>
         {this.renderRelatedItems()}
         <QuestionsAndAnswers />
-        <RatingsAndReviews />
+        <div className="ratingsAndReviews">
+        {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings} averageRating={this.state.averageRating} percent={this.state.percentRecommended}/> : null }
+        </div>
       </div>
     )
-
   }
-
-
 }
 
 export default App;
