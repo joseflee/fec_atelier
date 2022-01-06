@@ -58,17 +58,31 @@ class App extends React.Component {
 
   }
 
-  retrieveProduct() {
+  retrieveProduct(id) {
     var self = this;
 
     //console.log(APIkey);
 
+    // $.ajax({
+    //   method: 'GET',
+    //   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${this.state.productId}`,
+    //   headers: {
+    //     "Authorization": APIkey
+    //   }
+    // }).done((res) => {
+    //   self.setState({
+    //     ...self.state,
+    //     product: res,
+    //     currentItemFeatures: res.features,
+    //   }, () => {
+    //     this.retrieveStyles(this.state.productId);
+    //     //console.log('state product => ', self.state.product);
+    //   })
+    // })
+
     $.ajax({
       method: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${this.state.productId}`,
-      headers: {
-        "Authorization": APIkey
-      }
+      url: `products/${id}`
     }).done((res) => {
       self.setState({
         ...self.state,

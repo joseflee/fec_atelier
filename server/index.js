@@ -11,9 +11,11 @@ app.listen(port, () => {
 
 app.use(express.static('public'));
 
-app.get('/product', (req, res) => {
+app.get('/products/:id', (req, res) => {
 
-  retrieveProducts().then((data) => {
+  var id = req.params.id;
+
+  retrieveProduct(id).then((data) => {
     console.log(data)
     res.send(data);
   })
