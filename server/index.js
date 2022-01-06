@@ -16,8 +16,6 @@ app.use(express.static('public'));
 // GET single product by ID
 app.get('/products/:id', (req, res) => {
 
-  console.log('server product pull initiated')
-
   var id = req.params.id;
 
   retrieveProduct(id).then((data) => {
@@ -34,6 +32,11 @@ app.get('/products/:id', (req, res) => {
 app.get('/search/:searchTerm', (req, res) => {
 
   var query = req.params.searchTerm;
-  conductSearch(query).then(data => {console.log(data)});
+
+  conductSearch(query).then(data => {
+    res.send(200, data);
+  }).catch((err) => {
+    console.log(err);
+  });
 
 })

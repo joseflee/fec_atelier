@@ -24,13 +24,20 @@ class Overview extends React.Component {
   }
 
   componentDidUpdate() {
+
     if (this.props.product !== this.state.product) {
+
+      var productUpdate = this.props.product;
+      var stylesUpdate = this.props.styles;
+
       this.setState({
         ...this.state,
-        product: this.props.product,
-        styles: this.props.styles
+        product: productUpdate,
+        styles: stylesUpdate
+      }, () => {
       })
     }
+
   }
 
 

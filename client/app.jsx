@@ -67,20 +67,14 @@ class App extends React.Component {
       method: 'GET',
       url: `products/${id}`
     }).done((res) => {
-      self.setState({
-        ...self.state,
-        product: res,
-        currentItemFeatures: res.features,
-      }, () => {
-        this.retrieveStyles(this.state.productId);
+        this.retrieveStyles(res, this.state.productId);
         //console.log('state product => ', self.state.product);
-      })
     })
 
   }
 
 
-  retrieveStyles(productNumber) {
+  retrieveStyles(product, productNumber) {
     var self = this;
 
     $.ajax({
@@ -92,7 +86,9 @@ class App extends React.Component {
     }).done((res) => {
       self.setState({
         ...self.state,
+        product: product,
         styles: res,
+        currentItemFeatures: product.features
       }, () => {
         //console.log('state styles => ', self.state.styles);
       })
@@ -115,13 +111,10 @@ class App extends React.Component {
         ...self.state,
         ratings: res,
       }, () => {
-        // console.log('state styles => ', self.state.styles);
-        // console.log('state ratings: ', self.state.ratings);
         self.setState({
           ...self.state,
           averageRating: parseAverageRating(this.state.ratings)
         }, () => {
-          // console.log('average rating ', this.state.averageRating)
           self.setState({
             ...self.state,
             percentRecommended: getPercentRecommended(this.state.ratings)
@@ -138,11 +131,19 @@ class App extends React.Component {
   // not case sensitive but spelling must be correct
   handleSearch(searchTerm) {
 
+    //console.log('search toggled')
+
     $.ajax({
       method: 'GET',
       url: `search/${searchTerm}`,
     }).done((res) => {
-      console.log(res);
+      this.setState({
+        ...this.state,
+        productId: res
+      }, () => {
+        $('.searchInput').val('');
+        this.retrieveProduct(this.state.productId);
+      })
     })
 
   }
