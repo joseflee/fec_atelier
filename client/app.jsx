@@ -27,6 +27,7 @@ class App extends React.Component {
       product: null,
       styles: null,
       ratings: null,
+      ratingsMeta: {},
       averageRating: null,
       products: null,
       percentRecommended: null,
@@ -45,6 +46,7 @@ class App extends React.Component {
     this.retrieveStyleForRelated = this.retrieveStyleForRelated.bind(this);
     this.renderRelatedItems = this.renderRelatedItems.bind(this);
     this.retrieveRatings = this.retrieveRatings.bind(this);
+    this.retrieveRatingsMeta = this.retrieveRatingsMeta.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +55,7 @@ class App extends React.Component {
     this.retrieveStyles(this.state.productId);
     this.retrieveRelatedProducts(this.state.productId);
     this.retrieveRatings();
+    this.retrieveRatingsMeta();
   }
 
   componentDidUpdate() {
@@ -125,6 +128,20 @@ class App extends React.Component {
       })
     })
 
+  }
+
+  retrieveRatingsMeta() {
+    $.ajax({
+      method: 'GET',
+      url:`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${this.state.productId}`,
+      headers: {
+        'Authorization': APIkey
+      }
+    }).done((res) => {
+      this.setState({ratingsMeta: res}, () => {
+        // console.log('ratings meta in state: ', this.state.ratingsMeta);
+      })
+    })
   }
 
   // now available for use - must use string parameter with product name
@@ -235,7 +252,7 @@ class App extends React.Component {
         {this.renderRelatedItems()}
         <QuestionsAndAnswers />
         <div className="ratingsAndReviews">
-        {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings} averageRating={this.state.averageRating} percent={this.state.percentRecommended}/> : null }
+        {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings} averageRating={this.state.averageRating} percent={this.state.percentRecommended} ratingsMeta={this.state.ratingsMeta}/> : null }
         </div>
       </div>
     )

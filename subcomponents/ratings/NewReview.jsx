@@ -10,11 +10,27 @@ class NewReview extends React.Component {
     }
     this.handleAddReview = this.handleAddReview.bind(this);
     this.handleReviewClose = this.handleReviewClose.bind(this);
+    this.loadCharacteristics = this.loadCharacteristics.bind(this);
+  }
+
+  loadCharacteristics(characteristics) {
+    var characteristics = Object.keys(characteristics);
+    characteristics.forEach((char) => {
+      var id = `char${char}`;
+      var element = document.getElementById(id);
+      // console.log('element: ', element);
+      if(element) {
+        element.style.display = "block";
+      }
+    })
   }
 
   handleAddReview() {
     var modal = document.getElementById("reviewModal");
     var form = document.getElementById("reviewForm");
+
+    this.loadCharacteristics(this.props.characteristics);
+
     modal.style.display = "block";
     form.style.display = "block";
   }
@@ -24,6 +40,10 @@ class NewReview extends React.Component {
 
     modal.style.display = "none"
   }
+
+  // characteristics
+  // all divs will be blank by default
+  // after button click load appropriate characteristics
 
   render() {
     return (
@@ -45,8 +65,91 @@ class NewReview extends React.Component {
               <label htmlFor="recommendNo">No</label>
             </div>
 
-            <div className="characteristicRating">Characteristic Ratings*
+            <div className="characteristicRatingSelector">Characteristic Ratings*
+              <div className="characteristicRating" id="charSize">
+                <header>Size </header>
+                <
+                <label htmlFor="size1">1</label>
+                <input type="radio" name="size1" id="1" value="1"></input>
+                <label htmlFor="size2">2</label>
+                <input type="radio" name="size2" id="2" value="2"></input>
+                <label htmlFor="size3">3</label>
+                <input type="radio" name="size3" id="3" value="3"></input>
+                <label htmlFor="size4">4</label>
+                <input type="radio" name="size4" id="4" value="4"></input>
+                <label htmlFor="size5">5</label>
+                <input type="radio" name="size5" id="5" value="5"></input>
+              </div>
 
+              <div className="characteristicRating" id="charWidth">
+                <header>Width </header>
+                <label htmlFor="width1">1</label>
+                <input type="radio" name="width" id="width1" value="1"></input>
+                <label htmlFor="width2">2</label>
+                <input type="radio" name="width" id="width2" value="2"></input>
+                <label htmlFor="width3">3</label>
+                <input type="radio" name="width" id="width3" value="3"></input>
+                <label htmlFor="width4">4</label>
+                <input type="radio" name="width" id="width4" value="4"></input>
+                <label htmlFor="width5">5</label>
+                <input type="radio" name="width" id="width5" value="5"></input>
+              </div>
+
+              <div className="characteristicRating" id="charComfort">
+                <header>Comfort </header>
+                <label htmlFor="comfort1">1</label>
+                <input type="radio" name="comfort" id="comfort1" value="1"></input>
+                <label htmlFor="comfort2">2</label>
+                <input type="radio" name="comfort" id="comfort2" value="2"></input>
+                <label htmlFor="comfort3">3</label>
+                <input type="radio" name="comfort" id="comfort3" value="3"></input>
+                <label htmlFor="comfort4">4</label>
+                <input type="radio" name="comfort" id="comfort4" value="4"></input>
+                <label htmlFor="comfort5">5</label>
+                <input type="radio" name="comfort" id="comfort5" value="5"></input>
+              </div>
+
+              <div className="characteristicRating" id="charQuality">
+              <header>Quality </header>
+                <label htmlFor="quality1">1</label>
+                <input type="radio" name="quality" id="quality" value="1"></input>
+                <label htmlFor="quality2">2</label>
+                <input type="radio" name="quality" id="quality" value="2"></input>
+                <label htmlFor="quality3">3</label>
+                <input type="radio" name="quality" id="quality" value="3"></input>
+                <label htmlFor="quality4">4</label>
+                <input type="radio" name="quality" id="quality" value="4"></input>
+                <label htmlFor="quality5">5</label>
+                <input type="radio" name="quality" id="quality" value="5"></input>
+              </div>
+
+              <div className="characteristicRating" id="charLength">
+              <header>Length </header>
+                <label htmlFor="length1">1</label>
+                <input type="radio" name="length" id="length1" value="1"></input>
+                <label htmlFor="length2">2</label>
+                <input type="radio" name="length" id="length2" value="2"></input>
+                <label htmlFor="length3">3</label>
+                <input type="radio" name="length" id="length3" value="3"></input>
+                <label htmlFor="length4">4</label>
+                <input type="radio" name="length" id="length4" value="4"></input>
+                <label htmlFor="length5">5</label>
+                <input type="radio" name="length" id="length5" value="5"></input>
+              </div>
+
+              <div className="characteristicRating" id="charFit">
+              <header>Fit </header>
+                <label htmlFor="fit1">1</label>
+                <input type="radio" name="fit" id="fit1" value="1"></input>
+                <label htmlFor="fit2">2</label>
+                <input type="radio" name="fit" id="fit2" value="2"></input>
+                <label htmlFor="fit3">3</label>
+                <input type="radio" name="fit" id="fit3" value="3"></input>
+                <label htmlFor="fit4">4</label>
+                <input type="radio" name="fit" id="fit4" value="4"></input>
+                <label htmlFor="fit5">5</label>
+                <input type="radio" name="fit" id="fit5" value="5"></input>
+              </div>
             </div>
 
             <div id="newReviewSummary">Review Summary
@@ -81,16 +184,6 @@ class NewReview extends React.Component {
           </form>
         </div>
       </div>
-      // when button is clicked, should open a form with field inputs for:
-      // overall rating* : text should appear next to stars describing rating
-      // do you recommend?*
-      // characteristic rating*
-      // review summary
-      // review body*
-      // upload photos
-      // nickname*
-      // email*
-      // submit button
     )
   }
 }

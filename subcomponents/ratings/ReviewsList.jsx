@@ -41,7 +41,7 @@ class ReviewsList extends React.Component {
         <div id="reviewList">
           {this.state.visibleReviews.map(review => <ReviewListEntry review={review}/>)}
           <button id="moreReviews" onClick={this.handleMoreReviews}>More Reviews</button>
-          <NewReview/>
+          <NewReview characteristics={this.props.characteristics}/>
         </div>
     )
   }

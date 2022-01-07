@@ -629,9 +629,6 @@ QUESTIONS AND ANSWERS
 
 
 
-
-
-
 /*
 /////////////////////
 RATINGS AND REVIEWS
@@ -761,6 +758,7 @@ New Review
   color: black;
 }
 
+/* Stars */
 .reviewStarsOuter {
   display: inline-block;
   position: relative;
@@ -787,4 +785,9 @@ New Review
   color: #181817;
 }
 
+/* characteristics */
+
+.characteristicRating {
+  display: none;
+}
 
