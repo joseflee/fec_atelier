@@ -754,3 +754,31 @@ New Review
 #reviewSummaryText {
   color: black;
 }
+
+.reviewStarsOuter {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+  color: black;
+}
+
+.reviewStarsOuter::before {
+  content: "\f006";
+}
+
+.reviewStarsInner {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+}
+
+.reviewStarsInner::before {
+  content: "\f005";
+  color: #181817;
+}
+
+

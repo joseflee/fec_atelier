@@ -1,5 +1,6 @@
 import React from 'react';
 import ratingToStar from '../../modules/stars.js';
+import NewReviewStars from './NewReviewStars.jsx';
 
 class NewReview extends React.Component {
   constructor(props) {
@@ -14,21 +15,14 @@ class NewReview extends React.Component {
   handleAddReview() {
     var modal = document.getElementById("reviewModal");
     var form = document.getElementById("reviewForm");
-    var button = document.getElementById("addReview");
-    var summary = document.getElementById("newReviewSummary")
-    console.log('click');
     modal.style.display = "block";
     form.style.display = "block";
   }
 
   handleReviewClose() {
-    var close = document.getElementById("reviewClose");
     var modal = document.getElementById("reviewModal");
-    var form = document.getElementById("reviewForm");
 
-    modal.style.display = "none";
-    form.style.display = "none";
-
+    modal.style.display = "none"
   }
 
   render() {
@@ -39,6 +33,7 @@ class NewReview extends React.Component {
           <span id="reviewClose" onClick={this.handleReviewClose}>X</span>
           <form id="reviewForm">
             <label>Overall Rating*
+              <NewReviewStars />
 
             </label>
 
