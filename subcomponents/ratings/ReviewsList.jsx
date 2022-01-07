@@ -6,24 +6,43 @@ class ReviewsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: props.reviews
+      reviews: props.reviews,
+      visibleReviews: []
     }
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
   }
 
+  componentDidMount() {
+    var firstTwo = [];
+    firstTwo.push(this.props.reviews.results[0]);
+    firstTwo.push(this.props.reviews.results[1]);
+    this.setState({visibleReviews: firstTwo});
+  }
+
   handleMoreReviews() {
-    // add functionality to expand review list
+    var reviews = this.state.reviews.results;
+    var start = this.state.visibleReviews.length;
+    var end = start + 2;
+    var nextTwo = reviews.slice(start, end);
+    var newState = this.state.visibleReviews.concat(nextTwo);
+    var button = document.getElementById("moreReviews");
+    this.setState({visibleReviews: newState}, () => {
+      if(this.state.visibleReviews.length === this.state.reviews.results.length) {
+        button.style.display = "none";
+      }
+    });
+    // future enhancement:
+    // button should disappear after max height of element is reached
+    // list should become scrollable
   }
 
   render() {
     return (
         <div id="reviewList">
-          {this.props.reviews.results.map(review => <ReviewListEntry review={review}/>)}
-          <button id="moreReviews">More Reviews</button>
+          {this.state.visibleReviews.map(review => <ReviewListEntry review={review}/>)}
+          <button id="moreReviews" onClick={this.handleMoreReviews}>More Reviews</button>
           <NewReview/>
         </div>
-      // list should map ReviewListEntries two entries at a time
-      // <more reviews/> button should load two more entries
     )
   }
 }
