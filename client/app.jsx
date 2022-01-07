@@ -23,7 +23,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 59554,
+      productId: 59553,
       product: null,
       styles: null,
       ratings: null,
@@ -48,44 +48,33 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // invoke retrieveProduct
-    this.retrieveProduct();
+
+    this.retrieveProduct(this.state.productId);
     this.retrieveStyles(this.state.productId);
     this.retrieveRelatedProducts(this.state.productId);
     this.retrieveRatings();
-    console.log(this.state.ratings);
   }
 
   componentDidUpdate() {
 
   }
 
-  retrieveProduct() {
-    var self = this;
+  retrieveProduct(id) {
 
-    //console.log(APIkey);
+    var self = this;
 
     $.ajax({
       method: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${this.state.productId}`,
-      headers: {
-        "Authorization": APIkey
-      }
+      url: `products/${id}`
     }).done((res) => {
-      self.setState({
-        ...self.state,
-        product: res,
-        currentItemFeatures: res.features,
-      }, () => {
-        this.retrieveStyles(this.state.productId);
+        this.retrieveStyles(res, this.state.productId);
         //console.log('state product => ', self.state.product);
-      })
     })
 
   }
 
 
-  retrieveStyles(productNumber) {
+  retrieveStyles(product, productNumber) {
     var self = this;
 
     $.ajax({
@@ -97,7 +86,9 @@ class App extends React.Component {
     }).done((res) => {
       self.setState({
         ...self.state,
+        product: product,
         styles: res,
+        currentItemFeatures: product.features
       }, () => {
         //console.log('state styles => ', self.state.styles);
       })
@@ -120,13 +111,10 @@ class App extends React.Component {
         ...self.state,
         ratings: res,
       }, () => {
-        // console.log('state styles => ', self.state.styles);
-        // console.log('state ratings: ', self.state.ratings);
         self.setState({
           ...self.state,
           averageRating: parseAverageRating(this.state.ratings)
         }, () => {
-          // console.log('average rating ', this.state.averageRating)
           self.setState({
             ...self.state,
             percentRecommended: getPercentRecommended(this.state.ratings)
@@ -139,12 +127,24 @@ class App extends React.Component {
 
   }
 
+  // now available for use - must use string parameter with product name
+  // not case sensitive but spelling must be correct
   handleSearch(searchTerm) {
 
-    // this method will retrieve search term from topbar on page and use a
-    // server route + modularized helpers to construct search query and perform
-    // API pull.
-    // Then state will be updated with new product / styles
+    //console.log('search toggled')
+
+    $.ajax({
+      method: 'GET',
+      url: `search/${searchTerm}`,
+    }).done((res) => {
+      this.setState({
+        ...this.state,
+        productId: res
+      }, () => {
+        $('.searchInput').val('');
+        this.retrieveProduct(this.state.productId);
+      })
+    })
 
   }
 
@@ -169,8 +169,6 @@ class App extends React.Component {
       }
     })
   }
-
-
 
 
   retrieveProductForRelated(productId) {
