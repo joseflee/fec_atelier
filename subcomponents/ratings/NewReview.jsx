@@ -11,6 +11,7 @@ class NewReview extends React.Component {
     this.handleAddReview = this.handleAddReview.bind(this);
     this.handleReviewClose = this.handleReviewClose.bind(this);
     this.loadCharacteristics = this.loadCharacteristics.bind(this);
+    this.handleCharRating = this.handleCharRating.bind(this);
   }
 
   loadCharacteristics(characteristics) {
@@ -19,7 +20,7 @@ class NewReview extends React.Component {
       var id = `char${char}`;
       var element = document.getElementById(id);
       // console.log('element: ', element);
-      if(element) {
+      if (element) {
         element.style.display = "block";
       }
     })
@@ -39,6 +40,28 @@ class NewReview extends React.Component {
     var modal = document.getElementById("reviewModal");
 
     modal.style.display = "none"
+  }
+
+  handleCharRating(e) {
+    console.log('charRating: ', e.target);
+    var descriptions = {
+      size: ['A size too small', 'Half a size too small', 'Perfect', 'Half a size too big', 'A size too wide'],
+      width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly Wide', 'Too wide'],
+      comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+      quality: ['Poor', 'Below Average', 'What I expect', 'Pretty great', 'Perfect'],
+      length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+      fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slighly long', 'Runs long']
+    }
+
+    var char = e.target.name;
+    var index = e.target.value - 1;
+    var description = descriptions[char][index];
+    var id = `${char}Desc`;
+    var element = document.getElementById(id);
+    element.innerHTML = description;
+
+    this.forceUpdate();
+
   }
 
   // characteristics
@@ -68,87 +91,92 @@ class NewReview extends React.Component {
             <div className="characteristicRatingSelector">Characteristic Ratings*
               <div className="characteristicRating" id="charSize">
                 <header>Size </header>
-                <
+                <p className="charRatingDesc" id="sizeDesc">None selected</p>
                 <label htmlFor="size1">1</label>
-                <input type="radio" name="size1" id="1" value="1"></input>
+                <input type="radio" name="size1" id="1" value="1" onClick={this.handleCharRating}></input>
                 <label htmlFor="size2">2</label>
-                <input type="radio" name="size2" id="2" value="2"></input>
+                <input type="radio" name="size2" id="2" value="2" onClick={this.handleCharRating}></input>
                 <label htmlFor="size3">3</label>
-                <input type="radio" name="size3" id="3" value="3"></input>
+                <input type="radio" name="size3" id="3" value="3" onClick={this.handleCharRating}></input>
                 <label htmlFor="size4">4</label>
-                <input type="radio" name="size4" id="4" value="4"></input>
+                <input type="radio" name="size4" id="4" value="4" onClick={this.handleCharRating}></input>
                 <label htmlFor="size5">5</label>
-                <input type="radio" name="size5" id="5" value="5"></input>
+                <input type="radio" name="size5" id="5" value="5" onClick={this.handleCharRating}></input>
               </div>
 
               <div className="characteristicRating" id="charWidth">
                 <header>Width </header>
+                <p className="charRatingDesc" id="widthDesc">None selected</p>
                 <label htmlFor="width1">1</label>
-                <input type="radio" name="width" id="width1" value="1"></input>
+                <input type="radio" name="width" id="width1" value="1" onClick={this.handleCharRating}></input>
                 <label htmlFor="width2">2</label>
-                <input type="radio" name="width" id="width2" value="2"></input>
+                <input type="radio" name="width" id="width2" value="2" onClick={this.handleCharRating}></input>
                 <label htmlFor="width3">3</label>
-                <input type="radio" name="width" id="width3" value="3"></input>
+                <input type="radio" name="width" id="width3" value="3" onClick={this.handleCharRating}></input>
                 <label htmlFor="width4">4</label>
-                <input type="radio" name="width" id="width4" value="4"></input>
+                <input type="radio" name="width" id="width4" value="4" onClick={this.handleCharRating}></input>
                 <label htmlFor="width5">5</label>
-                <input type="radio" name="width" id="width5" value="5"></input>
+                <input type="radio" name="width" id="width5" value="5" onClick={this.handleCharRating}></input>
               </div>
 
               <div className="characteristicRating" id="charComfort">
                 <header>Comfort </header>
+                <p className="charRatingDesc" id="comfortDesc">None selected</p>
                 <label htmlFor="comfort1">1</label>
-                <input type="radio" name="comfort" id="comfort1" value="1"></input>
+                <input type="radio" name="comfort" id="comfort1" value="1" onClick={this.handleCharRating}></input>
                 <label htmlFor="comfort2">2</label>
-                <input type="radio" name="comfort" id="comfort2" value="2"></input>
+                <input type="radio" name="comfort" id="comfort2" value="2" onClick={this.handleCharRating}></input>
                 <label htmlFor="comfort3">3</label>
-                <input type="radio" name="comfort" id="comfort3" value="3"></input>
+                <input type="radio" name="comfort" id="comfort3" value="3" onClick={this.handleCharRating}></input>
                 <label htmlFor="comfort4">4</label>
-                <input type="radio" name="comfort" id="comfort4" value="4"></input>
+                <input type="radio" name="comfort" id="comfort4" value="4" onClick={this.handleCharRating}></input>
                 <label htmlFor="comfort5">5</label>
-                <input type="radio" name="comfort" id="comfort5" value="5"></input>
+                <input type="radio" name="comfort" id="comfort5" value="5" onClick={this.handleCharRating}></input>
               </div>
 
               <div className="characteristicRating" id="charQuality">
-              <header>Quality </header>
+                <header>Quality </header>
+                <p className="charRatingDesc" id="qualityDesc">None selected</p>
                 <label htmlFor="quality1">1</label>
-                <input type="radio" name="quality" id="quality" value="1"></input>
+                <input type="radio" name="quality" id="quality" value="1" onClick={this.handleCharRating}></input>
                 <label htmlFor="quality2">2</label>
-                <input type="radio" name="quality" id="quality" value="2"></input>
+                <input type="radio" name="quality" id="quality" value="2" onClick={this.handleCharRating}></input>
                 <label htmlFor="quality3">3</label>
-                <input type="radio" name="quality" id="quality" value="3"></input>
+                <input type="radio" name="quality" id="quality" value="3" onClick={this.handleCharRating}></input>
                 <label htmlFor="quality4">4</label>
-                <input type="radio" name="quality" id="quality" value="4"></input>
+                <input type="radio" name="quality" id="quality" value="4" onClick={this.handleCharRating}></input>
                 <label htmlFor="quality5">5</label>
-                <input type="radio" name="quality" id="quality" value="5"></input>
+                <input type="radio" name="quality" id="quality" value="5" onClick={this.handleCharRating}></input>
               </div>
 
               <div className="characteristicRating" id="charLength">
-              <header>Length </header>
+                <header>Length </header>
+                <p className="charRatingDesc" id="lengthDesc">None selected</p>
                 <label htmlFor="length1">1</label>
-                <input type="radio" name="length" id="length1" value="1"></input>
+                <input type="radio" name="length" id="length1" value="1" onClick={this.handleCharRating}></input>
                 <label htmlFor="length2">2</label>
-                <input type="radio" name="length" id="length2" value="2"></input>
+                <input type="radio" name="length" id="length2" value="2" onClick={this.handleCharRating}></input>
                 <label htmlFor="length3">3</label>
-                <input type="radio" name="length" id="length3" value="3"></input>
+                <input type="radio" name="length" id="length3" value="3" onClick={this.handleCharRating}></input>
                 <label htmlFor="length4">4</label>
-                <input type="radio" name="length" id="length4" value="4"></input>
+                <input type="radio" name="length" id="length4" value="4" onClick={this.handleCharRating}></input>
                 <label htmlFor="length5">5</label>
-                <input type="radio" name="length" id="length5" value="5"></input>
+                <input type="radio" name="length" id="length5" value="5" onClick={this.handleCharRating}></input>
               </div>
 
               <div className="characteristicRating" id="charFit">
-              <header>Fit </header>
+                <header>Fit </header>
+                <p className="charRatingDesc" id="fitDesc">None selected</p>
                 <label htmlFor="fit1">1</label>
-                <input type="radio" name="fit" id="fit1" value="1"></input>
+                <input type="radio" name="fit" id="fit1" value="1" onClick={this.handleCharRating}></input>
                 <label htmlFor="fit2">2</label>
-                <input type="radio" name="fit" id="fit2" value="2"></input>
+                <input type="radio" name="fit" id="fit2" value="2" onClick={this.handleCharRating}></input>
                 <label htmlFor="fit3">3</label>
-                <input type="radio" name="fit" id="fit3" value="3"></input>
+                <input type="radio" name="fit" id="fit3" value="3" onClick={this.handleCharRating}></input>
                 <label htmlFor="fit4">4</label>
-                <input type="radio" name="fit" id="fit4" value="4"></input>
+                <input type="radio" name="fit" id="fit4" value="4" onClick={this.handleCharRating}></input>
                 <label htmlFor="fit5">5</label>
-                <input type="radio" name="fit" id="fit5" value="5"></input>
+                <input type="radio" name="fit" id="fit5" value="5" onClick={this.handleCharRating}></input>
               </div>
             </div>
 
