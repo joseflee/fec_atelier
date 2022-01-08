@@ -863,7 +863,22 @@ New Review
 /* product breakdown */
 
 .charBarOuter {
+  position: relative;
   height: 10px;
   width: 300px;
   background-color: darkgray;
 }
+
+.charBarIndicator {
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.charBarIndicator::before {
+  color: black;
+  content: '\f0d7';
+}
+/* font-family: FontAwesome;
+  color: black; */
