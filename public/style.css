@@ -599,8 +599,15 @@ RELATED ITEMS
 
 
 
+/*
+-------------------------
+comparison modal
+-------------------------
+*/
+
 .comparisonModal {
-  width: 500px;
+  width: 800px;
+  height: 500px;
   background: white;
   border: 1px solid grey;
   transition: 1s ease-out;
@@ -609,7 +616,30 @@ RELATED ITEMS
   transform: scale(1);
   opacity: 1;
   visibility: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
 }
+
+.comparisonRow {
+  font-size: 13px;
+}
+
+.comparisonTopRow {
+  font-size: 17px;
+  padding-bottom: 20px;
+}
+
+.oneStar {
+  font-family: FontAwesome;
+  background: rgb(146, 142, 142);
+  border: none;
+}
+
 
 
 /*

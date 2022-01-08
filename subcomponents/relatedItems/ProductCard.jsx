@@ -1,9 +1,7 @@
 import React from 'react';
 import ratingToStar from '../../modules/stars.js';
+import {Stars} from './StarRating.jsx';
 
-//var starClass = 'stars-outer stars-outer::before stars-inner stars-inner::before';
-//var starClass = 'stars-outer stars-outer::before';
-var starClass = 'stars-outer';
 
 export class ProductCard extends React.Component {
   constructor(props) {
@@ -48,13 +46,13 @@ export class ProductCard extends React.Component {
   render() {
     return (
       <>
-        <div onClick={this.props.clickCard} className="card">
+        <div onClick={this.props.clickCard} data-txt={this.props.data} className="card">
           {this.renderImg()}
-          <button onClick={this.props.clickStar}>compare</button>
+          <button onClick={this.props.clickStar} data-id={this.props.data} className="fas fa-star oneStar">compare</button>
           <div>{this.props.itemInfo.category}</div>
           <div>{this.props.itemInfo.name}</div>
           {this.renderPrice()}
-          <div className={starClass}>{ratingToStar(this.props.itemInfo.rating)}</div>
+          <Stars rating={this.props.itemInfo.rating} />
         </div>
       </>
     )
