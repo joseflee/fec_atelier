@@ -6,7 +6,8 @@ var getPrecentRecommended = (reviews) => {
       recommendedCount++;
     }
   })
-  return (recommendedCount / reviews.results.length) * 100;
+  var percent = (recommendedCount / reviews.results.length) * 100;
+  return percent.toFixed();
 }
 
 export default getPrecentRecommended;
