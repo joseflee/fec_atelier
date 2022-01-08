@@ -34,6 +34,8 @@ class App extends React.Component {
       relatedItems: [],
       relatedStyles: [],
       relatedIds: [],
+      relatedRatings: [],
+
     }
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
@@ -43,7 +45,10 @@ class App extends React.Component {
     this.retrieveRelatedProducts = this.retrieveRelatedProducts.bind(this);
     this.retrieveProductForRelated = this.retrieveProductForRelated.bind(this);
     this.retrieveStyleForRelated = this.retrieveStyleForRelated.bind(this);
+    this.retrieveRatingForRelated = this.retrieveRatingForRelated.bind(this);
     this.renderRelatedItems = this.renderRelatedItems.bind(this);
+    this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
+
     this.retrieveRatings = this.retrieveRatings.bind(this);
   }
 
@@ -162,6 +167,8 @@ class App extends React.Component {
         data.forEach(id => {
           this.retrieveProductForRelated(id);
           this.retrieveStyleForRelated(id);
+          this.retrieveRatingForRelated(id);
+
         })
       },
       error: (err) => {
@@ -209,10 +216,54 @@ class App extends React.Component {
     })
   }
 
+  retrieveRatingForRelated(productId) {
+
+    var self = this;
+
+    $.ajax({
+      method: 'GET',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/?product_id=${productId}`,
+      headers: {
+        "Authorization": APIkey
+      }
+    }).done((res) => {
+      var avgRating = parseAverageRating(res);
+      var ratingObj = {ratingId: productId, rating: avgRating}
+      var currentRating = this.state.relatedRatings.concat(ratingObj);
+      self.setState({
+        relatedRatings: currentRating,
+      }, () => {
+
+      })
+    })
+  }
+
+  handleRelatedCardClick(e) {
+    var clickedCardId = e.currentTarget.getAttribute('data-txt');
+    console.log('current', this.state.productId);
+    this.setState({
+      productId: clickedCardId,
+      relatedItems: [],
+      relatedStyles: [],
+      relatedIds: [],
+      relatedRatings: [],
+
+    }, () => {
+      console.log('new state', this.state.productId)
+      this.retrieveProduct();
+      this.retrieveStyles(this.state.productId);
+      this.retrieveRelatedProducts();
+      this.retrieveRatings();
+
+    }
+    )
+  }
+
   renderRelatedItems() {
-    if (this.state.relatedIds.length > 0) {
-      if (this.state.relatedIds.length === this.state.relatedItems.length && this.state.relatedIds.length === this.state.relatedStyles.length) {
-        return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} features={this.state.currentItemFeatures} />
+    var noOfRelated = this.state.relatedIds.length;
+    if (noOfRelated > 0 && this.state.product && this.state.styles && this.state.averageRating) {
+      if (noOfRelated === this.state.relatedItems.length && noOfRelated === this.state.relatedStyles.length && noOfRelated === this.state.relatedRatings.length) {
+          return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} self={this.state.product} ratings={this.state.relatedRatings} clickCard={this.handleRelatedCardClick} />
       }
     }
   }

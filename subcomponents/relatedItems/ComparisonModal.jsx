@@ -5,27 +5,61 @@ export class ComparisonModal extends React.Component {
     super(props);
     this.state = {
       currentFeatures: [],
+      clickedCardFeatures: [],
+      combinedFeatures: [],
       details: [],
     }
     this.renderRows = this.renderRows.bind(this);
+    this.organizeFeatures = this.organizeFeatures.bind(this);
+
   }
 
   componentDidMount() {
-    console.log(this.props.features);
+    this.organizeFeatures();
+  }
+
+  organizeFeatures() {
+    var currentFeatures = this.props.self.features;
+    var clickedItemFeatures = this.props.relatedFeatures.features;
+    var sortedFeatures = [];
+    currentFeatures.forEach(item => {
+      var storage = {};
+      storage.feature = item.feature;
+      storage.left = item.value;
+      sortedFeatures.push(storage);
+    });
+    sortedFeatures.forEach(item => {
+      for (var i = 0; i < clickedItemFeatures.length; i++) {
+        if (clickedItemFeatures[i].feature === item.feature) {
+          item.right = clickedItemFeatures[i].value;
+          clickedItemFeatures.splice(i, 1);
+          i = i--;
+        }
+      }
+    });
+    clickedItemFeatures.forEach(item => {
+      var storage = {};
+      storage.feature = item.feature;
+      storage.right = item.value;
+      sortedFeatures.push(storage);
+    });
     this.setState({
-      currentFeatures: this.props.features,
+      combinedFeatures: sortedFeatures
+    }, () => {
+
     })
+
   }
 
   renderRows() {
-    if (this.state.currentFeatures.length > 0) {
+    if (this.state.combinedFeatures.length > 0) {
       return (
-        this.state.currentFeatures.map((feature, index) => {
+        this.state.combinedFeatures.map((feature, index) => {
           return(
             <tr key={index}>
-              <th>{feature.value}</th>
-              <th>{feature.feature}</th>
-              <th></th>
+              <th className="comparisonRow">{feature.left ? feature.left : null}</th>
+              <th className="comparisonRow">{feature.feature}</th>
+              <th className="comparisonRow">{feature.right ? feature.right : null}</th>
             </tr>
           )
         })
@@ -40,9 +74,9 @@ export class ComparisonModal extends React.Component {
         <table>
           <thead>
             <tr>
-              <th>column 1</th>
-              <th>characteristic</th>
-              <th>column 2</th>
+              <th className="comparisonTopRow">{this.props.self.name}</th>
+              <th className="comparisonTopRow"></th>
+              <th className="comparisonTopRow">{this.props.relatedFeatures.name}</th>
             </tr>
           </thead>
           <tbody>
