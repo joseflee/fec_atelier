@@ -25,18 +25,18 @@ class Overview extends React.Component {
 
   componentDidUpdate() {
 
-    if (this.props.product !== this.state.product) {
+    // if (this.props.product !== this.state.product) {
 
-      var productUpdate = this.props.product;
-      var stylesUpdate = this.props.styles;
+    //   var productUpdate = this.props.product;
+    //   var stylesUpdate = this.props.styles;
 
-      this.setState({
-        ...this.state,
-        product: productUpdate,
-        styles: stylesUpdate
-      }, () => {
-      })
-    }
+    //   this.setState({
+    //     ...this.state,
+    //     product: productUpdate,
+    //     styles: stylesUpdate
+    //   }, () => {
+    //   })
+    // }
 
   }
 
@@ -53,12 +53,12 @@ class Overview extends React.Component {
     return (
       <div id={'overview'}>
         <div className={'leftPanel'}>
-          <ImageGallery styleIndex={this.state.styles.results[this.state.selectedStyle]} styles={this.state.styles} index={this.state.selectedStyle} />
-          <ProductDescription description={this.state.product.description}/>
+          <ImageGallery styleIndex={this.props.styles.results[this.state.selectedStyle]} styles={this.props.styles} index={this.state.selectedStyle} />
+          <ProductDescription description={this.props.product.description}/>
         </div>
         <div className={'rightPanel'}>
-          <ProductInfo product={this.state.product} rating={this.props.rating} />
-          <StyleSelector styles={this.state.styles} changeStyle={this.changeStyle} />
+          <ProductInfo product={this.props.product} rating={this.props.rating} />
+          <StyleSelector styles={this.props.styles} changeStyle={this.changeStyle} />
           <AddToCart state={this.state} />
         </div>
       </div>

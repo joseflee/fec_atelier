@@ -6,9 +6,22 @@ const axios = require('axios');
 // retrieves product using id, returns a promise
 var retrieveProduct = (id) => {
 
-  var self = this;
-
   return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
+    headers: {
+      authorization: APIkey
+    }
+  }).then((response) => {
+    return response;
+  }).catch((err) => {
+    console.log(err);
+  })
+
+}
+
+// retrieves styles using product id
+var retrieveStyles = (id) => {
+
+  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`, {
     headers: {
       authorization: APIkey
     }
@@ -57,7 +70,9 @@ var parseResults = (array, term) => {
 
 
 
+
 module.exports ={
   retrieveProduct: retrieveProduct,
-  conductSearch: conductSearch
+  conductSearch: conductSearch,
+  retrieveStyles: retrieveStyles
 }

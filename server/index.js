@@ -2,7 +2,7 @@ const express = require('express');
 const expressStaticGzip = require('express-static-gzip')
 
 const app = express();
-const { retrieveProduct, conductSearch } = require('./apiMethods.js');
+const { retrieveProduct, retrieveStyles, conductSearch } = require('./apiMethods.js');
 
 var port = 3000;
 
@@ -27,6 +27,20 @@ app.get('/products/:id', (req, res) => {
   }).catch((err) => {
     console.log(err);
   });
+
+})
+
+// GET styles by product ID
+app.get('/styles/:id', (req, res) => {
+
+  var id = req.params.id;
+
+  retrieveStyles(id).then((data) => {
+    res.send(data.data);
+  }).catch((err) => {
+    console.log(err);
+  });
+
 
 })
 

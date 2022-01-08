@@ -84,10 +84,7 @@ class App extends React.Component {
 
     $.ajax({
       method: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productNumber}/styles`,
-      headers: {
-        "Authorization": APIkey
-      }
+      url: `styles/${productNumber}`
     }).done((res) => {
       self.setState({
         ...self.state,

@@ -25,7 +25,7 @@ class StyleSelector extends React.Component {
   }
 
   componentDidUpdate() {
-    //console.log('style selector updated with these props ', this.props);
+
     this.unpackStyles();
   }
 
