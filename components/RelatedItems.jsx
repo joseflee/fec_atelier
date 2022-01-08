@@ -12,31 +12,35 @@ class RelatedItems extends React.Component {
     this.state = {
       relatedItemsList: [],
       relatedStyles: [],
+      relatedRatings: [],
       outfitsList: [],
       currentItem: {},
       modal: false,
+      clickedCardFeatures: [],
     }
 
-    this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
     this.handleRelatedStarClick = this.handleRelatedStarClick.bind(this);
-    this.addToOutfits = this.addToOutfits.bind(this);
     this.removeFromOutfits = this.removeFromOutfits.bind(this);
-    this.addToRelatedItems = this.addToRelatedItems.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
-  //when a card on the related items list is clicked, it will navigate to that page
-  handleRelatedCardClick(e) {
-    console.log('clicked on the card')
-  }
-  //when the star on the related item card is clicked, a comparison modal will be opened up
-  //will need to pass the currentItem as well as the clicked on item to the modalComponent so it can
-  //render the table using that information
+
   handleRelatedStarClick(e) {
     e.stopPropagation();
-    console.log('clicked on the star')
+    var id = e.currentTarget.getAttribute('data-id');
+    console.log(id);
+    var comparedFeatures;
+    this.state.relatedItemsList.forEach(product => {
+      if (product.id === Number(id)) {
+        comparedFeatures = product;
+        //console.log(comparedFeatures);
+      }
+    })
     this.setState({
-      modal: true
+      modal: true,
+      clickedCardFeatures: comparedFeatures
+    }, () => {
+
     })
   }
 
@@ -45,11 +49,6 @@ class RelatedItems extends React.Component {
     this.setState({
       modal: false
     })
-  }
-
-  //function to add items to outfitlist
-  addToOutfits(e) {
-    console.log('added to outfit list')
   }
 
   //function to remove items from outfitList
@@ -64,7 +63,8 @@ class RelatedItems extends React.Component {
   componentDidMount() {
     this.setState({
       relatedItemsList: this.props.items,
-      relatedStyles: this.props.styles
+      relatedStyles: this.props.styles,
+      relatedRatings: this.props.ratings,
     });
   }
 
@@ -72,9 +72,9 @@ class RelatedItems extends React.Component {
     return (
       <>
         <div>Related Items</div>
-        {this.state.relatedItemsList.length > 0 ? <RelatedProductList clickCard={this.handleRelatedCardClick} clickStar={this.handleRelatedStarClick} related={this.state.relatedItemsList} styles={this.state.relatedStyles} /> : null}
+        <RelatedProductList clickCard={this.props.clickCard} clickStar={this.handleRelatedStarClick} related={this.props.items} styles={this.props.styles} ratings={this.props.ratings}/>
         <OutfitList add={this.addToOutfits} remove={this.removeFromOutfits} />
-        {this.state.modal ? <ComparisonModal close={this.closeModal} features={this.props.features} /> : null}
+        {(this.state.modal && this.state.clickedCardFeatures) ? <ComparisonModal close={this.closeModal} features={this.props.features} self={this.props.self} relatedFeatures={this.state.clickedCardFeatures} /> : null}
       </>
     )
   }
