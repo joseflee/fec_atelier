@@ -55,7 +55,7 @@ export class RelatedProductList extends React.Component {
     })
   }
 
-  combineProductData(array1, array2) {
+  combineProductData(array1, array2, array3) {
     var combinedArray = [];
     array1.forEach(obj1 => {
       array2.forEach(obj2 => {
@@ -65,20 +65,27 @@ export class RelatedProductList extends React.Component {
         }
       })
     })
+    combinedArray.forEach(item => {
+      array3.forEach(obj => {
+        if (obj.ratingId === '' + item.id) {
+          item.rating = obj.rating;
+        }
+      })
+    })
     return combinedArray;
   }
 
   componentDidMount() {
-    var combined = this.combineProductData(this.props.related, this.props.styles);
-    // console.log('did combine work?', combined);
+
+    var combined = this.combineProductData(this.props.related, this.props.styles, this.props.ratings);
     var threeAtATime = combined.slice(0, 3);
     this.setState({
       currentView: threeAtATime,
       relatedItems: combined,
-    })
+    }, () => {})
   }
 
-  render() {
+ render() {
     return (
       <>
         <h3>list of related products</h3>
@@ -86,8 +93,8 @@ export class RelatedProductList extends React.Component {
           <div className="centerVertical">
            {this.state.positionAtList > 0 ? <div className="leftArrow" onClick={this.handleLeftArrow}></div> : null}
           </div>
-          {this.state.currentView.map((item, index) => {
-            return <ProductCard key={index} clickCard={this.props.clickCard} clickStar={this.props.clickStar} itemInfo={item} />
+          {this.state.currentView.map((item) => {
+            return <ProductCard key={item.id} data={item.id} clickCard={this.props.clickCard} clickStar={this.props.clickStar} itemInfo={item} />
           })}
           <div className="centerVertical">
             {this.state.positionAtList < this.state.relatedItems.length - 3 ? <div className="rightArrow" onClick={this.handleRightArrow}></div> : null}
@@ -97,3 +104,4 @@ export class RelatedProductList extends React.Component {
     )
   }
 }
+
