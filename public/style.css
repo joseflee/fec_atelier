@@ -791,3 +791,39 @@ New Review
   display: none;
 }
 
+/* rating breakdown */
+
+/* .ratingBreakdown {
+  display: inline-flex;
+  width: 300px;
+} */
+
+.ratingGraph {
+  display: inline-flex;
+  flex-direction: column;
+  width: 280px;
+}
+
+.ratingContainer {
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  /* justify-content: space-between; */
+}
+
+.innerBar {
+  position: absolute;
+  /* align-self: flex-end; */
+  height: 5px;
+  width: 75px;
+  background-color: green;
+}
+
+.outerBar {
+  position: absolute;
+  /* align-self: flex-end; */
+  height: 5px;
+  width: 150px;
+  background-color: darkgray;
+}

@@ -10,7 +10,12 @@ class RatingsAndReviews extends React.Component {
       reviews: props.reviews,
       reviewCount: props.reviews.results.length,
       characteristics: props.ratingsMeta.characteristics
-    }
+    };
+    this.filterByStars = this.filterByStars.bind(this);
+  }
+
+  filterByStars() {
+    console.log('clicked');
   }
 
   // componentDidUpdate() {
@@ -22,8 +27,8 @@ class RatingsAndReviews extends React.Component {
     return (
       <div id="reviewsSection">
         <h3>Ratings & Reviews</h3>
-        <RatingBreakdown  averageRating={this.props.averageRating} percent={this.props.percent} reviewCount={this.state.reviewCount}/>
-        <ReviewsList reviews={this.state.reviews} characteristics={this.props.ratingsMeta.characteristics}/>
+        <RatingBreakdown  averageRating={this.props.averageRating} percent={this.props.percent} reviewCount={this.state.reviewCount} filterByStars={this.filterByStars} ratingsMeta={this.props.ratingsMeta}/>
+        <ReviewsList reviews={this.state.reviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings}/>
       </div>
 
     )
