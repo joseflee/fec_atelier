@@ -829,3 +829,11 @@ New Review
   width: 150px;
   background-color: darkgray;
 }
+
+/* product breakdown */
+
+.charBarOuter {
+  height: 10px;
+  width: 300px;
+  background-color: darkgray;
+}

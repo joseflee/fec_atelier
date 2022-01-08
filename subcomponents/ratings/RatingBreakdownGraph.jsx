@@ -10,7 +10,9 @@ var RatingBreakdownGraph = (props) => {
       var percent = (ratings[rating] / total) * 100;
       var id = `innerBar${rating}`;
       var element = document.getElementById(id);
-      element.style.width = `${percent}%`;
+      if (element) {
+        element.style.width = `${percent}%`;
+      }
     }
 
   };

@@ -8,10 +8,7 @@ var parseAverageRating = (obj) => {
     sum += results[i].rating;
   }
 
-  var average = sum / terms;
-
-  return average.toFixed(1);
-
+  return sum / terms;
 }
 
 export default parseAverageRating;
