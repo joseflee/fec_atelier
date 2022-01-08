@@ -12,12 +12,7 @@ class ReviewListEntry extends React.Component {
   }
 
   handleHelpful() {
-    console.log('click');
-    // console.log('props: ', this.props)
-    // console.log(this.state);
-    // console.log(this.props.helpfulness);
     this.setState((state) => ({ helpfulness: (state.helpfulness + 1) }), () => {
-      console.log(this.state);
     });
   }
 

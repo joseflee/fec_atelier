@@ -11,7 +11,7 @@ class ProductBreakdown extends React.Component {
     return (
       <div className="productBreakdown">
         {this.props.ratingsMeta.characteristics ? Object.keys(this.props.ratingsMeta.characteristics).map((key, index) =>
-          <CharacteristicRating key={index} meta={this.props.ratingsMeta} char={key} />) : null}
+          <CharacteristicRating key={index} meta={this.props.ratingsMeta.characteristics} char={key} />) : null}
       </div>
       // a graph decpicting average ratings of individual characteristics
     )
