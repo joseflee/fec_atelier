@@ -44,7 +44,11 @@ class App extends React.Component {
     this.retrieveProductForRelated = this.retrieveProductForRelated.bind(this);
     this.retrieveStyleForRelated = this.retrieveStyleForRelated.bind(this);
     this.renderRelatedItems = this.renderRelatedItems.bind(this);
+<<<<<<< HEAD
     this.retrieveRatings = this.retrieveRatings.bind(this);
+=======
+    this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
+>>>>>>> 33bde1e (Clicking on related item changes the overview item.)
   }
 
   componentDidMount() {
@@ -148,7 +152,7 @@ class App extends React.Component {
 
   }
 
-  retrieveRelatedProducts(productId) {
+  retrieveRelatedProducts() {
     $.ajax({
       method: 'GET',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${this.state.productId}/related`,
@@ -209,10 +213,28 @@ class App extends React.Component {
     })
   }
 
+  handleRelatedCardClick(e) {
+    var clickedCardId = e.currentTarget.getAttribute('data-txt');
+    this.setState({
+      productId: clickedCardId,
+      currentItemFeatures: [],
+      relatedItems: [],
+      relatedStyles: [],
+      relatedIds: [],
+
+    }, () => {
+      console.log('new state', this.state.productId)
+      this.retrieveProduct();
+      this.retrieveStyles(this.state.productId);
+      this.retrieveRelatedProducts(this.state.productId);
+    }
+    )
+  }
+
   renderRelatedItems() {
     if (this.state.relatedIds.length > 0) {
       if (this.state.relatedIds.length === this.state.relatedItems.length && this.state.relatedIds.length === this.state.relatedStyles.length) {
-        return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} features={this.state.currentItemFeatures} />
+        return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} features={this.state.currentItemFeatures} clickCard={this.handleRelatedCardClick} />
       }
     }
   }

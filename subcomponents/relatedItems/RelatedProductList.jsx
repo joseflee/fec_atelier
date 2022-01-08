@@ -72,6 +72,7 @@ export class RelatedProductList extends React.Component {
     var combined = this.combineProductData(this.props.related, this.props.styles);
     // console.log('did combine work?', combined);
     var threeAtATime = combined.slice(0, 3);
+    console.log('three', threeAtATime);
     this.setState({
       currentView: threeAtATime,
       relatedItems: combined,
@@ -86,8 +87,8 @@ export class RelatedProductList extends React.Component {
           <div className="centerVertical">
            {this.state.positionAtList > 0 ? <div className="leftArrow" onClick={this.handleLeftArrow}></div> : null}
           </div>
-          {this.state.currentView.map((item, index) => {
-            return <ProductCard key={index} clickCard={this.props.clickCard} clickStar={this.props.clickStar} itemInfo={item} />
+          {this.state.currentView.map((item) => {
+            return <ProductCard key={item.id} data={item.id} clickCard={this.props.clickCard} clickStar={this.props.clickStar} itemInfo={item} />
           })}
           <div className="centerVertical">
             {this.state.positionAtList < this.state.relatedItems.length - 3 ? <div className="rightArrow" onClick={this.handleRightArrow}></div> : null}

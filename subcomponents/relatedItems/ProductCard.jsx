@@ -48,7 +48,7 @@ export class ProductCard extends React.Component {
   render() {
     return (
       <>
-        <div onClick={this.props.clickCard} className="card">
+        <div onClick={this.props.clickCard} data-txt={this.props.data} className="card">
           {this.renderImg()}
           <button onClick={this.props.clickStar}>compare</button>
           <div>{this.props.itemInfo.category}</div>
