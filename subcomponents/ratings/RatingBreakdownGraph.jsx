@@ -1,14 +1,18 @@
 import React from 'react';
 
 var RatingBreakdownGraph = (props) => {
-  // console.log('meta: ', props.ratingsMeta);
 
   var populateRatings = (props) => {
-    // console.log('meta: ', meta);
     var total = props.reviewCount;
-    // iterate over ratings
-    // get width by dividing current value by total
-    // set width of corresponding innerBar
+    var ratings = props.ratingsMeta.ratings;
+
+    for (var rating in ratings) {
+      var percent = (ratings[rating] / total) * 100;
+      var id = `innerBar${rating}`;
+      var element = document.getElementById(id);
+      element.style.width = `${percent}%`;
+    }
+
   };
 
   populateRatings(props);
@@ -45,8 +49,9 @@ var RatingBreakdownGraph = (props) => {
 
       <div className="ratingContainer">
         <label className="breakdownLabel" htmlFor="outerBar1" onClick={props.filterByStars}>1 stars</label>
-        <div className="outerBar" id="outerBar1"></div>
-        <div className="innerBar" id="innerBar1"></div>
+        <div className="outerBar" id="outerBar1">
+          <div className="innerBar" id="innerBar1"></div>
+        </div>
       </div>
     </div>
   )

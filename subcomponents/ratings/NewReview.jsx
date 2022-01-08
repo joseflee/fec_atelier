@@ -19,7 +19,6 @@ class NewReview extends React.Component {
     characteristics.forEach((char) => {
       var id = `char${char}`;
       var element = document.getElementById(id);
-      // console.log('element: ', element);
       if (element) {
         element.style.display = "block";
       }
@@ -43,7 +42,6 @@ class NewReview extends React.Component {
   }
 
   handleCharRating(e) {
-    console.log('charRating: ', e.target);
     var descriptions = {
       size: ['A size too small', 'Half a size too small', 'Perfect', 'Half a size too big', 'A size too wide'],
       width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly Wide', 'Too wide'],
