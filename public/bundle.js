@@ -92,11 +92,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*******************/
 /***/ ((module) => {
 
-<<<<<<< HEAD
 eval("var APIkey = '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';\nmodule.exports = {\n  APIkey: APIkey\n};\n\n//# sourceURL=webpack://atelier/./config.js?");
-=======
-eval("module.exports = {\n  APIkey: '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'\n};\n\n//# sourceURL=webpack://atelier/./config.js?");
->>>>>>> 4290e1630bc53a6874c46a4d78c0fe60995f12a0
 
 /***/ }),
 
