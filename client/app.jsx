@@ -161,10 +161,21 @@ class App extends React.Component {
         "Authorization": APIkey
       },
       success: (data) => {
+        //data might have duplicates
+        //[3, 4, 3, 5]
+        //
+        var nonDuplicateObj = {};
+        data.forEach(item => {
+          nonDuplicateObj[item] = true;
+        })
+        var nonDuplicateArray = [];
+        for (var id in nonDuplicateObj) {
+          nonDuplicateArray.push(id);
+        }
         this.setState({
-          relatedIds: data
+          relatedIds: nonDuplicateArray
         });
-        data.forEach(id => {
+        nonDuplicateArray.forEach(id => {
           this.retrieveProductForRelated(id);
           this.retrieveStyleForRelated(id);
           this.retrieveRatingForRelated(id);
@@ -240,7 +251,6 @@ class App extends React.Component {
 
   handleRelatedCardClick(e) {
     var clickedCardId = e.currentTarget.getAttribute('data-txt');
-    console.log('current', this.state.productId);
     this.setState({
       productId: clickedCardId,
       relatedItems: [],
@@ -249,9 +259,7 @@ class App extends React.Component {
       relatedRatings: [],
 
     }, () => {
-      console.log('new state', this.state.productId)
-      this.retrieveProduct();
-      this.retrieveStyles(this.state.productId);
+      this.retrieveProduct(this.state.productId);
       this.retrieveRelatedProducts();
       this.retrieveRatings();
 

@@ -67,7 +67,7 @@ export class RelatedProductList extends React.Component {
     })
     combinedArray.forEach(item => {
       array3.forEach(obj => {
-        if (obj.ratingId === item.id) {
+        if (obj.ratingId === '' + item.id) {
           item.rating = obj.rating;
         }
       })
@@ -76,13 +76,13 @@ export class RelatedProductList extends React.Component {
   }
 
   componentDidMount() {
-    // console.log('did combine work?', combined);
+
     var combined = this.combineProductData(this.props.related, this.props.styles, this.props.ratings);
     var threeAtATime = combined.slice(0, 3);
     this.setState({
       currentView: threeAtATime,
       relatedItems: combined,
-    })
+    }, () => {})
   }
 
  render() {
