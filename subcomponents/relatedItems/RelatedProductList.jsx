@@ -72,7 +72,6 @@ export class RelatedProductList extends React.Component {
     var combined = this.combineProductData(this.props.related, this.props.styles);
     // console.log('did combine work?', combined);
     var threeAtATime = combined.slice(0, 3);
-    console.log('three', threeAtATime);
     this.setState({
       currentView: threeAtATime,
       relatedItems: combined,

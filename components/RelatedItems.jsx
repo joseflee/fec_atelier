@@ -15,21 +15,31 @@ class RelatedItems extends React.Component {
       outfitsList: [],
       currentItem: {},
       modal: false,
+      clickedCardFeatures: [],
     }
 
     //this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
     this.handleRelatedStarClick = this.handleRelatedStarClick.bind(this);
     this.addToOutfits = this.addToOutfits.bind(this);
     this.removeFromOutfits = this.removeFromOutfits.bind(this);
-    this.addToRelatedItems = this.addToRelatedItems.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
   handleRelatedStarClick(e) {
     e.stopPropagation();
-    console.log('clicked on the star')
+    var id = e.currentTarget.getAttribute('data-id');
+    var comparedFeatures;
+    this.state.relatedItemsList.forEach(product => {
+      if (product.id === Number(id)) {
+        comparedFeatures = product;
+        //console.log(comparedFeatures);
+      }
+    })
     this.setState({
-      modal: true
+      modal: true,
+      clickedCardFeatures: comparedFeatures
+    }, () => {
+
     })
   }
 
@@ -50,14 +60,12 @@ class RelatedItems extends React.Component {
     console.log('delete from outfit list');
   }
 
-  //function to add items to the related Items List; might need to do this in the database helpers
-  addToRelatedItems() {
-  }
-
   componentDidMount() {
     this.setState({
       relatedItemsList: this.props.items,
       relatedStyles: this.props.styles
+    }, () => {
+      //console.log(this.state.relatedItemsList)
     });
   }
 
@@ -67,7 +75,7 @@ class RelatedItems extends React.Component {
         <div>Related Items</div>
         {this.state.relatedItemsList.length > 0 ? <RelatedProductList clickCard={this.props.clickCard} clickStar={this.handleRelatedStarClick} related={this.state.relatedItemsList} styles={this.state.relatedStyles} /> : null}
         <OutfitList add={this.addToOutfits} remove={this.removeFromOutfits} />
-        {this.state.modal ? <ComparisonModal close={this.closeModal} features={this.props.features} /> : null}
+        {(this.state.modal && this.state.clickedCardFeatures) ? <ComparisonModal close={this.closeModal} features={this.props.features} self={this.props.self} relatedFeatures={this.state.clickedCardFeatures} /> : null}
       </>
     )
   }

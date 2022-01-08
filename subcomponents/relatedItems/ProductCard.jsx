@@ -50,7 +50,7 @@ export class ProductCard extends React.Component {
       <>
         <div onClick={this.props.clickCard} data-txt={this.props.data} className="card">
           {this.renderImg()}
-          <button onClick={this.props.clickStar}>compare</button>
+          <button onClick={this.props.clickStar} data-id={this.props.data} >compare</button>
           <div>{this.props.itemInfo.category}</div>
           <div>{this.props.itemInfo.name}</div>
           {this.renderPrice()}

@@ -44,18 +44,16 @@ class App extends React.Component {
     this.retrieveProductForRelated = this.retrieveProductForRelated.bind(this);
     this.retrieveStyleForRelated = this.retrieveStyleForRelated.bind(this);
     this.renderRelatedItems = this.renderRelatedItems.bind(this);
-<<<<<<< HEAD
-    this.retrieveRatings = this.retrieveRatings.bind(this);
-=======
     this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
->>>>>>> 33bde1e (Clicking on related item changes the overview item.)
+
+    this.retrieveRatings = this.retrieveRatings.bind(this);
   }
 
   componentDidMount() {
 
     this.retrieveProduct(this.state.productId);
     this.retrieveStyles(this.state.productId);
-    this.retrieveRelatedProducts(this.state.productId);
+    this.retrieveRelatedProducts();
     this.retrieveRatings();
   }
 
@@ -226,7 +224,9 @@ class App extends React.Component {
       console.log('new state', this.state.productId)
       this.retrieveProduct();
       this.retrieveStyles(this.state.productId);
-      this.retrieveRelatedProducts(this.state.productId);
+      this.retrieveRelatedProducts();
+      this.retrieveRatings();
+
     }
     )
   }
@@ -234,7 +234,7 @@ class App extends React.Component {
   renderRelatedItems() {
     if (this.state.relatedIds.length > 0) {
       if (this.state.relatedIds.length === this.state.relatedItems.length && this.state.relatedIds.length === this.state.relatedStyles.length) {
-        return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} features={this.state.currentItemFeatures} clickCard={this.handleRelatedCardClick} />
+        return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} self={this.state.product} clickCard={this.handleRelatedCardClick} />
       }
     }
   }
