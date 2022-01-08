@@ -1,5 +1,6 @@
 import React from 'react';
 import ratingToStar from '../../modules/stars.js';
+import {Stars} from './StarRating.jsx';
 //import 'font-awesome/css/font-awesome.css';
 
 //var starClass = 'stars-outer stars-outer::before stars-inner stars-inner::before';
@@ -12,6 +13,7 @@ export class ProductCard extends React.Component {
     this.renderPrice = this.renderPrice.bind(this);
     this.renderImg = this.renderImg.bind(this);
     this.findDefault = this.findDefault.bind(this);
+
   }
 
   findDefault() {
@@ -46,6 +48,8 @@ export class ProductCard extends React.Component {
   }
 
 
+
+
   render() {
     return (
       <>
@@ -55,7 +59,7 @@ export class ProductCard extends React.Component {
           <div>{this.props.itemInfo.category}</div>
           <div>{this.props.itemInfo.name}</div>
           {this.renderPrice()}
-          <div className={starClass}>{ratingToStar(this.props.itemInfo.rating)}</div>
+          <Stars rating={this.props.itemInfo.rating} />
         </div>
       </>
     )
