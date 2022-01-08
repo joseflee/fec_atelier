@@ -105,8 +105,6 @@ class StyleSelector extends React.Component {
 
   render() {
 
-
-
     return (
       <div>
         <div className={'styleIndicator'}><b>STYLE > </b>{this.unpackNamesNew()[this.state.featuredIndex]}</div>
