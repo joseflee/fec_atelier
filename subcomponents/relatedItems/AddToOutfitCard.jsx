@@ -6,7 +6,7 @@ import React from 'react';
 export const AddToOutfitCard = (props) => {
   return (
     <>
-      <div onClick={props.add} className="card">
+      <div onClick={props.addOutfit} className="card">
         <h1>+</h1>
         <div>Add to Outfit</div>
       </div>

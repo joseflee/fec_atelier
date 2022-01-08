@@ -35,6 +35,7 @@ class App extends React.Component {
       relatedStyles: [],
       relatedIds: [],
       relatedRatings: [],
+      outfits: [],
     }
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
@@ -47,6 +48,8 @@ class App extends React.Component {
     this.renderRelatedItems = this.renderRelatedItems.bind(this);
     this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
     this.retrieveRatingForRelated = this.retrieveRatingForRelated.bind(this);
+    this.addToOutfit = this.addToOutfit.bind(this);
+    //this.createOutfitObj = this.createOutfitObj.bind(this);
 
     this.retrieveRatings = this.retrieveRatings.bind(this);
   }
@@ -72,6 +75,11 @@ class App extends React.Component {
       url: `products/${id}`
     }).done((res) => {
         this.retrieveStyles(res, this.state.productId);
+      self.setState({
+        ...self.state,
+        product: res,
+      }, () => {
+        this.retrieveStyles(this.state.productId);
         //console.log('state product => ', self.state.product);
     })
 
@@ -204,9 +212,9 @@ class App extends React.Component {
         "Authorization": APIkey
       },
       success: (data) => {
-        var relatedStyle = this.state.relatedStyles.concat(data);
+        var relatedStyles = this.state.relatedStyles.concat(data);
         this.setState({
-          relatedStyles: relatedStyle
+          relatedStyles
         });
       },
       error: (err) => {
@@ -233,7 +241,7 @@ class App extends React.Component {
       self.setState({
         relatedRatings: currentRating,
       }, () => {
-       console.log(this.state.relatedRatings)
+
       })
     })
   }
@@ -241,12 +249,13 @@ class App extends React.Component {
 
   handleRelatedCardClick(e) {
     var clickedCardId = e.currentTarget.getAttribute('data-txt');
+    console.log('current', this.state.productId);
     this.setState({
       productId: clickedCardId,
-      currentItemFeatures: [],
       relatedItems: [],
       relatedStyles: [],
       relatedIds: [],
+      relatedRatings: [],
 
     }, () => {
       console.log('new state', this.state.productId)
@@ -259,10 +268,28 @@ class App extends React.Component {
     )
   }
 
+
+  addToOutfit() {
+    //var outfitObj = {};
+    console.log('hey')
+      var outfitObj = {};
+      outfitObj = Object.assign(this.state.product, this.state.styles);
+      console.log('outfit obj', outfitObj);
+      var allOutfits = this.state.outfits
+
+
+    this.setState((state)=>({
+      outfits: [...state.outfits, outfitObj]
+    }))
+
+  }
+
+
   renderRelatedItems() {
-    if (this.state.relatedIds.length > 0) {
-      if (this.state.relatedIds.length === this.state.relatedItems.length && this.state.relatedIds.length === this.state.relatedStyles.length) {
-        return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} self={this.state.product} ratings={this.state.relatedRatings} clickCard={this.handleRelatedCardClick} />
+    var noOfRelated = this.state.relatedIds.length;
+    if (noOfRelated > 0 && this.state.product && this.state.styles && this.state.averageRating) {
+      if (noOfRelated === this.state.relatedItems.length && noOfRelated === this.state.relatedStyles.length && noOfRelated === this.state.relatedRatings.length) {
+          return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} self={this.state.product} ratings={this.state.relatedRatings} clickCard={this.handleRelatedCardClick} addOutfit={this.addToOutfit} />
       }
     }
   }

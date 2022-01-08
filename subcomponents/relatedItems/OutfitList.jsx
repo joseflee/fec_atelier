@@ -11,7 +11,7 @@ export class OutfitList extends React.Component {
     return (
       <div>
         <h3>Your Outfit</h3>
-        <AddToOutfitCard add={this.props.add}/>
+        <AddToOutfitCard addOutfit={this.props.addOutfit}/>
       </div>
     )
   }

@@ -20,7 +20,6 @@ class RelatedItems extends React.Component {
 
     //this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
     this.handleRelatedStarClick = this.handleRelatedStarClick.bind(this);
-    this.addToOutfits = this.addToOutfits.bind(this);
     this.removeFromOutfits = this.removeFromOutfits.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
@@ -50,11 +49,6 @@ class RelatedItems extends React.Component {
     })
   }
 
-  //function to add items to outfitlist
-  addToOutfits(e) {
-    console.log('added to outfit list')
-  }
-
   //function to remove items from outfitList
   removeFromOutfits(e) {
     console.log('delete from outfit list');
@@ -74,7 +68,7 @@ class RelatedItems extends React.Component {
       <>
         <div>Related Items</div>
         {this.state.relatedItemsList.length > 0 ? <RelatedProductList clickCard={this.props.clickCard} clickStar={this.handleRelatedStarClick} related={this.state.relatedItemsList} styles={this.state.relatedStyles} ratings={this.props.ratings} /> : null}
-        <OutfitList add={this.addToOutfits} remove={this.removeFromOutfits} />
+        <OutfitList outfit={this.props.outfits} addOutfit={this.props.addOutfit} remove={this.removeFromOutfits} />
         {(this.state.modal && this.state.clickedCardFeatures) ? <ComparisonModal close={this.closeModal} features={this.props.features} self={this.props.self} relatedFeatures={this.state.clickedCardFeatures} /> : null}
       </>
     )

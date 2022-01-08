@@ -16,13 +16,6 @@ export class ComparisonModal extends React.Component {
 
   componentDidMount() {
     this.organizeFeatures();
-    console.log('self', this.props.self, this.props.features)
-    // this.setState({
-    //   currentFeatures: this.props.features,
-    //   clickedCardFeatures: this.props.relatedFeatures,
-    // }, () => {
-
-    // })
   }
 
   organizeFeatures() {
