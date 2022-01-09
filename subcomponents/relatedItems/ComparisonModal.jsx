@@ -15,13 +15,10 @@ export class ComparisonModal extends React.Component {
   }
 
   componentDidMount() {
-    console.log('1', this.props.relatedFeatures.features, '2', this.props.name.features);
-    console.log('name', this.props.name)
     this.organizeFeatures();
   }
 
   organizeFeatures() {
-    console.log('hello')
     var currentFeatures = this.props.name.features;
     var clickedItemFeatures = this.props.relatedFeatures.features;
     var sortedFeatures = [];

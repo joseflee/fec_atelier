@@ -49,12 +49,8 @@ export class OutfitList extends React.Component {
 
   renderOutfitList() {
     var outfitList = this.props.outfits;
-
-    //console.log('outfitlist', outfitList)
-    var threeAtATime = outfitList.slice(0, 3);
-
     //
-    return (threeAtATime.map(item => {
+    return (outfitList.map(item => {
       return <OutfitCard key={item.id} itemInfo={item} remove={this.props.remove} />
     }))
 
@@ -67,7 +63,13 @@ export class OutfitList extends React.Component {
         <h3>Your Outfit</h3>
         <div className="carousel">
           <AddToOutfitCard add={this.props.add}/>
+          <div className="centerVertical">
+            {this.props.position > 0 ? <div className="leftArrow" onClick={this.props.left}></div> : null}
+          </div>
           {this.renderOutfitList()}
+          <div className="centerVertical">
+            {this.props.position < this.props.outfits.length -3 ? <div className="rightArrow" onClick={this.props.right}></div> : null}
+          </div>
         </div>
       </div>
     )

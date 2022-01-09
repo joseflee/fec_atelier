@@ -28,11 +28,12 @@ class App extends React.Component {
       styles: null,
       ratings: null,
       averageRating: null,
-      //products: null,
       percentRecommended: null,
       allRelated: [],
       outfitIds: [],
       outfits: [],
+      outfitView: [],
+      outfitPosition: 0,
     }
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
@@ -40,11 +41,13 @@ class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
 
     this.retrieveRelatedProducts = this.retrieveRelatedProducts.bind(this);
-    this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
     this.retrieveAllForRelated = this.retrieveAllForRelated.bind(this);
+    this.retrieveAllForOutfits = this.retrieveAllForOutfits.bind(this);
+    this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
     this.addToOutfit = this.addToOutfit.bind(this);
     this.removeFromOutfits = this.removeFromOutfits.bind(this);
-    this.retrieveAllForOutfits = this.retrieveAllForOutfits.bind(this);
+    this.handleRightArrow = this.handleRightArrow.bind(this);
+    this.handleLeftArrow = this.handleLeftArrow.bind(this);
 
     this.retrieveRatings = this.retrieveRatings.bind(this);
   }
@@ -149,9 +152,7 @@ class App extends React.Component {
 
   }
 
-  //after getting all of the related products in an array
-  //perform calls to the api to get all of the data
-  //then arrange the data in the server, send it back and set state
+
 
 
   retrieveRelatedProducts(productId) {
@@ -162,7 +163,6 @@ class App extends React.Component {
         "Authorization": APIkey
       },
       success: (data) => {
-        console.log('related id', data);
         this.retrieveAllForRelated(data);
         if (this.state.outfits.length > 0) {
           this.retrieveAllForOutfits(this.state.outfits)
@@ -182,7 +182,6 @@ class App extends React.Component {
       method: 'GET',
       url: `related/${ids}`,
       success: (data) => {
-        console.log('data', data)
         this.setState({
           allRelated: data
         }, () => {})
@@ -200,9 +199,13 @@ class App extends React.Component {
       method: 'GET',
       url: `outfits/${ids}`,
       success: (data) => {
+        var threeAtATime = data.slice(0, 3);
+        console.log('data length', data.length)
         this.setState({
-          outfits: data
+          outfits: data,
+          outfitView: threeAtATime,
         }, () => {
+          console.log(this.state.outfits, 'three', this.state.outfitView)
         })
       },
       error: (err) => {
@@ -211,7 +214,6 @@ class App extends React.Component {
     })
   }
 
-   //function to remove items from outfitList
 
   handleRelatedCardClick(e) {
     var clickedCardId = e.currentTarget.getAttribute('data-txt');
@@ -258,6 +260,35 @@ class App extends React.Component {
     })
   }
 
+  handleLeftArrow() {
+    var newPosition;
+    if (this.state.outfitPosition > 0) {
+      newPosition = this.state.outfitPosition - 1;
+    } else {
+      newPosition = 0;
+    }
+    var newView = this.state.outfits.slice(newPosition, newPosition + 3);
+    this.setState({
+      outfitPosition: newPosition,
+      outfitView: newView
+    })
+
+  }
+
+  handleRightArrow() {
+    var newPosition;
+    if (this.state.outfitPosition < this.state.outfits.length - 3) {
+      newPosition = this.state.outfitPosition + 1;
+    } else {
+      newPosition = this.state.outfits.length - 3;
+    }
+    var newView = this.state.outfits.slice(newPosition, newPosition + 3);
+    this.setState({
+      outfitPosition: newPosition,
+      outfitView: newView
+    })
+
+  }
 
   render() {
 
@@ -274,7 +305,7 @@ class App extends React.Component {
           <div className={'announcement'}><i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - NEW PRODUCT HIGHLIGHT</div>
         </div>
         <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating}/> : null }</div>
-        {this.state.allRelated.length > 0 ? <RelatedItems all={this.state.allRelated} outfits={this.state.outfits} clickCard={this.handleRelatedCardClick} addOutfit={this.addToOutfit} remove={this.removeFromOutfits} name={this.state.product} /> : null}
+        {this.state.allRelated.length > 0 ? <RelatedItems all={this.state.allRelated} outfits={this.state.outfitView} clickCard={this.handleRelatedCardClick} addOutfit={this.addToOutfit} remove={this.removeFromOutfits} name={this.state.product} right={this.handleRightArrow} left={this.handleLeftArrow} position={this.state.outfitPosition} /> : null}
         <QuestionsAndAnswers />
         <div className="ratingsAndReviews">
         {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings} averageRating={this.state.averageRating} percent={this.state.percentRecommended}/> : null }

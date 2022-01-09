@@ -34,14 +34,10 @@ class RelatedItems extends React.Component {
     this.setState({
       modal: true,
       clickedCardFeatures: comparedFeatures
-    }, () => {
-      console.log('testing', this.state.clickedCardFeatures)
-      console.log('modl', this.state.modal);
     })
   }
 
   closeModal() {
-    console.log('hello')
     this.setState({
       modal: false
     })
@@ -58,7 +54,7 @@ class RelatedItems extends React.Component {
       <>
         <div>Related Items</div>
         <RelatedProductList clickCard={this.props.clickCard} clickStar={this.handleRelatedStarClick} all={this.props.all} />
-        <OutfitList outfits={this.props.outfits} add={this.props.addOutfit} remove={this.props.remove} />
+        <OutfitList outfits={this.props.outfits} add={this.props.addOutfit} remove={this.props.remove} right={this.props.right} left={this.props.left} position={this.props.position} />
         {(this.state.modal) ? <ComparisonModal close={this.closeModal} features={this.props.features} relatedFeatures={this.state.clickedCardFeatures} name={this.props.name} /> : null}
       </>
     )
