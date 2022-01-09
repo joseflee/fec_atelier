@@ -12,4 +12,6 @@ var parseAverageRating = (obj) => {
 
 }
 
-export default parseAverageRating;
+module.exports = {
+  parseAverageRating: parseAverageRating
+}

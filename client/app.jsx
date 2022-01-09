@@ -35,6 +35,7 @@ class App extends React.Component {
       relatedStyles: [],
       relatedIds: [],
       relatedRatings: [],
+      all: [],
 
     }
 
@@ -48,6 +49,7 @@ class App extends React.Component {
     this.retrieveRatingForRelated = this.retrieveRatingForRelated.bind(this);
     this.renderRelatedItems = this.renderRelatedItems.bind(this);
     this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
+    this.retrieveAllForRelated = this.retrieveAllForRelated.bind(this);
 
     this.retrieveRatings = this.retrieveRatings.bind(this);
   }
@@ -153,6 +155,11 @@ class App extends React.Component {
 
   }
 
+  //after getting all of the related products in an array
+  //perform calls to the api to get all of the data
+  //then arrange the data in the server, send it back and set state
+
+
   retrieveRelatedProducts(productId) {
     $.ajax({
       method: 'GET',
@@ -164,6 +171,11 @@ class App extends React.Component {
         //data might have duplicates
         //[3, 4, 3, 5]
         //
+        this.retrieveAllForRelated(data);
+
+
+
+
         var nonDuplicateObj = {};
         data.forEach(item => {
           nonDuplicateObj[item] = true;
@@ -184,6 +196,22 @@ class App extends React.Component {
       },
       error: (err) => {
         console.log('error getting related products', err);
+      }
+    })
+  }
+
+  retrieveAllForRelated(ids) {
+
+    var ids = ids.join('&');
+
+    $.ajax({
+      method: 'GET',
+      url: `related/${ids}`,
+      success: (data) => {
+        console.log('data', data)
+      },
+      error: (err) => {
+        console.log('error getting all for related', err)
       }
     })
   }
