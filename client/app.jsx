@@ -162,6 +162,7 @@ class App extends React.Component {
         "Authorization": APIkey
       },
       success: (data) => {
+        console.log('related id', data);
         this.retrieveAllForRelated(data);
         if (this.state.outfits.length > 0) {
           this.retrieveAllForOutfits(this.state.outfits)
@@ -199,11 +200,9 @@ class App extends React.Component {
       method: 'GET',
       url: `outfits/${ids}`,
       success: (data) => {
-        console.log('data for outfits', data);
         this.setState({
           outfits: data
         }, () => {
-          console.log(this.state.outfits);
         })
       },
       error: (err) => {
@@ -218,7 +217,7 @@ class App extends React.Component {
     var clickedCardId = e.currentTarget.getAttribute('data-txt');
     this.setState({
       productId: clickedCardId,
-
+      allRelated: []
     }, () => {
       this.retrieveProduct(this.state.productId);
       this.retrieveStyles(this.state.productId);
@@ -230,18 +229,33 @@ class App extends React.Component {
   }
 
   addToOutfit() {
-    console.log('working');
-    var outfits = this.state.outfitIds.concat(this.state.productId);
-    this.setState({
-      outfitIds: outfits,
-    }, () => {
-      console.log(this.state.outfitIds)
-      this.retrieveAllForOutfits(this.state.outfitIds);
-    })
+    if (this.state.outfitIds.indexOf(this.state.productId) === -1) {
+      var outfits = this.state.outfitIds.concat(this.state.productId);
+      this.setState({
+        outfitIds: outfits,
+      }, () => {
+        this.retrieveAllForOutfits(this.state.outfitIds);
+      })
+    }
   }
 
   removeFromOutfits(e) {
-    console.log('delete from outfit list');
+    var id = e.currentTarget.getAttribute('data-txt');
+    var outfitIds = this.state.outfitIds;
+    var targetIndex = outfitIds.indexOf(Number(id));
+    var splicedOutfitIds = outfitIds.splice(targetIndex, 1);
+    var outfits = this.state.outfits;
+    var listIndex;
+    outfits.forEach((item, index) => {
+      if (item.id === Number(id)) {
+        listIndex = index;
+      }
+    });
+    outfits.splice(listIndex, 1);
+    this.setState({
+      outfitIds: outfitIds,
+      outfits: outfits
+    })
   }
 
 

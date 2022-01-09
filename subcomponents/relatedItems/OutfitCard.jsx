@@ -18,15 +18,12 @@ export class OutfitCard extends React.Component {
     var defaultItem;
     this.props.itemInfo.results.forEach(item => {
       if (item['default?']) {
-        console.log('eee')
         defaultItem = item;
       }
     })
     if (!defaultItem) {
-      console.log('jfdkj')
-      defaultItem = this.props.itemInfo.results[0];
+           defaultItem = this.props.itemInfo.results[0];
     }
-    console.log('default is', defaultItem);
     return defaultItem;
   }
 
@@ -49,14 +46,14 @@ export class OutfitCard extends React.Component {
   }
 
   componentDidMount() {
-    console.log('props makke it to card', this.props.itemInfo)
+
   }
 
   render() {
     return (
       <>
         <div className="card">
-          <button onClick={this.props.remove}>delete</button>
+          <button data-txt={this.props.itemInfo.id} onClick={this.props.remove}>delete</button>
           {this.renderImg()}
           <div>{this.props.itemInfo.category}</div>
           <div>{this.props.itemInfo.name}</div>
