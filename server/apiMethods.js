@@ -62,8 +62,6 @@ var parseResults = (array, term) => {
 
 
 var retrieveRelatedData = (ids, cb) => {
-  //3 api calls per id
-  console.log('ids', ids);
   var allData = [];
   for (let i = 0; i < ids.length; i++) {
     let id = ids[i];
@@ -91,11 +89,8 @@ var retrieveRelatedData = (ids, cb) => {
           var averagedRating = parseAverageRating.parseAverageRating(data.data);
           var ratingObj = {rating: averagedRating};
           idData = {...idData, ...ratingObj};
-          //console.log('data', idData);
           allData.push(idData);
-          //console.log('allData', allData);
           if (ids.length === allData.length) {
-            //console.log('all datasss', allData);
             cb(allData);
           }
         })

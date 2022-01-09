@@ -59,3 +59,14 @@ app.get('/related/:ids', (req, res) => {
   }
   var data = retrieveRelatedData(ids, cb);
 })
+
+app.get('/outfits/:ids', (req, res) => {
+
+  var reqParam = req.params.ids;
+  console.log('reqparam', reqParam);
+  var ids = reqParam.split('&');
+  var cb = (data) => {
+    res.send(data);
+  }
+  var data = retrieveRelatedData(ids, cb);
+})

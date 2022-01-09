@@ -15,11 +15,14 @@ export class ComparisonModal extends React.Component {
   }
 
   componentDidMount() {
+    console.log('1', this.props.relatedFeatures.features, '2', this.props.name.features);
+    console.log('name', this.props.name)
     this.organizeFeatures();
   }
 
   organizeFeatures() {
-    var currentFeatures = this.props.self.features;
+    console.log('hello')
+    var currentFeatures = this.props.name.features;
     var clickedItemFeatures = this.props.relatedFeatures.features;
     var sortedFeatures = [];
     currentFeatures.forEach(item => {
@@ -74,7 +77,7 @@ export class ComparisonModal extends React.Component {
         <table>
           <thead>
             <tr>
-              <th className="comparisonTopRow">{this.props.self.name}</th>
+              <th className="comparisonTopRow">{this.props.name.name}</th>
               <th className="comparisonTopRow"></th>
               <th className="comparisonTopRow">{this.props.relatedFeatures.name}</th>
             </tr>
