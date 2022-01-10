@@ -6,12 +6,14 @@ class NewReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      photos: [],
+      addPhotos: true
     }
     this.handleAddReview = this.handleAddReview.bind(this);
     this.handleReviewClose = this.handleReviewClose.bind(this);
     this.loadCharacteristics = this.loadCharacteristics.bind(this);
     this.handleCharRating = this.handleCharRating.bind(this);
+    this.handlePhotos = this.handlePhotos.bind(this);
   }
 
   loadCharacteristics(characteristics) {
@@ -23,6 +25,31 @@ class NewReview extends React.Component {
         element.style.display = "block";
       }
     })
+  }
+
+  handlePhotos(e) {
+    var photoPaths = [];
+
+    for (var key in e.target.files) {
+      if (Number(key) >= 0) {
+        var url = URL.createObjectURL(e.target.files[key])
+        photoPaths.push(url);
+      }
+    }
+
+    if (photoPaths.length > 5) {
+      var input = document.getElementById('photoUploads');
+      input.value = '';
+      alert('Cannot upload more than 5 photos');
+    } else if (photoPaths.length === 5) {
+      this.setState({
+        photos: photoPaths,
+        addPhotos: false
+      })
+    } else {
+      this.setState({ photos: photoPaths })
+    }
+
   }
 
   handleAddReview() {
@@ -178,32 +205,37 @@ class NewReview extends React.Component {
 
             <div id="newReviewSummary">
               <header>Review Summary</header>
-              <textarea id="reviewSummaryText" name="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!"
+              <textarea className="reviewInputs" name="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!"
                 spellCheck="true"></textarea>
             </div>
 
             <div className="newReviewBody">
               <header>Review Body*</header>
-              <textarea name="reviewBody" maxLength="1000" placeholder="Why did you like the product or not?"
+              <textarea className="reviewInputs" name="reviewBody" maxLength="1000" placeholder="Why did you like the product or not?"
                 spellCheck="true" required={true}></textarea>
             </div>
 
             <div className="uploadPhotos">
               <header>Upload Photos</header>
-              <input type="file" name="photos" multiple></input>
-              <div className="photoThumbnails"></div>
+              {/* does null erase the input data? */}
+              {this.state.addPhotos ? <input type="file" name="photos" id="photoUploads" onChange={this.handlePhotos} multiple></input> : null}
+              {this.state.photos ? <div className="newReviewThumbnails">
+                {this.state.photos.map((photo, i) => (
+                  <img className="newReviewThumbnail" src={photo} key={i}></img>
+                ))}
+              </div> : null}
             </div>
 
             <div className="nickname">
               <header>Nickname*</header>
-              <input type="text" name="nickname" placeholder="Example: jackson11!"
+              <input className="reviewInputs" type="text" name="nickname" placeholder="Example: jackson11!"
                 spellCheck="true" maxLength="60" required={true}></input>
               <div>For privacy reasons, do not use your full name or email address</div>
             </div>
 
             <div className="email">
               <header>Email*</header>
-              <input type="text" name="email" placeholder="Example: jackson11@email.com"
+              <input className="reviewInputs" type="text" name="email" placeholder="Example: jackson11@email.com"
                 maxLength="60" required={true}></input>
               <div>For authentication reasons, you will not be emailed</div>
             </div>
