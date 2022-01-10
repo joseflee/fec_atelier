@@ -1,7 +1,7 @@
 var Promise = require('bluebird');
 var { APIkey } = require('../config.js');
 const axios = require('axios');
-
+const parseAverageRating = require('../modules/parseRatingsInServer.js');
 
 // retrieves product using id, returns a promise
 var retrieveProduct = (id) => {
@@ -57,7 +57,54 @@ var parseResults = (array, term) => {
 
 
 
+
+
+
+
+var retrieveRelatedData = (ids, cb) => {
+  var allData = [];
+  for (let i = 0; i < ids.length; i++) {
+    let id = ids[i];
+    let idData = {};
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
+      headers: {
+        authorization: APIkey
+      }
+    })
+    .then((data) => {
+      idData = {...data.data}
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`, {
+        headers: {
+          authorization: APIkey
+        }
+      })
+      .then((data) => {
+        idData = {...idData, ...data.data}
+        axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/?product_id=${id}`, {
+          headers: {
+            authorization: APIkey
+          }
+        })
+        .then((data) => {
+          var averagedRating = parseAverageRating.parseAverageRating(data.data);
+          var ratingObj = {rating: averagedRating};
+          idData = {...idData, ...ratingObj};
+          allData.push(idData);
+          if (ids.length === allData.length) {
+            cb(allData);
+          }
+        })
+        .catch((err) => {
+          console.log('error in the promise chain', err)
+        })
+      })
+    })
+  }
+}
+
+
 module.exports ={
   retrieveProduct: retrieveProduct,
-  conductSearch: conductSearch
+  conductSearch: conductSearch,
+  retrieveRelatedData: retrieveRelatedData,
 }
