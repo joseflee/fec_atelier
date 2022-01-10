@@ -4,7 +4,6 @@ import { mount, shallow, render } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { expect } from 'chai';
 import RelatedItems from '../../components/RelatedItems.jsx';
-import sinon from 'sinon';
 import {ProductCard} from '../../subcomponents/relatedItems/ProductCard.jsx';
 import {AddToOutfitCard} from '../../subcomponents/relatedItems/AddToOutfitCard.jsx';
 import {OutfitCard} from '../../subcomponents/relatedItems/OutfitCard.jsx';
