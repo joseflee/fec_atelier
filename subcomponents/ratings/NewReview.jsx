@@ -42,6 +42,7 @@ class NewReview extends React.Component {
   }
 
   handleCharRating(e) {
+    // move the descriptions object to main component state
     var descriptions = {
       size: ['A size too small', 'Half a size too small', 'Perfect', 'Half a size too big', 'A size too wide'],
       width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly Wide', 'Too wide'],

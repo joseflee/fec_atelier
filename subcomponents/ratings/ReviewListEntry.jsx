@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import Stars from './Stars.jsx';
+import ReviewPhotos from './ReviewPhotos.jsx';
 
 class ReviewListEntry extends React.Component {
   constructor(props) {
@@ -12,12 +13,7 @@ class ReviewListEntry extends React.Component {
   }
 
   handleHelpful() {
-    console.log('click');
-    // console.log('props: ', this.props)
-    // console.log(this.state);
-    // console.log(this.props.helpfulness);
     this.setState((state) => ({ helpfulness: (state.helpfulness + 1) }), () => {
-      console.log(this.state);
     });
   }
 
@@ -34,6 +30,7 @@ class ReviewListEntry extends React.Component {
 
         <div className="reviewSummary">{this.props.review.summary}</div>
         <div className="reviewBody">{this.props.review.body}</div>
+        {this.props.review.photos.length > 0 ? <ReviewPhotos photos={this.props.review.photos} /> : null}
         {this.props.review.recommend ? <div className="recommendedCheck">I recommend this product</div> : null}
         {this.props.review.response ? <div className="sellerResponse">
           <div className="responseHeader">Response:</div>

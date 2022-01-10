@@ -110,7 +110,7 @@ class App extends React.Component {
 
     $.ajax({
       method: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/?product_id=${this.state.productId}&count=200`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/?product_id=${this.state.productId}&count=10`,
       headers: {
         "Authorization": APIkey
       }

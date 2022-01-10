@@ -762,6 +762,27 @@ Review List
   left: 5px;
 }
 
+/* photos */
+
+.reviewPhotos {
+  position: relative;
+  height: 70%;
+  width: 100%;
+}
+
+.reviewImage {
+  height: 100px;
+  width: 70px;
+}
+
+.reviewPhotoModal {
+  /* display: none; */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
 /*
 /////////////////////
 New Review
@@ -863,7 +884,22 @@ New Review
 /* product breakdown */
 
 .charBarOuter {
+  position: relative;
   height: 10px;
   width: 300px;
   background-color: darkgray;
 }
+
+.charBarIndicator {
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.charBarIndicator::before {
+  color: black;
+  content: '\f0d7';
+}
+/* font-family: FontAwesome;
+  color: black; */
