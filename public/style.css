@@ -842,7 +842,16 @@ New Review
   display: none;
 }
 
-/* rating breakdown */
+/* photos */
+.newReviewThumbnail {
+  max-height: 100px;
+  max-width: 100px;
+}
+
+
+/* RATING BREAKDOWN */
+
+
 
 /* .ratingBreakdown {
   display: inline-flex;

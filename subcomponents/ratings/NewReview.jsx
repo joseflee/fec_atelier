@@ -6,12 +6,13 @@ class NewReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      photos: []
     }
     this.handleAddReview = this.handleAddReview.bind(this);
     this.handleReviewClose = this.handleReviewClose.bind(this);
     this.loadCharacteristics = this.loadCharacteristics.bind(this);
     this.handleCharRating = this.handleCharRating.bind(this);
+    this.handlePhotos = this.handlePhotos.bind(this);
   }
 
   loadCharacteristics(characteristics) {
@@ -22,6 +23,27 @@ class NewReview extends React.Component {
       if (element) {
         element.style.display = "block";
       }
+    })
+  }
+
+  handlePhotos(e) {
+    // console.log('event: ', e);
+    // console.log('event files: ', e.target.files);
+    // console.log('type: ', Array.isArray(e.target.files));
+    var photoPaths = [];
+    for(var key in e.target.files) {
+      // console.log('key: ', Number(key));
+      // console.log('condition: ', Number(key) >= 0);
+      if(Number(key) >= 0) {
+        var url = URL.createObjectURL(e.target.files[key])
+        photoPaths.push(url);
+        // console.log('photoPaths: ', photoPaths);
+      }
+    }
+    this.setState({
+      photos: photoPaths
+    }, () => {
+      console.log('state: ', this.state.photos);
     })
   }
 
@@ -190,8 +212,12 @@ class NewReview extends React.Component {
 
             <div className="uploadPhotos">
               <header>Upload Photos</header>
-              <input type="file" name="photos" multiple></input>
-              <div className="photoThumbnails"></div>
+              <input type="file" name="photos" onChange={this.handlePhotos} multiple></input>
+              {this.state.photos ? <div className="newReviewThumbnails">
+                {this.state.photos.map((photo, i) => (
+                  <img className="newReviewThumbnail" src={photo} key={i}></img>
+                ))}
+              </div> : null}
             </div>
 
             <div className="nickname">
