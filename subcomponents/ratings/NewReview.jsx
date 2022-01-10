@@ -27,24 +27,27 @@ class NewReview extends React.Component {
   }
 
   handlePhotos(e) {
-    // console.log('event: ', e);
-    // console.log('event files: ', e.target.files);
-    // console.log('type: ', Array.isArray(e.target.files));
     var photoPaths = [];
-    for(var key in e.target.files) {
-      // console.log('key: ', Number(key));
-      // console.log('condition: ', Number(key) >= 0);
-      if(Number(key) >= 0) {
+
+    for (var key in e.target.files) {
+      if (Number(key) >= 0) {
         var url = URL.createObjectURL(e.target.files[key])
         photoPaths.push(url);
-        // console.log('photoPaths: ', photoPaths);
       }
     }
-    this.setState({
-      photos: photoPaths
-    }, () => {
-      console.log('state: ', this.state.photos);
-    })
+
+    if (photoPaths.length > 5) {
+      var input = document.getElementById('photoUploads');
+      input.value = '';
+      alert('Cannot upload more than 5 photos');
+    } else {
+      this.setState({
+        photos: photoPaths
+      }, () => {
+        console.log('state: ', this.state.photos);
+      })
+    }
+
   }
 
   handleAddReview() {
@@ -212,7 +215,7 @@ class NewReview extends React.Component {
 
             <div className="uploadPhotos">
               <header>Upload Photos</header>
-              <input type="file" name="photos" onChange={this.handlePhotos} multiple></input>
+              <input type="file" name="photos" id="photoUploads" onChange={this.handlePhotos} multiple></input>
               {this.state.photos ? <div className="newReviewThumbnails">
                 {this.state.photos.map((photo, i) => (
                   <img className="newReviewThumbnail" src={photo} key={i}></img>
