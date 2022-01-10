@@ -765,6 +765,7 @@ Review List
 /* photos */
 
 .reviewPhotos {
+  position: relative;
   height: 70%;
   width: 100%;
 }
@@ -773,6 +774,14 @@ Review List
   height: 100px;
   width: 70px;
 }
+
+.reviewPhotoModal {
+  /* display: none; */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 
 /*
 /////////////////////
