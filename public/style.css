@@ -762,6 +762,18 @@ Review List
   left: 5px;
 }
 
+/* photos */
+
+.reviewPhotos {
+  height: 70%;
+  width: 100%;
+}
+
+.reviewImage {
+  height: 100px;
+  width: 70px;
+}
+
 /*
 /////////////////////
 New Review
