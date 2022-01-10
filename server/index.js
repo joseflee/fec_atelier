@@ -41,7 +41,6 @@ app.get('/styles/:id', (req, res) => {
     console.log(err);
   });
 
-
 })
 
 

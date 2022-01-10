@@ -15,8 +15,8 @@ class StyleSelector extends React.Component {
 
     this.changeStyle = this.changeStyle.bind(this);
     //this.unpackStyles = this.unpackStyles.bind(this);
-    this.unpackStylesNew = this.unpackStylesNew.bind(this);
-    this.unpackNamesNew = this.unpackNamesNew.bind(this);
+    this.unpackStyles = this.unpackStyles.bind(this);
+    this.unpackNames = this.unpackNames.bind(this);
 
   }
 
@@ -31,7 +31,7 @@ class StyleSelector extends React.Component {
     //this.unpackStyles();
   }
 
-  unpackStylesNew() {
+  unpackStyles() {
 
     var styles = this.props.styles.results;
     var imageUrls = [];
@@ -44,7 +44,7 @@ class StyleSelector extends React.Component {
 
   }
 
-  unpackNamesNew() {
+  unpackNames() {
 
     var styles = this.props.styles.results;
     var styleNames = [];
@@ -56,41 +56,6 @@ class StyleSelector extends React.Component {
     return styleNames;
 
   }
-
-  // unpackStyles() {
-
-  //   var styles = this.props.styles.results;
-  //   var imageUrls = [];
-  //   var styleNames = [];
-  //   var isNewGallery = false;
-  //   var index = this.state.featuredIndex;
-
-
-  //   for (var i = 0; i < styles.length; i++) {
-  //     styleNames.push(styles[i].name);
-  //     imageUrls.push(styles[i].photos[0].url);
-  //   }
-
-  //   for (var i = 0; i < styles.length; i++) {
-  //     if (styles[i].photos[0].url !== this.state.styles[i]) {
-  //       isNewGallery = true;
-  //     }
-  //   }
-
-  //   if (isNewGallery === true || this.state.styles.length === 0) {
-
-  //     this.setState({
-  //       ...this.state,
-  //       stylesObj: this.props.styles,
-  //       styles: imageUrls,
-  //       styleNames: styleNames
-  //     }, () => {
-  //       //console.log('set state ran... this is now styles in state -> ', this.state.styles)
-  //     })
-  //   }
-
-
-  // }
 
   changeStyle(index) {
     this.setState({
@@ -107,8 +72,8 @@ class StyleSelector extends React.Component {
 
     return (
       <div>
-        <div className={'styleIndicator'}><b>STYLE > </b>{this.unpackNamesNew()[this.state.featuredIndex]}</div>
-        <Style styles={this.unpackStylesNew()} styleNames={this.unpackNamesNew()} featuredIndex={this.state.featuredIndex} changeStyle={this.changeStyle}/>
+        <div className={'styleIndicator'}><b>STYLE > </b>{this.unpackNames()[this.state.featuredIndex]}</div>
+        <Style styles={this.unpackStyles()} styleNames={this.unpackNames()} featuredIndex={this.state.featuredIndex} changeStyle={this.changeStyle}/>
       </div>
     )
   }

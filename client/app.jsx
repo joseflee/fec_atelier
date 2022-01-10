@@ -55,9 +55,9 @@ class App extends React.Component {
   componentDidMount() {
 
     this.retrieveProduct(this.state.productId);
-    this.retrieveStyles(this.state.productId);
     this.retrieveRelatedProducts(this.state.productId);
     this.retrieveRatings();
+
   }
 
   componentDidUpdate() {
@@ -73,7 +73,6 @@ class App extends React.Component {
       url: `products/${id}`
     }).done((res) => {
         this.retrieveStyles(res, this.state.productId);
-        //console.log('state product => ', self.state.product);
     })
 
   }

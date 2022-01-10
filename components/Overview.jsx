@@ -20,23 +20,10 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    //console.log('component did mount');
+
   }
 
   componentDidUpdate() {
-
-    // if (this.props.product !== this.state.product) {
-
-    //   var productUpdate = this.props.product;
-    //   var stylesUpdate = this.props.styles;
-
-    //   this.setState({
-    //     ...this.state,
-    //     product: productUpdate,
-    //     styles: stylesUpdate
-    //   }, () => {
-    //   })
-    // }
 
   }
 
@@ -53,7 +40,7 @@ class Overview extends React.Component {
     return (
       <div id={'overview'}>
         <div className={'leftPanel'}>
-          <ImageGallery styleIndex={this.props.styles.results[this.state.selectedStyle]} styles={this.props.styles} index={this.state.selectedStyle} />
+          <ImageGallery styleIndex={this.props.styles.results[this.state.selectedStyle]} styles={this.props.styles} index={this.state.selectedStyle} style={this.props.styles.results[this.state.selectedStyle]} />
           <ProductDescription description={this.props.product.description}/>
         </div>
         <div className={'rightPanel'}>
