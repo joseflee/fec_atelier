@@ -48,11 +48,11 @@ export class OutfitList extends React.Component {
 
 
   renderOutfitList() {
-    var outfitList = this.props.outfits;
-    //
-    return (outfitList.map(item => {
-      return <OutfitCard key={item.id} itemInfo={item} remove={this.props.remove} />
-    }))
+    if (this.props.outfits.length > 0) {
+      return (this.props.outfits.map(item => {
+        return <OutfitCard key={item.id} itemInfo={item} remove={this.props.remove} />
+      }))
+    }
 
   }
 

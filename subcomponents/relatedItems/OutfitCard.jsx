@@ -1,7 +1,7 @@
 import React from 'react';
 import ratingToStar from '../../modules/stars.js';
 import {Stars} from './StarRating.jsx';
-
+import {CgCloseO} from 'react-icons/cg';
 
 export class OutfitCard extends React.Component {
   constructor(props) {
@@ -53,7 +53,9 @@ export class OutfitCard extends React.Component {
     return (
       <>
         <div className="card">
-          <button data-txt={this.props.itemInfo.id} onClick={this.props.remove}>delete</button>
+          <div data-txt={this.props.itemInfo.id} onClick={this.props.remove}>
+            <CgCloseO />
+          </div>
           {this.renderImg()}
           <div>{this.props.itemInfo.category}</div>
           <div>{this.props.itemInfo.name}</div>

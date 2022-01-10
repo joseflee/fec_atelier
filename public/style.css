@@ -572,6 +572,7 @@ RELATED ITEMS
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
+  width: 80em;
 }
 
 
@@ -597,7 +598,9 @@ RELATED ITEMS
   justify-content: center;
 }
 
-
+.close {
+  font-family: FontAwesome;
+}
 
 /*
 -------------------------

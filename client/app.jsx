@@ -194,19 +194,15 @@ class App extends React.Component {
 
   retrieveAllForOutfits(ids) {
     var ids = ids.join('&');
-    console.log('ids', ids);
     $.ajax({
       method: 'GET',
       url: `outfits/${ids}`,
       success: (data) => {
         var threeAtATime = data.slice(0, 3);
-        console.log('data length', data.length)
         this.setState({
           outfits: data,
           outfitView: threeAtATime,
-        }, () => {
-          console.log(this.state.outfits, 'three', this.state.outfitView)
-        })
+        }, () => {})
       },
       error: (err) => {
         console.log('error getting outfit data', err);
@@ -242,22 +238,32 @@ class App extends React.Component {
   }
 
   removeFromOutfits(e) {
+    e.stopPropagation();
     var id = e.currentTarget.getAttribute('data-txt');
     var outfitIds = this.state.outfitIds;
     var targetIndex = outfitIds.indexOf(Number(id));
     var splicedOutfitIds = outfitIds.splice(targetIndex, 1);
     var outfits = this.state.outfits;
     var listIndex;
+    var outfitView = this.state.outfitView;
+    var viewIndex;
     outfits.forEach((item, index) => {
       if (item.id === Number(id)) {
         listIndex = index;
       }
     });
     outfits.splice(listIndex, 1);
+    outfitView.forEach((item, index) => {
+      if (item.id === Number(id)) {
+        viewIndex = index;
+      }
+    });
+    outfitView.splice(viewIndex, 1);
     this.setState({
       outfitIds: outfitIds,
-      outfits: outfits
-    })
+      outfits: outfits,
+      outfitView: viewIndex,
+    }, () => {})
   }
 
   handleLeftArrow() {
