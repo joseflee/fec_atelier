@@ -205,13 +205,13 @@ class NewReview extends React.Component {
 
             <div id="newReviewSummary">
               <header>Review Summary</header>
-              <textarea id="reviewSummaryText" name="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!"
+              <textarea className="reviewInputs" name="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!"
                 spellCheck="true"></textarea>
             </div>
 
             <div className="newReviewBody">
               <header>Review Body*</header>
-              <textarea name="reviewBody" maxLength="1000" placeholder="Why did you like the product or not?"
+              <textarea className="reviewInputs" name="reviewBody" maxLength="1000" placeholder="Why did you like the product or not?"
                 spellCheck="true" required={true}></textarea>
             </div>
 
@@ -228,14 +228,14 @@ class NewReview extends React.Component {
 
             <div className="nickname">
               <header>Nickname*</header>
-              <input type="text" name="nickname" placeholder="Example: jackson11!"
+              <input className="reviewInputs" type="text" name="nickname" placeholder="Example: jackson11!"
                 spellCheck="true" maxLength="60" required={true}></input>
               <div>For privacy reasons, do not use your full name or email address</div>
             </div>
 
             <div className="email">
               <header>Email*</header>
-              <input type="text" name="email" placeholder="Example: jackson11@email.com"
+              <input className="reviewInputs" type="text" name="email" placeholder="Example: jackson11@email.com"
                 maxLength="60" required={true}></input>
               <div>For authentication reasons, you will not be emailed</div>
             </div>
