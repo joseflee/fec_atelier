@@ -331,6 +331,8 @@ Image Gallery - Overview
 }
 
 .mainImageFrame {
+  display: flex;
+  justify-content: center;
   z-index: 0;
   height: 100%;
   overflow: hidden;
@@ -428,7 +430,7 @@ Expanded View, Image Gallery - Overview
   position: relative;
   height: 600px;
   width: 800px;
-  left: 0px;
+  left: 100px;
   bottom: 675px;
 }
 
@@ -475,9 +477,9 @@ Expanded View, Image Gallery - Overview
 #xOutZoom {
   z-index: 3;
   display: inline-block;
-  position: relative;
-  left: 600px;
-  bottom: 480px;
+  position: absolute;
+  left: 780px;
+  bottom: 570px;
   font-family: arial;
   color:rgba(0, 0, 0, .5);
   font-size: 20px;
