@@ -6,7 +6,8 @@ class NewReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      photos: []
+      photos: [],
+      addPhotos: true
     }
     this.handleAddReview = this.handleAddReview.bind(this);
     this.handleReviewClose = this.handleReviewClose.bind(this);
@@ -40,12 +41,13 @@ class NewReview extends React.Component {
       var input = document.getElementById('photoUploads');
       input.value = '';
       alert('Cannot upload more than 5 photos');
-    } else {
+    } else if (photoPaths.length === 5) {
       this.setState({
-        photos: photoPaths
-      }, () => {
-        console.log('state: ', this.state.photos);
+        photos: photoPaths,
+        addPhotos: false
       })
+    } else {
+      this.setState({ photos: photoPaths })
     }
 
   }
@@ -215,7 +217,8 @@ class NewReview extends React.Component {
 
             <div className="uploadPhotos">
               <header>Upload Photos</header>
-              <input type="file" name="photos" id="photoUploads" onChange={this.handlePhotos} multiple></input>
+              {/* does null erase the input data? */}
+              {this.state.addPhotos ? <input type="file" name="photos" id="photoUploads" onChange={this.handlePhotos} multiple></input> : null}
               {this.state.photos ? <div className="newReviewThumbnails">
                 {this.state.photos.map((photo, i) => (
                   <img className="newReviewThumbnail" src={photo} key={i}></img>
