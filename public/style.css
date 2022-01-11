@@ -439,6 +439,14 @@ Expanded View, Image Gallery - Overview
   display: none;
 }
 
+.zoomedImageFrame {
+  display: flex;
+  justify-content: center;
+  z-index: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
 #zoomView {
   background-color: rgba(250, 250, 250, .9);
   z-index: 2;
@@ -454,6 +462,7 @@ Expanded View, Image Gallery - Overview
   display: inline-block;
   margin: 50px auto;
   width: 55%;
+  height: 90%;
   overflow: hidden;
 }
 
@@ -481,7 +490,7 @@ Expanded View, Image Gallery - Overview
 
 #dotBar {
   position: absolute;
-  bottom: 25px;
+  bottom: 5px;
   left: 330px;
 
 }
