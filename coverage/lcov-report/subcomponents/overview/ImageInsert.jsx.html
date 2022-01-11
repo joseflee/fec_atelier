@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">46.42% </span>
+                <span class="strong">45.61% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>26/56</span>
+                <span class='fraction'>26/57</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.28% </span>
+                <span class="strong">44.44% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>24/53</span>
+                <span class='fraction'>24/54</span>
             </div>
         
             
@@ -213,7 +213,8 @@
 <a name='L148'></a><a href='#L148'>148</a>
 <a name='L149'></a><a href='#L149'>149</a>
 <a name='L150'></a><a href='#L150'>150</a>
-<a name='L151'></a><a href='#L151'>151</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -299,6 +300,25 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -308,24 +328,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -428,7 +430,7 @@ class ImageInsert extends React.Component {
       }, () =&gt; {
         var i = this.state.featureImage;
         var scrollBox = $('.thumbnailScroll');
-        scrollBox.children('div').eq(i).css('border', '1px solid black');
+        scrollBox.children('img').eq(i).css('border', '2px solid black');
       })
     }
 &nbsp;
@@ -449,12 +451,12 @@ class ImageInsert extends React.Component {
     var upAngle = <span class="cstat-no" title="statement not covered" >$('.up_angle');</span>
     var downAngle = <span class="cstat-no" title="statement not covered" >$('.down_angle');</span>
 &nbsp;
-    //console.log('offset top =&gt; ', offset.top)
+<span class="cstat-no" title="statement not covered" >    console.log('offset top =&gt; ', offset.top)</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (Math.floor(offset.top) &gt;= 266) {</span>
+<span class="cstat-no" title="statement not covered" >    if (Math.floor(offset.top) &gt;= 180) {</span>
 <span class="cstat-no" title="statement not covered" >      upAngle.css('visibility', 'hidden');</span>
 <span class="cstat-no" title="statement not covered" >      downAngle.css('visibility', 'visible');</span>
-    } else <span class="cstat-no" title="statement not covered" >if (Math.floor(offset.top) &lt;= 166) {</span>
+    } else <span class="cstat-no" title="statement not covered" >if (Math.floor(offset.top) &lt;= 120) {</span>
 <span class="cstat-no" title="statement not covered" >      upAngle.css('visibility', 'visible');</span>
 <span class="cstat-no" title="statement not covered" >      downAngle.css('visibility', 'hidden');</span>
     } else {
@@ -470,13 +472,14 @@ class ImageInsert extends React.Component {
     var offset = <span class="cstat-no" title="statement not covered" >gallery.offset();</span>
     var shift;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (direction === 'down' &amp;&amp; Math.floor(offset.top) &gt; 166) {</span>
+<span class="cstat-no" title="statement not covered" >    if (direction === 'down' &amp;&amp; Math.floor(offset.top) &gt; 120) {</span>
 <span class="cstat-no" title="statement not covered" >      shift = offset.top - 20;</span>
-<span class="cstat-no" title="statement not covered" >      gallery.offset({ top: shift, left: 115 });</span>
+<span class="cstat-no" title="statement not covered" >      gallery.offset({ top: shift, left: 20 });</span>
     } else <span class="cstat-no" title="statement not covered" >if (direction === 'up' &amp;&amp; Math.floor(offset.top) &lt; 266) {</span>
 <span class="cstat-no" title="statement not covered" >      shift = offset.top + 20;</span>
-<span class="cstat-no" title="statement not covered" >      gallery.offset({ top: shift, left: 115 });</span>
+<span class="cstat-no" title="statement not covered" >      gallery.offset({ top: shift, left: 20 });</span>
     }
+&nbsp;
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    this.updateArrows();</span>
 &nbsp;
@@ -489,7 +492,7 @@ class ImageInsert extends React.Component {
 <span class="cstat-no" title="statement not covered" >        newIndex = i;</span>
       }
     }
-<span class="cstat-no" title="statement not covered" >    this.props.cb(newIndex);</span>
+<span class="cstat-no" title="statement not covered" >    this.props.cb(newIndex)</span>
   }
 &nbsp;
 &nbsp;
@@ -520,7 +523,7 @@ export default ImageInsert;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Jan 03 2022 13:30:08 GMT-0600 (Central Standard Time)
+                at Tue Jan 11 2022 11:01:39 GMT-0600 (Central Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
