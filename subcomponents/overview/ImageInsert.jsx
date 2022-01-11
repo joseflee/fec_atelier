@@ -84,7 +84,8 @@ class ImageInsert extends React.Component {
     var upAngle = $('.up_angle');
     var downAngle = $('.down_angle');
 
-    console.log('offset top => ', offset.top)
+    // ** calibration
+    // console.log('offset top => ', offset.top)
 
     if (Math.floor(offset.top) >= 180) {
       upAngle.css('visibility', 'hidden');

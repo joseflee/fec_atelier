@@ -1,8 +1,11 @@
 
 
 body {
+  margin: 0 auto;
   font-family: 'Poppins', sans-serif;
   background-color: rgba(0, 0, 0, .05);
+  min-width: 920px;
+  max-width: 1200px;
 }
 
 /*
@@ -338,7 +341,7 @@ Image Gallery - Overview
   height: 100%;
   overflow: hidden;
   width: 55%;
-  margin-left: 205px;
+  margin-left: 235px;
 }
 
 .mainImage:hover {
@@ -410,7 +413,7 @@ Image Gallery - Overview
   width: 15px;
   height: auto;
   position: relative;
-  left: 235px;
+  left: 255px;
   top: 305px;
   bottom: 90px;
   visibility: visible;
@@ -499,12 +502,14 @@ ADD TO CART
 .addToCartRow1 {
   display: flex;
   justify-content: space-between;
+  margin-right: 15px;
 }
 
 .addToCartRow2 {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
+  margin-right: 15px;
 }
 
 select {
@@ -794,4 +799,29 @@ New Review
 
 #reviewSummaryText {
   color: black;
+}
+
+
+
+
+
+
+
+/*
+//////////////////////////////
+Page responsiveness (presentation across screen sizes)
+//////////////////////////////
+*/
+
+
+@media only screen and (max-width: 1177px) {
+  .left_angle {
+    right: 190px;
+  }
+}
+
+@media only screen and (max-width: 1095px) {
+  .left_angle {
+    right: 180px;
+  }
 }
