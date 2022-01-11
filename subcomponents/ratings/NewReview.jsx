@@ -1,5 +1,4 @@
 import React from 'react';
-import ratingToStar from '../../modules/stars.js';
 import NewReviewStars from './NewReviewStars.jsx';
 import CharacteristicsForm from './CharacteristicsForm.jsx';
 
@@ -10,7 +9,9 @@ class NewReview extends React.Component {
       photos: [],
       addPhotos: true,
       overallRating: null,
-      characteristics: []
+      characteristics: [],
+      invalidInputs: [],
+      allInputsValid: true
     }
     this.handleAddReview = this.handleAddReview.bind(this);
     this.handleReviewClose = this.handleReviewClose.bind(this);
@@ -20,6 +21,7 @@ class NewReview extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
     this.handleOverallRating = this.handleOverallRating.bind(this);
+    this.findInvalidInputs = this.findInvalidInputs.bind(this);
   }
 
   loadCharacteristics(characteristics) {
@@ -31,24 +33,46 @@ class NewReview extends React.Component {
     this.state.overallRating = value;
   }
 
+  findInvalidInputs(allInputs, validInputs) {
+    var invalidInputs = [];
+
+    allInputs.forEach((input) => {
+      if (validInputs.indexOf(input) === -1) {
+        invalidInputs.push(input);
+      }
+    })
+
+    return invalidInputs;
+  }
+
   handleValidation(e) {
     e.preventDefault();
 
     var isValid = true;
     var requiredInputs = document.getElementsByClassName('required');
     var validLength = this.state.characteristics.length + 1;
+    var allInputs = [];
     var checked = [];
 
     if (!this.state.overallRating) {
+      allInputs.push('Overall Rating');
       isValid = false;
+    } else {
+      allInputs.push('Overall Rating');
+      checked.push('Overall Rating');
     }
 
     for (var i = 0; i < requiredInputs.length; i++) {
       var fieldset = requiredInputs[i].children;
 
       for (var j = 0; j < fieldset.length; j++) {
-        if (fieldset[j].checked === true) {
-          checked.push(fieldset[j].name);
+        if (fieldset[j].checked !== null && fieldset[j].checked !== undefined) {
+          if (allInputs.indexOf(fieldset[j].name) === -1) {
+            allInputs.push(fieldset[j].name);
+          }
+          if (fieldset[j].checked === true) {
+            checked.push(fieldset[j].name);
+          }
         }
       }
     }
@@ -58,6 +82,17 @@ class NewReview extends React.Component {
     }
 
     if (!isValid) {
+      var invalid = this.findInvalidInputs(allInputs, checked);
+      this.setState({
+        invalidInputs: invalid,
+        allInputsValid: false
+      }, () => {
+        var message = 'You must enter the following: \n';
+        this.state.invalidInputs.forEach((input) => {
+          message += `${input} \n`;
+        })
+        alert(message);
+      })
       console.log('Fill in required inputs');
     } else {
       console.log('All inputs are valid');
@@ -121,18 +156,19 @@ class NewReview extends React.Component {
   handleCharRating(e) {
     // move the descriptions object to main component state
     var descriptions = {
-      size: ['A size too small', 'Half a size too small', 'Perfect', 'Half a size too big', 'A size too wide'],
-      width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly Wide', 'Too wide'],
-      comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-      quality: ['Poor', 'Below Average', 'What I expect', 'Pretty great', 'Perfect'],
-      length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-      fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slighly long', 'Runs long']
+      Size: ['A size too small', 'Half a size too small', 'Perfect', 'Half a size too big', 'A size too wide'],
+      Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly Wide', 'Too wide'],
+      Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+      Quality: ['Poor', 'Below Average', 'What I expect', 'Pretty great', 'Perfect'],
+      Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+      Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slighly long', 'Runs long']
     }
 
     var char = e.target.name;
     var index = e.target.value - 1;
     var description = descriptions[char][index];
-    var id = `${char}Desc`;
+    var lowercase = char.toLowerCase();
+    var id = `${lowercase}Desc`;
     var element = document.getElementById(id);
     element.innerHTML = description;
 
@@ -156,10 +192,10 @@ class NewReview extends React.Component {
             <div className="recommend">
               <fieldset className="required" id="recommendFieldset" data-validate="true">
                 <legend>Do you recommend this product?*</legend>
-                <input type="radio" name="recommend" id="recommendYes" value="yes"></input>
+                <input type="radio" name="Recommended" id="recommendYes" value="yes"></input>
                 <label htmlFor="recommendYes">Yes</label>
 
-                <input type="radio" name="recommend" id="recommendNo" value="no"></input>
+                <input type="radio" name="Recommended" id="recommendNo" value="no"></input>
                 <label htmlFor="recommendNo">No</label>
               </fieldset>
             </div>
@@ -207,6 +243,8 @@ class NewReview extends React.Component {
                 maxLength="60" required={true} required pattern="^\S+@\S+$"></input>
               <div>For authentication reasons, you will not be emailed</div>
             </div>
+
+
 
             <button type="submit">Submit</button>
           </form>
