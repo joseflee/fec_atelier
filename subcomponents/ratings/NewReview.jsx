@@ -1,6 +1,7 @@
 import React from 'react';
 import ratingToStar from '../../modules/stars.js';
 import NewReviewStars from './NewReviewStars.jsx';
+import CharacteristicsForm from './CharacteristicsForm.jsx';
 
 class NewReview extends React.Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class NewReview extends React.Component {
     this.state = {
       photos: [],
       addPhotos: true,
-      overallRating: null
+      overallRating: null,
+      characteristics: []
     }
     this.handleAddReview = this.handleAddReview.bind(this);
     this.handleReviewClose = this.handleReviewClose.bind(this);
@@ -16,20 +18,13 @@ class NewReview extends React.Component {
     this.handleCharRating = this.handleCharRating.bind(this);
     this.handlePhotos = this.handlePhotos.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
     this.handleOverallRating = this.handleOverallRating.bind(this);
   }
 
   loadCharacteristics(characteristics) {
     var characteristics = Object.keys(characteristics);
-    characteristics.forEach((char) => {
-      var id = `char${char}`;
-      var element = document.getElementById(id);
-      if (element) {
-        element.style.display = "block";
-      }
-    })
+    this.setState({ characteristics: characteristics });
   }
 
   handleOverallRating(value) {
@@ -39,16 +34,34 @@ class NewReview extends React.Component {
   handleValidation(e) {
     e.preventDefault();
 
-    console.log('event: ', e);
     var isValid = true;
-    console.log('validation');
-    //
-  }
+    var requiredInputs = document.getElementsByClassName('required');
+    var validLength = this.state.characteristics.length + 1;
+    var checked = [];
 
-  handleChange(e) {
-    // console.log('change event: ', e);
-    // console.log('change event target: ', e.target.id);
-    // console.log('change event value: ', e.target.value);
+    if (!this.state.overallRating) {
+      isValid = false;
+    }
+
+    for (var i = 0; i < requiredInputs.length; i++) {
+      var fieldset = requiredInputs[i].children;
+
+      for (var j = 0; j < fieldset.length; j++) {
+        if (fieldset[j].checked === true) {
+          checked.push(fieldset[j].name);
+        }
+      }
+    }
+
+    if (checked.length < validLength) {
+      isValid = false;
+    }
+
+    if (!isValid) {
+      console.log('Fill in required inputs');
+    } else {
+      console.log('All inputs are valid');
+    }
 
   }
 
@@ -61,9 +74,6 @@ class NewReview extends React.Component {
     // if all conditions are met
     // send data to server
 
-    // if target is class is charRating
-    // iterate through elements list (e.target)
-    // find value
   }
 
   handlePhotos(e) {
@@ -144,7 +154,7 @@ class NewReview extends React.Component {
             </label>
 
             <div className="recommend">
-              <fieldset id="recommendFieldset">
+              <fieldset className="required" id="recommendFieldset" data-validate="true">
                 <legend>Do you recommend this product?*</legend>
                 <input type="radio" name="recommend" id="recommendYes" value="yes"></input>
                 <label htmlFor="recommendYes">Yes</label>
@@ -155,119 +165,23 @@ class NewReview extends React.Component {
             </div>
 
             <div className="characteristicRatingSelector">Characteristic Ratings*
-              <div className="characteristicRating" id="charSize">
-                <fieldset id="sizeFieldset">
-                  <legend>Size </legend>
-                  <p className="charRatingDesc" id="sizeDesc">None selected</p>
-                  <label htmlFor="size1">1</label>
-                  <input type="radio" name="size1" id="size1" value="1" onClick={this.handleCharRating}></input>
-                  <label htmlFor="size2">2</label>
-                  <input type="radio" name="size2" id="size2" value="2" onClick={this.handleCharRating}></input>
-                  <label htmlFor="size3">3</label>
-                  <input type="radio" name="size3" id="size3" value="3" onClick={this.handleCharRating}></input>
-                  <label htmlFor="size4">4</label>
-                  <input type="radio" name="size4" id="size4" value="4" onClick={this.handleCharRating}></input>
-                  <label htmlFor="size5">5</label>
-                  <input type="radio" name="size5" id="size5" value="5" onClick={this.handleCharRating}></input>
-                </fieldset>
-              </div>
 
-              <div className="characteristicRating" id="charWidth">
-                <fieldset id="widthFieldset">
-                  <legend>Width </legend>
-                  <p className="charRatingDesc" id="widthDesc">None selected</p>
-                  <label htmlFor="width1">1</label>
-                  <input type="radio" name="width" id="width1" value="1" onClick={this.handleCharRating}></input>
-                  <label htmlFor="width2">2</label>
-                  <input type="radio" name="width" id="width2" value="2" onClick={this.handleCharRating}></input>
-                  <label htmlFor="width3">3</label>
-                  <input type="radio" name="width" id="width3" value="3" onClick={this.handleCharRating}></input>
-                  <label htmlFor="width4">4</label>
-                  <input type="radio" name="width" id="width4" value="4" onClick={this.handleCharRating}></input>
-                  <label htmlFor="width5">5</label>
-                  <input type="radio" name="width" id="width5" value="5" onClick={this.handleCharRating}></input>
-                </fieldset>
-              </div>
+              {this.state.characteristics.map((char, i) => (
+                <CharacteristicsForm key={i} char={char} handleCharRating={this.handleCharRating} />
+              ))}
 
-              <div className="characteristicRating" id="charComfort">
-                <fieldset id="comfortFieldset">
-                  <legend>Comfort </legend>
-                  <p className="charRatingDesc" id="comfortDesc">None selected</p>
-                  <label htmlFor="comfort1">1</label>
-                  <input type="radio" name="comfort" id="comfort1" value="1" onClick={this.handleCharRating}></input>
-                  <label htmlFor="comfort2">2</label>
-                  <input type="radio" name="comfort" id="comfort2" value="2" onClick={this.handleCharRating}></input>
-                  <label htmlFor="comfort3">3</label>
-                  <input type="radio" name="comfort" id="comfort3" value="3" onClick={this.handleCharRating}></input>
-                  <label htmlFor="comfort4">4</label>
-                  <input type="radio" name="comfort" id="comfort4" value="4" onClick={this.handleCharRating}></input>
-                  <label htmlFor="comfort5">5</label>
-                  <input type="radio" name="comfort" id="comfort5" value="5" onClick={this.handleCharRating}></input>
-                </fieldset>
-              </div>
-
-              <div className="characteristicRating" id="charQuality">
-                <fieldset id="qualityFieldset">
-                  <legend>Quality </legend>
-                  <p className="charRatingDesc" id="qualityDesc">None selected</p>
-                  <label htmlFor="quality1">1</label>
-                  <input type="radio" name="quality" id="quality1" value="1" onClick={this.handleCharRating}></input>
-                  <label htmlFor="quality2">2</label>
-                  <input type="radio" name="quality" id="quality2" value="2" onClick={this.handleCharRating}></input>
-                  <label htmlFor="quality3">3</label>
-                  <input type="radio" name="quality" id="quality3" value="3" onClick={this.handleCharRating}></input>
-                  <label htmlFor="quality4">4</label>
-                  <input type="radio" name="quality" id="quality4" value="4" onClick={this.handleCharRating}></input>
-                  <label htmlFor="quality5">5</label>
-                  <input type="radio" name="quality" id="quality5" value="5" onClick={this.handleCharRating}></input>
-                </fieldset>
-              </div>
-
-              <div className="characteristicRating" id="charLength">
-                <fieldset id="lengthFieldset">
-                  <legend>Length </legend>
-                  <p className="charRatingDesc" id="lengthDesc">None selected</p>
-                  <label htmlFor="length1">1</label>
-                  <input type="radio" name="length" id="length1" value="1" onClick={this.handleCharRating}></input>
-                  <label htmlFor="length2">2</label>
-                  <input type="radio" name="length" id="length2" value="2" onClick={this.handleCharRating}></input>
-                  <label htmlFor="length3">3</label>
-                  <input type="radio" name="length" id="length3" value="3" onClick={this.handleCharRating}></input>
-                  <label htmlFor="length4">4</label>
-                  <input type="radio" name="length" id="length4" value="4" onClick={this.handleCharRating}></input>
-                  <label htmlFor="length5">5</label>
-                  <input type="radio" name="length" id="length5" value="5" onClick={this.handleCharRating}></input>
-                </fieldset>
-              </div>
-
-              <div className="characteristicRating" id="charFit">
-                <fieldset id="fitFieldset">
-                  <legend>Fit </legend>
-                  <p className="charRatingDesc" id="fitDesc">None selected</p>
-                  <label htmlFor="fit1">1</label>
-                  <input type="radio" name="fit" id="fit1" value="1" onClick={this.handleCharRating}></input>
-                  <label htmlFor="fit2">2</label>
-                  <input type="radio" name="fit" id="fit2" value="2" onClick={this.handleCharRating}></input>
-                  <label htmlFor="fit3">3</label>
-                  <input type="radio" name="fit" id="fit3" value="3" onClick={this.handleCharRating}></input>
-                  <label htmlFor="fit4">4</label>
-                  <input type="radio" name="fit" id="fit4" value="4" onClick={this.handleCharRating}></input>
-                  <label htmlFor="fit5">5</label>
-                  <input type="radio" name="fit" id="fit5" value="5" onClick={this.handleCharRating}></input>
-                </fieldset>
-              </div>
             </div>
 
             <div id="newReviewSummary">
               <header>Review Summary</header>
               <textarea className="reviewInputs" id="newReviewSummary" name="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!"
-                spellCheck="true" onChange={this.handleChange}></textarea>
+                spellCheck="true"></textarea>
             </div>
 
-            <div className="newReviewBody">
+            <div className="newReviewBody" data-validate="true">
               <header>Review Body*</header>
               <textarea className="reviewInputs" id="newReviewBody" name="reviewBody" minLength="50" maxLength="1000" placeholder="Why did you like the product or not?"
-                spellCheck="true" required={true} onChange={this.handleChange}></textarea>
+                spellCheck="true" required={true}></textarea>
             </div>
 
             <div className="uploadPhotos">
@@ -282,15 +196,15 @@ class NewReview extends React.Component {
 
             <div className="nickname">
               <header>Nickname*</header>
-              <input className="reviewInputs" type="text" name="nickname" placeholder="Example: jackson11!"
+              <input className="reviewInputs" id="newReviewName" type="text" name="nickname" placeholder="Example: jackson11!"
                 spellCheck="true" maxLength="60" required={true}></input>
               <div>For privacy reasons, do not use your full name or email address</div>
             </div>
 
             <div className="email">
               <header>Email*</header>
-              <input className="reviewInputs" type="text" name="email" placeholder="Example: jackson11@email.com"
-                maxLength="60" required={true}></input>
+              <input className="reviewInputs" id="newReviewEmail" type="text" name="email" placeholder="Example: jackson11@email.com"
+                maxLength="60" required={true} required pattern="^\S+@\S+$"></input>
               <div>For authentication reasons, you will not be emailed</div>
             </div>
 
