@@ -357,6 +357,16 @@ Image Gallery - Overview
   overflow: hidden;
 }
 
+#arrowBox {
+  display: flex;
+  justify-content: center;
+  z-index: 0;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  margin-left: 0px;
+}
+
 .imageInsert {
 
   display: inline-block;
@@ -418,6 +428,8 @@ Image Gallery - Overview
   bottom: 90px;
   visibility: visible;
 }
+
+
 
 /*
 Expanded View, Image Gallery - Overview
@@ -823,5 +835,23 @@ Page responsiveness (presentation across screen sizes)
 @media only screen and (max-width: 1095px) {
   .left_angle {
     right: 180px;
+  }
+}
+
+@media only screen and (max-width: 1005px) {
+  .left_angle {
+    right: 170px;
+  }
+}
+
+@media only screen and (max-width: 985px) {
+  .left_angle {
+    right: 160px;
+  }
+}
+
+@media only screen and (max-width: 965px) {
+  .left_angle {
+    right: 140px;
   }
 }
