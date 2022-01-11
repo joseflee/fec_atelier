@@ -31,6 +31,8 @@ class NewReviewStars extends React.Component {
     var eventNumber = e.target.id.match(/\d/);
     var index = Number(eventNumber[0]);
     var selectedStars = innerStarIds.slice(0, index);
+    var lastStar = selectedStars[selectedStars.length - 1];
+    var value = Number(lastStar[lastStar.length - 1]);
 
     innerStarIds.forEach((star) => {
       var element = document.getElementById(star);
@@ -43,6 +45,7 @@ class NewReviewStars extends React.Component {
     });
 
     this.setText(index);
+    this.props.handleOverallRating(value);
     this.forceUpdate();
   }
 

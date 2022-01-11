@@ -16,7 +16,7 @@ class ReviewsList extends React.Component {
     var firstTwo = [];
     firstTwo.push(this.props.reviews.results[0]);
     firstTwo.push(this.props.reviews.results[1]);
-    this.setState({visibleReviews: firstTwo});
+    this.setState({ visibleReviews: firstTwo });
   }
 
   handleMoreReviews() {
@@ -26,8 +26,8 @@ class ReviewsList extends React.Component {
     var nextTwo = reviews.slice(start, end);
     var newState = this.state.visibleReviews.concat(nextTwo);
     var button = document.getElementById("moreReviews");
-    this.setState({visibleReviews: newState}, () => {
-      if(this.state.visibleReviews.length === this.state.reviews.results.length) {
+    this.setState({ visibleReviews: newState }, () => {
+      if (this.state.visibleReviews.length === this.state.reviews.results.length) {
         button.style.display = "none";
       }
     });
@@ -38,11 +38,13 @@ class ReviewsList extends React.Component {
 
   render() {
     return (
+      <div id="reviewListContainer">
         <div id="reviewList">
-          {this.state.visibleReviews.map((review, index) => <ReviewListEntry key={index} review={review}/>)}
-          <button id="moreReviews" onClick={this.handleMoreReviews}>More Reviews</button>
-          <NewReview characteristics={this.props.characteristics}/>
+          {this.state.visibleReviews.map((review, index) => <ReviewListEntry key={index} review={review} />)}
         </div>
+        <button id="moreReviews" onClick={this.handleMoreReviews}>More Reviews</button>
+        <NewReview characteristics={this.props.characteristics} />
+      </div>
     )
   }
 }

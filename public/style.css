@@ -674,7 +674,7 @@ REVIEW LIST
 */
 
 
-#reviewList {
+#reviewListContainer {
   float: right;
   width: 60%;
   margin-left: 9%;
@@ -682,6 +682,11 @@ REVIEW LIST
   margin-top: 4.5%;
   margin-bottom: 4.5%;
   padding: 10px;
+}
+
+#reviewList {
+  max-height: 490px;
+  overflow-y: auto;
 }
 
 .reviewListEntry {
