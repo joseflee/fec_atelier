@@ -28,14 +28,12 @@ class App extends React.Component {
       styles: null,
       ratings: null,
       averageRating: null,
-      products: null,
       percentRecommended: null,
-      currentItemFeatures: [],
-      relatedItems: [],
-      relatedStyles: [],
-      relatedIds: [],
-      relatedRatings: [],
-
+      allRelated: [],
+      outfitIds: [],
+      outfits: [],
+      outfitView: [],
+      outfitPosition: 0,
     }
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
@@ -43,11 +41,13 @@ class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
 
     this.retrieveRelatedProducts = this.retrieveRelatedProducts.bind(this);
-    this.retrieveProductForRelated = this.retrieveProductForRelated.bind(this);
-    this.retrieveStyleForRelated = this.retrieveStyleForRelated.bind(this);
-    this.retrieveRatingForRelated = this.retrieveRatingForRelated.bind(this);
-    this.renderRelatedItems = this.renderRelatedItems.bind(this);
+    this.retrieveAllForRelated = this.retrieveAllForRelated.bind(this);
+    this.retrieveAllForOutfits = this.retrieveAllForOutfits.bind(this);
     this.handleRelatedCardClick = this.handleRelatedCardClick.bind(this);
+    this.addToOutfit = this.addToOutfit.bind(this);
+    this.removeFromOutfits = this.removeFromOutfits.bind(this);
+    this.handleRightArrow = this.handleRightArrow.bind(this);
+    this.handleLeftArrow = this.handleLeftArrow.bind(this);
 
     this.retrieveRatings = this.retrieveRatings.bind(this);
   }
@@ -93,7 +93,6 @@ class App extends React.Component {
         ...self.state,
         product: product,
         styles: res,
-        currentItemFeatures: product.features
       }, () => {
         //console.log('state styles => ', self.state.styles);
       })
@@ -153,6 +152,9 @@ class App extends React.Component {
 
   }
 
+
+
+
   retrieveRelatedProducts(productId) {
     $.ajax({
       method: 'GET',
@@ -161,26 +163,10 @@ class App extends React.Component {
         "Authorization": APIkey
       },
       success: (data) => {
-        //data might have duplicates
-        //[3, 4, 3, 5]
-        //
-        var nonDuplicateObj = {};
-        data.forEach(item => {
-          nonDuplicateObj[item] = true;
-        })
-        var nonDuplicateArray = [];
-        for (var id in nonDuplicateObj) {
-          nonDuplicateArray.push(id);
+        this.retrieveAllForRelated(data);
+        if (this.state.outfits.length > 0) {
+          this.retrieveAllForOutfits(this.state.outfits)
         }
-        this.setState({
-          relatedIds: nonDuplicateArray
-        });
-        nonDuplicateArray.forEach(id => {
-          this.retrieveProductForRelated(id);
-          this.retrieveStyleForRelated(id);
-          this.retrieveRatingForRelated(id);
-
-        })
       },
       error: (err) => {
         console.log('error getting related products', err);
@@ -188,92 +174,126 @@ class App extends React.Component {
     })
   }
 
+  retrieveAllForRelated(ids) {
 
-  retrieveProductForRelated(productId) {
+    var ids = ids.join('&');
+
     $.ajax({
       method: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}`,
-      headers: {
-        "Authorization": APIkey
-      },
+      url: `related/${ids}`,
       success: (data) => {
-        var relatedData = this.state.relatedItems.concat(data);
         this.setState({
-          relatedItems: relatedData
-        });
+          allRelated: data
+        }, () => {})
       },
       error: (err) => {
-        console.log('error', err);
+        console.log('error getting all for related', err)
       }
     })
   }
 
-  retrieveStyleForRelated(productNumber) {
+  retrieveAllForOutfits(ids) {
+    var ids = ids.join('&');
     $.ajax({
       method: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productNumber}/styles`,
-      headers: {
-        "Authorization": APIkey
-      },
+      url: `outfits/${ids}`,
       success: (data) => {
-        var relatedStyle = this.state.relatedStyles.concat(data);
+        var threeAtATime = data.slice(0, 3);
         this.setState({
-          relatedStyles: relatedStyle
-        });
+          outfits: data,
+          outfitView: threeAtATime,
+        }, () => {})
       },
       error: (err) => {
-        console.log(err);
+        console.log('error getting outfit data', err);
       }
     })
   }
 
-  retrieveRatingForRelated(productId) {
-
-    var self = this;
-
-    $.ajax({
-      method: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/?product_id=${productId}`,
-      headers: {
-        "Authorization": APIkey
-      }
-    }).done((res) => {
-      var avgRating = parseAverageRating(res);
-      var ratingObj = {ratingId: productId, rating: avgRating}
-      var currentRating = this.state.relatedRatings.concat(ratingObj);
-      self.setState({
-        relatedRatings: currentRating,
-      }, () => {
-
-      })
-    })
-  }
 
   handleRelatedCardClick(e) {
     var clickedCardId = e.currentTarget.getAttribute('data-txt');
     this.setState({
       productId: clickedCardId,
-      relatedItems: [],
-      relatedStyles: [],
-      relatedIds: [],
-      relatedRatings: [],
-
+      allRelated: []
     }, () => {
       this.retrieveProduct(this.state.productId);
-      this.retrieveRelatedProducts();
+      this.retrieveStyles(this.state.productId);
+      this.retrieveRelatedProducts(this.state.productId);
       this.retrieveRatings();
 
     }
     )
   }
 
-  renderRelatedItems() {
-    var noOfRelated = this.state.relatedIds.length;
-    if (noOfRelated > 0 && this.state.product && this.state.styles && this.state.averageRating) {
-      if (noOfRelated === this.state.relatedItems.length && noOfRelated === this.state.relatedStyles.length && noOfRelated === this.state.relatedRatings.length) {
-          return <RelatedItems items={this.state.relatedItems} styles={this.state.relatedStyles} self={this.state.product} ratings={this.state.relatedRatings} clickCard={this.handleRelatedCardClick} />
-      }
+  addToOutfit() {
+    if (this.state.outfitIds.indexOf(this.state.productId) === -1) {
+      var outfits = this.state.outfitIds.concat(this.state.productId);
+      this.setState({
+        outfitIds: outfits,
+      }, () => {
+        this.retrieveAllForOutfits(this.state.outfitIds);
+      })
     }
+  }
+
+  removeFromOutfits(e) {
+    e.stopPropagation();
+    var id = e.currentTarget.getAttribute('data-txt');
+    var outfitIds = this.state.outfitIds;
+    var targetIndex = outfitIds.indexOf(Number(id));
+    var splicedOutfitIds = outfitIds.splice(targetIndex, 1);
+    var outfits = this.state.outfits;
+    var listIndex;
+    var outfitView = this.state.outfitView;
+    var viewIndex;
+    outfits.forEach((item, index) => {
+      if (item.id === Number(id)) {
+        listIndex = index;
+      }
+    });
+    outfits.splice(listIndex, 1);
+    outfitView.forEach((item, index) => {
+      if (item.id === Number(id)) {
+        viewIndex = index;
+      }
+    });
+    outfitView.splice(viewIndex, 1);
+    this.setState({
+      outfitIds: outfitIds,
+      outfits: outfits,
+      outfitView: viewIndex,
+    }, () => {})
+  }
+
+  handleLeftArrow() {
+    var newPosition;
+    if (this.state.outfitPosition > 0) {
+      newPosition = this.state.outfitPosition - 1;
+    } else {
+      newPosition = 0;
+    }
+    var newView = this.state.outfits.slice(newPosition, newPosition + 3);
+    this.setState({
+      outfitPosition: newPosition,
+      outfitView: newView
+    })
+
+  }
+
+  handleRightArrow() {
+    var newPosition;
+    if (this.state.outfitPosition < this.state.outfits.length - 3) {
+      newPosition = this.state.outfitPosition + 1;
+    } else {
+      newPosition = this.state.outfits.length - 3;
+    }
+    var newView = this.state.outfits.slice(newPosition, newPosition + 3);
+    this.setState({
+      outfitPosition: newPosition,
+      outfitView: newView
+    })
+
   }
 
   render() {
@@ -291,7 +311,7 @@ class App extends React.Component {
           <div className={'announcement'}><i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - NEW PRODUCT HIGHLIGHT</div>
         </div>
         <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating}/> : null }</div>
-        {this.renderRelatedItems()}
+        {this.state.allRelated.length > 0 ? <RelatedItems all={this.state.allRelated} outfits={this.state.outfitView} clickCard={this.handleRelatedCardClick} addOutfit={this.addToOutfit} remove={this.removeFromOutfits} name={this.state.product} right={this.handleRightArrow} left={this.handleLeftArrow} position={this.state.outfitPosition} /> : null}
         <QuestionsAndAnswers />
         <div className="ratingsAndReviews">
         {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings} averageRating={this.state.averageRating} percent={this.state.percentRecommended}/> : null }
