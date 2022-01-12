@@ -1,8 +1,11 @@
 
 
 body {
+  margin: 0 auto;
   font-family: 'Poppins', sans-serif;
   background-color: rgba(0, 0, 0, .05);
+  min-width: 920px;
+  max-width: 1200px;
 }
 
 /*
@@ -279,6 +282,7 @@ Style Item - Overview
 Image Gallery - Overview
 */
 
+
 .imageGallery {
   text-align: center;
   height: 100%;
@@ -324,16 +328,20 @@ Image Gallery - Overview
 
 .mainImage {
   z-index: 0;
-  margin-left: 100px;
+  margin-left: 0px;
   display: inline-block;
   text-align: center;
   height: 100%;
 }
 
 .mainImageFrame {
+  display: flex;
+  justify-content: center;
   z-index: 0;
   height: 100%;
   overflow: hidden;
+  width: 55%;
+  margin-left: 235px;
 }
 
 .mainImage:hover {
@@ -347,6 +355,16 @@ Image Gallery - Overview
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+#arrowBox {
+  display: flex;
+  justify-content: center;
+  z-index: 0;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  margin-left: 0px;
 }
 
 .imageInsert {
@@ -382,7 +400,7 @@ Image Gallery - Overview
 }
 
 .left_angle {
-  z-index: 2;
+  z-index: 3;
   width: 15px;
   height: auto;
   position: relative;
@@ -405,11 +423,13 @@ Image Gallery - Overview
   width: 15px;
   height: auto;
   position: relative;
-  left: 235px;
+  left: 255px;
   top: 305px;
   bottom: 90px;
   visibility: visible;
 }
+
+
 
 /*
 Expanded View, Image Gallery - Overview
@@ -419,6 +439,14 @@ Expanded View, Image Gallery - Overview
   display: none;
 }
 
+.zoomedImageFrame {
+  display: flex;
+  justify-content: center;
+  z-index: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
 #zoomView {
   background-color: rgba(250, 250, 250, .9);
   z-index: 2;
@@ -426,7 +454,7 @@ Expanded View, Image Gallery - Overview
   position: relative;
   height: 600px;
   width: 800px;
-  left: 0px;
+  left: 100px;
   bottom: 675px;
 }
 
@@ -434,6 +462,7 @@ Expanded View, Image Gallery - Overview
   display: inline-block;
   margin: 50px auto;
   width: 55%;
+  height: 90%;
   overflow: hidden;
 }
 
@@ -461,7 +490,7 @@ Expanded View, Image Gallery - Overview
 
 #dotBar {
   position: absolute;
-  bottom: 25px;
+  bottom: 5px;
   left: 330px;
 
 }
@@ -473,9 +502,9 @@ Expanded View, Image Gallery - Overview
 #xOutZoom {
   z-index: 3;
   display: inline-block;
-  position: relative;
-  left: 600px;
-  bottom: 480px;
+  position: absolute;
+  left: 780px;
+  bottom: 570px;
   font-family: arial;
   color:rgba(0, 0, 0, .5);
   font-size: 20px;
@@ -494,12 +523,14 @@ ADD TO CART
 .addToCartRow1 {
   display: flex;
   justify-content: space-between;
+  margin-right: 15px;
 }
 
 .addToCartRow2 {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
+  margin-right: 15px;
 }
 
 select {
@@ -792,4 +823,47 @@ New Review
 
 #reviewSummaryText {
   color: black;
+}
+
+
+
+
+
+
+
+/*
+//////////////////////////////
+Page responsiveness (presentation across screen sizes)
+//////////////////////////////
+*/
+
+
+@media only screen and (max-width: 1177px) {
+  .left_angle {
+    right: 190px;
+  }
+}
+
+@media only screen and (max-width: 1095px) {
+  .left_angle {
+    right: 180px;
+  }
+}
+
+@media only screen and (max-width: 1005px) {
+  .left_angle {
+    right: 170px;
+  }
+}
+
+@media only screen and (max-width: 985px) {
+  .left_angle {
+    right: 160px;
+  }
+}
+
+@media only screen and (max-width: 965px) {
+  .left_angle {
+    right: 140px;
+  }
 }
