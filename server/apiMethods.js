@@ -66,19 +66,6 @@ var parseResults = (array, term) => {
 
 
 
-
-
-
-
-<<<<<<< HEAD
-module.exports ={
-  retrieveProduct: retrieveProduct,
-  conductSearch: conductSearch,
-  retrieveStyles: retrieveStyles
-=======
-
-
-
 var retrieveRelatedData = (ids, cb) => {
   var allData = [];
   for (let i = 0; i < ids.length; i++) {
@@ -122,8 +109,11 @@ var retrieveRelatedData = (ids, cb) => {
 
 
 module.exports ={
+
   retrieveProduct: retrieveProduct,
   conductSearch: conductSearch,
+  retrieveStyles: retrieveStyles,
   retrieveRelatedData: retrieveRelatedData,
->>>>>>> 77246a5a312fe76d7a6734dc02337c20b4d6b15c
+
 }
+

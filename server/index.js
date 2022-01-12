@@ -2,11 +2,7 @@ const express = require('express');
 const expressStaticGzip = require('express-static-gzip')
 
 const app = express();
-<<<<<<< HEAD
-const { retrieveProduct, retrieveStyles, conductSearch } = require('./apiMethods.js');
-=======
-const { retrieveProduct, conductSearch, retrieveRelatedData } = require('./apiMethods.js');
->>>>>>> 77246a5a312fe76d7a6734dc02337c20b4d6b15c
+const { retrieveProduct, retrieveStyles, conductSearch, retrieveRelatedData } = require('./apiMethods.js');
 
 var port = 3000;
 
