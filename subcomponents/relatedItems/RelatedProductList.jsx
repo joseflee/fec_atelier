@@ -10,13 +10,11 @@ export class RelatedProductList extends React.Component {
       positionAtList: 0,
       currentView: [],
       relatedItems: [],
-      relatedStyles: []
     }
     this.handleLeftArrow = this.handleLeftArrow.bind(this);
     this.handleRightArrow = this.handleRightArrow.bind(this);
     this.shiftViewLeft = this.shiftViewLeft.bind(this);
     this.shiftViewRight = this.shiftViewRight.bind(this);
-    this.combineProductData = this.combineProductData.bind(this);
   }
 
   handleLeftArrow() {
@@ -55,33 +53,12 @@ export class RelatedProductList extends React.Component {
     })
   }
 
-  combineProductData(array1, array2, array3) {
-    var combinedArray = [];
-    array1.forEach(obj1 => {
-      array2.forEach(obj2 => {
-        if ('' + obj1.id === obj2.product_id) {
-          var combined = Object.assign(obj1, obj2);
-          combinedArray.push(combined);
-        }
-      })
-    })
-    combinedArray.forEach(item => {
-      array3.forEach(obj => {
-        if (obj.ratingId === '' + item.id) {
-          item.rating = obj.rating;
-        }
-      })
-    })
-    return combinedArray;
-  }
-
   componentDidMount() {
-
-    var combined = this.combineProductData(this.props.related, this.props.styles, this.props.ratings);
-    var threeAtATime = combined.slice(0, 3);
+    var relatedProductData = this.props.all
+    var threeAtATime = relatedProductData.slice(0, 3);
     this.setState({
       currentView: threeAtATime,
-      relatedItems: combined,
+      relatedItems: relatedProductData,
     }, () => {})
   }
 
@@ -91,7 +68,7 @@ export class RelatedProductList extends React.Component {
         <h3>list of related products</h3>
         <div className="carousel">
           <div className="centerVertical">
-           {this.state.positionAtList > 0 ? <div className="leftArrow" onClick={this.handleLeftArrow}></div> : null}
+            {this.state.positionAtList > 0 ? <div className="leftArrow" onClick={this.handleLeftArrow}></div> : null}
           </div>
           {this.state.currentView.map((item) => {
             return <ProductCard key={item.id} data={item.id} clickCard={this.props.clickCard} clickStar={this.props.clickStar} itemInfo={item} />
