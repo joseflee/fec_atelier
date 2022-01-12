@@ -6,6 +6,13 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
+// React App Tests additions
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import {render, fireEvent, waitFor, screen} from '@testing-library/react'
+import '@testing-library/jest-dom'
+import camoOnesie from '../../mock_api/mockCamoOnesie.js';
+
 import Overview from '../../components/Overview.jsx';
 import AddToCart from '../../subcomponents/overview/AddToCart.jsx';
 import ImageGallery from '../../subcomponents/overview/ImageGallery.jsx';
@@ -17,6 +24,22 @@ import mockProduct from '../../mock_api/mock_product.js';
 import mockStyles from '../../mock_api/mock_styles.js';
 
 Enzyme.configure({ adapter: new Adapter() });
+
+const server = setupServer(
+      rest.get('/products/59553', (req, res, ctx) => {
+            return res(ctx.json({ result: camoOnesie }))
+      }),
+
+      rest.get('/')
+)
+
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
+
+test('ajax call connects with server', async () => {
+
+})
 
 
 test('Overview renders properly', () => {
