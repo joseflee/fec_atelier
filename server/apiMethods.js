@@ -102,9 +102,25 @@ var retrieveRelatedData = (ids, cb) => {
   }
 }
 
+var postReview = (data) => {
+  console.log('data: ', data);
+  // data = JSON.stringify(data);
+  return axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', data, {
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: APIkey
+    }
+  }).then((res) => {
+    return res;
+  }).catch((err) => {
+    console.log('Error in posting review: ', err);
+  })
+}
+
 
 module.exports ={
   retrieveProduct: retrieveProduct,
   conductSearch: conductSearch,
   retrieveRelatedData: retrieveRelatedData,
+  postReview: postReview
 }

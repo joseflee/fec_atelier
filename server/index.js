@@ -1,8 +1,11 @@
 const express = require('express');
 const expressStaticGzip = require('express-static-gzip')
+const bodyParser = require('body-parser');
 
 const app = express();
-const { retrieveProduct, conductSearch, retrieveRelatedData } = require('./apiMethods.js');
+const { retrieveProduct, conductSearch, retrieveRelatedData, postReview } = require('./apiMethods.js');
+
+var jsonParser = bodyParser.json();
 
 var port = 3000;
 
@@ -69,4 +72,17 @@ app.get('/outfits/:ids', (req, res) => {
     res.send(data);
   }
   var data = retrieveRelatedData(ids, cb);
+})
+
+//POST review
+app.post('/reviews', jsonParser, (req, res) => {
+
+  postReview(req.body).then((response) => {
+    console.log('in server: ', response);
+    console.log('status: ', response.status);
+    res.status(response.status).send(response.statusText);
+  }).catch((err) => {
+    console.log(err);
+  });
+
 })
