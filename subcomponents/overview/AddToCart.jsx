@@ -37,7 +37,6 @@ class AddToCart extends React.Component {
 
     var props = this.props.state;
     var selectedIndex = this.props.state.selectedStyle;
-    console.log('these are the props at the trouble spot -> ', this.props.state)
     var styles = this.props.state.styles.results;
     var selectedStyle = styles[selectedIndex];
 
