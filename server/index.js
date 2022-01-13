@@ -16,7 +16,6 @@ app.listen(port, () => {
 app.use('/', expressStaticGzip('public'));
 
 
-
 // GET single product by ID
 app.get('/products/:id', (req, res) => {
 
