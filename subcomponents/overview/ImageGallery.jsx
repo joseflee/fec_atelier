@@ -28,6 +28,8 @@ class ImageGallery extends React.Component {
     this.changeFeaturedImage = this.changeFeaturedImage.bind(this);
     this.resetTracking = this.resetTracking.bind(this);
 
+    this.unpackImagesNew = this.unpackImagesNew.bind(this);
+
   }
 
   componentDidMount() {
@@ -51,10 +53,23 @@ class ImageGallery extends React.Component {
   }
 
 
+  unpackImagesNew() {
+
+    var styleImages = this.props.style.photos;
+    var mainURLs = [];
+
+    for (var i = 0; i < styleImages.length; i++) {
+      mainURLs.push(styleImages[i].url);
+    }
+
+    return mainURLs;
+
+  }
+
+
   unpackImages() {
 
     var styleImages = this.state.selectedStyle.photos;
-    //var styleImages = this.state.styles[this.state.selectedIndex].photos;
     var mainURLs = [];
     var galleryIsNew = false;
 
@@ -214,7 +229,7 @@ class ImageGallery extends React.Component {
         <img className={'right_angle'} src={'./assets/right_angle.png'} onClick={() => { this.handleScroll('right') }} />
         <div className={'mainFrame'}>
           <ImageInsert featureImage={this.state.featureImage} selectedStyle={this.state.selectedStyle} cb={this.changeFeaturedImage} />
-          <MainImage image={this.state.newGallery[this.state.featureImage]} toggleZoom={this.toggleZoom} />
+          <MainImage image={this.unpackImagesNew()[this.state.featureImage]} toggleZoom={this.toggleZoom} />
         </div>
         <ImageZoom selectedStyle={this.state.selectedStyle} featureImage={this.state.featureImage} closeZoom={this.closeZoom} />
       </div>
@@ -224,6 +239,7 @@ class ImageGallery extends React.Component {
   }
 
 };
+
 
 
 

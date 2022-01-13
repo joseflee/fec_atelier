@@ -109,6 +109,18 @@ class ImageZoom extends React.Component {
 
   closeZoom() {
     this.props.closeZoom();
+
+    var zoomedImg = $('#zoomedImage');
+    var zoomed = $('#zoomFrame');
+    zoomed.css('background-image', 'none');
+    zoomedImg.css('visibility', 'visible');
+    zoomedImg.css('transform', 'scale(1)');
+    zoomedImg.css('cursor', 'zoom-in');
+    this.setState({
+      ...this.state,
+      zoom: false
+    })
+
   }
 
   trackZoom(e) {
@@ -144,7 +156,9 @@ class ImageZoom extends React.Component {
       <div id={'zoomView'}>
         <div id={'xOutZoom'} onClick={this.closeZoom}>x</div>
         <div id={'zoomFrame'} onMouseMove={this.trackZoom} onClick={this.zoomClick}>
-          <img id={'zoomedImage'} onClick={this.zoomClick} src={this.state.newGallery[this.state.featureImage]} />
+          <div className={'zoomedImageFrame'}>
+            <img id={'zoomedImage'} onClick={this.zoomClick} src={this.state.newGallery[this.state.featureImage]} />
+          </div>
         </div>
         <div id={'dotBar'}>{this.state.newGallery.map((item, i) => (
           <div key={i} className={'scrollDot'} onClick={this.handleImageChange}>.<span className={'invisibleIndex'}>{i}</span></div>

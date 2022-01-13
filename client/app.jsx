@@ -57,7 +57,6 @@ class App extends React.Component {
   componentDidMount() {
 
     this.retrieveProduct(this.state.productId);
-    this.retrieveStyles(this.state.productId);
     this.retrieveRelatedProducts(this.state.productId);
     this.retrieveRatings();
     this.retrieveRatingsMeta();
@@ -76,7 +75,6 @@ class App extends React.Component {
       url: `products/${id}`
     }).done((res) => {
         this.retrieveStyles(res, this.state.productId);
-        //console.log('state product => ', self.state.product);
     })
 
   }
@@ -87,10 +85,7 @@ class App extends React.Component {
 
     $.ajax({
       method: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productNumber}/styles`,
-      headers: {
-        "Authorization": APIkey
-      }
+      url: `styles/${productNumber}`
     }).done((res) => {
       self.setState({
         ...self.state,

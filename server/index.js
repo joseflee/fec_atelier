@@ -3,10 +3,10 @@ const expressStaticGzip = require('express-static-gzip')
 const bodyParser = require('body-parser');
 
 const app = express();
-const { retrieveProduct, conductSearch, retrieveRelatedData, postReview } = require('./apiMethods.js');
+
+const { retrieveProduct, retrieveStyles, conductSearch, retrieveRelatedData, postReview } = require('./apiMethods.js');
 
 var jsonParser = bodyParser.json();
-
 var port = 3000;
 
 app.listen(port, () => {
@@ -26,6 +26,19 @@ app.get('/products/:id', (req, res) => {
   var id = req.params.id;
 
   retrieveProduct(id).then((data) => {
+    res.send(data.data);
+  }).catch((err) => {
+    console.log(err);
+  });
+
+})
+
+// GET styles by product ID
+app.get('/styles/:id', (req, res) => {
+
+  var id = req.params.id;
+
+  retrieveStyles(id).then((data) => {
     res.send(data.data);
   }).catch((err) => {
     console.log(err);
