@@ -22,7 +22,7 @@ class RatingsAndReviews extends React.Component {
   render() {
     return (
       <div id="reviewsSection">
-        <h3>Ratings & Reviews</h3>
+        <h3 id="reviewsHeader">Ratings & Reviews</h3>
         <RatingBreakdown  averageRating={this.props.averageRating} percent={this.props.percent} reviewCount={this.state.reviewCount} filterByStars={this.filterByStars} ratingsMeta={this.props.ratingsMeta}/>
         <ProductBreakdown ratingsMeta={this.props.ratingsMeta}/>
         <ReviewsList reviews={this.state.reviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings} productId={this.props.productId}/>

@@ -670,15 +670,45 @@ RATINGS AND REVIEWS
 
 
 /*
+GRID
+*/
+
+#reviewsSection {
+  display: grid;
+  grid-template-columns: 100px 350px auto 100px;
+  grid-template-rows: 50px auto;
+  grid-template-areas:
+    ". header reviews ."
+    ". ratingBreakdown reviews ."
+    ". productBreakdown reviews .";
+}
+
+#reviewsHeader {
+  grid-area: header;
+}
+
+#ratingBreakdown {
+  grid-area: ratingBreakdown;
+}
+
+.productBreakdown {
+  grid-area: productBreakdown;
+}
+
+#reviewListContainer {
+  grid-area: reviews;
+}
+
+/*
 REVIEW LIST
 */
 
 
 #reviewListContainer {
   float: right;
-  width: 60%;
+  width: 723px;
+  max-width: 723px;
   margin-left: 9%;
-  margin-right: 9%;
   margin-top: 4.5%;
   margin-bottom: 4.5%;
   padding: 10px;
@@ -859,19 +889,20 @@ RATING BREAKDOWN
 
 
 
-/* .ratingBreakdown {
+#ratingBreakdown {
   display: inline-flex;
-  width: 300px;
-} */
+  flex-direction: column;
+  width: auto;
+}
 
 .ratingGraph {
   display: inline-flex;
   flex-direction: column;
-  width: 280px;
+  width: auto;
 }
 
 .ratingContainer {
-  position: relative;
+  /* position: relative; */
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -883,17 +914,40 @@ RATING BREAKDOWN
   position: absolute;
   top: 0;
   left: 0;
-  height: 5px;
-  width: 50%;
+  height: 10px;
+  width: 0;
   background-color: green;
 }
 
 .outerBar {
   position: relative;
   align-self: flex-end;
-  height: 5px;
-  width: 150px;
+  height: 10px;
+  width: 286px;
   background-color: darkgray;
+  margin-bottom: 7px;
+}
+
+#percentRecommended {
+  font-size: 16px;
+}
+
+.breakdownLabel {
+  width: 54px;
+}
+
+#ratingNumStarContainer {
+  display: inline-flex;
+  gap: 10px;
+}
+
+#ratingNumber {
+  font-size: 48px;
+  font-weight: 1000;
+}
+
+#ratingBreakdownStars {
+  margin-top: 12px;
 }
 
 /*
@@ -903,7 +957,7 @@ PRODUCT BREAKDOWN
 .charBarOuter {
   position: relative;
   height: 10px;
-  width: 300px;
+  width: 350px;
   background-color: darkgray;
 }
 

@@ -11,7 +11,7 @@ var Stars = (props) => {
 
   return (
 
-    <div>
+    <div id="ratingBreakdownStars">
       <div className={'stars-outer'}>
       <div className={'stars-inner'} style={{ width: rating }}></div>
       </div>
