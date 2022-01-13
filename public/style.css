@@ -729,7 +729,7 @@ REVIEW LIST
 .reviewEntryTop {
   display: inline-flex;
   flex-direction: row;
-  /* justify-content: right; */
+  align-content: baseline;
   justify-content: space-between;
   margin-top: 10px;
   margin-bottom: 10px;

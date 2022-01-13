@@ -14,7 +14,9 @@ class RatingBreakdown extends React.Component {
         <div id="ratingSummary">
           <div id="ratingNumStarContainer">
             <div id="ratingNumber">{this.props.averageRating ? this.props.averageRating.toFixed(1) : null}</div>
-            <Stars rating={this.props.averageRating} />
+            <div id="ratingBreakdownStars">
+              <Stars rating={this.props.averageRating} />
+            </div>
           </div>
           <div id="percentRecommended">{this.props.percent}% of reviews recommend this product</div>
           <div id="reviewCount">{this.props.reviewCount} reviews</div>
