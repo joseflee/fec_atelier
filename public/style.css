@@ -586,18 +586,82 @@ RELATED ITEMS
 /////////////////////
 */
 
+
+/*----------------
+product card
+----------------*/
+
+
 .card {
-  width: 200px;
+  border: 1px solid black;
+  width: 175px;
   height: 300px;
   background: rgb(214, 211, 211);
-  border: 1px solid black;
   text-align: center;
+  position: relative;
 }
 
 .cardImage {
-  max-width: 150px;
-  max-height: 150px;
+  /*max-width: 175px;*/
+  width: 100%;
+  max-height: 210px;
 }
+
+.noPhoto {
+  min-width: 150px;
+  min-height: 150px;
+  background-color: grey;
+
+}
+
+.RIproductInfo {
+  position: absolute;
+  bottom: 10px;
+  text-align: left;
+  font-size: .9em;
+  font-weight: bold;
+}
+
+.RIcategory {
+  position: relative;
+  text-align: left;
+  font-size: .8em;
+}
+
+.RIname {
+  position: relative;
+  text-align: left;
+  font-size: .9em;
+  font-weight: bold;
+}
+
+.RIprice {
+  position: relative;
+  text-align: left;
+  font-size: .8em;
+}
+
+.RIstars {
+  position: relative;
+  text-align: left;
+  font-size: .9em;
+  font-weight: bold;
+}
+
+.RIcompare {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+/*----------------
+
+----------------*/
+/*----------------
+
+----------------*/
+
+
+
 
 .carousel {
   display: flex;
@@ -606,6 +670,10 @@ RELATED ITEMS
   width: 80em;
 }
 
+.arrows {
+  border: 1px solid grey;
+  border-radius: 10px;
+}
 
 .rightArrow {
   width: 0;
@@ -670,7 +738,6 @@ comparison modal
 
 .oneStar {
   font-family: FontAwesome;
-  background: rgb(146, 142, 142);
   border: none;
 }
 

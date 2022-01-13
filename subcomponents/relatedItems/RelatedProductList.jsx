@@ -1,7 +1,7 @@
 import React from 'react';
-import {ProductCard} from './ProductCard.jsx';
-
-
+import { ProductCard } from './ProductCard.jsx';
+import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 export class RelatedProductList extends React.Component {
   constructor(props) {
     super(props);
@@ -68,13 +68,13 @@ export class RelatedProductList extends React.Component {
         <h3>list of related products</h3>
         <div className="carousel">
           <div className="centerVertical">
-            {this.state.positionAtList > 0 ? <div className="leftArrow" onClick={this.handleLeftArrow}></div> : null}
+            {this.state.positionAtList > 0 ? <div onClick={this.handleLeftArrow}><FaArrowLeft className="arrows" /></div> : null}
           </div>
           {this.state.currentView.map((item) => {
             return <ProductCard key={item.id} data={item.id} clickCard={this.props.clickCard} clickStar={this.props.clickStar} itemInfo={item} />
           })}
           <div className="centerVertical">
-            {this.state.positionAtList < this.state.relatedItems.length - 3 ? <div className="rightArrow" onClick={this.handleRightArrow}></div> : null}
+            {this.state.positionAtList < this.state.relatedItems.length - 3 ? <div onClick={this.handleRightArrow}><FaArrowRight className="arrows" /></div> : null}
           </div>
         </div>
       </>

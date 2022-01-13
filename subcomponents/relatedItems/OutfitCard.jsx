@@ -41,7 +41,7 @@ export class OutfitCard extends React.Component {
     if (defaultItem.photos[0].url) {
       return <div><img src={defaultItem.photos[0].url} className="cardImage" /></div>
     } else {
-      return <div>no photo</div>
+      return <div className="noPhoto centerVertical">No Photo Available</div>
     }
   }
 
@@ -51,17 +51,23 @@ export class OutfitCard extends React.Component {
 
   render() {
     return (
-      <>
-        <div className="card">
-          <div data-txt={this.props.itemInfo.id} onClick={this.props.remove}>
-            <CgCloseO />
-          </div>
-          {this.renderImg()}
-          <div>{this.props.itemInfo.category}</div>
-          <div>{this.props.itemInfo.name}</div>
-          <Stars rating={this.props.itemInfo.rating} />
+
+      <div className="card">
+        <div data-txt={this.props.itemInfo.id} onClick={this.props.remove} className="RIcompare">
+          <CgCloseO />
         </div>
-      </>
+        <div className="cardImage">
+          {this.renderImg()}
+        </div>
+        <div className="RIproductInfo">
+          <div className="RIcategory">{this.props.itemInfo.category}</div>
+          <div className="RIname">{this.props.itemInfo.name}</div>
+          <div className="RIstars">
+            <Stars rating={this.props.itemInfo.rating} />
+          </div>
+        </div>
+      </div>
+
     )
   }
 }

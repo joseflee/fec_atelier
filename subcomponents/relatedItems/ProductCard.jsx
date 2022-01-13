@@ -38,23 +38,27 @@ export class ProductCard extends React.Component {
     if (defaultItem.photos[0].url) {
       return <div><img src={defaultItem.photos[0].url} className="cardImage" /></div>
     } else {
-      return <div>no photo</div>
+      return <div className="noPhoto centerVertical">No Photo Available</div>
     }
   }
 
 
   render() {
     return (
-      <>
         <div onClick={this.props.clickCard} data-txt={this.props.data} className="card">
-          {this.renderImg()}
-          <button onClick={this.props.clickStar} data-id={this.props.data} className="fas fa-star oneStar">compare</button>
-          <div>{this.props.itemInfo.category}</div>
-          <div>{this.props.itemInfo.name}</div>
-          {this.renderPrice()}
-          <Stars rating={this.props.itemInfo.rating} />
+          <div className="cardImage">{this.renderImg()}</div>
+          <div className="RIcompare">
+            <div onClick={this.props.clickStar} data-id={this.props.data} className="fas fa-star oneStar"></div>
+          </div>
+          <div className="RIproductInfo">
+            <div className="RIcategory">{this.props.itemInfo.category}</div>
+            <div className='RIname'>{this.props.itemInfo.name}</div>
+            <div className='RIprice'>{this.renderPrice()}</div>
+            <div className="RIstars">
+              <Stars rating={this.props.itemInfo.rating} />
+            </div>
+          </div>
         </div>
-      </>
     )
   }
 }
