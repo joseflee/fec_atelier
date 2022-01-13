@@ -20,7 +20,7 @@ var Style = (props) => {
             <div className={'checkBox'}>
             <div className={'checkmark'}><span>&#10003;</span></div>
             </div>
-            <img className={`selectedStyle`} onClick={() => {handleClick(i)}} src={item}/>
+            <img className={`selectedStyle`} onClick={() => {handleClick(i)}} src={item} alt={'Atelier style image'}/>
             </div>
           )
         } else {
