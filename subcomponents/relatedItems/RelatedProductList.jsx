@@ -32,7 +32,7 @@ export class RelatedProductList extends React.Component {
     } else {
       newPosition = 0;
     }
-    var newView = this.state.relatedItems.slice(newPosition, newPosition + 3);
+    var newView = this.state.relatedItems.slice(newPosition, newPosition + 4);
     this.setState({
       positionAtList: newPosition,
       currentView: newView
@@ -41,12 +41,12 @@ export class RelatedProductList extends React.Component {
 
   shiftViewRight() {
     var newPosition;
-    if (this.state.positionAtList < this.state.relatedItems.length - 3) {
+    if (this.state.positionAtList < this.state.relatedItems.length - 4) {
       newPosition = this.state.positionAtList + 1;
     } else {
-      newPosition = this.state.relatedItems.length - 3;
+      newPosition = this.state.relatedItems.length - 4;
     }
-    var newView = this.state.relatedItems.slice(newPosition, newPosition + 3);
+    var newView = this.state.relatedItems.slice(newPosition, newPosition + 4);
     this.setState({
       positionAtList: newPosition,
       currentView: newView
@@ -55,17 +55,19 @@ export class RelatedProductList extends React.Component {
 
   componentDidMount() {
     var relatedProductData = this.props.all
-    var threeAtATime = relatedProductData.slice(0, 3);
+    var fourAtATime = relatedProductData.slice(0, 4);
     this.setState({
-      currentView: threeAtATime,
+      currentView: fourAtATime,
       relatedItems: relatedProductData,
-    }, () => {})
+    }, () => {
+
+    })
   }
 
  render() {
     return (
       <>
-        <h3>list of related products</h3>
+        <h3>Related Products</h3>
         <div className="carousel">
           <div className="centerVertical">
             {this.state.positionAtList > 0 ? <div onClick={this.handleLeftArrow}><FaArrowLeft className="arrows" /></div> : null}
@@ -74,7 +76,7 @@ export class RelatedProductList extends React.Component {
             return <ProductCard key={item.id} data={item.id} clickCard={this.props.clickCard} clickStar={this.props.clickStar} itemInfo={item} />
           })}
           <div className="centerVertical">
-            {this.state.positionAtList < this.state.relatedItems.length - 3 ? <div onClick={this.handleRightArrow}><FaArrowRight className="arrows" /></div> : null}
+            {this.state.positionAtList < this.state.relatedItems.length - 4 ? <div onClick={this.handleRightArrow}><FaArrowRight className="arrows RIarrow" /></div> : null}
           </div>
         </div>
       </>

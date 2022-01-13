@@ -159,13 +159,25 @@ class App extends React.Component {
         "Authorization": APIkey
       },
       success: (data) => {
-        this.retrieveAllForRelated(data);
-        if (this.state.outfits.length > 0) {
-          this.retrieveAllForOutfits(this.state.outfits)
+        //remove duplicates
+        //[1, 3, 4, 5, 3]
+        var dataObj = {};
+        var withoutDuplicates = [];
+        data.forEach( item => {
+          if ( productId !== item ) {
+            dataObj[ item ] = true;
+          }
+        } );
+        for ( var id in dataObj ) {
+          withoutDuplicates.push( id );
+        }
+        this.retrieveAllForRelated( withoutDuplicates );
+        if ( this.state.outfits.length > 0 ) {
+          this.retrieveAllForOutfits( this.state.outfits )
         }
       },
-      error: (err) => {
-        console.log('error getting related products', err);
+      error: ( err ) => {
+        console.log( 'error getting related products', err );
       }
     })
   }
@@ -223,12 +235,12 @@ class App extends React.Component {
   }
 
   addToOutfit() {
-    if (this.state.outfitIds.indexOf(this.state.productId) === -1) {
-      var outfits = this.state.outfitIds.concat(this.state.productId);
+    if ( this.state.outfitIds.indexOf( this.state.productId ) === -1) {
+      var outfits = this.state.outfitIds.concat( this.state.productId );
       this.setState({
         outfitIds: outfits,
       }, () => {
-        this.retrieveAllForOutfits(this.state.outfitIds);
+        this.retrieveAllForOutfits( this.state.outfitIds );
       })
     }
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ratingToStar from '../../modules/stars.js';
-import {Stars} from './StarRating.jsx';
+import { Stars } from './StarRating.jsx';
+import { BiStar } from 'react-icons/bi';
 
 
 export class ProductCard extends React.Component {
@@ -48,7 +49,7 @@ export class ProductCard extends React.Component {
         <div onClick={this.props.clickCard} data-txt={this.props.data} className="card">
           <div className="cardImage">{this.renderImg()}</div>
           <div className="RIcompare">
-            <div onClick={this.props.clickStar} data-id={this.props.data} className="fas fa-star oneStar"></div>
+            <BiStar onClick={this.props.clickStar} data-id={this.props.data} />
           </div>
           <div className="RIproductInfo">
             <div className="RIcategory">{this.props.itemInfo.category}</div>

@@ -52,7 +52,6 @@ class RelatedItems extends React.Component {
   render() {
     return (
       <>
-        <div>Related Items</div>
         <RelatedProductList clickCard={this.props.clickCard} clickStar={this.handleRelatedStarClick} all={this.props.all} />
         <OutfitList outfits={this.props.outfits} add={this.props.addOutfit} remove={this.props.remove} right={this.props.right} left={this.props.left} position={this.props.position} />
         {(this.state.modal) ? <ComparisonModal close={this.closeModal} features={this.props.features} relatedFeatures={this.state.clickedCardFeatures} name={this.props.name} /> : null}
