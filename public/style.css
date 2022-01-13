@@ -961,10 +961,27 @@ PRODUCT BREAKDOWN
   background-color: darkgray;
 }
 
-.charBarIndicator {
-  font-family: FontAwesome;
+.charBarInner {
   position: absolute;
   top: 0;
+  width: 350px;
+  height: 10px;
+  display: inline-flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+}
+
+.charBarGap {
+  background-color: rgb(232, 232, 232);
+  height: 10px;
+  width: 4px;
+}
+
+.charBarIndicator {
+  font-family: FontAwesome;
+  font-size: 36px;
+  position: absolute;
+  top: -13px;
   left: 0;
 }
 
@@ -972,5 +989,15 @@ PRODUCT BREAKDOWN
   color: black;
   content: '\f0d7';
 }
-/* font-family: FontAwesome;
-  color: black; */
+
+.charBarDescContainer {
+  width: 350px;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+.charBarDesc1, .charBarDesc2 {
+  font-size: 14px;
+}

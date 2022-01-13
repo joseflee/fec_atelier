@@ -13,12 +13,12 @@ class CharacteristicRating extends React.Component {
   // offset indicator by percentage
   // var indicatorId = `charBarIndicator${props.char}`;
 
-  componentDidMount() {
-      var rating = this.props.meta[this.props.char].value;
-      var value = (rating / 5) * 100;
-      var percent = `${value}%`;
-      var element = document.getElementById(this.state.indicatorId);
-      element.style.left = percent;
+  componentDidUpdate() {
+    var rating = this.props.meta[this.props.char].value;
+    var value = (rating / 5) * 100;
+    var percent = `${value}%`;
+    var element = document.getElementById(this.state.indicatorId);
+    element.style.left = percent;
   }
 
   render() {
@@ -26,11 +26,18 @@ class CharacteristicRating extends React.Component {
       <div className="charBreakdown">
         <header className="charBarHeader">{this.props.char}</header>
         <div className="charBarOuter">
-          <div className="charBarInner"></div>
+          <div className="charBarInner">
+            <div className="charBarGap"></div>
+            <div className="charBarGap"></div>
+            <div className="charBarGap"></div>
+            <div className="charBarGap"></div>
+          </div>
           <div className="charBarIndicator" id={this.state.indicatorId}></div>
         </div>
-        <p className="charBarDesc1">Poor</p>
-        <p className="charBarDesc2">Perfect</p>
+        <div className="charBarDescContainer">
+          <span className="charBarDesc1">{this.props.descriptions[this.props.char][0]}</span>
+          <span className="charBarDesc2">{this.props.descriptions[this.props.char][this.props.descriptions[this.props.char].length - 1]}</span>
+        </div>
       </div>
     )
   }
