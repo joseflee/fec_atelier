@@ -3,12 +3,15 @@ import NewReview from '../subcomponents/ratings/NewReview.jsx';
 import ReviewsList from '../subcomponents/ratings/ReviewsList.jsx';
 import RatingBreakdown from '../subcomponents/ratings/RatingBreakdown.jsx';
 import ProductBreakdown from '../subcomponents/ratings/ProductBreakdown.jsx';
+import Sort from '../subcomponents/ratings/Sort.jsx';
 
 class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: props.reviews,
+      reviews: null,
+      isReady: false,
+      changedSort: 0,
       reviewCount: props.reviews.results.length,
       characteristics: props.ratingsMeta.characteristics,
       descriptions: {
@@ -21,19 +24,84 @@ class RatingsAndReviews extends React.Component {
       }
     };
     this.filterByStars = this.filterByStars.bind(this);
+    this.handleSort = this.handleSort.bind(this);
+    this.compareHelpfulness = this.compareHelpfulness.bind(this);
+    this.compareNewest = this.compareNewest.bind(this);
+  }
+
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      reviews: this.props.reviews,
+      isReady: true
+    }, () => {
+      console.log('state after mount', this.state);
+    })
   }
 
   filterByStars() {
     console.log('clicked');
   }
 
+  compareHelpfulness(a, b) {
+    return b.helpfulness - a.helpfulness;
+  }
+
+  compareNewest(a, b) {
+    var c = new Date(a.date);
+    var d = new Date(b.date);
+    return d - c;
+  }
+
+  handleSort(e) {
+    var option = e.target.innerHTML;
+    var reviews = this.props.reviews;
+    // if option is helfulness
+    // sort reviews.results from most helpful to least helpful
+    if (option === 'Helpfulness') {
+      reviews.results = reviews.results.sort(this.compareHelpfulness);
+      console.log('helpfulness', option);
+      // console.log('results: ', reviews);
+      this.setState({
+        ...this.state,
+        reviews: reviews,
+        changedSort: (this.state.changedSort + 1)
+      }, () => {
+        console.log('changedSort: ', this.state.changedSort);
+      })
+    }
+    // if option is newest
+    // sort reviews from newest to oldest
+    if (option === 'Newest') {
+      reviews.results = reviews.results.sort(this.compareNewest);
+      console.log('newest', option);
+      // console.log('results: ', reviews);
+      this.setState({
+        ...this.state,
+        reviews: reviews,
+        changedSort: (this.state.changedSort + 1)
+      }, () => {
+        console.log('changedSort: ', this.state.changedSort);
+      })
+    }
+
+    // if option is relevance
+    // sort reviews that are most helpful and newest, with helpfulness taking priority over date
+    if (option === 'Relevance') {
+      console.log('relevance', option);
+    }
+
+  }
+
   render() {
     return (
       <div id="reviewsSection">
         <h3 id="reviewsHeader">Ratings & Reviews</h3>
-        <RatingBreakdown  averageRating={this.props.averageRating} percent={this.props.percent} reviewCount={this.state.reviewCount} filterByStars={this.filterByStars} ratingsMeta={this.props.ratingsMeta}/>
-        <ProductBreakdown ratingsMeta={this.props.ratingsMeta} descriptions={this.state.descriptions}/>
-        <ReviewsList reviews={this.state.reviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings} productId={this.props.productId}/>
+        <Sort handleSort={this.handleSort} />
+        <RatingBreakdown averageRating={this.props.averageRating} percent={this.props.percent} reviewCount={this.state.reviewCount} filterByStars={this.filterByStars} ratingsMeta={this.props.ratingsMeta} />
+        <ProductBreakdown ratingsMeta={this.props.ratingsMeta} descriptions={this.state.descriptions} />
+        {this.state.isReady ? <ReviewsList key={this.state.changedSort} reviews={this.state.reviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings} productId={this.props.productId} /> : null}
       </div>
 
     )
