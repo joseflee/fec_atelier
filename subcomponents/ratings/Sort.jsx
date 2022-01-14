@@ -5,11 +5,11 @@ var Sort = (props) => {
   return (
     <div id="sortReviews">
       Sort on
-      <ul id="sortDropdown">
-        <li><span onClick={props.handleSort}>Relevance</span></li>
-        <li><span onClick={props.handleSort}>Helpfulness</span></li>
-        <li><span onClick={props.handleSort}>Newest</span></li>
-      </ul>
+      <div id="sortDropdown">
+        <div className="sortOption" onClick={props.handleSort}>Relevance</div>
+        <div className="sortOption" onClick={props.handleSort}>Helpfulness</div>
+        <div className="sortOption" onClick={props.handleSort}>Newest</div>
+      </div>
     </div>
     // when clicked should open a drop down menu that sorts by:
     // helpful reviews, newest, and relevant (combination of helpful/newest)

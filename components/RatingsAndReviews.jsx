@@ -27,6 +27,7 @@ class RatingsAndReviews extends React.Component {
     this.handleSort = this.handleSort.bind(this);
     this.compareHelpfulness = this.compareHelpfulness.bind(this);
     this.compareNewest = this.compareNewest.bind(this);
+    this.compareRelevance = this.compareRelevance.bind(this);
   }
 
 
@@ -44,6 +45,12 @@ class RatingsAndReviews extends React.Component {
     console.log('clicked');
   }
 
+  compareRelevance (a, b) {
+    var c = new Date(a.date);
+    var d = new Date(b.date);
+    return b.helpfulness - a.helpfulness || d - c;
+  }
+
   compareHelpfulness(a, b) {
     return b.helpfulness - a.helpfulness;
   }
@@ -57,26 +64,9 @@ class RatingsAndReviews extends React.Component {
   handleSort(e) {
     var option = e.target.innerHTML;
     var reviews = this.props.reviews;
-    // if option is helfulness
-    // sort reviews.results from most helpful to least helpful
+
     if (option === 'Helpfulness') {
       reviews.results = reviews.results.sort(this.compareHelpfulness);
-      console.log('helpfulness', option);
-      // console.log('results: ', reviews);
-      this.setState({
-        ...this.state,
-        reviews: reviews,
-        changedSort: (this.state.changedSort + 1)
-      }, () => {
-        console.log('changedSort: ', this.state.changedSort);
-      })
-    }
-    // if option is newest
-    // sort reviews from newest to oldest
-    if (option === 'Newest') {
-      reviews.results = reviews.results.sort(this.compareNewest);
-      console.log('newest', option);
-      // console.log('results: ', reviews);
       this.setState({
         ...this.state,
         reviews: reviews,
@@ -86,10 +76,26 @@ class RatingsAndReviews extends React.Component {
       })
     }
 
-    // if option is relevance
-    // sort reviews that are most helpful and newest, with helpfulness taking priority over date
+    if (option === 'Newest') {
+      reviews.results = reviews.results.sort(this.compareNewest);
+      this.setState({
+        ...this.state,
+        reviews: reviews,
+        changedSort: (this.state.changedSort + 1)
+      }, () => {
+        console.log('changedSort: ', this.state.changedSort);
+      })
+    }
+
     if (option === 'Relevance') {
-      console.log('relevance', option);
+      reviews.results = reviews.results.sort(this.compareRelevance);
+      this.setState({
+        ...this.state,
+        reviews: reviews,
+        changedSort: (this.state.changedSort + 1)
+      }, () => {
+        console.log('relevance state', this.state);
+      })
     }
 
   }
