@@ -6,28 +6,40 @@ class ReviewsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: props.reviews,
+      reviews: null,
       visibleReviews: []
     }
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.reviews.results != prevProps.reviews.results) {
+  //     this.setState({ reviews: this.props.reviews.results})
+  //   }
+  // }
+
   componentDidMount() {
+    console.log('props on mount: ', this.props);
     var firstTwo = [];
     firstTwo.push(this.props.reviews.results[0]);
     firstTwo.push(this.props.reviews.results[1]);
-    this.setState({ visibleReviews: firstTwo });
+    this.setState({
+      reviews: this.props.reviews.results,
+      visibleReviews: firstTwo
+    }, () => {
+      console.log('state after mount in child: ', this.state);
+    });
   }
 
   handleMoreReviews() {
-    var reviews = this.state.reviews.results;
+    var reviews = this.props.reviews.results;
     var start = this.state.visibleReviews.length;
     var end = start + 2;
     var nextTwo = reviews.slice(start, end);
     var newState = this.state.visibleReviews.concat(nextTwo);
     var button = document.getElementById("moreReviews");
     this.setState({ visibleReviews: newState }, () => {
-      if (this.state.visibleReviews.length === this.state.reviews.results.length) {
+      if (this.state.visibleReviews.length === this.state.reviews.length) {
         button.style.display = "none";
       }
     });
