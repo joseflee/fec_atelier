@@ -4,7 +4,7 @@ var Sort = (props) => {
 
   return (
     <div id="sortReviews">
-      Sort on
+      Sort on <span id="sortCaret"></span>
       <div id="sortDropdown">
         <div className="sortOption" onClick={props.handleSort}>Relevance</div>
         <div className="sortOption" onClick={props.handleSort}>Helpfulness</div>

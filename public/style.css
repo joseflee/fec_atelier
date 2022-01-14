@@ -706,16 +706,21 @@ GRID
 
 #reviewsSection {
   display: grid;
-  grid-template-columns: 100px 350px auto 100px;
-  grid-template-rows: 50px auto;
+  grid-template-columns: 350px auto;
+  grid-template-rows: 50px 350px 350px auto;
   grid-template-areas:
-    ". header reviews ."
-    ". ratingBreakdown reviews ."
-    ". productBreakdown reviews .";
+    "header sort"
+    "ratingBreakdown reviews"
+    "productBreakdown reviews"
+    ". newReview";
 }
 
 #reviewsHeader {
   grid-area: header;
+}
+
+#sortReviews {
+  grid-area: sort;
 }
 
 #ratingBreakdown {
@@ -1033,7 +1038,28 @@ PRODUCT BREAKDOWN
   font-size: 14px;
 }
 
+/*
+SORT
+*/
 
+.sortOption {
+  background-color: lightgray;
+  max-width: 100px;
+}
+
+.sortOption:hover,
+.sortOption:focus-within {
+  background: red;
+  cursor: pointer;
+}
+
+#sortCaret {
+  font-family: FontAwesome;
+}
+
+#sortCaret::before {
+  content: '\f078';
+}
 
 
 
