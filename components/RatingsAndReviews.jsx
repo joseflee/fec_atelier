@@ -10,6 +10,8 @@ class RatingsAndReviews extends React.Component {
     super(props);
     this.state = {
       reviews: null,
+      reviewList: null,
+      visibleReviews: [],
       isReady: false,
       changedSort: 0,
       reviewCount: props.reviews.results.length,
@@ -28,24 +30,73 @@ class RatingsAndReviews extends React.Component {
     this.compareHelpfulness = this.compareHelpfulness.bind(this);
     this.compareNewest = this.compareNewest.bind(this);
     this.compareRelevance = this.compareRelevance.bind(this);
+    this.handleFirstTwoReviews = this.handleFirstTwoReviews.bind(this);
+    this.handleMoreReviews = this.handleMoreReviews.bind(this);
   }
 
 
   componentDidMount() {
+    var reviews = this.props.reviews;
+    var reviewsList = this.props.reviews.results;
+    var firstTwo = this.handleFirstTwoReviews(reviewsList);
     this.setState({
       ...this.state,
-      reviews: this.props.reviews,
+      reviewsList: reviewsList,
+      visibleReviews: firstTwo,
       isReady: true
     }, () => {
-      console.log('state after mount', this.state);
+      // console.log('state after mount', this.state);
     })
   }
 
-  filterByStars() {
-    console.log('clicked');
+  handleFirstTwoReviews(reviewsList) {
+    var firstTwo = [];
+    firstTwo.push(reviewsList[0]);
+    firstTwo.push(reviewsList[1]);
+    return firstTwo;
   }
 
-  compareRelevance (a, b) {
+  handleMoreReviews() {
+    var reviewsList = this.state.reviewsList;
+    var start = this.state.visibleReviews.length;
+    var end = start + 2;
+    var nextTwo = reviewsList.slice(start, end);
+    var newState = this.state.visibleReviews.concat(nextTwo);
+    var button = document.getElementById("moreReviews");
+    this.setState({ visibleReviews: newState }, () => {
+      if (this.state.visibleReviews.length === this.state.reviewsList.length) {
+        button.style.display = "none";
+      }
+    });
+    // future enhancement:
+    // button should disappear after max height of element is reached
+    // list should become scrollable
+  }
+
+
+  filterByStars(e) {
+    // console.log('clicked');
+    console.log('event: ', e);
+    var rating = Number(e.target.innerHTML[0]);
+    var newReviews = this.state.reviews;
+    var filtered = [];
+    console.log('rating: ', rating);
+    newReviews.results.forEach((review) => {
+      if (review.rating === rating) {
+        filtered.push(review);
+      }
+    })
+
+    newReviews.results = filtered;
+    console.log('filtered reviews: ', newReviews);
+    this.setState({
+      ...this.state,
+      reviews: newReviews,
+      changedSort: (this.state.changedSort + 1)
+    })
+  }
+
+  compareRelevance(a, b) {
     var c = new Date(a.date);
     var d = new Date(b.date);
     return b.helpfulness - a.helpfulness || d - c;
@@ -72,7 +123,7 @@ class RatingsAndReviews extends React.Component {
         reviews: reviews,
         changedSort: (this.state.changedSort + 1)
       }, () => {
-        console.log('changedSort: ', this.state.changedSort);
+        // console.log('changedSort: ', this.state.changedSort);
       })
     }
 
@@ -83,7 +134,7 @@ class RatingsAndReviews extends React.Component {
         reviews: reviews,
         changedSort: (this.state.changedSort + 1)
       }, () => {
-        console.log('changedSort: ', this.state.changedSort);
+        // console.log('changedSort: ', this.state.changedSort);
       })
     }
 
@@ -94,7 +145,7 @@ class RatingsAndReviews extends React.Component {
         reviews: reviews,
         changedSort: (this.state.changedSort + 1)
       }, () => {
-        console.log('relevance state', this.state);
+        // console.log('relevance state', this.state);
       })
     }
 
@@ -104,10 +155,10 @@ class RatingsAndReviews extends React.Component {
     return (
       <div id="reviewsSection">
         <h3 id="reviewsHeader">Ratings & Reviews</h3>
-        <Sort handleSort={this.handleSort} reviewCount={this.state.reviewCount}/>
+        <Sort handleSort={this.handleSort} reviewCount={this.state.reviewCount} />
         <RatingBreakdown averageRating={this.props.averageRating} percent={this.props.percent} reviewCount={this.state.reviewCount} filterByStars={this.filterByStars} ratingsMeta={this.props.ratingsMeta} />
         <ProductBreakdown ratingsMeta={this.props.ratingsMeta} descriptions={this.state.descriptions} />
-        {this.state.isReady ? <ReviewsList key={this.state.changedSort} reviews={this.state.reviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings} productId={this.props.productId} /> : null}
+        {this.state.isReady ? <ReviewsList key={this.state.changedSort} reviews={this.state.reviewsList} visibleReviews={this.state.visibleReviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings} productId={this.props.productId} handleMoreReviews={this.handleMoreReviews} /> : null}
       </div>
 
     )

@@ -7,13 +7,29 @@ class ReviewListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      helpfulness: props.review.helpfulness
+      helpfulness: null,
+      isReady: false
     }
     this.handleHelpful = this.handleHelpful.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({
+      helpfulness: this.props.review.helpfulness,
+      isReady: true
+    }, () => {
+      console.log('state after mount: ', this.state);
+    })
+  }
+
+  // componentWillUnmount() {
+  //   this.setState({
+  //     isReady: false
+  //   })
+  // }
+
   handleHelpful() {
-    this.setState((state) => ({ helpfulness: (state.helpfulness + 1) }), () => {
+    this.setState((state) => ({ helpfulness: (this.state.helpfulness + 1) }), () => {
     });
   }
 
@@ -22,27 +38,27 @@ class ReviewListEntry extends React.Component {
       <div className="reviewListEntry">
         <div className="reviewEntryTop">
           <div className="reviewRating">
-            <Stars rating={this.props.review.rating} />
+            {this.state.isReady ? <Stars rating={this.props.review.rating} /> : null}
           </div>
-          <div className="reviewerName">{this.props.review.reviewer_name}</div>
-          <div className="reviewDate">{moment(this.props.review.date).format('MMMM Do YYYY')}</div>
+          {this.state.isReady ? <div className="reviewerName">{this.props.review.reviewer_name}</div> : null}
+          {this.state.isReady ? <div className="reviewDate">{moment(this.props.review.date).format('MMMM Do YYYY')}</div> : null }
         </div>
 
-        <div className="reviewSummary">{this.props.review.summary}</div>
-        <div className="reviewBody">{this.props.review.body}</div>
-        {this.props.review.photos.length > 0 ? <ReviewPhotos photos={this.props.review.photos} /> : null}
-        {this.props.review.recommend ? <div className="recommendedCheck">I recommend this product</div> : null}
-        {this.props.review.response ? <div className="sellerResponse">
+        {this.state.isReady ? <div className="reviewSummary">{this.props.review.summary}</div> : null}
+        {this.state.isReady ? <div className="reviewBody">{this.props.review.body}</div> : null}
+        {this.state.isReady && this.props.review.photos.length > 0 ? <ReviewPhotos photos={this.props.review.photos} /> : null}
+        {this.state.isReady && this.props.review.recommend ? <div className="recommendedCheck">I recommend this product</div> : null}
+        {this.state.isReady && this.props.review.response ? <div className="sellerResponse">
           <div className="responseHeader">Response:</div>
           <div className="responseText">{this.props.review.response}</div>
         </div> : null}
-        <div className="reviewEntryBottom">
+        {this.state.isReady ? <div className="reviewEntryBottom">
           <div className="reviewHelpfulness">
             <div className="helpfulText">Helpful?</div>
             <div className="helpfulYes" onClick={this.handleHelpful}>Yes</div>
             <div className="helpfulCount">({this.state.helpfulness})</div>
           </div>
-        </div>
+        </div> : null}
       </div>
     )
   }
