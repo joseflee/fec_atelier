@@ -707,9 +707,10 @@ GRID
 #reviewsSection {
   display: grid;
   grid-template-columns: 350px auto;
-  grid-template-rows: 50px 350px 350px auto;
+  grid-template-rows: 50px 90px 175px 350px auto;
   grid-template-areas:
-    "header sort"
+    "header ."
+    "ratingBreakdown sort"
     "ratingBreakdown reviews"
     "productBreakdown reviews"
     ". newReview";
@@ -736,6 +737,51 @@ GRID
 }
 
 /*
+SORT
+*/
+
+#sortReviews {
+  position: relative;
+  margin-left: 9%;
+  padding-left: 10px;
+  /* padding: 10px; */
+  height: 100px;
+  max-width: 180px;
+  max-height: 100px;
+}
+
+.sortOption {
+  background-color: lightgray;
+  max-width: 100px;
+}
+
+.sortOption:hover,
+.sortOption:focus-within {
+  background: red;
+  cursor: pointer;
+}
+
+#sortCaret {
+  font-family: FontAwesome;
+}
+
+#sortCaret::before {
+  content: '\f078';
+}
+
+#sortBar {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
+#sortDropdown {
+  position: absolute;
+  left: 100px;
+  overflow: auto;
+}
+
+/*
 REVIEW LIST
 */
 
@@ -744,8 +790,8 @@ REVIEW LIST
   float: right;
   width: 723px;
   max-width: 723px;
+  /* margin-top: 10px; */
   margin-left: 9%;
-  margin-top: 4.5%;
   margin-bottom: 4.5%;
   padding: 10px;
 }
@@ -1038,28 +1084,6 @@ PRODUCT BREAKDOWN
   font-size: 14px;
 }
 
-/*
-SORT
-*/
-
-.sortOption {
-  background-color: lightgray;
-  max-width: 100px;
-}
-
-.sortOption:hover,
-.sortOption:focus-within {
-  background: red;
-  cursor: pointer;
-}
-
-#sortCaret {
-  font-family: FontAwesome;
-}
-
-#sortCaret::before {
-  content: '\f078';
-}
 
 
 

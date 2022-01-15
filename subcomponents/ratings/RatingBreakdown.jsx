@@ -19,7 +19,6 @@ class RatingBreakdown extends React.Component {
             </div>
           </div>
           <div id="percentRecommended">{this.props.percent}% of reviews recommend this product</div>
-          <div id="reviewCount">{this.props.reviewCount} reviews</div>
         </div>
         <RatingBreakdownGraph filterByStars={this.props.filterByStars} ratingsMeta={this.props.ratingsMeta} reviewCount={this.props.reviewCount} />
       </div>
