@@ -1015,7 +1015,13 @@ RATING BREAKDOWN
 }
 
 .breakdownLabel {
+  text-decoration: underline;
   width: 54px;
+}
+
+.breakdownLabel:hover {
+  color: red;
+  cursor: pointer;
 }
 
 #ratingNumStarContainer {
