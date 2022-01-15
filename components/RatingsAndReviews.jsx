@@ -12,6 +12,8 @@ class RatingsAndReviews extends React.Component {
       reviews: null,
       reviewList: null,
       visibleReviews: [],
+      filteredReviews: [],
+      isFiltered: false,
       isReady: false,
       changedSort: 0,
       reviewCount: props.reviews.results.length,
@@ -38,10 +40,12 @@ class RatingsAndReviews extends React.Component {
   componentDidMount() {
     var reviews = this.props.reviews;
     var reviewsList = this.props.reviews.results;
+    var filteredReviews = this.state.filteredReviews;
     var firstTwo = this.handleFirstTwoReviews(reviewsList);
     this.setState({
       ...this.state,
       reviewsList: reviewsList,
+      filteredReviews: filteredReviews,
       visibleReviews: firstTwo,
       isReady: true
     }, () => {
@@ -51,13 +55,25 @@ class RatingsAndReviews extends React.Component {
 
   handleFirstTwoReviews(reviewsList) {
     var firstTwo = [];
-    firstTwo.push(reviewsList[0]);
-    firstTwo.push(reviewsList[1]);
+    // for (var i = 0; i < 2; i++) {
+    //   firstTwo.push(reviewsList[i]);
+    // }
+    if (reviewsList.length === 1) {
+      firstTwo.push(reviewsList[0]);
+    } else if (reviewsList.length > 1) {
+      firstTwo.push(reviewsList[0]);
+      firstTwo.push(reviewsList[1]);
+    }
     return firstTwo;
   }
 
   handleMoreReviews() {
-    var reviewsList = this.state.reviewsList;
+    var reviewsList;
+    if (!this.state.isFiltered) {
+      reviewsList = this.state.reviewsList;
+    } else {
+      reviewsList = this.state.filteredReviews;
+    }
     var start = this.state.visibleReviews.length;
     var end = start + 2;
     var nextTwo = reviewsList.slice(start, end);
@@ -78,20 +94,22 @@ class RatingsAndReviews extends React.Component {
     // console.log('clicked');
     console.log('event: ', e);
     var rating = Number(e.target.innerHTML[0]);
-    var newReviews = this.state.reviews;
+    var newReviews = this.state.reviewsList;
     var filtered = [];
     console.log('rating: ', rating);
-    newReviews.results.forEach((review) => {
+    newReviews.forEach((review) => {
       if (review.rating === rating) {
         filtered.push(review);
       }
     })
 
-    newReviews.results = filtered;
+    newReviews = filtered;
+    var firstTwo = this.handleFirstTwoReviews(newReviews);
     console.log('filtered reviews: ', newReviews);
     this.setState({
       ...this.state,
-      reviews: newReviews,
+      visibleReviews: firstTwo,
+      filteredReviews: newReviews,
       changedSort: (this.state.changedSort + 1)
     })
   }
@@ -158,7 +176,7 @@ class RatingsAndReviews extends React.Component {
         <Sort handleSort={this.handleSort} reviewCount={this.state.reviewCount} />
         <RatingBreakdown averageRating={this.props.averageRating} percent={this.props.percent} reviewCount={this.state.reviewCount} filterByStars={this.filterByStars} ratingsMeta={this.props.ratingsMeta} />
         <ProductBreakdown ratingsMeta={this.props.ratingsMeta} descriptions={this.state.descriptions} />
-        {this.state.isReady ? <ReviewsList key={this.state.changedSort} reviews={this.state.reviewsList} visibleReviews={this.state.visibleReviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings} productId={this.props.productId} handleMoreReviews={this.handleMoreReviews} /> : null}
+        {this.state.isReady ? <ReviewsList key={this.state.changedSort} reviews={this.state.reviewsList} visibleReviews={this.state.visibleReviews} filteredReviews={this.state.filteredReviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings} productId={this.props.productId} handleMoreReviews={this.handleMoreReviews} /> : null}
       </div>
 
     )

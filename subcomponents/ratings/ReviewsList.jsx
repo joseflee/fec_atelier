@@ -50,7 +50,7 @@ var ReviewsList = (props) => {
     return (
       <div id="reviewListContainer">
         <div id="reviewList">
-          {props.reviews ? props.visibleReviews.map((review, index) => <ReviewListEntry key={index} review={review} />) : null}
+          {props.visibleReviews.length > 0 ? props.visibleReviews.map((review, index) => <ReviewListEntry key={index} review={review} />) : <div>No reviews</div>}
         </div>
         <button id="moreReviews" onClick={props.handleMoreReviews}>More Reviews</button>
         <NewReview characteristics={props.characteristics} productId={props.productId}/>

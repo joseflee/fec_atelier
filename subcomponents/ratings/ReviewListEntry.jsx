@@ -3,24 +3,27 @@ import moment from 'moment';
 import Stars from './Stars.jsx';
 import ReviewPhotos from './ReviewPhotos.jsx';
 
-class ReviewListEntry extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      helpfulness: null,
-      isReady: false
-    }
-    this.handleHelpful = this.handleHelpful.bind(this);
-  }
+var ReviewListEntry = (props) => {
+  var helpfulness = props.review.helpfulness;
+  console.log('review prop: ', props.review);
+  console.log('variable: ', helpfulness);
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     helpfulness: null,
+  //     isReady: false
+  //   }
+  //   this.handleHelpful = this.handleHelpful.bind(this);
+  // }
 
-  componentDidMount() {
-    this.setState({
-      helpfulness: this.props.review.helpfulness,
-      isReady: true
-    }, () => {
-      console.log('state after mount: ', this.state);
-    })
-  }
+  // componentDidMount() {
+  //   this.setState({
+  //     helpfulness: this.props.review.helpfulness,
+  //     isReady: true
+  //   }, () => {
+  //     console.log('state after mount: ', this.state);
+  //   })
+  // }
 
   // componentWillUnmount() {
   //   this.setState({
@@ -28,40 +31,40 @@ class ReviewListEntry extends React.Component {
   //   })
   // }
 
-  handleHelpful() {
-    this.setState((state) => ({ helpfulness: (this.state.helpfulness + 1) }), () => {
-    });
-  }
+  var handleHelpful = () => {
+    helpfulness = helpfulness + 1;
+    console.log('handle: ', helpfulness);
+  };
 
-  render() {
+  // render() {
     return (
       <div className="reviewListEntry">
         <div className="reviewEntryTop">
           <div className="reviewRating">
-            {this.state.isReady ? <Stars rating={this.props.review.rating} /> : null}
+            <Stars rating={props.review.rating} />
           </div>
-          {this.state.isReady ? <div className="reviewerName">{this.props.review.reviewer_name}</div> : null}
-          {this.state.isReady ? <div className="reviewDate">{moment(this.props.review.date).format('MMMM Do YYYY')}</div> : null }
+          <div className="reviewerName">{props.review.reviewer_name}</div>
+          <div className="reviewDate">{moment(props.review.date).format('MMMM Do YYYY')}</div>
         </div>
 
-        {this.state.isReady ? <div className="reviewSummary">{this.props.review.summary}</div> : null}
-        {this.state.isReady ? <div className="reviewBody">{this.props.review.body}</div> : null}
-        {this.state.isReady && this.props.review.photos.length > 0 ? <ReviewPhotos photos={this.props.review.photos} /> : null}
-        {this.state.isReady && this.props.review.recommend ? <div className="recommendedCheck">I recommend this product</div> : null}
-        {this.state.isReady && this.props.review.response ? <div className="sellerResponse">
+        <div className="reviewSummary">{props.review.summary}</div>
+        <div className="reviewBody">{props.review.body}</div>
+        {props.review.photos.length > 0 ? <ReviewPhotos photos={props.review.photos} /> : null}
+        {props.review.recommend ? <div className="recommendedCheck">I recommend this product</div> : null}
+        {props.review.response ? <div className="sellerResponse">
           <div className="responseHeader">Response:</div>
-          <div className="responseText">{this.props.review.response}</div>
+          <div className="responseText">{props.review.response}</div>
         </div> : null}
-        {this.state.isReady ? <div className="reviewEntryBottom">
+        <div className="reviewEntryBottom">
           <div className="reviewHelpfulness">
             <div className="helpfulText">Helpful?</div>
-            <div className="helpfulYes" onClick={this.handleHelpful}>Yes</div>
-            <div className="helpfulCount">({this.state.helpfulness})</div>
+            <div className="helpfulYes" onClick={handleHelpful}>Yes</div>
+            <div className="helpfulCount">({helpfulness})</div>
           </div>
-        </div> : null}
+        </div>
       </div>
     )
-  }
+  // }
 }
 
 export default ReviewListEntry;
