@@ -159,12 +159,10 @@ class App extends React.Component {
         "Authorization": APIkey
       },
       success: (data) => {
-        //remove duplicates
-        //[1, 3, 4, 5, 3]
         var dataObj = {};
         var withoutDuplicates = [];
         data.forEach( item => {
-          if ( productId !== item ) {
+          if ( Number( productId ) !== Number( item ) ) {
             dataObj[ item ] = true;
           }
         } );
@@ -220,72 +218,73 @@ class App extends React.Component {
 
 
   handleRelatedCardClick(e) {
-    var clickedCardId = e.currentTarget.getAttribute('data-txt');
-    this.setState({
+    var clickedCardId = e.currentTarget.getAttribute( 'data-txt' );
+    this.setState( {
       productId: clickedCardId,
       allRelated: []
     }, () => {
-      this.retrieveProduct(this.state.productId);
-      this.retrieveStyles(this.state.productId);
-      this.retrieveRelatedProducts(this.state.productId);
+      this.retrieveProduct( this.state.productId );
+      this.retrieveStyles( this.state.productId );
+      this.retrieveRelatedProducts( this.state.productId );
       this.retrieveRatings();
-
     }
     )
   }
 
   addToOutfit() {
     if ( this.state.outfitIds.indexOf( this.state.productId ) === -1) {
-      var outfits = this.state.outfitIds.concat( this.state.productId );
+      var outfits = this.state.outfitIds.concat( Number( this.state.productId ) );
       this.setState({
         outfitIds: outfits,
       }, () => {
         this.retrieveAllForOutfits( this.state.outfitIds );
+        console.log(this.state.outfitIds);
       })
     }
   }
 
   removeFromOutfits(e) {
     e.stopPropagation();
-    var id = e.currentTarget.getAttribute('data-txt');
+    var id = e.currentTarget.getAttribute( 'data-txt' );
     var outfitIds = this.state.outfitIds;
-    var targetIndex = outfitIds.indexOf(Number(id));
-    var splicedOutfitIds = outfitIds.splice(targetIndex, 1);
+    var targetIndex = outfitIds.indexOf( Number( id ) );
+    var splicedOutfitIds = outfitIds.splice( targetIndex, 1 );
     var outfits = this.state.outfits;
     var listIndex;
     var outfitView = this.state.outfitView;
     var viewIndex;
-    outfits.forEach((item, index) => {
-      if (item.id === Number(id)) {
+    outfits.forEach( ( item, index ) => {
+      if ( item.id === Number( id ) ) {
         listIndex = index;
       }
     });
-    outfits.splice(listIndex, 1);
-    outfitView.forEach((item, index) => {
-      if (item.id === Number(id)) {
+
+    outfits.splice( listIndex, 1 );
+    outfitView.forEach( ( item, index ) => {
+      if ( item.id === Number( id ) ) {
         viewIndex = index;
       }
     });
-    outfitView.splice(viewIndex, 1);
-    this.setState({
+    outfitView.splice( viewIndex, 1 );
+    this.setState( {
       outfitIds: outfitIds,
       outfits: outfits,
-      outfitView: viewIndex,
+      outfitView: outfitView,
     }, () => {})
   }
 
   handleLeftArrow() {
     var newPosition;
-    if (this.state.outfitPosition > 0) {
+    if ( this.state.outfitPosition > 0 ) {
       newPosition = this.state.outfitPosition - 1;
     } else {
       newPosition = 0;
     }
-    var newView = this.state.outfits.slice(newPosition, newPosition + 3);
-    this.setState({
+    var newView = this.state.outfits.slice( newPosition, newPosition + 3 );
+    this.setState( {
       outfitPosition: newPosition,
       outfitView: newView
-    })
+    } )
 
   }
 
@@ -319,7 +318,7 @@ class App extends React.Component {
           <div className={'announcement'}><i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - NEW PRODUCT HIGHLIGHT</div>
         </div>
         <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating}/> : null }</div>
-        {this.state.allRelated.length > 0 ? <RelatedItems all={this.state.allRelated} outfits={this.state.outfitView} clickCard={this.handleRelatedCardClick} addOutfit={this.addToOutfit} remove={this.removeFromOutfits} name={this.state.product} right={this.handleRightArrow} left={this.handleLeftArrow} position={this.state.outfitPosition} /> : null}
+        {this.state.allRelated.length > 0 ? <RelatedItems all={this.state.allRelated} outfits={this.state.outfitView} outfitLength={this.state.outfits.length} clickCard={this.handleRelatedCardClick} addOutfit={this.addToOutfit} remove={this.removeFromOutfits} name={this.state.product} right={this.handleRightArrow} left={this.handleLeftArrow} position={this.state.outfitPosition} /> : null}
         <QuestionsAndAnswers />
         <div className="ratingsAndReviews">
         {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings} averageRating={this.state.averageRating} percent={this.state.percentRecommended}/> : null }

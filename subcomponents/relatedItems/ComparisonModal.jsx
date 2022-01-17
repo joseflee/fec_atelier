@@ -15,6 +15,7 @@ export class ComparisonModal extends React.Component {
   }
 
   componentDidMount() {
+    console.log('props', this.props);
     this.organizeFeatures();
   }
 
@@ -56,7 +57,7 @@ export class ComparisonModal extends React.Component {
       return (
         this.state.combinedFeatures.map((feature, index) => {
           return(
-            <tr key={index}>
+            <tr key={index} className="rowCharacteristic">
               <th className="comparisonRow">{feature.left ? feature.left : null}</th>
               <th className="comparisonRow">{feature.feature}</th>
               <th className="comparisonRow">{feature.right ? feature.right : null}</th>
@@ -70,12 +71,12 @@ export class ComparisonModal extends React.Component {
   render() {
     return (
       <div onClick={this.props.close} className="comparisonModal">
-        <h5>Comparing</h5>
+        <div className="comparingHeader">Comparing</div>
         <table>
           <thead>
             <tr>
               <th className="comparisonTopRow">{this.props.name.name}</th>
-              <th className="comparisonTopRow"></th>
+              <th></th>
               <th className="comparisonTopRow">{this.props.relatedFeatures.name}</th>
             </tr>
           </thead>

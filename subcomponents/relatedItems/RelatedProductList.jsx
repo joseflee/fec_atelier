@@ -2,6 +2,7 @@ import React from 'react';
 import { ProductCard } from './ProductCard.jsx';
 import { FaArrowRight } from 'react-icons/fa';
 import { FaArrowLeft } from 'react-icons/fa';
+
 export class RelatedProductList extends React.Component {
   constructor(props) {
     super(props);

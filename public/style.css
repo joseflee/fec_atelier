@@ -701,10 +701,10 @@ product card
 }
 
 
-.RIarrow {
+/* .RIarrow {
   display: inline-block;
   text-align: left;
-}
+} */
 
 .close {
   font-family: FontAwesome;
@@ -730,15 +730,16 @@ comparison modal
   transition: 1s ease-out;
   box-shadow: -2rem 2rem 2rem rgba(0, 0, 0, 0.2);
   filter: blur(0);
-  transform: scale(1);
   opacity: 1;
   visibility: visible;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: fixed;
+  margin: 0 auto;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 
 }
 
@@ -748,9 +749,21 @@ comparison modal
 
 .comparisonTopRow {
   font-size: 17px;
-  padding-bottom: 20px;
+  position: relative;
+  top: 4%;
+
 }
 
+.comparingHeader {
+  position: fixed;
+  top: 1%;
+  left: 1%;
+  font-size: 15px;
+}
+
+.rowCharacteristic {
+  border: 1px solid rgb(106, 102, 102);
+}
 
 
 
