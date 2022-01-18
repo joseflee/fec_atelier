@@ -171,19 +171,23 @@ class App extends React.Component {
         "Authorization": APIkey
       },
       success: (data) => {
-        var dataObj = {};
-        var withoutDuplicates = [];
-        data.forEach( item => {
-          if ( productId !== item ) {
-            dataObj[ item ] = true;
+        if (data.length === 0) {
+          this.retrieveAllForRelated(59553);
+        } else {
+          var dataObj = {};
+          var withoutDuplicates = [];
+          data.forEach( item => {
+            if ( productId !== item ) {
+              dataObj[ item ] = true;
+            }
+          } );
+          for ( var id in dataObj ) {
+            withoutDuplicates.push( id );
           }
-        } );
-        for ( var id in dataObj ) {
-          withoutDuplicates.push( id );
-        }
-        this.retrieveAllForRelated( withoutDuplicates );
-        if ( this.state.outfits.length > 0 ) {
-          this.retrieveAllForOutfits( this.state.outfits )
+          this.retrieveAllForRelated( withoutDuplicates );
+          if ( this.state.outfits.length > 0 ) {
+            this.retrieveAllForOutfits( this.state.outfitIds )
+          }
         }
       },
       error: ( err ) => {
@@ -193,7 +197,12 @@ class App extends React.Component {
   }
 
   retrieveAllForRelated( ids ) {
-    var ids = ids.join( '&' );
+    //var ids = ids.join( '&' );
+    if (typeof(ids) === 'number') {
+      ids = ids;
+    } else {
+      ids = ids.join( '&' );
+    }
     $.ajax({
       method: 'GET',
       url: `related/${ids}`,
@@ -229,13 +238,11 @@ class App extends React.Component {
 
   handleRelatedCardClick(e) {
     var clickedCardId = e.currentTarget.getAttribute( 'data-txt' );
-    console.log('clicked card id', clickedCardId);
     this.setState( {
       productId: clickedCardId,
       allRelated: []
     }, () => {
       this.retrieveProduct( this.state.productId );
-      this.retrieveStyles( this.state.productId );
       this.retrieveRelatedProducts( this.state.productId );
       this.retrieveRatings();
     }

@@ -70,7 +70,6 @@ app.get('/related/:ids', (req, res) => {
     res.send(data);
   }).catch(err => {
     console.log('error getting data from related API', err);
-    res.send(err);
   });
 })
 
