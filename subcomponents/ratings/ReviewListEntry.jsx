@@ -5,35 +5,10 @@ import ReviewPhotos from './ReviewPhotos.jsx';
 
 var ReviewListEntry = (props) => {
   var helpfulness = props.review.helpfulness;
-  console.log('review prop: ', props.review);
-  console.log('variable: ', helpfulness);
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     helpfulness: null,
-  //     isReady: false
-  //   }
-  //   this.handleHelpful = this.handleHelpful.bind(this);
-  // }
-
-  // componentDidMount() {
-  //   this.setState({
-  //     helpfulness: this.props.review.helpfulness,
-  //     isReady: true
-  //   }, () => {
-  //     console.log('state after mount: ', this.state);
-  //   })
-  // }
-
-  // componentWillUnmount() {
-  //   this.setState({
-  //     isReady: false
-  //   })
-  // }
 
   var handleHelpful = () => {
     helpfulness = helpfulness + 1;
-    console.log('handle: ', helpfulness);
+    // console.log('handle: ', helpfulness);
   };
 
   // render() {

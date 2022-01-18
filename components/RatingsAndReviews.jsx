@@ -10,9 +10,9 @@ class RatingsAndReviews extends React.Component {
     super(props);
     this.state = {
       reviews: null,
-      reviewList: null,
+      reviewsList: null,
       visibleReviews: [],
-      filteredReviews: [],
+      currentReviews: [],
       isFiltered: false,
       isReady: false,
       changedSort: 0,
@@ -40,24 +40,19 @@ class RatingsAndReviews extends React.Component {
   componentDidMount() {
     var reviews = this.props.reviews;
     var reviewsList = this.props.reviews.results;
-    var filteredReviews = this.state.filteredReviews;
-    var firstTwo = this.handleFirstTwoReviews(reviewsList);
+    var firstTwo = this.handleFirstTwoReviews(reviewsList);;
+
     this.setState({
       ...this.state,
       reviewsList: reviewsList,
-      filteredReviews: filteredReviews,
+      currentReviews: reviewsList,
       visibleReviews: firstTwo,
       isReady: true
-    }, () => {
-      // console.log('state after mount', this.state);
     })
   }
 
   handleFirstTwoReviews(reviewsList) {
     var firstTwo = [];
-    // for (var i = 0; i < 2; i++) {
-    //   firstTwo.push(reviewsList[i]);
-    // }
     if (reviewsList.length === 1) {
       firstTwo.push(reviewsList[0]);
     } else if (reviewsList.length > 1) {
@@ -68,19 +63,14 @@ class RatingsAndReviews extends React.Component {
   }
 
   handleMoreReviews() {
-    var reviewsList;
-    if (!this.state.isFiltered) {
-      reviewsList = this.state.reviewsList;
-    } else {
-      reviewsList = this.state.filteredReviews;
-    }
+    var reviewsList = this.state.currentReviews;
     var start = this.state.visibleReviews.length;
     var end = start + 2;
     var nextTwo = reviewsList.slice(start, end);
     var newState = this.state.visibleReviews.concat(nextTwo);
     var button = document.getElementById("moreReviews");
     this.setState({ visibleReviews: newState }, () => {
-      if (this.state.visibleReviews.length === this.state.reviewsList.length) {
+      if (this.state.visibleReviews.length === this.state.currentReviews.length) {
         button.style.display = "none";
       }
     });
@@ -91,12 +81,9 @@ class RatingsAndReviews extends React.Component {
 
 
   filterByStars(e) {
-    // console.log('clicked');
-    console.log('event: ', e);
     var rating = Number(e.target.innerHTML[0]);
     var newReviews = this.state.reviewsList;
     var filtered = [];
-    console.log('rating: ', rating);
     newReviews.forEach((review) => {
       if (review.rating === rating) {
         filtered.push(review);
@@ -105,11 +92,11 @@ class RatingsAndReviews extends React.Component {
 
     newReviews = filtered;
     var firstTwo = this.handleFirstTwoReviews(newReviews);
-    console.log('filtered reviews: ', newReviews);
     this.setState({
       ...this.state,
       visibleReviews: firstTwo,
-      filteredReviews: newReviews,
+      currentReviews: newReviews,
+      isFiltered: true,
       changedSort: (this.state.changedSort + 1)
     })
   }
@@ -132,41 +119,30 @@ class RatingsAndReviews extends React.Component {
 
   handleSort(e) {
     var option = e.target.innerHTML;
-    var reviews = this.props.reviews;
+    var reviews = this.state.currentReviews;
+    var newReviews;
+    var firstTwo;
 
     if (option === 'Helpfulness') {
-      reviews.results = reviews.results.sort(this.compareHelpfulness);
-      this.setState({
-        ...this.state,
-        reviews: reviews,
-        changedSort: (this.state.changedSort + 1)
-      }, () => {
-        // console.log('changedSort: ', this.state.changedSort);
-      })
+      newReviews = reviews.sort(this.compareHelpfulness);
     }
 
     if (option === 'Newest') {
-      reviews.results = reviews.results.sort(this.compareNewest);
-      this.setState({
-        ...this.state,
-        reviews: reviews,
-        changedSort: (this.state.changedSort + 1)
-      }, () => {
-        // console.log('changedSort: ', this.state.changedSort);
-      })
+      newReviews = reviews.sort(this.compareNewest);
     }
 
     if (option === 'Relevance') {
-      reviews.results = reviews.results.sort(this.compareRelevance);
-      this.setState({
-        ...this.state,
-        reviews: reviews,
-        changedSort: (this.state.changedSort + 1)
-      }, () => {
-        // console.log('relevance state', this.state);
-      })
+      newReviews = reviews.sort(this.compareRelevance);
     }
 
+    firstTwo = this.handleFirstTwoReviews(newReviews);
+
+    this.setState({
+      ...this.state,
+      currentReviews: reviews,
+      visibleReviews: firstTwo,
+      changedSort: (this.state.changedSort + 1)
+    })
   }
 
   render() {
@@ -176,7 +152,7 @@ class RatingsAndReviews extends React.Component {
         <Sort handleSort={this.handleSort} reviewCount={this.state.reviewCount} />
         <RatingBreakdown averageRating={this.props.averageRating} percent={this.props.percent} reviewCount={this.state.reviewCount} filterByStars={this.filterByStars} ratingsMeta={this.props.ratingsMeta} />
         <ProductBreakdown ratingsMeta={this.props.ratingsMeta} descriptions={this.state.descriptions} />
-        {this.state.isReady ? <ReviewsList key={this.state.changedSort} reviews={this.state.reviewsList} visibleReviews={this.state.visibleReviews} filteredReviews={this.state.filteredReviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings} productId={this.props.productId} handleMoreReviews={this.handleMoreReviews} /> : null}
+        {this.state.isReady ? <ReviewsList key={this.state.changedSort} reviews={this.state.currentReviews} visibleReviews={this.state.visibleReviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings} productId={this.props.productId} handleMoreReviews={this.handleMoreReviews} /> : null}
       </div>
 
     )
