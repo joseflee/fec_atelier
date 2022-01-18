@@ -58,6 +58,15 @@ class App extends React.Component {
     this.retrieveRelatedProducts(this.state.productId);
     this.retrieveRatings();
 
+
+    if (localStorage.getItem('outfitIds')) {
+      var outfitIds = localStorage.getItem('outfitIds').split(',');
+      this.setState({
+        outfitIds
+      }, () => {
+        this.retrieveAllForOutfits(this.state.outfitIds);
+      } )
+    }
   }
 
   componentDidUpdate() {
@@ -180,10 +189,8 @@ class App extends React.Component {
     })
   }
 
-  retrieveAllForRelated(ids) {
-
-    var ids = ids.join('&');
-
+  retrieveAllForRelated( ids ) {
+    var ids = ids.join( '&' );
     $.ajax({
       method: 'GET',
       url: `related/${ids}`,
@@ -233,12 +240,12 @@ class App extends React.Component {
 
   addToOutfit() {
     if ( this.state.outfitIds.indexOf( this.state.productId ) === -1) {
-      var outfits = this.state.outfitIds.concat( Number( this.state.productId ) );
+      var outfitIds = this.state.outfitIds.concat( Number( this.state.productId ) );
+      localStorage.setItem('outfitIds', outfitIds);
       this.setState({
-        outfitIds: outfits,
+        outfitIds,
       }, () => {
         this.retrieveAllForOutfits( this.state.outfitIds );
-        console.log(this.state.outfitIds);
       })
     }
   }
@@ -248,28 +255,29 @@ class App extends React.Component {
     var id = e.currentTarget.getAttribute( 'data-txt' );
     var outfitIds = this.state.outfitIds;
     var targetIndex = outfitIds.indexOf( Number( id ) );
-    var splicedOutfitIds = outfitIds.splice( targetIndex, 1 );
+    outfitIds.splice( targetIndex, 1 );
+    localStorage.setItem('outfitIds', outfitIds);
     var outfits = this.state.outfits;
     var listIndex;
-    var outfitView = this.state.outfitView;
-    var viewIndex;
     outfits.forEach( ( item, index ) => {
       if ( item.id === Number( id ) ) {
         listIndex = index;
       }
     });
-
     outfits.splice( listIndex, 1 );
+    var outfitView = this.state.outfitView;
+    var viewIndex;
     outfitView.forEach( ( item, index ) => {
       if ( item.id === Number( id ) ) {
         viewIndex = index;
       }
     });
     outfitView.splice( viewIndex, 1 );
+
     this.setState( {
-      outfitIds: outfitIds,
-      outfits: outfits,
-      outfitView: outfitView,
+      outfitIds,
+      outfits,
+      outfitView,
     }, () => {})
   }
 
@@ -289,16 +297,16 @@ class App extends React.Component {
   }
 
   handleRightArrow() {
-    var newPosition;
+    var outfitPosition;
     if (this.state.outfitPosition < this.state.outfits.length - 3) {
-      newPosition = this.state.outfitPosition + 1;
+      outfitPosition = this.state.outfitPosition + 1;
     } else {
-      newPosition = this.state.outfits.length - 3;
+      outfitPosition = this.state.outfits.length - 3;
     }
-    var newView = this.state.outfits.slice(newPosition, newPosition + 3);
+    var outfitView = this.state.outfits.slice(outfitPosition, outfitPosition + 3);
     this.setState({
-      outfitPosition: newPosition,
-      outfitView: newView
+      outfitPosition,
+      outfitView
     })
 
   }
@@ -318,7 +326,9 @@ class App extends React.Component {
           <div className={'announcement'}><i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - NEW PRODUCT HIGHLIGHT</div>
         </div>
         <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating}/> : null }</div>
-        {this.state.allRelated.length > 0 ? <RelatedItems all={this.state.allRelated} outfits={this.state.outfitView} outfitLength={this.state.outfits.length} clickCard={this.handleRelatedCardClick} addOutfit={this.addToOutfit} remove={this.removeFromOutfits} name={this.state.product} right={this.handleRightArrow} left={this.handleLeftArrow} position={this.state.outfitPosition} /> : null}
+        <div>
+          {this.state.allRelated.length > 0 ? <RelatedItems all={this.state.allRelated} outfits={this.state.outfitView} outfitLength={this.state.outfits.length} clickCard={this.handleRelatedCardClick} addOutfit={this.addToOutfit} remove={this.removeFromOutfits} name={this.state.product} right={this.handleRightArrow} left={this.handleLeftArrow} position={this.state.outfitPosition} /> : null}
+        </div>
         <QuestionsAndAnswers />
         <div className="ratingsAndReviews">
         {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings} averageRating={this.state.averageRating} percent={this.state.percentRecommended}/> : null }
