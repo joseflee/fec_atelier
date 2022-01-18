@@ -40,7 +40,7 @@ class RatingsAndReviews extends React.Component {
   componentDidMount() {
     var reviews = this.props.reviews;
     var reviewsList = this.props.reviews.results;
-    var firstTwo = this.handleFirstTwoReviews(reviewsList);;
+    var firstTwo = this.handleFirstTwoReviews(reviewsList);
 
     this.setState({
       ...this.state,
@@ -152,7 +152,7 @@ class RatingsAndReviews extends React.Component {
         <Sort handleSort={this.handleSort} reviewCount={this.state.reviewCount} />
         <RatingBreakdown averageRating={this.props.averageRating} percent={this.props.percent} reviewCount={this.state.reviewCount} filterByStars={this.filterByStars} ratingsMeta={this.props.ratingsMeta} />
         <ProductBreakdown ratingsMeta={this.props.ratingsMeta} descriptions={this.state.descriptions} />
-        {this.state.isReady ? <ReviewsList key={this.state.changedSort} reviews={this.state.currentReviews} visibleReviews={this.state.visibleReviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings} productId={this.props.productId} handleMoreReviews={this.handleMoreReviews} /> : null}
+        {this.state.isReady ? <ReviewsList key={this.state.changedSort} reviews={this.state.currentReviews} visibleReviews={this.state.visibleReviews} characteristics={this.props.ratingsMeta.characteristics} ratings={this.props.ratingsMeta.ratings} productId={this.props.productId} handleMoreReviews={this.handleMoreReviews} descriptions={this.state.descriptions} /> : null}
       </div>
 
     )

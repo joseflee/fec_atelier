@@ -189,19 +189,10 @@ class NewReview extends React.Component {
   }
 
   handleCharRating(e) {
-    // move the descriptions object to main component state
-    var descriptions = {
-      Size: ['A size too small', 'Half a size too small', 'Perfect', 'Half a size too big', 'A size too wide'],
-      Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly Wide', 'Too wide'],
-      Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-      Quality: ['Poor', 'Below Average', 'What I expect', 'Pretty great', 'Perfect'],
-      Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-      Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slighly long', 'Runs long']
-    }
 
     var char = e.target.name;
     var index = e.target.value - 1;
-    var description = descriptions[char][index];
+    var description = this.props.descriptions[char][index];
     var lowercase = char.toLowerCase();
     var id = `${lowercase}Desc`;
     var element = document.getElementById(id);
@@ -216,7 +207,7 @@ class NewReview extends React.Component {
       <div className="newReview">
         <button id="addReview" onClick={this.handleAddReview}>Add A Review +</button>
         <div id="reviewModal">
-          <span id="reviewClose" onClick={this.handleReviewClose}>X</span>
+          <span id="reviewClose" onClick={this.handleReviewClose}>x</span>
           <form id="reviewForm" onSubmit={this.handleValidation}>
             <label>
               Overall Rating*
