@@ -61,6 +61,9 @@ class App extends React.Component {
 
     if (localStorage.getItem('outfitIds')) {
       var outfitIds = localStorage.getItem('outfitIds').split(',');
+      var outfitIds = outfitIds.map(id => {
+        return Number( id );
+      })
       this.setState({
         outfitIds
       }, () => {
@@ -171,7 +174,7 @@ class App extends React.Component {
         var dataObj = {};
         var withoutDuplicates = [];
         data.forEach( item => {
-          if ( Number( productId ) !== Number( item ) ) {
+          if ( productId !== item ) {
             dataObj[ item ] = true;
           }
         } );
@@ -205,20 +208,20 @@ class App extends React.Component {
     })
   }
 
-  retrieveAllForOutfits(ids) {
-    var ids = ids.join('&');
+  retrieveAllForOutfits( ids ) {
+    var ids = ids.join( '&' );
     $.ajax({
       method: 'GET',
       url: `outfits/${ids}`,
-      success: (data) => {
-        var threeAtATime = data.slice(0, 3);
+      success: ( data ) => {
+        var threeAtATime = data.slice( 0, 3 );
         this.setState({
           outfits: data,
           outfitView: threeAtATime,
         }, () => {})
       },
-      error: (err) => {
-        console.log('error getting outfit data', err);
+      error: ( err ) => {
+        console.log( 'error getting outfit data', err );
       }
     })
   }
@@ -226,6 +229,7 @@ class App extends React.Component {
 
   handleRelatedCardClick(e) {
     var clickedCardId = e.currentTarget.getAttribute( 'data-txt' );
+    console.log('clicked card id', clickedCardId);
     this.setState( {
       productId: clickedCardId,
       allRelated: []
@@ -239,7 +243,7 @@ class App extends React.Component {
   }
 
   addToOutfit() {
-    if ( this.state.outfitIds.indexOf( this.state.productId ) === -1) {
+    if ( this.state.outfitIds.indexOf( Number( this.state.productId ) ) === -1 ) {
       var outfitIds = this.state.outfitIds.concat( Number( this.state.productId ) );
       localStorage.setItem('outfitIds', outfitIds);
       this.setState({
@@ -249,6 +253,7 @@ class App extends React.Component {
       })
     }
   }
+
 
   removeFromOutfits(e) {
     e.stopPropagation();
@@ -327,7 +332,7 @@ class App extends React.Component {
         </div>
         <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating}/> : null }</div>
         <div>
-          {this.state.allRelated.length > 0 ? <RelatedItems all={this.state.allRelated} outfits={this.state.outfitView} outfitLength={this.state.outfits.length} clickCard={this.handleRelatedCardClick} addOutfit={this.addToOutfit} remove={this.removeFromOutfits} name={this.state.product} right={this.handleRightArrow} left={this.handleLeftArrow} position={this.state.outfitPosition} /> : null}
+          { this.state.allRelated.length > 0 ? <RelatedItems all={ this.state.allRelated } outfits={ this.state.outfitView } outfitLength={ this.state.outfits.length } clickCard={ this.handleRelatedCardClick } addOutfit={ this.addToOutfit } remove={ this.removeFromOutfits } name={ this.state.product } right={ this.handleRightArrow } left={ this.handleLeftArrow } position={ this.state.outfitPosition } /> : null}
         </div>
         <QuestionsAndAnswers />
         <div className="ratingsAndReviews">

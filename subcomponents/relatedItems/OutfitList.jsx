@@ -15,7 +15,7 @@ export class OutfitList extends React.Component {
   renderOutfitList() {
     if ( this.props.outfits.length > 0 ) {
       return ( this.props.outfits.map( item => {
-        return <OutfitCard key={ item.id } itemInfo={ item } remove={ this.props.remove } />
+        return <OutfitCard key={ item.id } itemInfo={ item } remove={ this.props.remove } clickCard={ this.props.clickCard} />
       } ) )
     }
   }

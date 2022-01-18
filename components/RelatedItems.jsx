@@ -26,7 +26,7 @@ class RelatedItems extends React.Component {
     var id = e.currentTarget.getAttribute( 'data-id' );
     var comparedFeatures;
     this.state.relatedItemsList.forEach( product => {
-      if ( product.id === Number( id ) ) {
+      if ( product.id === Number( id )  ) {
         comparedFeatures = product;
       }
     })
@@ -52,7 +52,7 @@ class RelatedItems extends React.Component {
     return (
       <div>
         <RelatedProductList clickCard={ this.props.clickCard } clickStar={ this.handleRelatedStarClick } all={ this.props.all } />
-        <OutfitList outfits={ this.props.outfits } outfitLength={ this.props.outfitLength } add={ this.props.addOutfit } remove={ this.props.remove } right={ this.props.right } left={ this.props.left } position={ this.props.position } />
+        <OutfitList outfits={ this.props.outfits } outfitLength={ this.props.outfitLength } add={ this.props.addOutfit } remove={ this.props.remove } right={ this.props.right } left={ this.props.left } position={ this.props.position } clickCard={ this.props.clickCard } />
         { this.state.modal ? <ComparisonModal close={ this.closeModal } features={ this.props.features } relatedFeatures={ this.state.clickedCardFeatures } name={ this.props.name } /> : null}
       </div>
     )

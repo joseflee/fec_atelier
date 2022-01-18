@@ -48,7 +48,7 @@ export class OutfitCard extends React.Component {
   render() {
     return (
 
-      <div className="card">
+      <div className="card" data-txt={ this.props.itemInfo.id } onClick= { this.props.clickCard }>
         <div data-txt={ this.props.itemInfo.id } onClick={ this.props.remove } className="RIcompare">
           <CgCloseO />
         </div>
