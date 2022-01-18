@@ -122,6 +122,20 @@ var postReview = (data) => {
   })
 }
 
+var updateHelpfulness = (data) => {
+  console.log('data: ', data);
+  var helpfulness = data.helpfulness.toString();
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${data.reviewId}/helpful`, helpfulness, {
+    headers: {
+      authorization: APIkey
+    }
+  }).then((res) => {
+    console.log('response from API: ', res.status, res.statusText);
+    return res;
+  }).catch((err) => {
+    console.log('Error in updating helpfulness: ', err);
+  })
+}
 
 module.exports ={
 
@@ -129,5 +143,7 @@ module.exports ={
   conductSearch: conductSearch,
   retrieveStyles: retrieveStyles,
   retrieveRelatedData: retrieveRelatedData,
-  postReview: postReview
+  postReview: postReview,
+  updateHelpfulness: updateHelpfulness
+
 }

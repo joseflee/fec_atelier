@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const { retrieveProduct, retrieveStyles, conductSearch, retrieveRelatedData, postReview } = require('./apiMethods.js');
+const { retrieveProduct, retrieveStyles, conductSearch, retrieveRelatedData, postReview, updateHelpfulness } = require('./apiMethods.js');
 
 var jsonParser = bodyParser.json();
 var port = 3000;
@@ -98,4 +98,14 @@ app.post('/reviews', jsonParser, (req, res) => {
     console.log(err);
   });
 
+})
+
+app.put('/helpful', jsonParser, (req, res) => {
+
+  updateHelpfulness(req.body).then((response) => {
+    console.log('in server ', response.status, response.statusText);
+    res.status(response.status).send(response.statusText);
+  }).catch((err) => {
+    console.log(err);
+  })
 })
