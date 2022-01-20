@@ -18,6 +18,7 @@ class ImageInsert extends React.Component {
     this.updateThumbnailBorder = this.updateThumbnailBorder.bind(this);
     this.unpackImages = this.unpackImages.bind(this);
     this.changeFeaturedImage = this.changeFeaturedImage.bind(this);
+    this.resizeImage = this.resizeImage.bind(this);
 
   }
 
@@ -129,6 +130,16 @@ class ImageInsert extends React.Component {
     this.props.cb(newIndex)
   }
 
+  resizeImage(image) {
+
+  var sizedImage = image.split('');
+  sizedImage.splice(sizedImage.length - 33, 33);
+  sizedImage = sizedImage.join('').concat('&w=60&h=60');
+
+  return sizedImage;
+
+  }
+
 
   render() {
     return (
@@ -136,7 +147,7 @@ class ImageInsert extends React.Component {
       <img src={'./assets/up_angle.png'} className={"up_angle"} onClick={() => {this.handleScroll('up')}}></img>
       <div className={'thumbnailGallery'} onScroll={this.updateArrows}>
         <div className={'thumbnailScroll'}>{this.state.thumbGallery.map((item, i) => (
-          <img key={i} className={'thumbnailItem'} src={item} onClick={this.changeFeaturedImage} alt={'Atelier image thumbnail'}/>
+          <img key={i} className={'thumbnailItem'} src={this.resizeImage(item)} onClick={this.changeFeaturedImage} alt={'Atelier image thumbnail'}/>
         ))}</div>
       </div>
       <img src={'./assets/down_angle.png'} className={"down_angle"} onClick={() => {this.handleScroll('down')}}></img>
