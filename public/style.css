@@ -16,6 +16,36 @@ body {
 
 /*
 ////////////////////
+preload page structure
+////////////////////
+*/
+
+#overviewPlaceholder {
+  display: inline-block;
+  height: 750px;
+  width: 100%;
+}
+
+#relatedPlaceholder {
+  display:inline-block;
+  height: 750px;
+  width: 100%;
+}
+
+#questionsPlaceholder {
+  display:inline-block;
+  height: 350px;
+  width: 100%;
+}
+
+#ratingsPlaceholder {
+  display:inline-block;
+  height: 550px;
+  width: 100%;
+}
+
+/*
+////////////////////
 topbar
 ////////////////////
 */
@@ -98,8 +128,9 @@ OVERVIEW
 
 
 #overview {
-  /* border: 1px solid rgba(0, 0, 0, .4); */
+  display: inline-block;
   height: 750px;
+  width: 100%;
 }
 
 .leftPanel {
