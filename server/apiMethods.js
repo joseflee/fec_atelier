@@ -66,46 +66,58 @@ var parseResults = (array, term) => {
 
 
 
-var retrieveRelatedData = (ids, cb) => {
-  var allData = [];
-  for (let i = 0; i < ids.length; i++) {
-    let id = ids[i];
-    let idData = {};
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
-      headers: {
-        authorization: APIkey
+
+var retrieveRelatedData = ( ids ) => {
+  var prefix = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+  var headers = { authorization: APIkey };
+
+  var getProducts = ( id ) => {
+    return axios.get(`${prefix}/products/${id}`, {
+      headers: headers
+    })
+  };
+  var getStyles = ( id ) => {
+    return axios.get(`${prefix}/products/${id}/styles`, {
+      headers: headers
+    })
+  };
+  var getReviews = ( id ) => {
+    return axios.get(`${prefix}/reviews/?product_id=${id}`, {
+      headers: headers
+    })
+  };
+
+  var getAll = ( ids ) => {
+    var allForId = ids.map( id => {
+      var product = getProducts( id );
+      var style = getStyles( id );
+      var review = getReviews( id );
+      return Promise.all( [ product, style, review ] );
+    })
+
+    var allForIds = Promise.all( allForId );
+    var state = allForIds.map( data => {
+      var [ productData, stylesData, reviewsData ] = data;
+
+      return {
+        ...productData.data,
+        ...stylesData.data,
+        rating: parseAverageRating.parseAverageRating (reviewsData.data ),
       }
     })
-    .then((data) => {
-      idData = {...data.data}
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`, {
-        headers: {
-          authorization: APIkey
-        }
-      })
-      .then((data) => {
-        idData = {...idData, ...data.data}
-        axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/?product_id=${id}`, {
-          headers: {
-            authorization: APIkey
-          }
-        })
-        .then((data) => {
-          var averagedRating = parseAverageRating.parseAverageRating(data.data);
-          var ratingObj = {rating: averagedRating};
-          idData = {...idData, ...ratingObj};
-          allData.push(idData);
-          if (ids.length === allData.length) {
-            cb(allData);
-          }
-        })
-        .catch((err) => {
-          console.log('error in the promise chain', err)
-        })
-      })
-    })
+    return state;
   }
+
+  return getAll(ids );
 }
+
+
+
+
+
+
+
+
 
 
 module.exports ={

@@ -2,7 +2,7 @@ const express = require('express');
 const expressStaticGzip = require('express-static-gzip')
 
 const app = express();
-const { retrieveProduct, retrieveStyles, conductSearch, retrieveRelatedData } = require('./apiMethods.js');
+const { retrieveProduct, retrieveStyles, conductSearch, retrieveRelatedData, retrieveRelatedDataRefactored } = require('./apiMethods.js');
 
 var port = 3000;
 
@@ -66,19 +66,21 @@ app.get('/related/:ids', (req, res) => {
 
   var reqParam = req.params.ids;
   var ids = reqParam.split('&');
-  var cb = (data) => {
+  retrieveRelatedData(ids).then(data => {
     res.send(data);
-  }
-  var data = retrieveRelatedData(ids, cb);
+  }).catch(err => {
+    console.log('error getting data from related API', err);
+  });
 })
 
 app.get('/outfits/:ids', (req, res) => {
 
   var reqParam = req.params.ids;
-  console.log('reqparam', reqParam);
   var ids = reqParam.split('&');
-  var cb = (data) => {
+  retrieveRelatedData(ids).then(data => {
     res.send(data);
-  }
-  var data = retrieveRelatedData(ids, cb);
+  }).catch(err => {
+    console.log('error getting data from outfit API', err);
+    res.send(err);
+  });
 })
