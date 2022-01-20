@@ -136,7 +136,7 @@ class ImageInsert extends React.Component {
       <img src={'./assets/up_angle.png'} className={"up_angle"} onClick={() => {this.handleScroll('up')}}></img>
       <div className={'thumbnailGallery'} onScroll={this.updateArrows}>
         <div className={'thumbnailScroll'}>{this.state.thumbGallery.map((item, i) => (
-          <img key={i} className={'thumbnailItem'} src={item} onClick={this.changeFeaturedImage}/>
+          <img key={i} className={'thumbnailItem'} src={item} onClick={this.changeFeaturedImage} alt={'Atelier image thumbnail'}/>
         ))}</div>
       </div>
       <img src={'./assets/down_angle.png'} className={"down_angle"} onClick={() => {this.handleScroll('down')}}></img>

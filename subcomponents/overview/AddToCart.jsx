@@ -36,8 +36,8 @@ class AddToCart extends React.Component {
   unpackProps() {
 
     var props = this.props.state;
-    var selectedIndex = props.selectedStyle;
-    var styles = props.styles.results;
+    var selectedIndex = this.props.state.selectedStyle;
+    var styles = this.props.state.styles.results;
     var selectedStyle = styles[selectedIndex];
 
     var SKUbySize = {};

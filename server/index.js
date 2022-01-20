@@ -19,7 +19,6 @@ app.listen(port, () => {
 app.use('/', expressStaticGzip('public'));
 
 
-
 // GET single product by ID
 app.get('/products/:id', (req, res) => {
 
@@ -70,20 +69,20 @@ app.get('/related/:ids', (req, res) => {
 
   var reqParam = req.params.ids;
   var ids = reqParam.split('&');
-  var cb = (data) => {
+  retrieveRelatedData(ids).then(data => {
     res.send(data);
-  }
-  var data = retrieveRelatedData(ids, cb);
+  }).catch(err => {
+    console.log('error getting data from related API', err);
+  });
 })
 
 app.get('/outfits/:ids', (req, res) => {
 
   var reqParam = req.params.ids;
-  console.log('reqparam', reqParam);
   var ids = reqParam.split('&');
-  var cb = (data) => {
+  retrieveRelatedData(ids).then(data => {
     res.send(data);
-  }
+  })
   var data = retrieveRelatedData(ids, cb);
 })
 
@@ -105,7 +104,8 @@ app.put('/helpful', jsonParser, (req, res) => {
   updateHelpfulness(req.body).then((response) => {
     console.log('in server ', response.status, response.statusText);
     res.status(response.status).send(response.statusText);
-  }).catch((err) => {
-    console.log(err);
-  })
+  }).catch(err => {
+    console.log('error getting data from outfit API', err);
+    res.send(err);
+  });
 })
