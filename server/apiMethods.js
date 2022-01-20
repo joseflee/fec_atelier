@@ -111,6 +111,35 @@ var retrieveRelatedData = ( ids ) => {
   return getAll(ids );
 }
 
+var postReview = (data) => {
+  console.log('data: ', data);
+  // data = JSON.stringify(data);
+  return axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', data, {
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: APIkey
+    }
+  }).then((res) => {
+    return res;
+  }).catch((err) => {
+    console.log('Error in posting review: ', err);
+  })
+}
+
+var updateHelpfulness = (data) => {
+  console.log('data: ', data);
+  var helpfulness = data.helpfulness.toString();
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${data.reviewId}/helpful`, helpfulness, {
+    headers: {
+      authorization: APIkey
+    }
+  }).then((res) => {
+    console.log('response from API: ', res.status, res.statusText);
+    return res;
+  }).catch((err) => {
+    console.log('Error in updating helpfulness: ', err);
+  })
+}
 
 
 
@@ -126,6 +155,7 @@ module.exports ={
   conductSearch: conductSearch,
   retrieveStyles: retrieveStyles,
   retrieveRelatedData: retrieveRelatedData,
+  postReview: postReview,
+  updateHelpfulness: updateHelpfulness
 
 }
-

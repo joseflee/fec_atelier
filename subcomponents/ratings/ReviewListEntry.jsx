@@ -1,24 +1,49 @@
 import React from 'react';
 import moment from 'moment';
 import Stars from './Stars.jsx';
+import ReviewPhotos from './ReviewPhotos.jsx';
+import $ from 'jquery';
 
 class ReviewListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      helpfulness: props.review.helpfulness
-    }
+      helpfulness: null,
+      entries: null
+    };
     this.handleHelpful = this.handleHelpful.bind(this);
   }
 
+  componentDidMount() {
+    var helpfulness = this.props.review.helpfulness;
+    this.setState({
+      helpfulness: helpfulness
+    })
+  }
+
   handleHelpful() {
-    console.log('click');
-    // console.log('props: ', this.props)
-    // console.log(this.state);
-    // console.log(this.props.helpfulness);
-    this.setState((state) => ({ helpfulness: (state.helpfulness + 1) }), () => {
-      console.log(this.state);
-    });
+    if (this.state.entries < 1) {
+      this.setState({
+        helpfulness: (this.state.helpfulness + 1),
+        entries: 1
+      }, () => {
+        var data = {
+          reviewId: this.props.review.review_id,
+          helpfulness: this.state.helpfulness
+        };
+
+        var json = JSON.stringify(data);
+
+        $.ajax({
+          method: 'PUT',
+          url: '/helpful',
+          contentType: 'application/json',
+          data: json
+        }).done((res) => {
+          console.log('client side: ', res);
+        })
+      })
+    }
   }
 
   render() {
@@ -34,6 +59,7 @@ class ReviewListEntry extends React.Component {
 
         <div className="reviewSummary">{this.props.review.summary}</div>
         <div className="reviewBody">{this.props.review.body}</div>
+        {this.props.review.photos.length > 0 ? <ReviewPhotos photos={this.props.review.photos} /> : null}
         {this.props.review.recommend ? <div className="recommendedCheck">I recommend this product</div> : null}
         {this.props.review.response ? <div className="sellerResponse">
           <div className="responseHeader">Response:</div>

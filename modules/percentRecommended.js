@@ -1,12 +1,13 @@
 var getPrecentRecommended = (reviews) => {
   // console.log('percent reviews: ', reviews);
   var recommendedCount = 0;
-  reviews.results.forEach((review) => {
+  reviews.forEach((review) => {
     if(review.recommend) {
       recommendedCount++;
     }
   })
-  return (recommendedCount / reviews.results.length) * 100;
+  var percent = (recommendedCount / reviews.length) * 100;
+  return percent.toFixed();
 }
 
 export default getPrecentRecommended;
