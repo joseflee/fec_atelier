@@ -2,25 +2,21 @@ import React from 'react';
 import NewReview from '../subcomponents/ratings/NewReview.jsx';
 import ReviewsList from '../subcomponents/ratings/ReviewsList.jsx';
 import RatingBreakdown from '../subcomponents/ratings/RatingBreakdown.jsx';
+import ProductBreakdown from '../subcomponents/ratings/ProductBreakdown.jsx';
+import Sort from '../subcomponents/ratings/Sort.jsx';
 
-class RatingsAndReviews extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      reviews: props.reviews
-    }
-  }
+var RatingsAndReviews = (props) => {
 
-  render() {
     return (
       <div id="reviewsSection">
-        <h3>Ratings & Reviews</h3>
-        <RatingBreakdown  averageRating={this.props.averageRating} percent={this.props.percent}/>
-        <ReviewsList reviews={this.state.reviews} />
+        <h3 id="reviewsHeader">Ratings & Reviews</h3>
+        <Sort handleSort={props.handleSort} reviewCount={props.reviewCount} />
+        <RatingBreakdown averageRating={props.averageRating} percent={props.percent} reviewCount={props.reviewCount} filterByStars={props.filterByStars} ratingsMeta={props.ratingsMeta} />
+        <ProductBreakdown ratingsMeta={props.ratingsMeta} descriptions={props.descriptions} />
+        <ReviewsList reviews={props.currentReviews} visibleReviews={props.visibleReviews} characteristics={props.characteristics} ratings={props.ratingsMeta.ratings} productId={props.productId} handleMoreReviews={props.handleMoreReviews} descriptions={props.descriptions}/>
       </div>
 
     )
-  }
 }
 
 export default RatingsAndReviews;

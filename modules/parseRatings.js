@@ -9,7 +9,6 @@ var parseAverageRating = (obj) => {
   }
 
   return sum / terms;
-
 }
 
 export default parseAverageRating;

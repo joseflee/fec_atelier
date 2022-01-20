@@ -1,9 +1,12 @@
 const express = require('express');
 const expressStaticGzip = require('express-static-gzip')
+const bodyParser = require('body-parser');
 
 const app = express();
-const { retrieveProduct, retrieveStyles, conductSearch, retrieveRelatedData, retrieveRelatedDataRefactored } = require('./apiMethods.js');
 
+const { retrieveProduct, retrieveStyles, conductSearch, retrieveRelatedData, postReview, updateHelpfulness } = require('./apiMethods.js');
+
+var jsonParser = bodyParser.json();
 var port = 3000;
 
 app.listen(port, () => {
@@ -79,6 +82,28 @@ app.get('/outfits/:ids', (req, res) => {
   var ids = reqParam.split('&');
   retrieveRelatedData(ids).then(data => {
     res.send(data);
+  })
+  var data = retrieveRelatedData(ids, cb);
+})
+
+//POST review
+app.post('/reviews', jsonParser, (req, res) => {
+
+  postReview(req.body).then((response) => {
+    console.log('in server: ', response);
+    console.log('status: ', response.status);
+    res.status(response.status).send(response.statusText);
+  }).catch((err) => {
+    console.log(err);
+  });
+
+})
+
+app.put('/helpful', jsonParser, (req, res) => {
+
+  updateHelpfulness(req.body).then((response) => {
+    console.log('in server ', response.status, response.statusText);
+    res.status(response.status).send(response.statusText);
   }).catch(err => {
     console.log('error getting data from outfit API', err);
     res.send(err);

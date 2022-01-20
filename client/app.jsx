@@ -27,6 +27,7 @@ class App extends React.Component {
       product: null,
       styles: null,
       ratings: null,
+      ratingsMeta: {},
       averageRating: null,
       percentRecommended: null,
       allRelated: [],
@@ -34,6 +35,18 @@ class App extends React.Component {
       outfits: [],
       outfitView: [],
       outfitPosition: 0,
+      visibleReviews: [],
+      currentReviews: [],
+      reviewCount: null,
+      characteristics: null,
+      descriptions: {
+        Size: ['A size too small', 'Half a size too small', 'Perfect', 'Half a size too big', 'A size too wide'],
+        Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly Wide', 'Too wide'],
+        Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+        Quality: ['Poor', 'Below Average', 'What I expect', 'Pretty great', 'Perfect'],
+        Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+        Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slighly long', 'Runs long']
+      }
     }
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
@@ -50,6 +63,15 @@ class App extends React.Component {
     this.handleLeftArrow = this.handleLeftArrow.bind(this);
 
     this.retrieveRatings = this.retrieveRatings.bind(this);
+    this.retrieveRatingsMeta = this.retrieveRatingsMeta.bind(this);
+
+    this.filterByStars = this.filterByStars.bind(this);
+    this.handleSort = this.handleSort.bind(this);
+    this.compareHelpfulness = this.compareHelpfulness.bind(this);
+    this.compareNewest = this.compareNewest.bind(this);
+    this.compareRelevance = this.compareRelevance.bind(this);
+    this.handleFirstTwoReviews = this.handleFirstTwoReviews.bind(this);
+    this.handleMoreReviews = this.handleMoreReviews.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +79,7 @@ class App extends React.Component {
     this.retrieveProduct(this.state.productId);
     this.retrieveRelatedProducts(this.state.productId);
     this.retrieveRatings();
+    this.retrieveRatingsMeta();
 
 
     if (localStorage.getItem('outfitIds')) {
@@ -114,29 +137,49 @@ class App extends React.Component {
 
     $.ajax({
       method: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/?product_id=${this.state.productId}`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/?product_id=${this.state.productId}&count=200`,
       headers: {
         "Authorization": APIkey
       }
     }).done((res) => {
+      var reviews = res.results;
+      var count = reviews.length;
+      var firstTwo = this.handleFirstTwoReviews(reviews);
+      var percent = getPercentRecommended(reviews);
       self.setState({
         ...self.state,
         ratings: res,
+        visibleReviews: firstTwo,
+        currentReviews: reviews,
+        reviewCount: count,
+        percentRecommended: percent
       }, () => {
         self.setState({
           ...self.state,
           averageRating: parseAverageRating(this.state.ratings)
-        }, () => {
-          self.setState({
-            ...self.state,
-            percentRecommended: getPercentRecommended(this.state.ratings)
-          }, () => {
-            // console.log('percent recommended: ', this.state.percentRecommended);
-          })
         })
       })
     })
 
+  }
+
+  retrieveRatingsMeta() {
+    $.ajax({
+      method: 'GET',
+      url:`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${this.state.productId}`,
+      headers: {
+        'Authorization': APIkey
+      }
+    }).done((res) => {
+      var characteristics = Object.keys(res.characteristics);
+      // console.log('after ratingsMeta api: ', characteristics);
+      this.setState({
+        ratingsMeta: res,
+        characteristics: characteristics
+      }, () => {
+        // console.log('ratings meta in state: ', this.state.ratingsMeta);
+      })
+    })
   }
 
   // now available for use - must use string parameter with product name
@@ -245,6 +288,7 @@ class App extends React.Component {
       this.retrieveProduct( this.state.productId );
       this.retrieveRelatedProducts( this.state.productId );
       this.retrieveRatings();
+      this.retrieveRatingsMeta();
     }
     )
   }
@@ -323,6 +367,104 @@ class App extends React.Component {
 
   }
 
+  // reviews handlers
+  handleFirstTwoReviews(reviewsList) {
+    var firstTwo = [];
+    if (reviewsList.length === 1) {
+      firstTwo.push(reviewsList[0]);
+    } else if (reviewsList.length > 1) {
+      firstTwo.push(reviewsList[0]);
+      firstTwo.push(reviewsList[1]);
+    }
+    return firstTwo;
+  }
+
+  handleMoreReviews() {
+    var reviewsList = this.state.currentReviews;
+    var start = this.state.visibleReviews.length;
+    var end = start + 2;
+    var nextTwo = reviewsList.slice(start, end);
+    var newState = this.state.visibleReviews.concat(nextTwo);
+    var button = document.getElementById("moreReviews");
+    this.setState({ visibleReviews: newState }, () => {
+      if (this.state.visibleReviews.length === this.state.currentReviews.length) {
+        button.style.display = "none";
+      }
+    });
+    // future enhancement:
+    // button should disappear after max height of element is reached
+    // list should become scrollable
+  }
+
+  filterByStars(e) {
+    var rating = Number(e.target.innerHTML[0]);
+    var newReviews = this.state.ratings.results;
+    var filtered = [];
+    var button = document.getElementById("moreReviews");
+
+    button.style.display = "block";
+
+    newReviews.forEach((review) => {
+      if (review.rating === rating) {
+        filtered.push(review);
+      }
+    })
+
+    newReviews = filtered;
+    var firstTwo = this.handleFirstTwoReviews(newReviews);
+    this.setState({
+      ...this.state,
+      visibleReviews: firstTwo,
+      currentReviews: newReviews,
+      isFiltered: true,
+      changedSort: (this.state.changedSort + 1)
+    })
+  }
+
+  compareRelevance(a, b) {
+    var c = new Date(a.date);
+    var d = new Date(b.date);
+    return b.helpfulness - a.helpfulness || d - c;
+  }
+
+  compareHelpfulness(a, b) {
+    return b.helpfulness - a.helpfulness;
+  }
+
+  compareNewest(a, b) {
+    var c = new Date(a.date);
+    var d = new Date(b.date);
+    return d - c;
+  }
+
+  handleSort(e) {
+    var option = e.target.innerHTML;
+    var reviews = this.state.currentReviews;
+    var newReviews;
+    var firstTwo;
+
+    if (option === 'Helpfulness') {
+      newReviews = reviews.sort(this.compareHelpfulness);
+    }
+
+    if (option === 'Newest') {
+      newReviews = reviews.sort(this.compareNewest);
+    }
+
+    if (option === 'Relevance') {
+      newReviews = reviews.sort(this.compareRelevance);
+    }
+
+    firstTwo = this.handleFirstTwoReviews(newReviews);
+
+    this.setState({
+      ...this.state,
+      currentReviews: reviews,
+      visibleReviews: firstTwo
+      // changedSort: (this.state.changedSort + 1)
+    })
+  }
+
   render() {
 
     return (
@@ -343,7 +485,8 @@ class App extends React.Component {
         </div>
         <QuestionsAndAnswers />
         <div className="ratingsAndReviews">
-        {this.state.ratings ? <RatingsAndReviews reviews={this.state.ratings} averageRating={this.state.averageRating} percent={this.state.percentRecommended}/> : null }
+        {this.state.percentRecommended && this.state.averageRating && this.state.ratingsMeta ? <RatingsAndReviews reviews={this.state.currentReviews} averageRating={this.state.averageRating} percent={this.state.percentRecommended} ratingsMeta={this.state.ratingsMeta}
+        productId={this.state.productId} descriptions={this.state.descriptions} visibleReviews={this.state.visibleReviews} handleSort={this.handleSort} filterByStars={this.filterByStars} handleMoreReviews={this.handleMoreReviews} reviewCount={this.state.reviewCount} characteristics={this.state.characteristics}/> : null }
         </div>
       </div>
     )
