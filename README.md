@@ -22,15 +22,18 @@ Once the dependencies are installed, you can run ```npm run build``` and ```npm 
 
 ## Overview
 
-https://user-images.githubusercontent.com/42950088/150287122-edb66890-9778-43fa-be38-d40c9c65bd9e.mov
+![Screen-Recording-2022-01-19-at-11 19 21-PM](https://user-images.githubusercontent.com/42950088/150291814-65c4422a-3b06-4140-af77-90f9968fb390.gif)
+
 
 ## Related Items
 
-https://user-images.githubusercontent.com/42950088/150287189-115b587d-56ed-4dd8-8498-2b0ea8c1b421.mov
+![Screen-Recording-2022-01-19-at-11 23 11-PM](https://user-images.githubusercontent.com/42950088/150292260-76f411d7-166e-432b-910c-cfe00c1935f1.gif)
+
 
 ## Reviews and Ratings
 
-https://user-images.githubusercontent.com/42950088/150287257-780b9a47-26ba-413a-9328-75a4f685ada4.mov
+![Screen-Recording-2022-01-19-at-10 36 05-PM](https://user-images.githubusercontent.com/42950088/150290824-38f07a1c-8ab7-4750-aee0-27f8752fce0c.gif)
+
 
 
 
