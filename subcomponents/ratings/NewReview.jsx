@@ -27,8 +27,8 @@ class NewReview extends React.Component {
   }
 
   loadCharacteristics(characteristics) {
-    var characteristics = Object.keys(characteristics);
-    this.setState({ characteristics: characteristics });
+    // var characteristics = Object.keys(characteristics);
+    this.setState({ characteristics: this.props.characteristics });
   }
 
   handleOverallRating(value) {

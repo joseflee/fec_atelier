@@ -400,6 +400,10 @@ class App extends React.Component {
     var rating = Number(e.target.innerHTML[0]);
     var newReviews = this.state.ratings.results;
     var filtered = [];
+    var button = document.getElementById("moreReviews");
+
+    button.style.display = "block";
+
     newReviews.forEach((review) => {
       if (review.rating === rating) {
         filtered.push(review);
@@ -482,7 +486,7 @@ class App extends React.Component {
         <QuestionsAndAnswers />
         <div className="ratingsAndReviews">
         {this.state.percentRecommended && this.state.averageRating && this.state.ratingsMeta ? <RatingsAndReviews reviews={this.state.currentReviews} averageRating={this.state.averageRating} percent={this.state.percentRecommended} ratingsMeta={this.state.ratingsMeta}
-        productId={this.state.productId} descriptions={this.state.descriptions} visibleReviews={this.state.visibleReviews} handleSort={this.handleSort} filterByStars={this.filterByStars} handleMoreReviews={this.handleMoreReviews} reviewCount={this.state.reviewCount}/> : null }
+        productId={this.state.productId} descriptions={this.state.descriptions} visibleReviews={this.state.visibleReviews} handleSort={this.handleSort} filterByStars={this.filterByStars} handleMoreReviews={this.handleMoreReviews} reviewCount={this.state.reviewCount} characteristics={this.state.characteristics}/> : null }
         </div>
       </div>
     )

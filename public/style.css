@@ -966,6 +966,12 @@ REVIEW LIST
   margin-bottom: 10px;
   position: relative;
   left: 5px;
+  text-decoration: underline;
+}
+
+.helpfulYes:hover {
+  cursor: pointer;
+  color: red;
 }
 
 .helpfulCount {
