@@ -9,7 +9,7 @@ var RatingsAndReviews = (props) => {
 
     return (
       <div id="reviewsSection">
-        <h3 id="reviewsHeader">Ratings & Reviews</h3>
+        <div id="reviewsHeader" id={'ratingsAndReviewsHeader'}><b>Ratings & Reviews</b></div>
         <Sort handleSort={props.handleSort} reviewCount={props.reviewCount} />
         <RatingBreakdown averageRating={props.averageRating} percent={props.percent} reviewCount={props.reviewCount} filterByStars={props.filterByStars} ratingsMeta={props.ratingsMeta} />
         <ProductBreakdown ratingsMeta={props.ratingsMeta} descriptions={props.descriptions} />

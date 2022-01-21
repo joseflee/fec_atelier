@@ -75,6 +75,7 @@ topbar
 
 #invisibleSearch {
   color: rgba(0, 0, 0, .0);
+  font-size: 1px;
 }
 
 input, textarea {
@@ -858,6 +859,10 @@ QUESTIONS AND ANSWERS
 RATINGS AND REVIEWS
 /////////////////////
 */
+
+#ratingsAndReviewsHeader {
+  font-size: 20px;
+}
 
 
 /*

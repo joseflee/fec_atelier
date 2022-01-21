@@ -1,9 +1,5 @@
 import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
-// import Overview from '../components/Overview.jsx';
-// import QuestionsAndAnswers from '../components/QuestionsAndAnswers.jsx';
-// import RatingsAndReviews from '../components/RatingsAndReviews.jsx';
-// import RelatedItems from '../components/RelatedItems.jsx';
 const Overview = lazy(() => import('../components/Overview.jsx'));
 const QuestionsAndAnswers = lazy(() => import('../components/QuestionsAndAnswers.jsx'));
 const RatingsAndReviews = lazy(() => import('../components/RatingsAndReviews.jsx'));
@@ -14,7 +10,6 @@ import Search from '../components/Search.jsx';
 import $ from 'jquery';
 import { APIkey } from '../config.js';
 
-// importing search bar icon from react library
 import { FaSistrix } from 'react-icons/fa';
 import parseAverageRating from '../modules/parseRatings.js';
 import mockProduct from '../mock_api/mock_product.js';
@@ -185,11 +180,8 @@ class App extends React.Component {
     })
   }
 
-  // now available for use - must use string parameter with product name
-  // not case sensitive but spelling must be correct
+  // not case sensitive but spelling must be correct (product name)
   handleSearch(searchTerm) {
-
-    //console.log('search toggled')
 
     $.ajax({
       method: 'GET',
