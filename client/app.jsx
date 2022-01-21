@@ -50,7 +50,8 @@ class App extends React.Component {
         Quality: ['Poor', 'Below Average', 'What I expect', 'Pretty great', 'Perfect'],
         Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
         Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slighly long', 'Runs long']
-      }
+      },
+      clicks: []
     }
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
@@ -76,6 +77,8 @@ class App extends React.Component {
     this.compareRelevance = this.compareRelevance.bind(this);
     this.handleFirstTwoReviews = this.handleFirstTwoReviews.bind(this);
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
+
+    this.trackClick = this.trackClick.bind(this);
   }
 
   componentDidMount() {
@@ -465,6 +468,20 @@ class App extends React.Component {
     })
   }
 
+  trackClick(clickObj) {
+
+    var newClicks = this.state.clicks;
+    newClicks.push(clickObj);
+
+    this.setState({
+      ...this.state,
+      clicks: newClicks
+    }, () => {
+      console.log('central state click counter => ', this.state.clicks)
+    })
+
+  }
+
   render() {
 
     return (
@@ -483,7 +500,7 @@ class App extends React.Component {
 
         <div id={'overviewPlaceholder'}>
           <Suspense fallback={<div>Loading...</div>}>
-            <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating} /> : null}</div>
+            <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating} trackClick={this.trackClick} /> : null}</div>
           </Suspense>
         </div>
 
