@@ -13,7 +13,7 @@ class QuestionsAndAnswers extends React.Component {
   render() {
     return (
       <div>
-        <h4>Questions And Answers</h4>
+        <div><b>Questions And Answers</b></div>
         <QuestionSearch />
         <QuestionList data={sampleData}/>
         <MoreQuestions />

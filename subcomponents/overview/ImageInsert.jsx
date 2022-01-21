@@ -18,6 +18,7 @@ class ImageInsert extends React.Component {
     this.updateThumbnailBorder = this.updateThumbnailBorder.bind(this);
     this.unpackImages = this.unpackImages.bind(this);
     this.changeFeaturedImage = this.changeFeaturedImage.bind(this);
+    this.resizeImage = this.resizeImage.bind(this);
 
   }
 
@@ -120,26 +121,37 @@ class ImageInsert extends React.Component {
   }
 
   changeFeaturedImage(e) {
+
     var newIndex;
     for (var i = 0; i < this.state.thumbGallery.length; i++) {
-      if (this.state.thumbGallery[i] === e.target.src) {
+      if (this.state.thumbGallery[i].slice(0, 60) === e.target.src.slice(0, 60)) {
         newIndex = i;
       }
     }
     this.props.cb(newIndex)
   }
 
+  resizeImage(image) {
+
+  var sizedImage = image.split('');
+  sizedImage.splice(sizedImage.length - 33, 33);
+  sizedImage = sizedImage.join('').concat('&w=80&h=auto');
+
+  return sizedImage;
+
+  }
+
 
   render() {
     return (
       <div className={'imageInsert'}>
-      <img src={'./assets/up_angle.png'} className={"up_angle"} onClick={() => {this.handleScroll('up')}}></img>
+      <img src={'./assets/up_angle.png'} className={"up_angle"} height={'30px'} width={'30px'} onClick={() => {this.handleScroll('up')}}></img>
       <div className={'thumbnailGallery'} onScroll={this.updateArrows}>
         <div className={'thumbnailScroll'}>{this.state.thumbGallery.map((item, i) => (
-          <img key={i} className={'thumbnailItem'} src={item} onClick={this.changeFeaturedImage} alt={'Atelier image thumbnail'}/>
+          <img key={i} className={'thumbnailItem'} src={this.resizeImage(item)} onClick={this.changeFeaturedImage} alt={'Atelier image thumbnail'}/>
         ))}</div>
       </div>
-      <img src={'./assets/down_angle.png'} className={"down_angle"} onClick={() => {this.handleScroll('down')}}></img>
+      <img src={'./assets/down_angle.png'} className={"down_angle"} alt={'down arrow'} height={'30px'} width={'30px'} onClick={() => {this.handleScroll('down')}}></img>
       </div>
     )
   }
