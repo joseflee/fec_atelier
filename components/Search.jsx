@@ -37,8 +37,10 @@ class Search extends React.Component {
     return (
 
       <form className={'search'} name={'search'}>
-        <input type={'text'} name={'search'} onChange={this.updateSearchTerm} className={'searchInput'}></input>
-        <FaSistrix className={'searchIcon'} onClick={this.submitSearch}/>
+        <label htmlFor={'search'}><span id={'invisibleSearch'}>Search</span>
+          <input type={'text'} name={'search'} onChange={this.updateSearchTerm} className={'searchInput'}></input>
+        </label>
+        <FaSistrix className={'searchIcon'} onClick={this.submitSearch} />
       </form>
 
     )

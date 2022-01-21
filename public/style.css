@@ -1,14 +1,14 @@
-@font-face {
-  font-family: 'Pacifico';
+/* @font-face {
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
-  src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/FwZY7-Qmy14u9lezJ-6H6MmBp0u-.woff2) format('woff2');
-  font-display: swap;
-}
+  src: url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500) format('woff2');
+  font-display: fallback;
+} */
 
 body {
   margin: 0 auto;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', Arial, sans-serif;
   background-color: rgba(0, 0, 0, .05);
   min-width: 920px;
   max-width: 1200px;
@@ -71,6 +71,10 @@ topbar
 .search {
   margin: 6px 10px 0 0;
   display: inline-block;
+}
+
+#invisibleSearch {
+  color: rgba(0, 0, 0, .0);
 }
 
 input, textarea {
@@ -372,6 +376,7 @@ Image Gallery - Overview
   display: inline-block;
   text-align: center;
   height: 100%;
+  width: auto;
 }
 
 .mainImageFrame {

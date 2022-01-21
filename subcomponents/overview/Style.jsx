@@ -15,7 +15,7 @@ var Style = (props) => {
 
     var sizedImage = image.split('');
     sizedImage.splice(sizedImage.length - 33, 33);
-    sizedImage = sizedImage.join('').concat('&w=60&h=60');
+    sizedImage = sizedImage.join('').concat('&w=80&h=auto');
 
     return sizedImage;
 
@@ -31,12 +31,12 @@ var Style = (props) => {
             <div className={'checkBox'}>
             <div className={'checkmark'}><span>&#10003;</span></div>
             </div>
-            <img className={`selectedStyle`} onClick={() => {handleClick(i)}} src={resizeImage(item)} alt={'Atelier style image'}/>
+            <img className={`selectedStyle`} alt={item} onClick={() => {handleClick(i)}} src={resizeImage(item)} alt={'Atelier style image'}/>
             </div>
           )
         } else {
           return (
-            <img key={i} className={'styleItem'} onClick={() => {handleClick(i)}} src={resizeImage(item)}/>
+            <img key={i} className={'styleItem'} alt={item} onClick={() => {handleClick(i)}} src={resizeImage(item)}/>
           )
         }
       })}</div>

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
-import Overview from '../components/Overview.jsx';
-import QuestionsAndAnswers from '../components/QuestionsAndAnswers.jsx';
-import RatingsAndReviews from '../components/RatingsAndReviews.jsx';
-import RelatedItems from '../components/RelatedItems.jsx';
+// import Overview from '../components/Overview.jsx';
+// import QuestionsAndAnswers from '../components/QuestionsAndAnswers.jsx';
+// import RatingsAndReviews from '../components/RatingsAndReviews.jsx';
+// import RelatedItems from '../components/RelatedItems.jsx';
+const Overview = lazy(() => import('../components/Overview.jsx'));
+const QuestionsAndAnswers = lazy(() => import('../components/QuestionsAndAnswers.jsx'));
+const RatingsAndReviews = lazy(() => import('../components/RatingsAndReviews.jsx'));
+const RelatedItems = lazy(() => import('../components/RelatedItems.jsx'));
 import Search from '../components/Search.jsx';
 
 
@@ -85,18 +89,14 @@ class App extends React.Component {
     if (localStorage.getItem('outfitIds')) {
       var outfitIds = localStorage.getItem('outfitIds').split(',');
       var outfitIds = outfitIds.map(id => {
-        return Number( id );
+        return Number(id);
       })
       this.setState({
         outfitIds
       }, () => {
         this.retrieveAllForOutfits(this.state.outfitIds);
-      } )
+      })
     }
-  }
-
-  componentDidUpdate() {
-
   }
 
   retrieveProduct(id) {
@@ -107,7 +107,7 @@ class App extends React.Component {
       method: 'GET',
       url: `products/${id}`
     }).done((res) => {
-        this.retrieveStyles(res, this.state.productId);
+      this.retrieveStyles(res, this.state.productId);
     })
 
   }
@@ -166,7 +166,7 @@ class App extends React.Component {
   retrieveRatingsMeta() {
     $.ajax({
       method: 'GET',
-      url:`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${this.state.productId}`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${this.state.productId}`,
       headers: {
         'Authorization': APIkey
       }
@@ -219,32 +219,32 @@ class App extends React.Component {
         } else {
           var dataObj = {};
           var withoutDuplicates = [];
-          data.forEach( item => {
-            if ( productId !== item ) {
-              dataObj[ item ] = true;
+          data.forEach(item => {
+            if (productId !== item) {
+              dataObj[item] = true;
             }
-          } );
-          for ( var id in dataObj ) {
-            withoutDuplicates.push( id );
+          });
+          for (var id in dataObj) {
+            withoutDuplicates.push(id);
           }
-          this.retrieveAllForRelated( withoutDuplicates );
-          if ( this.state.outfits.length > 0 ) {
-            this.retrieveAllForOutfits( this.state.outfitIds )
+          this.retrieveAllForRelated(withoutDuplicates);
+          if (this.state.outfits.length > 0) {
+            this.retrieveAllForOutfits(this.state.outfitIds)
           }
         }
       },
-      error: ( err ) => {
-        console.log( 'error getting related products', err );
+      error: (err) => {
+        console.log('error getting related products', err);
       }
     })
   }
 
-  retrieveAllForRelated( ids ) {
+  retrieveAllForRelated(ids) {
     //var ids = ids.join( '&' );
-    if (typeof(ids) === 'number') {
+    if (typeof (ids) === 'number') {
       ids = ids;
     } else {
-      ids = ids.join( '&' );
+      ids = ids.join('&');
     }
     $.ajax({
       method: 'GET',
@@ -252,7 +252,7 @@ class App extends React.Component {
       success: (data) => {
         this.setState({
           allRelated: data
-        }, () => {})
+        }, () => { })
       },
       error: (err) => {
         console.log('error getting all for related', err)
@@ -260,33 +260,33 @@ class App extends React.Component {
     })
   }
 
-  retrieveAllForOutfits( ids ) {
-    var ids = ids.join( '&' );
+  retrieveAllForOutfits(ids) {
+    var ids = ids.join('&');
     $.ajax({
       method: 'GET',
       url: `outfits/${ids}`,
-      success: ( data ) => {
-        var threeAtATime = data.slice( 0, 3 );
+      success: (data) => {
+        var threeAtATime = data.slice(0, 3);
         this.setState({
           outfits: data,
           outfitView: threeAtATime,
-        }, () => {})
+        }, () => { })
       },
-      error: ( err ) => {
-        console.log( 'error getting outfit data', err );
+      error: (err) => {
+        console.log('error getting outfit data', err);
       }
     })
   }
 
 
   handleRelatedCardClick(e) {
-    var clickedCardId = e.currentTarget.getAttribute( 'data-txt' );
-    this.setState( {
+    var clickedCardId = e.currentTarget.getAttribute('data-txt');
+    this.setState({
       productId: clickedCardId,
       allRelated: []
     }, () => {
-      this.retrieveProduct( this.state.productId );
-      this.retrieveRelatedProducts( this.state.productId );
+      this.retrieveProduct(this.state.productId);
+      this.retrieveRelatedProducts(this.state.productId);
       this.retrieveRatings();
       this.retrieveRatingsMeta();
     }
@@ -294,13 +294,13 @@ class App extends React.Component {
   }
 
   addToOutfit() {
-    if ( this.state.outfitIds.indexOf( Number( this.state.productId ) ) === -1 ) {
-      var outfitIds = this.state.outfitIds.concat( Number( this.state.productId ) );
+    if (this.state.outfitIds.indexOf(Number(this.state.productId)) === -1) {
+      var outfitIds = this.state.outfitIds.concat(Number(this.state.productId));
       localStorage.setItem('outfitIds', outfitIds);
       this.setState({
         outfitIds,
       }, () => {
-        this.retrieveAllForOutfits( this.state.outfitIds );
+        this.retrieveAllForOutfits(this.state.outfitIds);
       })
     }
   }
@@ -308,47 +308,47 @@ class App extends React.Component {
 
   removeFromOutfits(e) {
     e.stopPropagation();
-    var id = e.currentTarget.getAttribute( 'data-txt' );
+    var id = e.currentTarget.getAttribute('data-txt');
     var outfitIds = this.state.outfitIds;
-    var targetIndex = outfitIds.indexOf( Number( id ) );
-    outfitIds.splice( targetIndex, 1 );
+    var targetIndex = outfitIds.indexOf(Number(id));
+    outfitIds.splice(targetIndex, 1);
     localStorage.setItem('outfitIds', outfitIds);
     var outfits = this.state.outfits;
     var listIndex;
-    outfits.forEach( ( item, index ) => {
-      if ( item.id === Number( id ) ) {
+    outfits.forEach((item, index) => {
+      if (item.id === Number(id)) {
         listIndex = index;
       }
     });
-    outfits.splice( listIndex, 1 );
+    outfits.splice(listIndex, 1);
     var outfitView = this.state.outfitView;
     var viewIndex;
-    outfitView.forEach( ( item, index ) => {
-      if ( item.id === Number( id ) ) {
+    outfitView.forEach((item, index) => {
+      if (item.id === Number(id)) {
         viewIndex = index;
       }
     });
-    outfitView.splice( viewIndex, 1 );
+    outfitView.splice(viewIndex, 1);
 
-    this.setState( {
+    this.setState({
       outfitIds,
       outfits,
       outfitView,
-    }, () => {})
+    }, () => { })
   }
 
   handleLeftArrow() {
     var newPosition;
-    if ( this.state.outfitPosition > 0 ) {
+    if (this.state.outfitPosition > 0) {
       newPosition = this.state.outfitPosition - 1;
     } else {
       newPosition = 0;
     }
-    var newView = this.state.outfits.slice( newPosition, newPosition + 3 );
-    this.setState( {
+    var newView = this.state.outfits.slice(newPosition, newPosition + 3);
+    this.setState({
       outfitPosition: newPosition,
       outfitView: newView
-    } )
+    })
 
   }
 
@@ -476,19 +476,39 @@ class App extends React.Component {
             <div className={'searchFieldUnderline'} />
           </div>
         </div>
+
         <div className={'siteAnnouncementBar'}>
           <div className={'announcement'}><i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - NEW PRODUCT HIGHLIGHT</div>
         </div>
-        <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating}/> : null }</div>
-        <div>
-          { this.state.allRelated.length > 0 ? <RelatedItems all={ this.state.allRelated } outfits={ this.state.outfitView } outfitLength={ this.state.outfits.length } clickCard={ this.handleRelatedCardClick } addOutfit={ this.addToOutfit } remove={ this.removeFromOutfits } name={ this.state.product } right={ this.handleRightArrow } left={ this.handleLeftArrow } position={ this.state.outfitPosition } /> : null}
+
+        <div id={'overviewPlaceholder'}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating} /> : null}</div>
+          </Suspense>
         </div>
-        <QuestionsAndAnswers />
-        <div className="ratingsAndReviews">
-        {this.state.percentRecommended && this.state.averageRating && this.state.ratingsMeta ? <RatingsAndReviews reviews={this.state.currentReviews} averageRating={this.state.averageRating} percent={this.state.percentRecommended} ratingsMeta={this.state.ratingsMeta}
-        productId={this.state.productId} descriptions={this.state.descriptions} visibleReviews={this.state.visibleReviews} handleSort={this.handleSort} filterByStars={this.filterByStars} handleMoreReviews={this.handleMoreReviews} reviewCount={this.state.reviewCount} characteristics={this.state.characteristics}/> : null }
+
+        <div id={'relatedPlaceholder'}>
+          <Suspense fallback={<div>Loading...</div>}>
+            {this.state.allRelated.length > 0 ? <RelatedItems all={this.state.allRelated} outfits={this.state.outfitView} outfitLength={this.state.outfits.length} clickCard={this.handleRelatedCardClick} addOutfit={this.addToOutfit} remove={this.removeFromOutfits} name={this.state.product} right={this.handleRightArrow} left={this.handleLeftArrow} position={this.state.outfitPosition} /> : null}
+          </Suspense>
         </div>
-      </div>
+
+        <div id={'questionsPlaceholder'}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <QuestionsAndAnswers />
+        </Suspense>
+        </div>
+
+        <div id={'ratingsPlaceholder'}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <div className="ratingsAndReviews">
+            {this.state.percentRecommended && this.state.averageRating && this.state.ratingsMeta ? <RatingsAndReviews reviews={this.state.currentReviews} averageRating={this.state.averageRating} percent={this.state.percentRecommended} ratingsMeta={this.state.ratingsMeta}
+              productId={this.state.productId} descriptions={this.state.descriptions} visibleReviews={this.state.visibleReviews} handleSort={this.handleSort} filterByStars={this.filterByStars} handleMoreReviews={this.handleMoreReviews} reviewCount={this.state.reviewCount} characteristics={this.state.characteristics} /> : null}
+          </div>
+        </Suspense>
+        </div>
+
+      </div >
     )
   }
 }
