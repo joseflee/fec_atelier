@@ -26,8 +26,8 @@ export class OutfitList extends React.Component {
 
   render() {
     return (
-      <div>
-        <h3>Your Outfit</h3>
+      <>
+        <div className="RIHeadings">Your Outfit</div>
         <div className="carousel">
           <AddToOutfitCard add={ this.props.add }/>
           <div className="centerVertical">
@@ -38,7 +38,7 @@ export class OutfitList extends React.Component {
             { this.props.position < ( this.props.outfitLength - 3 ) ? <div onClick={ this.props.right }> <FaArrowRight className="arrows RIarrow" /> </div> : null }
           </div>
         </div>
-      </div>
+      </>
     )
   }
 }

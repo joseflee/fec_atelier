@@ -220,7 +220,7 @@ class App extends React.Component {
           var dataObj = {};
           var withoutDuplicates = [];
           data.forEach(item => {
-            if (productId !== item) {
+            if ( Number( productId ) !== Number ( item ) ) {
               dataObj[item] = true;
             }
           });

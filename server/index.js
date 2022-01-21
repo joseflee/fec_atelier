@@ -83,7 +83,6 @@ app.get('/outfits/:ids', (req, res) => {
   retrieveRelatedData(ids).then(data => {
     res.send(data);
   })
-  var data = retrieveRelatedData(ids, cb);
 })
 
 //POST review
@@ -109,3 +108,7 @@ app.put('/helpful', jsonParser, (req, res) => {
     res.send(err);
   });
 })
+
+
+
+

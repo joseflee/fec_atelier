@@ -16,14 +16,14 @@ Enzyme.configure( { adapter: new Adapter() } );
 
 
 
-describe("RelatedItems", () => {
+describe( "RelatedItems", () => {
 
-  test("relatedItems renders", () => {
-    const wrapper = shallow(<RelatedItems />);
-    expect(wrapper.find('div')).toHaveLength(1);
+  test( "relatedItems renders", () => {
+    const wrapper = shallow( <RelatedItems /> );
+    expect( wrapper.find( 'div' ) ).toHaveLength( 1 );
   });
 
-  test("ProductCard should have a star rating", () => {
+  test( "ProductCard should have a star rating", () => {
     const props = {
       clickCard: () => {},
       clickStar: () => {},
@@ -39,11 +39,11 @@ describe("RelatedItems", () => {
         ]
       }
     }
-    const wrapper = shallow(<ProductCard {...props}/>);
-    expect(wrapper.find(Stars)).toHaveLength(1);
+    const wrapper = shallow( <ProductCard { ...props } />);
+    expect( wrapper.find( Stars ) ).toHaveLength( 1 );
   });
 
-  test("ProductCard should have a div with className RIprice", () => {
+  test( "ProductCard should have a div with className RIprice", () => {
     const props = {
       clickCard: () => {},
       clickStar: () => {},
@@ -59,8 +59,8 @@ describe("RelatedItems", () => {
         ]
       }
     }
-    const wrapper = shallow(<ProductCard {...props}/>);
-    expect(wrapper.find('.RIprice')).toHaveLength(1);
+    const wrapper = shallow( <ProductCard { ...props } />);
+    expect( wrapper.find( '.RIprice' ) ).toHaveLength( 1 );
   });
 
   test("ProductCard should have a div with className cardImage", () => {
@@ -79,8 +79,8 @@ describe("RelatedItems", () => {
         ]
       }
     }
-    const wrapper = shallow(<ProductCard {...props}/>);
-    expect(wrapper.find('.cardImage')).toHaveLength(1);
+    const wrapper = shallow( <ProductCard { ...props } />);
+    expect( wrapper.find( '.cardImage' ) ).toHaveLength( 1 );
   });
 
 
@@ -152,34 +152,79 @@ describe("RelatedItems", () => {
 
   })
 
+  const mockItem = {
+    "id": 59553,
+    "campus": "hr-rpp",
+    "name": "Camo Onesie",
+    "slogan": "Blend in to your crowd",
+    "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+    "category": "Jackets",
+    "default_price": "140.00",
+  }
 
-  test("OutfitCard should have a title of Your ", () => {
+  describe("props passed down", () => {
 
-    // itemInfo: {
-    //   campus: "hr-rpp",
-    //   category: "Jackets",
-    //   default_price: "140.00",
-    //   features: [
-    //     0: {feature: 'Fabric', value: 'Canvas'}
-    //     1: {feature: 'Buttons', value: 'Brass'}
-    //   ],
-    //   id: 59553,
-    //   name: "Camo Onesie",
-    //   rating: 2.2
-    // }
+    const props1 = {outfits: [], all: [], mockItem: mockItem};
 
-    // const props = {
-    //   itemInfo: {id: 5},
-    //   remove: () => {},
+    it("accepts props", () => {
+      const wrapper = mount( <RelatedItems {...props1}/> );
+      expect( wrapper.instance().props.mockItem ).toEqual( mockItem );
+    });
 
-    // }
+    it("Clicking on the card should call handleRelatedCardClick", () => {
+      const spy = jest.fn();
+      const props = {
+        itemInfo: {
+          results: [
+            {
+              photos: [
+                {
+                  url: ''
+                }
+              ]
+            }
+          ]
+        },
+      }
+      const wrapper = mount( <ProductCard clickCard={spy}  {...props}/> );
+      wrapper.find('.card').simulate('click');
+      expect(spy).toHaveBeenCalled();
+    })
 
+    it("Clicking on the star should call handleRelatedStarClick", () => {
+      const spy = jest.fn();
+      const props = {
+        itemInfo: {
+          results: [ { photos: [ { url: '' } ] } ]
+        },
+      }
+      const wrapper = mount( <ProductCard clickStar={spy} {...props} /> );
+      wrapper.find('BiStar').simulate('click');
+      expect(spy).toHaveBeenCalled();
+    })
 
+    it("Changes state if the star is clicked", () => {
 
-    const wrapper = shallow(<OutfitCard itemInfo={{results: []}} />);
-    const Cg = wrapper.find('CgCloseO');
-    expect(Cg).toHaveLength(1);
-  });
-
+      const propsForCard = {
+        itemInfo: {
+          results: [ { photos: [ { url: '' } ] } ]
+        },
+      };
+      const propsForModal = {
+        relatedFeatures: { features:[], name: 'Camo' },
+        name: { features: [], name: 'Camo'},
+      }
+      const parentWrapper = mount( <RelatedItems { ...props1 }/> );
+      const spy = jest.spyOn( parentWrapper.instance(), 'handleRelatedStarClick' );
+      const spy2 = jest.spyOn( parentWrapper.instance(), 'closeModal' );
+      const childWrapper = mount( <ProductCard clickStar={ spy } { ...propsForCard } /> );
+      const modalWrapper = mount( <ComparisonModal close={ spy2 } { ...propsForModal } /> );
+      expect( parentWrapper.state().modal ).toEqual( false );
+      childWrapper.find( 'BiStar' ).simulate( 'click' );
+      expect( parentWrapper.state().modal ).toEqual( true );
+      modalWrapper.find( '.comparisonModal' ).simulate( 'click' );
+      expect( parentWrapper.state().modal ).toEqual( false );
+    })
+  })
 
 })
