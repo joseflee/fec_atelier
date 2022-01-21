@@ -68,7 +68,7 @@ export class RelatedProductList extends React.Component {
  render() {
     return (
       <>
-        <h3>Related Products</h3>
+        <div className="RIHeadings">Related Products</div>
         <div className="carousel">
           <div className="centerVertical">
             {this.state.positionAtList > 0 ? <div onClick={this.handleLeftArrow}><FaArrowLeft className="arrows" /></div> : null}
