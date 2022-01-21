@@ -11,6 +11,17 @@ var Style = (props) => {
 
   }
 
+  var resizeImage = (image) => {
+
+    var sizedImage = image.split('');
+    sizedImage.splice(sizedImage.length - 33, 33);
+    sizedImage = sizedImage.join('').concat('&w=80&h=auto');
+
+    return sizedImage;
+
+  }
+
+
   return (
     <div className={'styleSelector'}>
       <div className={'scrollBox'}>{props.styles.map((item, i) => {
@@ -20,12 +31,12 @@ var Style = (props) => {
             <div className={'checkBox'}>
             <div className={'checkmark'}><span>&#10003;</span></div>
             </div>
-            <img className={`selectedStyle`} onClick={() => {handleClick(i)}} src={item} alt={'Atelier style image'}/>
+            <img className={`selectedStyle`} alt={item} onClick={() => {handleClick(i)}} src={resizeImage(item)} alt={'Atelier style image'}/>
             </div>
           )
         } else {
           return (
-            <img key={i} className={'styleItem'} onClick={() => {handleClick(i)}} src={item}/>
+            <img key={i} className={'styleItem'} alt={item} onClick={() => {handleClick(i)}} src={resizeImage(item)}/>
           )
         }
       })}</div>

@@ -11,12 +11,12 @@ var Stars = (props) => {
   return (
 
     <div>
-      <a href={'#ratingsAndReviewsSectionIdHere'}>
+      <a href={'#reviewsSection'}>
         <div className={'stars-outer'}>
         <div className={'stars-inner'} style={{ width: rating }}></div>
         </div>
       </a>
-      <a href={'#ratingsAndReviewsSectionIdHere'} className={'readAllReviews'}>read all reviews</a>
+      <a href={'#reviewsSection'} className={'readAllReviews'}>read all reviews</a>
     </div>
 
   )

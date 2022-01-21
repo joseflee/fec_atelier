@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "startup": "pm2 start server/index.js",
+    "updateCSS": "css-minify -f ./public/style.css",
     "test": "jest",
     "jest-overview": "jest --verbose ./test/overview --collectCoverage",
     "jest-relatedItems": "jest --verbose ./test/relatedItems --collectCoverage",
@@ -38,6 +39,7 @@
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.1",
     "chai": "^4.3.4",
+    "css-minify": "^2.0.0",
     "express": "^4.17.2",
     "express-static-gzip": "^2.1.1",
     "jquery": "^3.6.0",
@@ -52,6 +54,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
+    "react-image-file-resizer": "^0.4.7",
     "regenerator-runtime": "^0.13.9",
     "webpack": "^5.65.0"
   },
