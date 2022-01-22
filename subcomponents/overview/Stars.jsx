@@ -22,7 +22,7 @@ var Stars = (props) => {
   return (
 
     <div>
-      <a href={'#reviewsSection'} onClick={handleClick}>
+      <a href={'#reviewsSection'} onClick={handleClick}><span className={'invisiblePeriod'}>.</span>
         <div className={'stars-outer'}>
         <div className={'stars-inner'} style={{ width: rating }}></div>
         </div>

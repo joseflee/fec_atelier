@@ -636,6 +636,11 @@ RELATED ITEMS
 /////////////////////
 */
 
+.invisiblePeriod {
+  color: rgba(0, 0, 0, .0);
+  font-size: 1px;
+}
+
 
 /*----------------
 product card

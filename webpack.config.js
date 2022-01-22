@@ -9,6 +9,9 @@ module.exports = {
   },
   devtool: 'source-map',
   mode: 'production',
+  optimization: {
+    usedExports: true
+  },
   module: {
     rules: [
       {

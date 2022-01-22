@@ -40,7 +40,7 @@ export class ProductCard extends React.Component {
       var sizedImage = defaultItem.photos[0].url.split('');
       sizedImage.splice(sizedImage.length - 33, 33);
       sizedImage = sizedImage.join('').concat('&w=190&h=auto');
-      return <div><img src={ sizedImage } className="cardImage" alt="product image" width={'190px'} height={'220px'} /></div>
+      return <div><img src={ sizedImage } className="cardImage" alt="product image" width={'190px'} height={'240px'} /></div>
     } else {
       return <div className="noPhoto centerVertical">No Photo Available</div>
     }
