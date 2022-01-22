@@ -42,7 +42,7 @@ export class OutfitCard extends React.Component {
       var sizedImage = defaultItem.photos[0].url.split('');
       sizedImage.splice(sizedImage.length - 33, 33);
       sizedImage = sizedImage.join('').concat('&w=190&h=auto');
-      return <div><img src={ sizedImage } className="cardImage" /></div>
+      return <div><img src={ sizedImage } className="cardImage" width={'190px'} height={'240px'} /></div>
     } else {
       return <div className="noPhoto centerVertical">No Photo Available</div>
     }
