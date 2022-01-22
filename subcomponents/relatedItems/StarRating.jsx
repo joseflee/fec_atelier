@@ -8,7 +8,7 @@ export var Stars = (props) => {
   return (
 
     <div>
-      <a href={'#ratingsAndReviewsSectionIdHere'}>
+      <a href={'#ratingsAndReviewsSectionIdHere'}><span className={'invisiblePeriod'}>.</span>
         <div className={'stars-outer'}>
         <div className={'stars-inner'} style={{ width: rating }}></div>
         </div>

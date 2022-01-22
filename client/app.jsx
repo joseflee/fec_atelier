@@ -1,9 +1,5 @@
 import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
-// import Overview from '../components/Overview.jsx';
-// import QuestionsAndAnswers from '../components/QuestionsAndAnswers.jsx';
-// import RatingsAndReviews from '../components/RatingsAndReviews.jsx';
-// import RelatedItems from '../components/RelatedItems.jsx';
 const Overview = lazy(() => import('../components/Overview.jsx'));
 const QuestionsAndAnswers = lazy(() => import('../components/QuestionsAndAnswers.jsx'));
 const RatingsAndReviews = lazy(() => import('../components/RatingsAndReviews.jsx'));
@@ -14,7 +10,6 @@ import Search from '../components/Search.jsx';
 import $ from 'jquery';
 import { APIkey } from '../config.js';
 
-// importing search bar icon from react library
 import { FaSistrix } from 'react-icons/fa';
 import parseAverageRating from '../modules/parseRatings.js';
 import mockProduct from '../mock_api/mock_product.js';
@@ -50,7 +45,8 @@ class App extends React.Component {
         Quality: ['Poor', 'Below Average', 'What I expect', 'Pretty great', 'Perfect'],
         Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
         Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slighly long', 'Runs long']
-      }
+      },
+      clicks: []
     }
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
@@ -76,6 +72,8 @@ class App extends React.Component {
     this.compareRelevance = this.compareRelevance.bind(this);
     this.handleFirstTwoReviews = this.handleFirstTwoReviews.bind(this);
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
+
+    this.trackClick = this.trackClick.bind(this);
   }
 
   componentDidMount() {
@@ -182,11 +180,8 @@ class App extends React.Component {
     })
   }
 
-  // now available for use - must use string parameter with product name
-  // not case sensitive but spelling must be correct
+  // not case sensitive but spelling must be correct (product name)
   handleSearch(searchTerm) {
-
-    //console.log('search toggled')
 
     $.ajax({
       method: 'GET',
@@ -465,6 +460,20 @@ class App extends React.Component {
     })
   }
 
+  trackClick(clickObj) {
+
+    var newClicks = this.state.clicks;
+    newClicks.push(clickObj);
+
+    this.setState({
+      ...this.state,
+      clicks: newClicks
+    }, () => {
+      console.log('central state click counter => ', this.state.clicks)
+    })
+
+  }
+
   render() {
 
     return (
@@ -483,7 +492,7 @@ class App extends React.Component {
 
         <div id={'overviewPlaceholder'}>
           <Suspense fallback={<div>Loading...</div>}>
-            <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating} /> : null}</div>
+            <div>{this.state.product && this.state.styles ? <Overview product={this.state.product} styles={this.state.styles} rating={this.state.averageRating} trackClick={this.trackClick} /> : null}</div>
           </Suspense>
         </div>
 

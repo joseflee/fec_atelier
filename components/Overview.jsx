@@ -49,7 +49,7 @@ class Overview extends React.Component {
 
         <div className={'rightPanel'}>
 
-          <ProductInfo product={this.props.product} rating={this.props.rating} />
+          <ProductInfo product={this.props.product} rating={this.props.rating} trackClick={this.props.trackClick} />
 
           <Suspense fallback={<div>Loading...</div>}>
             <StyleSelector styles={this.props.styles} changeStyle={this.changeStyle} />

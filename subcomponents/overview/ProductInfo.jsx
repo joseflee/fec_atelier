@@ -12,7 +12,7 @@ var ProductInfo = (props) => {
 
     <div className={'productInfo'}>
       <div className={'starbox'}>
-        <Stars props={props} rating={props.rating}/>
+        <Stars props={props} rating={props.rating} trackClick={props.trackClick} />
       </div>
       <div id={'category-overview'}>{category}</div>
       <div id={'expandedProductName-overview'} className={'productName'}>{name}</div>
