@@ -7,7 +7,11 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
   },
-  mode: 'development',
+  devtool: 'source-map',
+  mode: 'production',
+  optimization: {
+    usedExports: true
+  },
   module: {
     rules: [
       {

@@ -52,10 +52,10 @@ class ReviewPhotos extends React.Component {
       return (
         <div className="reviewPhotos">
           {this.state.modal ? <div className="reviewPhotoWindow" onClick={this.handleModalClose}>
-            <img className="reviewModalImg" src={this.state.selectedURL}></img>
+            <img className="reviewModalImg" src={this.state.selectedURL} alt={'review image'}></img>
           </div> : null}
           {this.props.photos ? this.props.photos.map((photo, index) => (
-            <img className="reviewImage" key={index} src={photo.url} onClick={this.handleModalView} id={photo.id}></img>
+            <img className="reviewImage" key={index} src={photo.url} alt={'review image'} onClick={this.handleModalView} id={photo.id}></img>
           )) : null}
         </div>
       )

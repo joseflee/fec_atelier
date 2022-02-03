@@ -58,9 +58,9 @@ export class ComparisonModal extends React.Component {
         this.state.combinedFeatures.map((feature, index) => {
           return(
             <tr key={index} className="rowCharacteristic">
-              <th className="comparisonRow">{feature.left ? feature.left : null}</th>
-              <th className="comparisonRow">{feature.feature}</th>
-              <th className="comparisonRow">{feature.right ? feature.right : null}</th>
+              <th className="comparisonRow thSize leftAndRight">{feature.left ? feature.left : null}</th>
+              <th className="comparisonRow thSize middleColumn">{feature.feature}</th>
+              <th className="comparisonRow thSize leftAndRight">{feature.right ? feature.right : null}</th>
             </tr>
           )
         })
@@ -75,9 +75,9 @@ export class ComparisonModal extends React.Component {
         <table>
           <thead>
             <tr>
-              <th className="comparisonTopRow">{this.props.name.name}</th>
-              <th></th>
-              <th className="comparisonTopRow">{this.props.relatedFeatures.name}</th>
+              <th className="comparisonTopRow thSize">{this.props.name.name}</th>
+              <th className="thSize"></th>
+              <th className="comparisonTopRow thSize">{this.props.relatedFeatures.name}</th>
             </tr>
           </thead>
           <tbody>

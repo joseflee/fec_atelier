@@ -1,11 +1,47 @@
-
+/* @font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500) format('woff2');
+  font-display: fallback;
+} */
 
 body {
   margin: 0 auto;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', Arial, sans-serif;
   background-color: rgba(0, 0, 0, .05);
   min-width: 920px;
   max-width: 1200px;
+}
+
+/*
+////////////////////
+preload page structure
+////////////////////
+*/
+
+#overviewPlaceholder {
+  display: inline-block;
+  height: 750px;
+  width: 100%;
+}
+
+#relatedPlaceholder {
+  display:inline-block;
+  height: 750px;
+  width: 100%;
+}
+
+#questionsPlaceholder {
+  display:inline-block;
+  height: 350px;
+  width: 100%;
+}
+
+#ratingsPlaceholder {
+  display:inline-block;
+  height: 550px;
+  width: 100%;
 }
 
 /*
@@ -35,6 +71,11 @@ topbar
 .search {
   margin: 6px 10px 0 0;
   display: inline-block;
+}
+
+#invisibleSearch {
+  color: rgba(0, 0, 0, .0);
+  font-size: 1px;
 }
 
 input, textarea {
@@ -92,8 +133,9 @@ OVERVIEW
 
 
 #overview {
-  /* border: 1px solid rgba(0, 0, 0, .4); */
+  display: inline-block;
   height: 750px;
+  width: 100%;
 }
 
 .leftPanel {
@@ -217,6 +259,7 @@ Style Item - Overview
   text-align: center;
   margin: 20px 0 0 20px;
   line-height: 50px;
+  object-fit: cover;
 
 }
 
@@ -230,6 +273,7 @@ Style Item - Overview
   text-align: center;
   margin: 20px 0 0 20px;
   line-height: 50px;
+  object-fit: cover;
 
 }
 
@@ -313,6 +357,7 @@ Image Gallery - Overview
   margin-top: 12px;
   border: 1px solid rgba(0, 0, 0, .3);
   font-size: 10px;
+  object-fit: cover;
 }
 
 .thumbnailItem:hover {
@@ -332,6 +377,7 @@ Image Gallery - Overview
   display: inline-block;
   text-align: center;
   height: 100%;
+  width: auto;
 }
 
 .mainImageFrame {
@@ -520,6 +566,10 @@ ADD TO CART
 ///////////////////
 */
 
+.addToCart {
+  margin-top: 40px;
+}
+
 .addToCartRow1 {
   display: flex;
   justify-content: space-between;
@@ -586,6 +636,11 @@ RELATED ITEMS
 /////////////////////
 */
 
+.invisiblePeriod {
+  color: rgba(0, 0, 0, .0);
+  font-size: 1px;
+}
+
 
 /*----------------
 product card
@@ -594,8 +649,8 @@ product card
 
 .card {
   border: 1px solid rgb(182, 175, 175);
-  width: 175px;
-  height: 300px;
+  width: 190px;
+  height: 310px;
   background: rgb(214, 211, 211);
   text-align: center;
   position: relative;
@@ -605,41 +660,51 @@ product card
 .cardImage {
   /*max-width: 175px;*/
   width: 100%;
-  max-height: 210px;
+  max-height: 230px;
+  object-fit: cover;
 }
 
 .noPhoto {
   min-width: 150px;
-  min-height: 150px;
+  min-height: 230px;
   background-color: grey;
 
 }
 
 .RIproductInfo {
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
   text-align: left;
   font-size: .9em;
   font-weight: bold;
+
 }
 
 .RIcategory {
   position: relative;
   text-align: left;
   font-size: .8em;
+  padding-left: 4%;
+
 }
 
 .RIname {
   position: relative;
+  font-family: sans-serif;
   text-align: left;
   font-size: .9em;
   font-weight: bold;
+  padding-left: 4%;
+  white-space: nowrap;
+
 }
 
 .RIprice {
   position: relative;
   text-align: left;
   font-size: .8em;
+  padding-left: 4%;
+
 }
 
 .RIstars {
@@ -647,6 +712,7 @@ product card
   text-align: left;
   font-size: .9em;
   font-weight: bold;
+  padding-left: 4%;
 }
 
 .RIcompare {
@@ -658,13 +724,6 @@ product card
 /*----------------
 
 ----------------*/
-/*----------------
-
-----------------*/
-
-
-
-
 .carousel {
   display: flex;
   flex-flow: row wrap;
@@ -681,9 +740,9 @@ product card
 .rightArrow {
   width: 0;
   height: 0;
-  border-top: 15px solid transparent;
+  /* border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
-  border-left: 15px solid black;
+  border-left: 15px solid black; */
 }
 
 .leftArrow {
@@ -700,6 +759,10 @@ product card
   justify-content: center;
 }
 
+.RIHeadings {
+  padding: 10px;
+  font-size: 16px;
+}
 
 /* .RIarrow {
   display: inline-block;
@@ -723,8 +786,8 @@ comparison modal
 */
 
 .comparisonModal {
-  width: 800px;
-  height: 500px;
+  width: 550px;
+  height: 400px;
   background: white;
   border: 1px solid grey;
   transition: 1s ease-out;
@@ -748,9 +811,11 @@ comparison modal
 }
 
 .comparisonTopRow {
-  font-size: 17px;
-  position: relative;
-  top: 4%;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: sans-serif;
+  position: fixed;
+  top: 12%;
 
 }
 
@@ -759,14 +824,23 @@ comparison modal
   top: 1%;
   left: 1%;
   font-size: 15px;
+  font-weight: 400;
 }
 
-.rowCharacteristic {
-  border: 1px solid rgb(106, 102, 102);
+.middleColumn {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: sans-serif;
 }
 
+.leftAndRight {
+  font-size: 14px;
+  font-weight: 300;
+}
 
-
+.thSize {
+  width: 160px;
+}
 
 /*
 /////////////////////
@@ -790,6 +864,10 @@ QUESTIONS AND ANSWERS
 RATINGS AND REVIEWS
 /////////////////////
 */
+
+#ratingsAndReviewsHeader {
+  font-size: 20px;
+}
 
 
 /*

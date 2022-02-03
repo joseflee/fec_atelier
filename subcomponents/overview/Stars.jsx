@@ -6,17 +6,28 @@ var Stars = (props) => {
   // Uncomment when receiving rating props
   var rating = ratingToStar(props.rating);
 
-  //var rating = ratingToStar(4);
+  var handleClick = () => {
+
+    var click = {
+      date: new Date(),
+      element: 'anchor',
+      module: 'Product Info'
+    }
+
+    props.trackClick(click);
+
+  }
+
 
   return (
 
     <div>
-      <a href={'#ratingsAndReviewsSectionIdHere'}>
+      <a href={'#reviewsSection'} onClick={handleClick}><span className={'invisiblePeriod'}>.</span>
         <div className={'stars-outer'}>
         <div className={'stars-inner'} style={{ width: rating }}></div>
         </div>
       </a>
-      <a href={'#ratingsAndReviewsSectionIdHere'} className={'readAllReviews'}>read all reviews</a>
+      <a href={'#reviewsSection'} className={'readAllReviews'}>read all reviews</a>
     </div>
 
   )
