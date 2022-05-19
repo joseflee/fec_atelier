@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const { retrieveProduct, retrieveStyles, conductSearch, retrieveRelatedData, postReview, updateHelpfulness } = require('./apiMethods.js');
+const { getFirstId, retrieveProduct, retrieveStyles, conductSearch, retrieveRelatedData, postReview, updateHelpfulness } = require('./apiMethods.js');
 
 var jsonParser = bodyParser.json();
 var port = 3000;
@@ -18,6 +18,16 @@ app.listen(port, () => {
 // G-zipped static service
 app.use('/', expressStaticGzip('public'));
 
+
+app.get('/products', (req, res) => {
+  getFirstId()
+    .then(data => {
+      res.send(data[0])
+    })
+    .catch(err => {
+      console.log('error sending first id', err);
+    })
+})
 
 // GET single product by ID
 app.get('/products/:id', (req, res) => {

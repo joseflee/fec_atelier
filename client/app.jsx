@@ -48,6 +48,7 @@ class App extends React.Component {
       },
       clicks: []
     }
+    this.setInitialProduct = this.setInitialProduct.bind(this);
 
     this.retrieveProduct = this.retrieveProduct.bind(this);
     this.retrieveStyles = this.retrieveStyles.bind(this);
@@ -77,12 +78,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-
-    this.retrieveProduct(this.state.productId);
-    this.retrieveRelatedProducts(this.state.productId);
-    this.retrieveRatings();
-    this.retrieveRatingsMeta();
-
+    this.setInitialProduct();
 
     if (localStorage.getItem('outfitIds')) {
       var outfitIds = localStorage.getItem('outfitIds').split(',');
@@ -95,6 +91,26 @@ class App extends React.Component {
         this.retrieveAllForOutfits(this.state.outfitIds);
       })
     }
+  }
+
+  setInitialProduct(id) {
+    $.ajax({
+      method: 'GET',
+      url: `products`,
+      success: (data) => {
+        this.setState({
+          productId: data.id
+        }, () => {
+          this.retrieveProduct(this.state.productId);
+          this.retrieveRelatedProducts(this.state.productId);
+          this.retrieveRatings();
+          this.retrieveRatingsMeta();
+        })
+      },
+      error: (err) => {
+        console.log('error getting outfit data', err);
+      }
+    })
   }
 
   retrieveProduct(id) {

@@ -4,6 +4,30 @@ const axios = require('axios');
 const parseAverageRating = require('../modules/parseRatingsInServer.js');
 
 // retrieves product using id, returns a promise
+
+
+const getFirstId = () => {
+  var path = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/';
+  var headers = { authorization: APIkey };
+  return axios.get(path, {
+    headers: {
+      authorization: APIkey
+    }
+  })
+  .then(response => {
+    return response.data;
+  })
+  .catch(err => {
+    console.log('error getting firstId', err);
+  })
+
+}
+
+
+
+
+
+
 var retrieveProduct = (id) => {
 
   return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
@@ -150,7 +174,7 @@ var updateHelpfulness = (data) => {
 
 
 module.exports ={
-
+  getFirstId: getFirstId,
   retrieveProduct: retrieveProduct,
   conductSearch: conductSearch,
   retrieveStyles: retrieveStyles,
